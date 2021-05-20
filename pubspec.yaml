@@ -33,6 +33,8 @@ dependencies:
   cloud_firestore: ^0.14.2
   firebase_auth: ^0.18.2
   google_sign_in: ^4.5.4
+  font_awesome_flutter: ^9.0.0
+  equatable: ^2.0.2
   uuid: ^3.0.0
   intl: ^0.16.1
   timeago: ^3.0.1
@@ -40,6 +42,15 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  pedantic: ^1.9.0
+
+  flutter_launcher_icons: "^0.9.0"
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/givenow-logo.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
