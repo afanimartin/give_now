@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:give_now/blocs/authentication/authentication_bloc.dart';
+import 'package:give_now/screens/log_in_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -21,7 +24,11 @@ class HomeScreen extends StatelessWidget {
                   color: Colors.black,
                   size: 30,
                 ),
-                onPressed: () {})
+                onPressed: () {
+                  context.read<AuthenticationBloc>().add(LogOut());
+                  Navigator.of(context).pushAndRemoveUntil(
+                      LogInScreen.route(), (route) => false);
+                })
           ],
         ),
       );

@@ -16,14 +16,14 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => RepositoryProvider.value(
-      value: authenticationRepository,
-      child: BlocProvider<AuthenticationBloc>(
-        create: (_) => AuthenticationBloc(
-          authenticationRepository: authenticationRepository,
+        value: authenticationRepository,
+        child: BlocProvider<AuthenticationBloc>(
+          create: (_) => AuthenticationBloc(
+            authenticationRepository: authenticationRepository,
+          ),
+          child: const AppView(),
         ),
-        child: const AppView(),
-      ),
-    );
+      );
 }
 
 class AppView extends StatefulWidget {

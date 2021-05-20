@@ -11,7 +11,7 @@ class SplashScreen extends StatelessWidget {
         color: Colors.white,
         child: Center(
             child: Image.asset(
-          'assets/skanner-logo.png',
+          'assets/givenow-logo.png',
           height: 100,
         )),
       );

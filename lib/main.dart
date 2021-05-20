@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:give_now/repositories/authentication/authentication_repository.dart';
 import 'package:give_now/screens/app.dart';
 
 void main() async {
@@ -7,5 +8,7 @@ void main() async {
 
   await Firebase.initializeApp();
 
-  runApp(const App());
+  runApp(App(
+    authenticationRepository: AuthenticationRepository(),
+  ));
 }
