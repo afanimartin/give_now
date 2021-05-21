@@ -1,11 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:give_now/blocs/authentication/authentication_bloc.dart';
+import 'package:give_now/blocs/image/image_cubit.dart';
 import 'package:give_now/blocs/tab/tab_bloc.dart';
 import 'package:give_now/blocs/tab/tab_event.dart';
 import 'package:give_now/models/app_tab/app_tab.dart';
 import 'package:give_now/screens/log_in_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:give_now/widgets/tab_selector.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -37,7 +42,7 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () => _uploadImageToStorage(context),
             child: Icon(
               Icons.add,
             ),
@@ -49,4 +54,23 @@ class HomeScreen extends StatelessWidget {
                   context.read<TabBloc>().add(UpdateTab(tab: tab))),
         ),
       );
+
+  void _uploadImageToStorage(BuildContext context) async {
+    final _imagePicker = ImagePicker();
+    PickedFile pickedImage;
+
+    await Permission.photos.request();
+
+    final permissionStatus = await Permission.photos.status;
+
+    if (permissionStatus.isGranted) {
+      pickedImage = await _imagePicker.getImage(source: ImageSource.gallery);
+
+      final file = File(pickedImage.path);
+
+      if (file != null) {
+        context.read<ImageCubit>().uploadImage(file);
+      }
+    }
+  }
 }

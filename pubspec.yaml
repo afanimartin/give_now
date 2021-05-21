@@ -29,15 +29,18 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   flutter_bloc: ^7.0.0
-  firebase_core: ^0.5.1
-  cloud_firestore: ^0.14.2
-  firebase_auth: ^0.18.2
+  firebase_core: ^1.2.0
+  cloud_firestore: ^2.2.0
+  firebase_auth: ^1.2.0
   google_sign_in: ^4.5.4
   font_awesome_flutter: ^9.0.0
   equatable: ^2.0.2
   uuid: ^3.0.0
-  intl: ^0.16.1
+  intl: ^0.17.0
   timeago: ^3.0.1
+  image_picker: ^0.7.5+2
+  permission_handler: ^7.1.0
+  firebase_storage: ^8.1.0
 
 dev_dependencies:
   flutter_test:
@@ -50,7 +53,7 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/givenow-logo.png"
+  image_path: "assets/givenow-logo-two.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
