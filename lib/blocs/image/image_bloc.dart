@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +9,8 @@ import 'package:give_now/blocs/image/image_state.dart';
 import 'package:give_now/helpers/bloc/current_user_id.dart';
 import 'package:give_now/repositories/authentication/authentication_repository.dart';
 import 'package:give_now/repositories/image_upload/image_repository.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class ImageBloc extends Bloc<ImageEvent, ImageState> {
   final ImageRepository _imageRepository;
@@ -28,16 +31,30 @@ class ImageBloc extends Bloc<ImageEvent, ImageState> {
     } else if (event is UpdateImages) {
       yield* _mapUpdatedImagesToState(event);
     } else if (event is AddImage) {
-      yield* _mapAddImageToState(event);
+      yield* _mapAddImageToState();
     }
   }
 
-  Stream<ImageState> _mapAddImageToState(AddImage event) async* {
+  Stream<ImageState> _mapAddImageToState() async* {
     yield ImageIsAdding();
 
     try {
-      _imageRepository.uploadImage(
-          event.imageToUpload, _currentUserId.getCurrentUserId());
+      final _imagePicker = ImagePicker();
+      PickedFile pickedImage;
+
+      await Permission.photos.request();
+
+      final permissionStatus = await Permission.photos.status;
+
+      if (permissionStatus.isGranted) {
+        pickedImage = await _imagePicker.getImage(source: ImageSource.gallery);
+
+        final file = File(pickedImage.path);
+
+        if (file != null) {
+          _imageRepository.uploadImage(file, _currentUserId.getCurrentUserId());
+        }
+      }
     } on Exception catch (_) {}
   }
 
