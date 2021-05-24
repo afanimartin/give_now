@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,11 +27,19 @@ class ImageBloc extends Bloc<ImageEvent, ImageState> {
       yield* _mapLoadImagesToState();
     } else if (event is UpdateImages) {
       yield* _mapUpdatedImagesToState(event);
+    } else if (event is AddImage) {
+      yield* _mapAddImageToState(event);
     }
   }
 
-  void uploadImage(File imageToUpload) => _imageRepository.uploadImage(
-      imageToUpload, _currentUserId.getCurrentUserId());
+  Stream<ImageState> _mapAddImageToState(AddImage event) async* {
+    yield ImageIsAdding();
+
+    try {
+      _imageRepository.uploadImage(
+          event.imageToUpload, _currentUserId.getCurrentUserId());
+    } on Exception catch (_) {}
+  }
 
   Stream<ImageState> _mapLoadImagesToState() async* {
     try {
@@ -49,8 +56,7 @@ class ImageBloc extends Bloc<ImageEvent, ImageState> {
   }
 
   Stream<ImageState> _mapUpdatedImagesToState(UpdateImages event) async* {
-    yield ImagesUpdated(
-        images: event.images, userId: _currentUserId.getCurrentUserId());
+    yield ImagesUpdated(images: event.images);
   }
 
   @override

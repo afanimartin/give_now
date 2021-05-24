@@ -32,15 +32,8 @@ class ImageRepository extends IImageRepository {
   }
 
   @override
-  Stream<List<ImageModel>> imageStream(String userId) {
-    final images = _firebaseFirestore
-        .collection('uploads')
-        // .where('userId', isEqualTo: userId)
-        .snapshots()
-        .map((snapshot) =>
-            snapshot.docs.map((doc) => ImageModel.fromSnapshot(doc)).toList()
-              ..sort((a, b) => b.timestamp.compareTo(a.timestamp)));
-
-    return images;
-  }
+  Stream<List<ImageModel>> imageStream(String userId) =>
+      _firebaseFirestore.collection('uploads').snapshots().map((snapshot) =>
+          snapshot.docs.map((doc) => ImageModel.fromSnapshot(doc)).toList()
+            ..sort((a, b) => b.timestamp.compareTo(a.timestamp)));
 }
