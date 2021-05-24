@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:give_now/blocs/authentication/authentication_bloc.dart';
-import 'package:give_now/blocs/image/image_cubit.dart';
+import 'package:give_now/blocs/image/image_bloc.dart';
+import 'package:give_now/blocs/image/image_state.dart';
 import 'package:give_now/blocs/tab/tab_bloc.dart';
 import 'package:give_now/blocs/tab/tab_event.dart';
 import 'package:give_now/models/app_tab/app_tab.dart';
@@ -41,6 +43,7 @@ class HomeScreen extends StatelessWidget {
                   })
             ],
           ),
+          body: _renderImages(),
           floatingActionButton: FloatingActionButton(
             onPressed: () => _uploadImageToStorage(context),
             child: Icon(
@@ -69,8 +72,31 @@ class HomeScreen extends StatelessWidget {
       final file = File(pickedImage.path);
 
       if (file != null) {
-        context.read<ImageCubit>().uploadImage(file);
+        context.read<ImageBloc>().uploadImage(file);
       }
     }
   }
+
+  _renderImages() => BlocBuilder<ImageBloc, ImageState>(
+        builder: (context, state) {
+          if (state is ImagesUpdated) {
+            return state.images.isEmpty
+                ? Center(child: Text('No images to load'))
+                : ListView.builder(
+                    itemCount: state.images.length,
+                    itemBuilder: (context, index) {
+                      final image = state.images[index];
+
+                      return Container(
+                          child: Card(
+                        elevation: 4,
+                        child: CachedNetworkImage(
+                          imageUrl: image.mainImageUrl,
+                        ),
+                      ));
+                    });
+          }
+          return Center(child: CircularProgressIndicator());
+        },
+      );
 }

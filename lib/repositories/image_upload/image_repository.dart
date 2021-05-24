@@ -25,10 +25,22 @@ class ImageRepository extends IImageRepository {
         id: uuid.v4(),
         userId: userId,
         mainImageUrl: imageUrl,
+        timestamp: Timestamp.now(),
         otherImageUrls: [imageUrl]);
 
-    await _firebaseFirestore
+    await _firebaseFirestore.collection('uploads').add(image.toDocument());
+  }
+
+  @override
+  Stream<List<ImageModel>> imageStream(String userId) {
+    final images = _firebaseFirestore
         .collection('uploads')
-        .add(image.toDocument());
+        // .where('userId', isEqualTo: userId)
+        .snapshots()
+        .map((snapshot) =>
+            snapshot.docs.map((doc) => ImageModel.fromSnapshot(doc)).toList()
+              ..sort((a, b) => b.timestamp.compareTo(a.timestamp)));
+
+    return images;
   }
 }

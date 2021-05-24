@@ -14,7 +14,7 @@ class CurrentUserId extends Equatable {
     String currentUserId;
 
     if (authState is AuthenticationState) {
-      currentUserId = authState.user.id;
+      currentUserId = authState.user.userId;
     }
     return currentUserId;
   }

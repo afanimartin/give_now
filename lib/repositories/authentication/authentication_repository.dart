@@ -49,7 +49,7 @@ class AuthenticationRepository extends IAuthenticationRepository {
   }
 
   UserModel toUser(User firebaseUser) => UserModel(
-      id: firebaseUser.uid,
+      userId: firebaseUser.uid,
       email: firebaseUser.email,
       displayName: firebaseUser.displayName,
       photoUrl: firebaseUser.photoURL);

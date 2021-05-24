@@ -19,7 +19,7 @@ class AuthenticationBloc
   AuthenticationBloc(
       {@required AuthenticationRepository authenticationRepository})
       : _authenticationRepository = authenticationRepository,
-        super(const AuthenticationState.unknown()) {
+        super(const AuthenticationState.unauthenticated()) {
     _userStreamSubscription?.cancel();
 
     _userStreamSubscription = _authenticationRepository.user

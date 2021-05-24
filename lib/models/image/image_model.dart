@@ -6,30 +6,32 @@ class ImageModel extends Equatable {
   final String id;
   final String userId;
   final String mainImageUrl;
-  final List<String> otherImageUrls;
+  final Timestamp timestamp;
+  final List<dynamic> otherImageUrls;
 
   ImageModel(
       {@required this.id,
       @required this.userId,
       @required this.mainImageUrl,
-      this.otherImageUrls});
+      this.otherImageUrls,
+      this.timestamp});
 
   Map<String, dynamic> toDocument() => {
         'id': id,
         'userId': userId,
         'mainImageUrl': mainImageUrl,
-        'otherImageUrls': otherImageUrls
+        'timestamp': timestamp,
+        'otherImageUrls': otherImageUrls,
       };
 
-  factory ImageModel.fromSnapshot(DocumentSnapshot doc) {
-    doc = doc.data();
-    return ImageModel(
-        id: doc.id,
-        userId: doc['userId'] as String,
-        mainImageUrl: doc['mainImageUrl'] as String,
-        otherImageUrls: doc['otherImageUrls'] as List<String>);
-  }
+  factory ImageModel.fromSnapshot(DocumentSnapshot doc) => ImageModel(
+      id: doc.id,
+      userId: doc['userId'] as String,
+      mainImageUrl: doc['mainImageUrl'] as String,
+      timestamp: doc['timestamp'] as Timestamp,
+      otherImageUrls: doc['otherImageUrls']);
 
   @override
-  List<Object> get props => [id, userId, mainImageUrl, otherImageUrls];
+  List<Object> get props =>
+      [id, userId, mainImageUrl, timestamp, otherImageUrls];
 }
