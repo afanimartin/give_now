@@ -63,40 +63,11 @@ class ImageBloc extends Bloc<ImageEvent, ImageState> {
           files.add(file);
         }
 
-        await _imageRepository.uploadImages(
+        await _imageRepository.uploadImageUrlsToFirestore(
             files, _currentUserId.getCurrentUserId());
       }
     } on Exception catch (_) {}
   }
-
-  // Stream<ImageState> _mapAddImageToState() async* {
-  //   yield ImageIsAdding();
-
-  //   try {
-  //     List<File> files = [];
-  //     List<Asset> images = [];
-
-  //     await Permission.photos.request();
-
-  //     final permissionStatus = await Permission.photos.status;
-
-  //     if (permissionStatus.isGranted) {
-  //       images = await MultiImagePicker.pickImages(
-  //           maxImages: 5, selectedAssets: images);
-
-  //       for (var i = 0; i < images.length; i++) {
-  //         final path = File(images[i].identifier);
-
-  //         files.add(path);
-  //       }
-
-  //       if (files != null) {
-  //         await _imageRepository.uploadImageUrlsToFirestore(
-  //             files, _currentUserId.getCurrentUserId());
-  //       }
-  //     }
-  //   } on Exception catch (_) {}
-  // }
 
   Stream<ImageState> _mapLoadImagesToState() async* {
     try {

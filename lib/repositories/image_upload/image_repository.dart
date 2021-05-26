@@ -11,31 +11,8 @@ class ImageRepository extends IImageRepository {
   final _firebaseFirestore = FirebaseFirestore.instance;
 
   @override
-  Future<String> uploadImageToStorage(File imageToUpload, String userId) async {
-    final uuid = Uuid();
-    final imageUrls = [];
-
-    final snapshot = await _firebaseStorage
-        .ref()
-        .child("images/${imageToUpload.path}")
-        .putFile(imageToUpload);
-
-    final url = await snapshot.ref.getDownloadURL();
-    imageUrls.add(url);
-
-    final image = ImageModel(
-        id: uuid.v4(),
-        userId: userId,
-        mainImageUrl: imageUrls[0],
-        timestamp: Timestamp.now(),
-        otherImageUrls: imageUrls.sublist(1));
-
-    await _firebaseFirestore.collection('uploads').add(image.toDocument());
-
-    return url;
-  }
-
-  Future<void> uploadImages(List<File> images, String userId) async {
+  Future<List<String>> uploadImageToStorage(
+      List<File> images, String userId) async {
     final uuid = Uuid();
     List<String> imageUrls = [];
 
@@ -49,6 +26,16 @@ class ImageRepository extends IImageRepository {
       imageUrls.add(_url);
     }
 
+    return imageUrls;
+  }
+
+  @override
+  Future<void> uploadImageUrlsToFirestore(
+      List<File> urlsToUpload, String userId) async {
+    final uuid = Uuid();
+
+    final imageUrls = await uploadImageToStorage(urlsToUpload, userId);
+
     if (imageUrls.isNotEmpty) {
       final image = ImageModel(
           id: uuid.v4(),
@@ -58,31 +45,7 @@ class ImageRepository extends IImageRepository {
           otherImageUrls: imageUrls.sublist(1));
 
       await _firebaseFirestore.collection('uploads').add(image.toDocument());
-    } else {
-      print("Urls list is empty");
     }
-  }
-
-  @override
-  Future<void> uploadImageUrlsToFirestore(
-      List<String> urlsToUpload, String userId) async {
-    // final uuid = Uuid();
-
-    // final List<String> imageUrls = [];
-
-    // for (var i = 0; i < urlsToUpload.length; i++) {
-    //   final str = await uploadImageToStorage(urlsToUpload[i]);
-    //   imageUrls.add(str);
-    // }
-
-    // final image = ImageModel(
-    //     id: uuid.v4(),
-    //     userId: userId,
-    //     mainImageUrl: imageUrls[0],
-    //     timestamp: Timestamp.now(),
-    //     otherImageUrls: imageUrls.sublist(1));
-
-    // await _firebaseFirestore.collection('uploads').add(image.toDocument());
   }
 
   @override
