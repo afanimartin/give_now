@@ -6,10 +6,11 @@ import 'package:give_now/blocs/image/image_state.dart';
 import 'package:give_now/models/image/image_model.dart';
 import 'package:give_now/screens/image_detail_screen.dart';
 import 'package:give_now/widgets/progress_loader.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class RenderImages extends StatefulWidget {
   const RenderImages({Key key}) : super(key: key);
-  
+
   @override
   _RenderImagesState createState() => _RenderImagesState();
 }
@@ -49,8 +50,16 @@ class _RenderImage extends StatelessWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             elevation: 4,
-            child: CachedNetworkImage(
-              imageUrl: image.mainImageUrl,
+            child: Column(
+              children: [
+                CachedNetworkImage(
+                  imageUrl: image.mainImageUrl,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(timeago.format(image.timestamp.toDate())),
+                )
+              ],
             ),
           ),
         ),
