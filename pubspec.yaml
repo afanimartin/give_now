@@ -42,6 +42,8 @@ dependencies:
   permission_handler: ^7.1.0
   firebase_storage: ^8.1.0
   cached_network_image: ^3.0.0
+  multi_image_picker2: ^5.0.0
+  path_provider: ^2.0.2
 
 dev_dependencies:
   flutter_test:

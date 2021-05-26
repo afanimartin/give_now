@@ -9,7 +9,8 @@ import 'package:give_now/blocs/image/image_state.dart';
 import 'package:give_now/helpers/bloc/current_user_id.dart';
 import 'package:give_now/repositories/authentication/authentication_repository.dart';
 import 'package:give_now/repositories/image_upload/image_repository.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:multi_image_picker2/multi_image_picker2.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class ImageBloc extends Bloc<ImageEvent, ImageState> {
@@ -31,32 +32,71 @@ class ImageBloc extends Bloc<ImageEvent, ImageState> {
     } else if (event is UpdateImages) {
       yield* _mapUpdatedImagesToState(event);
     } else if (event is AddImage) {
-      yield* _mapAddImageToState();
+      // yield* _mapAddImageToState();
     }
   }
 
-  Stream<ImageState> _mapAddImageToState() async* {
-    yield ImageIsAdding();
-
+  void uploadImages() async {
     try {
-      final _imagePicker = ImagePicker();
-      PickedFile pickedImage;
+      final files = <File>[];
+      List<Asset> images = [];
 
       await Permission.photos.request();
 
       final permissionStatus = await Permission.photos.status;
 
+      final appDocDir = await getTemporaryDirectory();
+      final appDocPath = appDocDir.path;
+
       if (permissionStatus.isGranted) {
-        pickedImage = await _imagePicker.getImage(source: ImageSource.gallery);
+        images = await MultiImagePicker.pickImages(
+            maxImages: 5, selectedAssets: images);
 
-        final file = File(pickedImage.path);
+        for (int i = 0; i < images.length; i++) {
+          final byteData = await images[i].getByteData();
 
-        if (file != null) {
-          _imageRepository.uploadImage(file, _currentUserId.getCurrentUserId());
+          final tempFile = File('$appDocPath/${images[i].name}');
+
+          final file = await tempFile.writeAsBytes(byteData.buffer
+              .asInt8List(byteData.offsetInBytes, byteData.lengthInBytes));
+
+          files.add(file);
         }
+
+        await _imageRepository.uploadImages(
+            files, _currentUserId.getCurrentUserId());
       }
     } on Exception catch (_) {}
   }
+
+  // Stream<ImageState> _mapAddImageToState() async* {
+  //   yield ImageIsAdding();
+
+  //   try {
+  //     List<File> files = [];
+  //     List<Asset> images = [];
+
+  //     await Permission.photos.request();
+
+  //     final permissionStatus = await Permission.photos.status;
+
+  //     if (permissionStatus.isGranted) {
+  //       images = await MultiImagePicker.pickImages(
+  //           maxImages: 5, selectedAssets: images);
+
+  //       for (var i = 0; i < images.length; i++) {
+  //         final path = File(images[i].identifier);
+
+  //         files.add(path);
+  //       }
+
+  //       if (files != null) {
+  //         await _imageRepository.uploadImageUrlsToFirestore(
+  //             files, _currentUserId.getCurrentUserId());
+  //       }
+  //     }
+  //   } on Exception catch (_) {}
+  // }
 
   Stream<ImageState> _mapLoadImagesToState() async* {
     try {
