@@ -17,7 +17,7 @@ class ImageRepository extends IImageRepository {
 
     final snapshot = await _firebaseStorage
         .ref()
-        .child("images/${uuid.v4()}")
+        .child("images/${imageToUpload.path}")
         .putFile(imageToUpload);
 
     final url = await snapshot.ref.getDownloadURL();
