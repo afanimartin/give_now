@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:give_now/blocs/image/image_bloc.dart';
 import 'package:give_now/blocs/image/image_state.dart';
+import 'package:give_now/widgets/floating_action_button.dart';
 import 'package:give_now/widgets/render_images.dart';
 
 class UserImagesScreen extends StatefulWidget {
@@ -17,12 +18,12 @@ class _UserImagesScreenState extends State<UserImagesScreen> {
         body: const RenderImages(),
         floatingActionButton: BlocBuilder<ImageBloc, ImageState>(
           builder: (context, state) {
-            return FloatingActionButton(
+            return FloatingActionButtonWidget(
               onPressed: () => context.read<ImageBloc>().pickAnUploadImages(),
               child: Icon(
                 Icons.add,
               ),
-              backgroundColor: Colors.greenAccent,
+              backgroundColor: Theme.of(context).primaryColor,
             );
           },
         ),

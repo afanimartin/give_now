@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:give_now/blocs/authentication/authentication_bloc.dart';
-import 'package:give_now/blocs/image/image_bloc.dart';
-import 'package:give_now/blocs/image/image_state.dart';
 import 'package:give_now/blocs/tab/tab_bloc.dart';
 import 'package:give_now/blocs/tab/tab_event.dart';
 import 'package:give_now/models/app_tab/app_tab.dart';

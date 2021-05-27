@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:give_now/utils/colors.dart';
 import '../blocs/authentication/authentication_bloc.dart';
 import '../repositories/authentication/authentication_repository.dart';
 import 'home_screen.dart';
@@ -42,6 +43,7 @@ class _AppViewState extends State<AppView> {
   Widget build(BuildContext context) => MaterialApp(
         debugShowCheckedModeBanner: false,
         navigatorKey: _navigatorKey,
+        theme: appTheme(),
         builder: (context, child) =>
             BlocListener<AuthenticationBloc, AuthenticationState>(
           listener: (context, state) {

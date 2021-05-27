@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:give_now/blocs/image/image_bloc.dart';
 import 'package:give_now/blocs/image/image_state.dart';
 import 'package:give_now/models/image/image_model.dart';
+import 'package:give_now/widgets/floating_action_button.dart';
 import 'package:give_now/widgets/progress_loader.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
@@ -38,10 +39,10 @@ class ImageDetailScreen extends StatelessWidget {
         ),
         floatingActionButton: BlocBuilder<ImageBloc, ImageState>(
           builder: (context, state) {
-            return FloatingActionButton(
-              onPressed: () => context.read<ImageBloc>().pickAnUploadImages(),
+            return FloatingActionButtonWidget(
+              onPressed: () {},
               child: Icon(FontAwesomeIcons.donate),
-              backgroundColor: Colors.greenAccent,
+              backgroundColor: Theme.of(context).primaryColor,
             );
           },
         ),
