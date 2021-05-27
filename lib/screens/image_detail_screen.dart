@@ -45,7 +45,7 @@ class _PhotoViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        height: MediaQuery.of(context).size.height,
+        height: 350,
         width: MediaQuery.of(context).size.width,
         margin: const EdgeInsets.only(left: 15, right: 15),
         child: PhotoViewGallery.builder(
@@ -53,10 +53,20 @@ class _PhotoViewWidget extends StatelessWidget {
           builder: (context, index) {
             final image = images[index];
 
-            return PhotoViewGalleryPageOptions(
-                imageProvider: NetworkImage(image),
-                minScale: PhotoViewComputedScale.contained * 0.8,
-                maxScale: PhotoViewComputedScale.contained * 2);
+            return PhotoViewGalleryPageOptions.customChild(
+              child: Card(
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: CachedNetworkImage(
+                  imageUrl: image,
+                  fit: BoxFit.cover,
+                ),
+              ),
+
+              // minScale: PhotoViewComputedScale.contained * 0.8,
+              // maxScale: PhotoViewComputedScale.contained * 2
+            );
           },
           scrollPhysics: BouncingScrollPhysics(),
           backgroundDecoration: BoxDecoration(
@@ -67,7 +77,7 @@ class _PhotoViewWidget extends StatelessWidget {
               width: 30,
               height: 30,
               child: CircularProgressIndicator(
-                backgroundColor: Colors.blue,
+                backgroundColor: Colors.white,
                 value: event == null
                     ? 0
                     : event.cumulativeBytesLoaded / event.expectedTotalBytes,

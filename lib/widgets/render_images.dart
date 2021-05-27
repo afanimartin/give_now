@@ -54,6 +54,9 @@ class _RenderImage extends StatelessWidget {
               children: [
                 CachedNetworkImage(
                   imageUrl: image.mainImageUrl,
+                  height: 300,
+                  width: 400,
+                  fit: BoxFit.cover,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
