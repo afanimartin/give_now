@@ -36,7 +36,7 @@ class ImageBloc extends Bloc<ImageEvent, ImageState> {
     }
   }
 
-  void uploadImages() async {
+  void pickAnUploadImages() async {
     try {
       final files = <File>[];
       List<Asset> images = [];

@@ -17,7 +17,9 @@ class TabSelector extends StatelessWidget {
       backgroundColor: Colors.white,
       items: AppTab.values
           .map((tab) => BottomNavigationBarItem(
-              icon: _tabIcon(tab), label: _tabLabel(tab)))
+              icon: _tabIcon(tab),
+              label: _tabLabel(tab),
+              backgroundColor: Colors.greenAccent))
           .toList());
 
   Icon _tabIcon(AppTab tab) {
@@ -59,7 +61,7 @@ class TabSelector extends StatelessWidget {
         break;
 
       default:
-        return 'All';
+        return '';
         break;
     }
   }

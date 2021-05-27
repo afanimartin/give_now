@@ -7,7 +7,7 @@ import 'package:give_now/blocs/tab/tab_event.dart';
 import 'package:give_now/models/app_tab/app_tab.dart';
 import 'package:give_now/screens/log_in_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:give_now/widgets/render_images.dart';
+import 'package:give_now/widgets/render_screens.dart';
 import 'package:give_now/widgets/tab_selector.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -39,18 +39,7 @@ class HomeScreen extends StatelessWidget {
                   })
             ],
           ),
-          body: const RenderImages(),
-          floatingActionButton: BlocBuilder<ImageBloc, ImageState>(
-            builder: (context, state) {
-              return FloatingActionButton(
-                onPressed: () => context.read<ImageBloc>().uploadImages(),
-                child: Icon(
-                  Icons.add,
-                ),
-                backgroundColor: Colors.brown[600],
-              );
-            },
-          ),
+          body: RenderScreens(state: state),
           bottomNavigationBar: TabSelector(
               activeTab: state,
               onTabSelected: (tab) =>

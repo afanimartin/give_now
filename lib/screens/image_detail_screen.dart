@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:give_now/blocs/image/image_bloc.dart';
 import 'package:give_now/blocs/image/image_state.dart';
 import 'package:give_now/models/image/image_model.dart';
@@ -35,6 +36,15 @@ class ImageDetailScreen extends StatelessWidget {
             return const ProgressLoader();
           },
         ),
+        floatingActionButton: BlocBuilder<ImageBloc, ImageState>(
+          builder: (context, state) {
+            return FloatingActionButton(
+              onPressed: () => context.read<ImageBloc>().pickAnUploadImages(),
+              child: Icon(FontAwesomeIcons.donate),
+              backgroundColor: Colors.greenAccent,
+            );
+          },
+        ),
       );
 }
 
@@ -62,9 +72,6 @@ class _PhotoViewWidget extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-
-              // minScale: PhotoViewComputedScale.contained * 0.8,
-              // maxScale: PhotoViewComputedScale.contained * 2
             );
           },
           scrollPhysics: BouncingScrollPhysics(),
@@ -76,7 +83,7 @@ class _PhotoViewWidget extends StatelessWidget {
               width: 30,
               height: 30,
               child: CircularProgressIndicator(
-                backgroundColor: Colors.white,
+                backgroundColor: Colors.greenAccent,
                 value: event == null
                     ? 0
                     : event.cumulativeBytesLoaded / event.expectedTotalBytes,

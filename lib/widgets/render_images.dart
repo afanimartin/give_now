@@ -50,6 +50,7 @@ class _RenderImage extends StatelessWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             elevation: 4,
+            
             child: Column(
               children: [
                 CachedNetworkImage(
