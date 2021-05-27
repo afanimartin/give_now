@@ -5,7 +5,6 @@ import 'package:give_now/blocs/image/image_bloc.dart';
 import 'package:give_now/blocs/image/image_state.dart';
 import 'package:give_now/models/image/image_model.dart';
 import 'package:give_now/widgets/progress_loader.dart';
-import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
 class ImageDetailScreen extends StatelessWidget {
