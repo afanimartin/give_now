@@ -12,15 +12,15 @@ import '../widgets/floating_action_button.dart';
 import '../widgets/progress_loader.dart';
 
 ///
-class ImageDetailScreen extends StatelessWidget {
+class ItemDetailScreen extends StatelessWidget {
   ///
-  ImageDetailScreen({@required this.image, Key key}) : super(key: key);
+  ItemDetailScreen({@required this.item, Key key}) : super(key: key);
 
   ///
-  final ItemModel image;
+  final ItemModel item;
 
   ///
-  final List<String> images = [];
+  final List<String> items = <String>[];
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -32,10 +32,11 @@ class ImageDetailScreen extends StatelessWidget {
         body: BlocBuilder<ItemBloc, ItemState>(
           builder: (context, state) {
             if (state is ItemUpdated) {
-              state.currentUserImages.forEach((image) {
-                image.otherImageUrls.forEach((String img) => images.add(img));
+              state?.currentUserItems?.forEach((item) {
+                item.otherImageUrls
+                    .forEach((dynamic img) => items.add(img.toString()));
               });
-              return _PhotoViewWidget(images: images);
+              return _PhotoViewWidget(items: items);
             }
 
             return const ProgressLoader();
@@ -44,23 +45,27 @@ class ImageDetailScreen extends StatelessWidget {
         floatingActionButton: BlocBuilder<ItemBloc, ItemState>(
             builder: (context, state) => FloatingActionButtonWidget(
                   backgroundColor: Theme.of(context).primaryColor,
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<ItemBloc>().donateItemToCharity(item);
+
+                    Navigator.of(context).pop();
+                  },
                   child: const Icon(FontAwesomeIcons.donate),
                 )),
       );
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ItemModel>('image', image));
+    properties.add(DiagnosticsProperty<ItemModel>('item', item));
     // ignore: cascade_invocations
-    properties.add(IterableProperty<String>('images', images));
+    properties.add(IterableProperty<String>('items', items));
   }
 }
 
 class _PhotoViewWidget extends StatelessWidget {
   ///
-  const _PhotoViewWidget({@required this.images, Key key}) : super(key: key);
-  final List<String> images;
+  const _PhotoViewWidget({@required this.items, Key key}) : super(key: key);
+  final List<String> items;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -68,9 +73,9 @@ class _PhotoViewWidget extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         margin: const EdgeInsets.only(left: 15, right: 15),
         child: PhotoViewGallery.builder(
-          itemCount: images.length,
+          itemCount: items.length,
           builder: (context, index) {
-            final image = images[index];
+            final item = items[index];
 
             return PhotoViewGalleryPageOptions.customChild(
               child: Card(
@@ -78,7 +83,7 @@ class _PhotoViewWidget extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
                 child: CachedNetworkImage(
-                  imageUrl: image,
+                  imageUrl: item,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -105,6 +110,6 @@ class _PhotoViewWidget extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(IterableProperty<String>('images', images));
+    properties.add(IterableProperty<String>('items', items));
   }
 }

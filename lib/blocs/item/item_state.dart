@@ -15,21 +15,28 @@ class ItemState extends Equatable {
 ///
 class ItemUpdated extends ItemState {
   ///
-  ItemUpdated({@required this.images, FirebaseAuth firebaseAuth})
+  ItemUpdated({@required this.items, FirebaseAuth firebaseAuth})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
 
   ///
-  final List<ItemModel> images;
+  final List<ItemModel> items;
   final FirebaseAuth _firebaseAuth;
 
   ///
-  List<ItemModel> get currentUserImages => images
-      .where((image) => image.userId == _firebaseAuth.currentUser.uid)
+  List<ItemModel> get currentUserItems => items
+      .where((item) =>
+          item.userId == _firebaseAuth.currentUser.uid && !item.donated)
       .toList();
 
   @override
-  List<Object> get props => [images];
+  List<Object> get props => [items];
 }
 
 ///
-class ImageIsAdding extends ItemState {}
+class ImageIsBeingAdded extends ItemState {}
+
+///
+class ItemIsBeingDonated extends ItemState {}
+
+/// 
+class ItemIsDonatedSuccessfully extends ItemState {}

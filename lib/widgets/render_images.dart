@@ -24,12 +24,12 @@ class _RenderImagesState extends State<RenderImages> {
   Widget build(BuildContext context) => BlocBuilder<ItemBloc, ItemState>(
         builder: (context, state) {
           if (state is ItemUpdated) {
-            return state.currentUserImages.isEmpty
+            return state.currentUserItems.isEmpty
                 ? const Center(child: Text('No images to load'))
                 : ListView.builder(
-                    itemCount: state.currentUserImages.length,
+                    itemCount: state.currentUserItems.length,
                     itemBuilder: (context, index) {
-                      final image = state.currentUserImages[index];
+                      final image = state.currentUserItems[index];
                       return _RenderImage(image: image);
                     });
           }
@@ -49,7 +49,7 @@ class _RenderImage extends StatelessWidget {
         padding: const EdgeInsets.only(left: 10, top: 6, right: 10, bottom: 6),
         child: GestureDetector(
           onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(
-              builder: (_) => ImageDetailScreen(image: image))),
+              builder: (_) => ItemDetailScreen(item: image))),
           child: Card(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

@@ -23,7 +23,7 @@ void main() async {
       ),
       BlocProvider<ItemBloc>(
           create: (_) =>
-              ItemBloc(imageRepository: ItemRepository())..add(LoadImages()))
+              ItemBloc(itemRepository: ItemRepository())..add(LoadItems()))
     ],
     child: App(
       authenticationRepository: AuthenticationRepository(),

@@ -12,16 +12,19 @@ class ItemEvent extends Equatable {
 }
 
 ///
-class LoadImages extends ItemEvent {}
+class LoadItems extends ItemEvent {}
 
 ///
-class AddImage extends ItemEvent {}
+class AddItem extends ItemEvent {}
+
+/// 
+class DonateItem extends ItemEvent {}
 
 ///
-class UpdateImages extends ItemEvent {
+class UpdateItems extends ItemEvent {
   ///
-  const UpdateImages({@required this.images});
+  const UpdateItems({@required this.items});
 
   ///
-  final List<ItemModel> images;
+  final List<ItemModel> items;
 }

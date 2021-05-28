@@ -47,17 +47,30 @@ class ItemRepository extends IItemRepository {
           timestamp: Timestamp.now(),
           otherImageUrls: imageUrls.sublist(1));
 
-      await _firebaseFirestore.collection('uploads').add(image.toDocument());
+      await _firebaseFirestore
+          .collection(Paths.uploads)
+          .add(image.toDocument());
     }
   }
 
   @override
   Future<void> donateItemToCharity(ItemModel itemToDonate) async {
-    
+    await _firebaseFirestore
+        .collection(Paths.donations)
+        .add(itemToDonate.toDocument());
+
+    await _firebaseFirestore
+        .collection(Paths.uploads)
+        .doc(itemToDonate.id)
+        .delete();
+
+    await _firebaseFirestore
+        .collection(Paths.uploads)
+        .add(itemToDonate.toDocument());
   }
 
   @override
-  Stream<List<ItemModel>> imageStream(String userId) =>
+  Stream<List<ItemModel>> currentUserItemStream(String userId) =>
       _firebaseFirestore.collection(Paths.uploads).snapshots().map((snapshot) =>
           snapshot.docs.map((doc) => ItemModel.fromSnapshot(doc)).toList()
             ..sort((a, b) => b.timestamp.compareTo(a.timestamp)));

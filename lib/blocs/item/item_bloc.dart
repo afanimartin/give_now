@@ -8,6 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../helpers/bloc/current_user_id.dart';
+import '../../models/image/item_model.dart';
 import '../../repositories/authentication/authentication_repository.dart';
 import '../../repositories/image_upload/item_repository.dart';
 import '../authentication/authentication_bloc.dart';
@@ -17,26 +18,39 @@ import 'item_state.dart';
 ///
 class ItemBloc extends Bloc<ItemEvent, ItemState> {
   ///
-  ItemBloc({@required ItemRepository imageRepository})
-      : _imageRepository = imageRepository,
+  ItemBloc({@required ItemRepository itemRepository})
+      : _itemRepository = itemRepository,
         super(const ItemState());
 
   final _currentUserId = CurrentUserId(
       authenticationBloc: AuthenticationBloc(
           authenticationRepository: AuthenticationRepository()));
 
-  final ItemRepository _imageRepository;
+  final ItemRepository _itemRepository;
   StreamSubscription _imageStreamSubscription;
 
   @override
   Stream<ItemState> mapEventToState(ItemEvent event) async* {
-    if (event is LoadImages) {
+    if (event is LoadItems) {
       yield* _mapLoadImagesToState();
-    } else if (event is UpdateImages) {
+    } else if (event is UpdateItems) {
       yield* _mapUpdatedImagesToState(event);
-    } else if (event is AddImage) {
+    } else if (event is AddItem) {
       // yield* _mapAddImageToState();
     }
+  }
+
+  ///
+  void donateItemToCharity(ItemModel itemToDonate) {
+    final updatedItem = itemToDonate.copyWith(
+        id: itemToDonate.id,
+        userId: itemToDonate.userId,
+        donated: !itemToDonate.donated,
+        mainImageUrl: itemToDonate.mainImageUrl,
+        otherImageUrls: itemToDonate.otherImageUrls,
+        timestamp: itemToDonate.timestamp);
+
+    _itemRepository.donateItemToCharity(updatedItem);
   }
 
   ///
@@ -69,7 +83,7 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
           files.add(file);
         }
 
-        await _imageRepository.uploadItemToFirestore(
+        await _itemRepository.uploadItemToFirestore(
             files, _currentUserId.getCurrentUserId());
       }
     } on Exception catch (_) {}
@@ -81,16 +95,16 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
 
       final userId = _currentUserId.getCurrentUserId();
 
-      _imageStreamSubscription = _imageRepository
-          .imageStream(userId)
-          .listen((images) => add(UpdateImages(images: images)));
+      _imageStreamSubscription = _itemRepository
+          .currentUserItemStream(userId)
+          .listen((images) => add(UpdateItems(items: images)));
     } on Exception catch (error) {
       throw Exception(error);
     }
   }
 
-  Stream<ItemState> _mapUpdatedImagesToState(UpdateImages event) async* {
-    yield ItemUpdated(images: event.images);
+  Stream<ItemState> _mapUpdatedImagesToState(UpdateItems event) async* {
+    yield ItemUpdated(items: event.items);
   }
 
   @override
