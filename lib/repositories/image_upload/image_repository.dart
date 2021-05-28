@@ -6,6 +6,7 @@ import 'package:give_now/models/image/image_model.dart';
 import 'package:give_now/repositories/image_upload/i_image_repository.dart';
 import 'package:uuid/uuid.dart';
 
+///
 class ImageRepository extends IImageRepository {
   final _firebaseStorage = FirebaseStorage.instance;
   final _firebaseFirestore = FirebaseFirestore.instance;
@@ -13,13 +14,13 @@ class ImageRepository extends IImageRepository {
   @override
   Future<List<String>> uploadImageToStorage(
       List<File> images, String userId) async {
-    final uuid = Uuid();
-    List<String> imageUrls = [];
+    const uuid = Uuid();
+    final imageUrls = [];
 
-    for (int i = 0; i < images.length; i++) {
+    for (var i = 0; i < images.length; i++) {
       final _ref = await _firebaseStorage
           .ref()
-          .child("images/${uuid.v4()}")
+          .child('images/${uuid.v4()}')
           .putFile(images[i]);
 
       final _url = await _ref.ref.getDownloadURL();
@@ -32,7 +33,7 @@ class ImageRepository extends IImageRepository {
   @override
   Future<void> uploadImageUrlsToFirestore(
       List<File> urlsToUpload, String userId) async {
-    final uuid = Uuid();
+    const uuid = Uuid();
 
     final imageUrls = await uploadImageToStorage(urlsToUpload, userId);
 

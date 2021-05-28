@@ -8,16 +8,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:give_now/widgets/render_screens.dart';
 import 'package:give_now/widgets/tab_selector.dart';
 
+///
 class HomeScreen extends StatelessWidget {
+  ///
   const HomeScreen({Key key}) : super(key: key);
 
+  ///
   static Route route() => MaterialPageRoute(builder: (_) => const HomeScreen());
 
   @override
   Widget build(BuildContext context) => BlocBuilder<TabBloc, AppTab>(
         builder: (context, state) => Scaffold(
           appBar: AppBar(
-            title: Text(
+            title: const Text(
               'Givenow',
               style: TextStyle(
                   color: Colors.black, fontSize: 28, letterSpacing: 1.2),
@@ -25,7 +28,7 @@ class HomeScreen extends StatelessWidget {
             backgroundColor: Colors.white,
             actions: [
               IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.exit_to_app,
                     color: Colors.black,
                     size: 30,

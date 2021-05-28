@@ -11,11 +11,10 @@ import '../../repositories/authentication/authentication_repository.dart';
 part 'authentication_state.dart';
 part 'authentication_event.dart';
 
+/// Authentication bloc
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-  final AuthenticationRepository _authenticationRepository;
-  StreamSubscription _userStreamSubscription;
-
+  /// Constructor
   AuthenticationBloc(
       {@required AuthenticationRepository authenticationRepository})
       : _authenticationRepository = authenticationRepository,
@@ -25,6 +24,9 @@ class AuthenticationBloc
     _userStreamSubscription = _authenticationRepository.user
         .listen((user) => add(AppStarted(user: user)));
   }
+
+  final AuthenticationRepository _authenticationRepository;
+  StreamSubscription _userStreamSubscription;
 
   @override
   Stream<AuthenticationState> mapEventToState(

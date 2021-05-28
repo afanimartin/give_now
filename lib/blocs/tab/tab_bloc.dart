@@ -3,7 +3,9 @@ import 'package:give_now/models/app_tab/app_tab.dart';
 
 import 'tab_event.dart';
 
+///
 class TabBloc extends Bloc<TabEvent, AppTab> {
+  ///
   TabBloc() : super(AppTab.home);
 
   @override

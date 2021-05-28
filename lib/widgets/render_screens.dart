@@ -4,9 +4,13 @@ import 'package:give_now/screens/donations_screen.dart';
 import 'package:give_now/screens/user_images_screen.dart';
 import 'package:give_now/screens/user_profile_screen.dart';
 
+///
 class RenderScreens extends StatelessWidget {
-  final AppTab state;
+  ///
   const RenderScreens({@required this.state, Key key}) : super(key: key);
+
+  ///
+  final AppTab state;
 
   @override
   Widget build(BuildContext context) => _renderScreens(state);

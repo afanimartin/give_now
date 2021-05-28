@@ -13,10 +13,9 @@ import 'package:multi_image_picker2/multi_image_picker2.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+///
 class ImageBloc extends Bloc<ImageEvent, ImageState> {
-  final ImageRepository _imageRepository;
-  StreamSubscription _imageStreamSubscription;
-
+  ///
   ImageBloc({@required ImageRepository imageRepository})
       : _imageRepository = imageRepository,
         super(const ImageState());
@@ -24,6 +23,9 @@ class ImageBloc extends Bloc<ImageEvent, ImageState> {
   final _currentUserId = CurrentUserId(
       authenticationBloc: AuthenticationBloc(
           authenticationRepository: AuthenticationRepository()));
+
+  final ImageRepository _imageRepository;
+  StreamSubscription _imageStreamSubscription;
 
   @override
   Stream<ImageState> mapEventToState(event) async* {
@@ -36,10 +38,13 @@ class ImageBloc extends Bloc<ImageEvent, ImageState> {
     }
   }
 
+  ///
   void pickAnUploadImages() async {
     try {
       final files = <File>[];
-      List<Asset> images = [];
+
+      ///
+      var images = <Asset>[];
 
       await Permission.photos.request();
 
@@ -52,7 +57,7 @@ class ImageBloc extends Bloc<ImageEvent, ImageState> {
         images = await MultiImagePicker.pickImages(
             maxImages: 5, selectedAssets: images);
 
-        for (int i = 0; i < images.length; i++) {
+        for (var i = 0; i < images.length; i++) {
           final byteData = await images[i].getByteData();
 
           final tempFile = File('$appDocPath/${images[i].name}');

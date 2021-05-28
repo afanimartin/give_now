@@ -4,15 +4,17 @@ import 'package:google_sign_in/google_sign_in.dart';
 import '../../models/user/user_model.dart';
 import 'i_authentication_repository.dart';
 
+///
 class AuthenticationRepository extends IAuthenticationRepository {
-  final GoogleSignIn _googleSignIn;
-  final FirebaseAuth _firebaseAuth;
-
+  ///
   AuthenticationRepository(
       {GoogleSignIn googleSignIn, FirebaseAuth firebaseAuth})
       : _googleSignIn = googleSignIn ?? GoogleSignIn.standard(),
         _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn;
+  final FirebaseAuth _firebaseAuth;
 
+  ///
   Stream<UserModel> get user =>
       _firebaseAuth.authStateChanges().map((firebaseUser) =>
           firebaseUser == null ? UserModel.empty : toUser(firebaseUser));
@@ -48,6 +50,7 @@ class AuthenticationRepository extends IAuthenticationRepository {
     } on Exception catch (_) {}
   }
 
+  ///
   UserModel toUser(User firebaseUser) => UserModel(
       userId: firebaseUser.uid,
       email: firebaseUser.email,

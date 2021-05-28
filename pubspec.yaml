@@ -49,6 +49,7 @@ dev_dependencies:
     sdk: flutter
 
   pedantic: ^1.9.0
+  very_good_analysis: ^2.1.1
 
   flutter_launcher_icons: "^0.9.0"
 

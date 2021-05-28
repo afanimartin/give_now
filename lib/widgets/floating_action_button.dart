@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
+///
 class FloatingActionButtonWidget extends StatelessWidget {
-  final void Function() onPressed;
-  final Widget child;
-  final Color backgroundColor;
-
+  ///
   const FloatingActionButtonWidget(
       {@required this.onPressed,
       @required this.child,
@@ -12,10 +10,19 @@ class FloatingActionButtonWidget extends StatelessWidget {
       Key key})
       : super(key: key);
 
+  ///
+  final void Function() onPressed;
+
+  ///
+  final Widget child;
+
+  ///
+  final Color backgroundColor;
+
   @override
   Widget build(BuildContext context) => FloatingActionButton(
         onPressed: onPressed,
-        child: child,
         backgroundColor: backgroundColor,
+        child: child,
       );
 }

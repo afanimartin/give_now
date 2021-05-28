@@ -1,1 +1,11 @@
-enum AppTab { home, profile, donations }
+///
+enum AppTab {
+  ///
+  home,
+
+  ///
+  profile,
+
+  ///
+  donations
+}

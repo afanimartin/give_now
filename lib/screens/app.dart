@@ -7,12 +7,15 @@ import 'home_screen.dart';
 import 'log_in_screen.dart';
 import 'splash_screen.dart';
 
+///
 class App extends StatelessWidget {
+  ///
   const App({
     @required this.authenticationRepository,
     Key key,
   }) : super(key: key);
 
+  ///
   final AuthenticationRepository authenticationRepository;
 
   @override
@@ -27,7 +30,9 @@ class App extends StatelessWidget {
       );
 }
 
+///
 class AppView extends StatefulWidget {
+  ///
   const AppView({Key key}) : super(key: key);
 
   @override

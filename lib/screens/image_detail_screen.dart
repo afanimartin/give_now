@@ -9,11 +9,15 @@ import 'package:give_now/widgets/floating_action_button.dart';
 import 'package:give_now/widgets/progress_loader.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
+///
 class ImageDetailScreen extends StatelessWidget {
-  final ImageModel image;
-
+  ///
   ImageDetailScreen({@required this.image, Key key}) : super(key: key);
 
+  ///
+  final ImageModel image;
+
+  ///
   final List<String> images = [];
 
   @override
@@ -21,15 +25,13 @@ class ImageDetailScreen extends StatelessWidget {
         backgroundColor: Colors.grey[200],
         appBar: AppBar(
           backgroundColor: Colors.white,
-          iconTheme: IconThemeData(color: Colors.black),
+          iconTheme: const IconThemeData(color: Colors.black),
         ),
         body: BlocBuilder<ImageBloc, ImageState>(
           builder: (context, state) {
             if (state is ImagesUpdated) {
-              state.currentUserImages.forEach((image) {
-                image.otherImageUrls.forEach((img) {
-                  images.add(img);
-                });
+              state.currentUserImages.map((image) {
+                image.otherImageUrls.map((img) => images);
               });
               return _PhotoViewWidget(images: images);
             }
@@ -38,20 +40,18 @@ class ImageDetailScreen extends StatelessWidget {
           },
         ),
         floatingActionButton: BlocBuilder<ImageBloc, ImageState>(
-          builder: (context, state) {
-            return FloatingActionButtonWidget(
-              onPressed: () {},
-              child: Icon(FontAwesomeIcons.donate),
-              backgroundColor: Theme.of(context).primaryColor,
-            );
-          },
-        ),
+            builder: (context, state) => FloatingActionButtonWidget(
+                  backgroundColor: Theme.of(context).primaryColor,
+                  onPressed: () {},
+                  child: const Icon(FontAwesomeIcons.donate),
+                )),
       );
 }
 
 class _PhotoViewWidget extends StatelessWidget {
-  final List<String> images;
+  ///
   const _PhotoViewWidget({@required this.images, Key key}) : super(key: key);
+  final List<String> images;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -75,12 +75,12 @@ class _PhotoViewWidget extends StatelessWidget {
               ),
             );
           },
-          scrollPhysics: BouncingScrollPhysics(),
-          backgroundDecoration: BoxDecoration(
+          scrollPhysics: const BouncingScrollPhysics(),
+          backgroundDecoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(20))),
           enableRotation: true,
           loadingBuilder: (context, event) => Center(
-            child: Container(
+            child: SizedBox(
               width: 30,
               height: 30,
               child: CircularProgressIndicator(

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:give_now/blocs/authentication/authentication_bloc.dart';
 
+///
 class UserProfileScreen extends StatelessWidget {
+  ///
   const UserProfileScreen({Key key}) : super(key: key);
 
   @override
@@ -21,11 +23,11 @@ class UserProfileScreen extends StatelessWidget {
                 backgroundImage: CachedNetworkImageProvider(user.photoUrl)),
             Text(
               user.displayName,
-              style: TextStyle(fontSize: 28),
+              style: const TextStyle(fontSize: 28),
             ),
             Text(
               user.email,
-              style: TextStyle(fontSize: 22, color: Colors.black45),
+              style: const TextStyle(fontSize: 22, color: Colors.black45),
             ),
           ],
         ),

@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:give_now/models/app_tab/app_tab.dart';
 
+///
 class TabSelector extends StatelessWidget {
-  final AppTab activeTab;
-  final Function(AppTab) onTabSelected;
-
+  ///
   const TabSelector(
       {@required this.activeTab, @required this.onTabSelected, Key key})
       : super(key: key);
+
+  ///
+  final AppTab activeTab;
+
+  ///
+  final Function(AppTab) onTabSelected;
 
   @override
   Widget build(BuildContext context) => BottomNavigationBar(

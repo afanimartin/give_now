@@ -8,7 +8,9 @@ import 'package:give_now/screens/image_detail_screen.dart';
 import 'package:give_now/widgets/progress_loader.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
+///
 class RenderImages extends StatefulWidget {
+  ///
   const RenderImages({Key key}) : super(key: key);
 
   @override
@@ -21,7 +23,7 @@ class _RenderImagesState extends State<RenderImages> {
         builder: (context, state) {
           if (state is ImagesUpdated) {
             return state.currentUserImages.isEmpty
-                ? Center(child: Text('No images to load'))
+                ? const Center(child: Text('No images to load'))
                 : ListView.builder(
                     itemCount: state.currentUserImages.length,
                     itemBuilder: (context, index) {
@@ -35,12 +37,12 @@ class _RenderImagesState extends State<RenderImages> {
 }
 
 class _RenderImage extends StatelessWidget {
+  ///
+  const _RenderImage({@required this.image, Key key}) : super(key: key);
   final ImageModel image;
 
-  const _RenderImage({@required this.image, Key key}) : super(key: key);
-
   @override
-  Widget build(BuildContext context) => Container(
+  Widget build(BuildContext context) => SizedBox(
           child: Padding(
         padding: const EdgeInsets.only(left: 10, top: 6, right: 10, bottom: 6),
         child: GestureDetector(
@@ -50,7 +52,6 @@ class _RenderImage extends StatelessWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             elevation: 4,
-            
             child: Column(
               children: [
                 CachedNetworkImage(

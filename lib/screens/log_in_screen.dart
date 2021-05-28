@@ -5,9 +5,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../blocs/login/login_cubit.dart';
 import '../repositories/authentication/authentication_repository.dart';
 
+///
 class LogInScreen extends StatelessWidget {
+  ///
   const LogInScreen({Key key}) : super(key: key);
 
+  ///
   static Route<void> route() =>
       MaterialPageRoute<void>(builder: (_) => const LogInScreen());
 
