@@ -9,8 +9,10 @@ abstract class IItemRepository {
       List<File> images, String userId);
 
   ///
-  Future<void> uploadItemToFirestore(
-      List<File> urlsToUpload, String userId);
+  Future<void> uploadItemToFirestore(List<File> urlsToUpload, String userId);
+
+  ///
+  Future<void> donateItemToCharity(ItemModel itemToDonate);
 
   ///
   Stream<List<ItemModel>> imageStream(String userId);

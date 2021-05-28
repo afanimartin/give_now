@@ -9,6 +9,7 @@ class ItemModel extends Equatable {
       {@required this.id,
       @required this.userId,
       @required this.mainImageUrl,
+      this.donated = false,
       this.otherImageUrls,
       this.timestamp});
 
@@ -16,6 +17,7 @@ class ItemModel extends Equatable {
   factory ItemModel.fromSnapshot(DocumentSnapshot doc) => ItemModel(
       id: doc.id,
       userId: doc['userId'] as String,
+      donated: doc['donated'] as bool,
       mainImageUrl: doc['mainImageUrl'] as String,
       timestamp: doc['timestamp'] as Timestamp,
       otherImageUrls: doc['otherImageUrls']);
@@ -25,6 +27,9 @@ class ItemModel extends Equatable {
 
   ///
   final String userId;
+
+  ///
+  final bool donated;
 
   ///
   final String mainImageUrl;
@@ -39,6 +44,7 @@ class ItemModel extends Equatable {
   Map<String, dynamic> toDocument() => <String, dynamic>{
         'id': id,
         'userId': userId,
+        'donated': donated,
         'mainImageUrl': mainImageUrl,
         'timestamp': timestamp,
         'otherImageUrls': otherImageUrls,
@@ -46,5 +52,5 @@ class ItemModel extends Equatable {
 
   @override
   List<Object> get props =>
-      [id, userId, mainImageUrl, timestamp, otherImageUrls];
+      [id, userId, donated, mainImageUrl, timestamp, otherImageUrls];
 }

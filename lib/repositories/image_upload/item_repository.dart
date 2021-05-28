@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../models/image/item_model.dart';
+import '../../utils/paths.dart';
 import 'i_item_repository.dart';
 
 ///
@@ -51,8 +52,13 @@ class ItemRepository extends IItemRepository {
   }
 
   @override
+  Future<void> donateItemToCharity(ItemModel itemToDonate) async {
+    
+  }
+
+  @override
   Stream<List<ItemModel>> imageStream(String userId) =>
-      _firebaseFirestore.collection('uploads').snapshots().map((snapshot) =>
+      _firebaseFirestore.collection(Paths.uploads).snapshots().map((snapshot) =>
           snapshot.docs.map((doc) => ItemModel.fromSnapshot(doc)).toList()
             ..sort((a, b) => b.timestamp.compareTo(a.timestamp)));
 }
