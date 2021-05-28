@@ -3,9 +3,9 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 ///
-class ImageModel extends Equatable {
+class ItemModel extends Equatable {
   ///
-  const ImageModel(
+  const ItemModel(
       {@required this.id,
       @required this.userId,
       @required this.mainImageUrl,
@@ -13,7 +13,7 @@ class ImageModel extends Equatable {
       this.timestamp});
 
   ///
-  factory ImageModel.fromSnapshot(DocumentSnapshot doc) => ImageModel(
+  factory ItemModel.fromSnapshot(DocumentSnapshot doc) => ItemModel(
       id: doc.id,
       userId: doc['userId'] as String,
       mainImageUrl: doc['mainImageUrl'] as String,
@@ -33,10 +33,10 @@ class ImageModel extends Equatable {
   final Timestamp timestamp;
 
   ///
-  final List<dynamic> otherImageUrls;
+  final dynamic otherImageUrls;
 
   ///
-  Map<String, dynamic> toDocument() => {
+  Map<String, dynamic> toDocument() => <String, dynamic>{
         'id': id,
         'userId': userId,
         'mainImageUrl': mainImageUrl,

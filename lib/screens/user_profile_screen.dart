@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:give_now/blocs/authentication/authentication_bloc.dart';
+import '../blocs/authentication/authentication_bloc.dart';
 
 ///
 class UserProfileScreen extends StatelessWidget {
@@ -19,7 +19,7 @@ class UserProfileScreen extends StatelessWidget {
           children: [
             Row(),
             CircleAvatar(
-                radius: 40.0,
+                radius: 40,
                 backgroundImage: CachedNetworkImageProvider(user.photoUrl)),
             Text(
               user.displayName,

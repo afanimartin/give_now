@@ -1,8 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:give_now/models/app_tab/app_tab.dart';
-import 'package:give_now/screens/donations_screen.dart';
-import 'package:give_now/screens/user_images_screen.dart';
-import 'package:give_now/screens/user_profile_screen.dart';
+import '../models/app_tab/app_tab.dart';
+import '../screens/donations_screen.dart';
+import '../screens/user_images_screen.dart';
+import '../screens/user_profile_screen.dart';
 
 ///
 class RenderScreens extends StatelessWidget {
@@ -27,10 +28,12 @@ class RenderScreens extends StatelessWidget {
       case AppTab.donations:
         return const DonationsScreen();
         break;
-
-      default:
-        break;
     }
     return const SizedBox.shrink();
+  }
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(EnumProperty<AppTab>('state', state));
   }
 }

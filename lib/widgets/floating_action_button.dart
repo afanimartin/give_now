@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 ///
@@ -25,4 +26,12 @@ class FloatingActionButtonWidget extends StatelessWidget {
         backgroundColor: backgroundColor,
         child: child,
       );
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty<void Function()>('onPressed', onPressed));
+    // ignore: cascade_invocations
+    properties.add(ColorProperty('backgroundColor', backgroundColor));
+  }
 }

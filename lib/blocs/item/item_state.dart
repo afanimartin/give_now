@@ -1,29 +1,29 @@
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:give_now/models/image/image_model.dart';
+import '../../models/image/item_model.dart';
 
 ///
-class ImageState extends Equatable {
+class ItemState extends Equatable {
   ///
-  const ImageState();
+  const ItemState();
 
   @override
   List<Object> get props => [];
 }
 
 ///
-class ImagesUpdated extends ImageState {
+class ItemUpdated extends ItemState {
   ///
-  ImagesUpdated({@required this.images, FirebaseAuth firebaseAuth})
+  ItemUpdated({@required this.images, FirebaseAuth firebaseAuth})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
 
   ///
-  final List<ImageModel> images;
+  final List<ItemModel> images;
   final FirebaseAuth _firebaseAuth;
 
   ///
-  List<ImageModel> get currentUserImages => images
+  List<ItemModel> get currentUserImages => images
       .where((image) => image.userId == _firebaseAuth.currentUser.uid)
       .toList();
 
@@ -32,4 +32,4 @@ class ImagesUpdated extends ImageState {
 }
 
 ///
-class ImageIsAdding extends ImageState {}
+class ImageIsAdding extends ItemState {}

@@ -2,20 +2,21 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:give_now/models/image/image_model.dart';
-import 'package:give_now/repositories/image_upload/i_image_repository.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../models/image/item_model.dart';
+import 'i_item_repository.dart';
+
 ///
-class ImageRepository extends IImageRepository {
+class ItemRepository extends IItemRepository {
   final _firebaseStorage = FirebaseStorage.instance;
   final _firebaseFirestore = FirebaseFirestore.instance;
 
   @override
-  Future<List<String>> uploadImageToStorage(
+  Future<List<String>> uploadItemImagesToStorage(
       List<File> images, String userId) async {
     const uuid = Uuid();
-    final imageUrls = [];
+    final imageUrls = <String>[];
 
     for (var i = 0; i < images.length; i++) {
       final _ref = await _firebaseStorage
@@ -31,14 +32,14 @@ class ImageRepository extends IImageRepository {
   }
 
   @override
-  Future<void> uploadImageUrlsToFirestore(
+  Future<void> uploadItemToFirestore(
       List<File> urlsToUpload, String userId) async {
     const uuid = Uuid();
 
-    final imageUrls = await uploadImageToStorage(urlsToUpload, userId);
+    final imageUrls = await uploadItemImagesToStorage(urlsToUpload, userId);
 
     if (imageUrls.isNotEmpty) {
-      final image = ImageModel(
+      final image = ItemModel(
           id: uuid.v4(),
           userId: userId,
           mainImageUrl: imageUrls[0],
@@ -50,8 +51,8 @@ class ImageRepository extends IImageRepository {
   }
 
   @override
-  Stream<List<ImageModel>> imageStream(String userId) =>
+  Stream<List<ItemModel>> imageStream(String userId) =>
       _firebaseFirestore.collection('uploads').snapshots().map((snapshot) =>
-          snapshot.docs.map((doc) => ImageModel.fromSnapshot(doc)).toList()
+          snapshot.docs.map((doc) => ItemModel.fromSnapshot(doc)).toList()
             ..sort((a, b) => b.timestamp.compareTo(a.timestamp)));
 }

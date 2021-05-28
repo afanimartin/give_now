@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:give_now/blocs/authentication/authentication_bloc.dart';
+import '../../blocs/authentication/authentication_bloc.dart';
 
 ///
 class CurrentUserId extends Equatable {

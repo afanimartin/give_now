@@ -1,13 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:give_now/blocs/image/image_bloc.dart';
-import 'package:give_now/blocs/image/image_state.dart';
-import 'package:give_now/models/image/image_model.dart';
-import 'package:give_now/widgets/floating_action_button.dart';
-import 'package:give_now/widgets/progress_loader.dart';
 import 'package:photo_view/photo_view_gallery.dart';
+
+import '../blocs/item/item_bloc.dart';
+import '../blocs/item/item_state.dart';
+import '../models/image/item_model.dart';
+import '../widgets/floating_action_button.dart';
+import '../widgets/progress_loader.dart';
 
 ///
 class ImageDetailScreen extends StatelessWidget {
@@ -15,7 +17,7 @@ class ImageDetailScreen extends StatelessWidget {
   ImageDetailScreen({@required this.image, Key key}) : super(key: key);
 
   ///
-  final ImageModel image;
+  final ItemModel image;
 
   ///
   final List<String> images = [];
@@ -27,11 +29,11 @@ class ImageDetailScreen extends StatelessWidget {
           backgroundColor: Colors.white,
           iconTheme: const IconThemeData(color: Colors.black),
         ),
-        body: BlocBuilder<ImageBloc, ImageState>(
+        body: BlocBuilder<ItemBloc, ItemState>(
           builder: (context, state) {
-            if (state is ImagesUpdated) {
-              state.currentUserImages.map((image) {
-                image.otherImageUrls.map((img) => images);
+            if (state is ItemUpdated) {
+              state.currentUserImages.forEach((image) {
+                image.otherImageUrls.forEach((String img) => images.add(img));
               });
               return _PhotoViewWidget(images: images);
             }
@@ -39,13 +41,20 @@ class ImageDetailScreen extends StatelessWidget {
             return const ProgressLoader();
           },
         ),
-        floatingActionButton: BlocBuilder<ImageBloc, ImageState>(
+        floatingActionButton: BlocBuilder<ItemBloc, ItemState>(
             builder: (context, state) => FloatingActionButtonWidget(
                   backgroundColor: Theme.of(context).primaryColor,
                   onPressed: () {},
                   child: const Icon(FontAwesomeIcons.donate),
                 )),
       );
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ItemModel>('image', image));
+    // ignore: cascade_invocations
+    properties.add(IterableProperty<String>('images', images));
+  }
 }
 
 class _PhotoViewWidget extends StatelessWidget {
@@ -93,4 +102,9 @@ class _PhotoViewWidget extends StatelessWidget {
           ),
         ),
       );
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<String>('images', images));
+  }
 }

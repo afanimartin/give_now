@@ -1,6 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:give_now/models/app_tab/app_tab.dart';
+import '../models/app_tab/app_tab.dart';
 
 ///
 class TabSelector extends StatelessWidget {
@@ -44,13 +45,10 @@ class TabSelector extends StatelessWidget {
           FontAwesomeIcons.briefcase,
         );
         break;
-
-      default:
-        return const Icon(
-          Icons.show_chart,
-        );
-        break;
     }
+    return const Icon(
+      Icons.show_chart,
+    );
   }
 
   String _tabLabel(AppTab tab) {
@@ -64,10 +62,16 @@ class TabSelector extends StatelessWidget {
       case AppTab.donations:
         return 'Donations';
         break;
-
-      default:
-        return '';
-        break;
     }
+    return '';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(EnumProperty<AppTab>('activeTab', activeTab));
+    // ignore: cascade_invocations
+    properties.add(DiagnosticsProperty<Function(AppTab p1)>(
+        'onTabSelected', onTabSelected));
   }
 }

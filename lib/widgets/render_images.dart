@@ -1,12 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:give_now/blocs/image/image_bloc.dart';
-import 'package:give_now/blocs/image/image_state.dart';
-import 'package:give_now/models/image/image_model.dart';
-import 'package:give_now/screens/image_detail_screen.dart';
-import 'package:give_now/widgets/progress_loader.dart';
 import 'package:timeago/timeago.dart' as timeago;
+
+import '../blocs/item/item_bloc.dart';
+import '../blocs/item/item_state.dart';
+import '../models/image/item_model.dart';
+import '../screens/item_detail_screen.dart';
+import 'progress_loader.dart';
 
 ///
 class RenderImages extends StatefulWidget {
@@ -19,9 +21,9 @@ class RenderImages extends StatefulWidget {
 
 class _RenderImagesState extends State<RenderImages> {
   @override
-  Widget build(BuildContext context) => BlocBuilder<ImageBloc, ImageState>(
+  Widget build(BuildContext context) => BlocBuilder<ItemBloc, ItemState>(
         builder: (context, state) {
-          if (state is ImagesUpdated) {
+          if (state is ItemUpdated) {
             return state.currentUserImages.isEmpty
                 ? const Center(child: Text('No images to load'))
                 : ListView.builder(
@@ -39,14 +41,14 @@ class _RenderImagesState extends State<RenderImages> {
 class _RenderImage extends StatelessWidget {
   ///
   const _RenderImage({@required this.image, Key key}) : super(key: key);
-  final ImageModel image;
+  final ItemModel image;
 
   @override
   Widget build(BuildContext context) => SizedBox(
           child: Padding(
         padding: const EdgeInsets.only(left: 10, top: 6, right: 10, bottom: 6),
         child: GestureDetector(
-          onTap: () => Navigator.of(context).push(MaterialPageRoute(
+          onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(
               builder: (_) => ImageDetailScreen(image: image))),
           child: Card(
             shape:
@@ -61,7 +63,7 @@ class _RenderImage extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8),
                   child: Text(timeago.format(image.timestamp.toDate())),
                 )
               ],
@@ -69,4 +71,9 @@ class _RenderImage extends StatelessWidget {
           ),
         ),
       ));
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ItemModel>('image', image));
+  }
 }

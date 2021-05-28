@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:give_now/models/app_tab/app_tab.dart';
+import '../../models/app_tab/app_tab.dart';
 
 import 'tab_event.dart';
 

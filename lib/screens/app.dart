@@ -1,8 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:give_now/utils/colors.dart';
+
 import '../blocs/authentication/authentication_bloc.dart';
 import '../repositories/authentication/authentication_repository.dart';
+import '../utils/colors.dart';
 import 'home_screen.dart';
 import 'log_in_screen.dart';
 import 'splash_screen.dart';
@@ -28,6 +30,12 @@ class App extends StatelessWidget {
           child: const AppView(),
         ),
       );
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<AuthenticationRepository>(
+        'authenticationRepository', authenticationRepository));
+  }
 }
 
 ///
@@ -64,8 +72,6 @@ class _AppViewState extends State<AppView> {
                   LogInScreen.route(),
                   (route) => false,
                 );
-                break;
-              default:
                 break;
             }
           },

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:give_now/blocs/authentication/authentication_bloc.dart';
-import 'package:give_now/blocs/tab/tab_bloc.dart';
-import 'package:give_now/blocs/tab/tab_event.dart';
-import 'package:give_now/models/app_tab/app_tab.dart';
-import 'package:give_now/screens/log_in_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:give_now/widgets/render_screens.dart';
-import 'package:give_now/widgets/tab_selector.dart';
+
+import '../blocs/authentication/authentication_bloc.dart';
+import '../blocs/tab/tab_bloc.dart';
+import '../blocs/tab/tab_event.dart';
+import '../models/app_tab/app_tab.dart';
+import '../widgets/render_screens.dart';
+import '../widgets/tab_selector.dart';
+import 'log_in_screen.dart';
 
 ///
 class HomeScreen extends StatelessWidget {
@@ -14,7 +15,8 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({Key key}) : super(key: key);
 
   ///
-  static Route route() => MaterialPageRoute(builder: (_) => const HomeScreen());
+  static Route route() =>
+      MaterialPageRoute<void>(builder: (_) => const HomeScreen());
 
   @override
   Widget build(BuildContext context) => BlocBuilder<TabBloc, AppTab>(

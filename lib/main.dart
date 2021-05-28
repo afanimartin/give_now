@@ -1,13 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:give_now/blocs/image/image_bloc.dart';
-import 'package:give_now/blocs/image/image_event.dart';
-import 'package:give_now/blocs/simple_bloc_observer.dart';
-import 'package:give_now/blocs/tab/tab_bloc.dart';
-import 'package:give_now/repositories/authentication/authentication_repository.dart';
-import 'package:give_now/repositories/image_upload/image_repository.dart';
-import 'package:give_now/screens/app.dart';
+import 'blocs/item/item_bloc.dart';
+import 'blocs/item/item_event.dart';
+import 'blocs/simple_bloc_observer.dart';
+import 'blocs/tab/tab_bloc.dart';
+import 'repositories/authentication/authentication_repository.dart';
+import 'repositories/image_upload/item_repository.dart';
+import 'screens/app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,9 +21,9 @@ void main() async {
       BlocProvider<TabBloc>(
         create: (_) => TabBloc(),
       ),
-      BlocProvider<ImageBloc>(
+      BlocProvider<ItemBloc>(
           create: (_) =>
-              ImageBloc(imageRepository: ImageRepository())..add(LoadImages()))
+              ItemBloc(imageRepository: ItemRepository())..add(LoadImages()))
     ],
     child: App(
       authenticationRepository: AuthenticationRepository(),
