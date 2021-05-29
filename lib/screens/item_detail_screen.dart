@@ -68,24 +68,17 @@ class _PhotoViewWidget extends StatelessWidget {
   final List<String> items;
 
   @override
-  Widget build(BuildContext context) => Container(
-        height: 350,
-        width: MediaQuery.of(context).size.width,
-        margin: const EdgeInsets.only(left: 15, right: 15),
+  Widget build(BuildContext context) => SizedBox(
+        height: 300,
         child: PhotoViewGallery.builder(
           itemCount: items.length,
           builder: (context, index) {
             final item = items[index];
 
             return PhotoViewGalleryPageOptions.customChild(
-              child: Card(
-                elevation: 4,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                child: CachedNetworkImage(
-                  imageUrl: item,
-                  fit: BoxFit.cover,
-                ),
+              child: CachedNetworkImage(
+                imageUrl: item,
+                fit: BoxFit.cover,
               ),
             );
           },
