@@ -25,7 +25,7 @@ class _RenderImagesState extends State<RenderImages> {
         builder: (context, state) {
           if (state is ItemUpdated) {
             return state.currentUserItems.isEmpty
-                ? const Center(child: Text('No images to load'))
+                ? const Center(child: Text('No items to load'))
                 : ListView.builder(
                     itemCount: state.currentUserItems.length,
                     itemBuilder: (context, index) {

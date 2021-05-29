@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'blocs/donation/donation_bloc.dart';
+import 'blocs/donation/donation_event.dart';
 import 'blocs/item/item_bloc.dart';
 import 'blocs/item/item_event.dart';
 import 'blocs/simple_bloc_observer.dart';
@@ -24,7 +26,10 @@ void main() async {
       ),
       BlocProvider<ItemBloc>(
           create: (_) =>
-              ItemBloc(itemRepository: ItemRepository())..add(LoadItems()))
+              ItemBloc(itemRepository: ItemRepository())..add(LoadItems())),
+      BlocProvider<DonationBloc>(
+          create: (_) => DonationBloc(itemRepository: ItemRepository())
+            ..add(LoadDonations()))
     ],
     child: App(
       authenticationRepository: AuthenticationRepository(),

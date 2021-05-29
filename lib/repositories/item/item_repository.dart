@@ -74,6 +74,7 @@ class ItemRepository extends IItemRepository {
       _firebaseFirestore.collection(Paths.uploads).snapshots().map((snapshot) =>
           snapshot.docs.map((doc) => ItemModel.fromSnapshot(doc)).toList()
             ..sort((a, b) => b.timestamp.compareTo(a.timestamp)));
+
   ///
   Stream<List<ItemModel>> currentUserDonations(String userId) =>
       _firebaseFirestore.collection(Paths.donations).snapshots().map(

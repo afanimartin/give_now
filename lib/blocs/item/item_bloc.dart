@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:multi_image_picker2/multi_image_picker2.dart';
@@ -48,7 +49,7 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
         donated: !itemToDonate.donated,
         mainImageUrl: itemToDonate.mainImageUrl,
         otherImageUrls: itemToDonate.otherImageUrls,
-        timestamp: itemToDonate.timestamp);
+        timestamp: Timestamp.now());
 
     _itemRepository.donateItemToCharity(updatedItem);
   }
