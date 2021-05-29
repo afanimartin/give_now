@@ -10,7 +10,7 @@ import 'package:permission_handler/permission_handler.dart';
 import '../../helpers/bloc/current_user_id.dart';
 import '../../models/image/item_model.dart';
 import '../../repositories/authentication/authentication_repository.dart';
-import '../../repositories/image_upload/item_repository.dart';
+import '../../repositories/item/item_repository.dart';
 import '../authentication/authentication_bloc.dart';
 import 'item_event.dart';
 import 'item_state.dart';
