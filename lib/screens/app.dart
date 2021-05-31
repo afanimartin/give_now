@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/authentication/authentication_bloc.dart';
 import '../repositories/authentication/authentication_repository.dart';
-import '../utils/colors.dart';
+import '../utils/app_theme.dart';
 import 'home_screen.dart';
 import 'log_in_screen.dart';
 import 'splash_screen.dart';
