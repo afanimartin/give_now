@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../models/app_tab/app_tab.dart';
 import '../screens/donations_screen.dart';
-import '../screens/user_images_screen.dart';
+import '../screens/user_items_screen.dart';
 import '../screens/user_profile_screen.dart';
 
 ///
@@ -19,7 +19,7 @@ class RenderScreens extends StatelessWidget {
   Widget _renderScreens(AppTab state) {
     switch (state) {
       case AppTab.home:
-        return const UserImagesScreen();
+        return const UserItemsScreen();
         break;
       case AppTab.profile:
         return const UserProfileScreen();

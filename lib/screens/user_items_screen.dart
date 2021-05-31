@@ -8,31 +8,31 @@ import '../widgets/items_grid.dart';
 import '../widgets/progress_loader.dart';
 
 ///
-class UserImagesScreen extends StatefulWidget {
+class UserItemsScreen extends StatefulWidget {
   ///
-  const UserImagesScreen({Key key}) : super(key: key);
+  const UserItemsScreen({Key key}) : super(key: key);
 
   @override
-  _UserImagesScreenState createState() => _UserImagesScreenState();
+  _UserItemsScreenState createState() => _UserItemsScreenState();
 }
 
-class _UserImagesScreenState extends State<UserImagesScreen> {
+class _UserItemsScreenState extends State<UserItemsScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: BlocBuilder<ItemBloc, ItemState>(
-            builder: (contex, state) {
-              if (state is ItemUpdated) {
-                return CustomScrollView(
-                  slivers: [
-                    ItemsGrid(
-                      items: state.currentUserItems,
-                    )
-                  ],
-                );
-              }
-              return const ProgressLoader();
-            },
-          ),
+          builder: (contex, state) {
+            if (state is ItemUpdated) {
+              return CustomScrollView(
+                slivers: [
+                  ItemsGrid(
+                    items: state.currentUserItems,
+                  )
+                ],
+              );
+            }
+            return const ProgressLoader();
+          },
+        ),
         floatingActionButton: BlocBuilder<ItemBloc, ItemState>(
             builder: (context, state) => FloatingActionButtonWidget(
                   onPressed: () =>
