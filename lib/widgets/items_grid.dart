@@ -25,10 +25,10 @@ class ItemsGrid extends StatelessWidget {
             return _buildItemCard(context, item);
           }, childCount: items?.length),
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              childAspectRatio: 0.8),
+            maxCrossAxisExtent: 200,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+          ),
         ),
       );
 
@@ -41,14 +41,16 @@ class ItemsGrid extends StatelessWidget {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: CachedNetworkImage(
                   imageUrl: item.mainImageUrl,
                   fit: BoxFit.cover,
+                  width: 400,
                 ),
+              ),
+              const SizedBox(
+                height: 8,
               ),
               Expanded(child: Text(timeago.format(item.timestamp.toDate())))
             ],
