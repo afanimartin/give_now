@@ -27,13 +27,15 @@ class _UserItemsScreenState extends State<UserItemsScreen> {
             }
 
             if (state is ItemUpdated) {
-              return CustomScrollView(
-                slivers: [
-                  ItemsGrid(
-                    items: state.currentUserItems,
-                  )
-                ],
-              );
+              return state.currentUserItems.isNotEmpty
+                  ? CustomScrollView(
+                      slivers: [
+                        ItemsGrid(
+                          items: state.currentUserItems,
+                        )
+                      ],
+                    )
+                  : const Center(child: Text('No items uploaded'));
             }
 
             return const SizedBox.shrink();

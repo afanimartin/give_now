@@ -32,10 +32,7 @@ class ItemDetailScreen extends StatelessWidget {
         body: BlocBuilder<ItemBloc, ItemState>(
           builder: (context, state) {
             if (state is ItemUpdated) {
-              state?.currentUserItems?.forEach((item) {
-                item.otherImageUrls
-                    .forEach((dynamic img) => items.add(img.toString()));
-              });
+              item.otherImageUrls.forEach((img) => items.add(img.toString()));
               return _PhotoViewWidget(items: items);
             }
 
