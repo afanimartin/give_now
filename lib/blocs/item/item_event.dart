@@ -15,7 +15,7 @@ class ItemEvent extends Equatable {
 class LoadItems extends ItemEvent {}
 
 ///
-class AddItem extends ItemEvent {}
+class PickAndUploadItems extends ItemEvent {}
 
 /// 
 class DonateItem extends ItemEvent {}

@@ -33,7 +33,7 @@ class ItemUpdated extends ItemState {
 }
 
 ///
-class ImageIsBeingAdded extends ItemState {}
+class ItemIsBeingAdded extends ItemState {}
 
 ///
 class ItemIsBeingDonated extends ItemState {}

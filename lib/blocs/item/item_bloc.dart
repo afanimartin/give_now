@@ -36,9 +36,46 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
       yield* _mapLoadImagesToState();
     } else if (event is UpdateItems) {
       yield* _mapUpdatedImagesToState(event);
-    } else if (event is AddItem) {
-      // yield* _mapAddImageToState();
+    } else if (event is PickAndUploadItems) {
+      yield* _mapPickAndUploadItemsToState();
     }
+  }
+
+  Stream<ItemState> _mapPickAndUploadItemsToState() async* {
+    yield ItemIsBeingAdded();
+
+    try {
+      final files = <File>[];
+
+      ///
+      var images = <Asset>[];
+
+      await Permission.photos.request();
+
+      final permissionStatus = await Permission.photos.status;
+
+      final appDocDir = await getTemporaryDirectory();
+      final appDocPath = appDocDir.path;
+
+      if (permissionStatus.isGranted) {
+        images = await MultiImagePicker.pickImages(
+            maxImages: 5, selectedAssets: images);
+
+        for (var i = 0; i < images.length; i++) {
+          final byteData = await images[i].getByteData();
+
+          final tempFile = File('$appDocPath/${images[i].name}');
+
+          final file = await tempFile.writeAsBytes(byteData.buffer
+              .asInt8List(byteData.offsetInBytes, byteData.lengthInBytes));
+
+          files.add(file);
+        }
+
+        await _itemRepository.uploadItemToFirestore(
+            files, _currentUserId.getCurrentUserId());
+      }
+    } on Exception catch (_) {}
   }
 
   ///
@@ -55,7 +92,7 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
   }
 
   ///
-  void pickAnUploadImages() async {
+  void pickAndUploadImages() async {
     try {
       final files = <File>[];
 

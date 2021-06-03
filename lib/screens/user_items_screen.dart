@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/item/item_bloc.dart';
+import '../blocs/item/item_event.dart';
 import '../blocs/item/item_state.dart';
 import '../widgets/floating_action_button.dart';
 import '../widgets/items_grid.dart';
@@ -21,6 +22,10 @@ class _UserItemsScreenState extends State<UserItemsScreen> {
   Widget build(BuildContext context) => Scaffold(
         body: BlocBuilder<ItemBloc, ItemState>(
           builder: (contex, state) {
+            if (state is ItemIsBeingAdded) {
+              return const ProgressLoader();
+            }
+
             if (state is ItemUpdated) {
               return CustomScrollView(
                 slivers: [
@@ -30,17 +35,20 @@ class _UserItemsScreenState extends State<UserItemsScreen> {
                 ],
               );
             }
-            return const ProgressLoader();
+
+            return const SizedBox.shrink();
           },
         ),
         floatingActionButton: BlocBuilder<ItemBloc, ItemState>(
             builder: (context, state) => FloatingActionButtonWidget(
                   onPressed: () =>
-                      context.read<ItemBloc>().pickAnUploadImages(),
+                      context.read<ItemBloc>().add(PickAndUploadItems()),
                   backgroundColor: Theme.of(context).primaryColor,
-                  child: const Icon(
-                    Icons.add,
-                  ),
+                  child: state is ItemIsBeingAdded
+                      ? const ProgressLoader()
+                      : const Icon(
+                          Icons.add,
+                        ),
                 )),
       );
 }

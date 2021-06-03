@@ -40,19 +40,18 @@ class ItemsGrid extends StatelessWidget {
           elevation: 4,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CachedNetworkImage(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: CachedNetworkImage(
                   imageUrl: item.mainImageUrl,
                   fit: BoxFit.cover,
                 ),
-                Text(timeago.format(item.timestamp.toDate()))
-              ],
-            ),
+              ),
+              Expanded(child: Text(timeago.format(item.timestamp.toDate())))
+            ],
           ),
         ),
       );

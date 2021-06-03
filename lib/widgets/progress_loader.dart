@@ -6,6 +6,9 @@ class ProgressLoader extends StatelessWidget {
   const ProgressLoader({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) =>
-      const SizedBox(child: Center(child: CircularProgressIndicator()));
+  Widget build(BuildContext context) => const SizedBox(
+          child: Center(
+              child: CircularProgressIndicator(
+        backgroundColor: Colors.white,
+      )));
 }
