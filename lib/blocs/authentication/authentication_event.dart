@@ -13,7 +13,8 @@ abstract class AuthenticationEvent extends Equatable {
 class AppStarted extends AuthenticationEvent {
   /// AppStarted constructor
   const AppStarted({@required this.user});
-  /// 
+
+  ///
   final UserModel user;
 
   @override

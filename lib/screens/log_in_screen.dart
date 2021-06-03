@@ -15,31 +15,29 @@ class LogInScreen extends StatelessWidget {
       MaterialPageRoute<void>(builder: (_) => const LogInScreen());
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.white,
-        ),
-        body: BlocProvider(
-          create: (context) =>
-              LogInCubit(authenticationRepository: AuthenticationRepository()),
-          child: Align(
-            alignment: const Alignment(0, -1 / 3),
-            child: Column(
-              children: [
-                Image.asset(
-                  'assets/givenow-logo.png',
-                  height: 150,
-                ),
-                const SizedBox(
-                  height: 100,
-                ),
-                const SizedBox(
-                  height: 6,
-                ),
-                _GoogleLogInButton()
-              ],
+  Widget build(BuildContext context) => SafeArea(
+        child: Scaffold(
+          backgroundColor: Theme.of(context).primaryColor,
+          body: BlocProvider(
+            create: (context) => LogInCubit(
+                authenticationRepository: AuthenticationRepository()),
+            child: Align(
+              alignment: const Alignment(0, -1 / 3),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 100),
+                    child: Image.asset(
+                      'assets/givenow-logo.png',
+                      height: 150,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 100,
+                  ),
+                  _GoogleLogInButton()
+                ],
+              ),
             ),
           ),
         ),
@@ -50,21 +48,22 @@ class _GoogleLogInButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ElevatedButton(
       style:
-          ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.black)),
+          ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.white)),
       onPressed: () => context.read<LogInCubit>().logIn(),
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: Row(
           mainAxisSize: MainAxisSize.min,
-          children: const [
-            Icon(
-              FontAwesomeIcons.google,
-              size: 28,
+          children: [
+            Image.asset(
+              'assets/google_logo.png',
+              height: 40,
+              width: 50,
             ),
-            SizedBox(width: 4),
-            Text(
+            const SizedBox(width: 4),
+            const Text(
               'Log in with Google',
-              style: TextStyle(fontSize: 22),
+              style: TextStyle(fontSize: 26, color: Colors.black),
             )
           ],
         ),

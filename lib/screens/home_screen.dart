@@ -37,7 +37,8 @@ class HomeScreen extends StatelessWidget {
                   ),
                   onPressed: () {
                     context.read<AuthenticationBloc>().add(LogOut());
-                    Navigator.of(context).pushAndRemoveUntil(
+
+                    Navigator.of(context).pushAndRemoveUntil<void>(
                         LogInScreen.route(), (route) => false);
                   })
             ],

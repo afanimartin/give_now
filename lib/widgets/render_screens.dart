@@ -31,6 +31,7 @@ class RenderScreens extends StatelessWidget {
     }
     return const SizedBox.shrink();
   }
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);

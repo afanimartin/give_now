@@ -46,7 +46,8 @@ class AuthenticationRepository extends IAuthenticationRepository {
   @override
   Future<void> logOut() async {
     try {
-      await Future.wait([_googleSignIn.signOut()]);
+      // Using _googleSignIn.out() does not work ):
+      await Future.wait([_firebaseAuth.signOut()]);
     } on Exception catch (_) {}
   }
 
