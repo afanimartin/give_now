@@ -35,7 +35,10 @@ class _UserItemsScreenState extends State<UserItemsScreen> {
                         )
                       ],
                     )
-                  : const Center(child: Text('No items uploaded'));
+                  : const Center(
+                      child: Text(
+                      'No items uploaded',
+                    ));
             }
 
             return const SizedBox.shrink();

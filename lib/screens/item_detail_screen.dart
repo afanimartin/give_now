@@ -31,6 +31,9 @@ class ItemDetailScreen extends StatelessWidget {
         ),
         body: BlocBuilder<ItemBloc, ItemState>(
           builder: (context, state) {
+            if (state is ItemIsBeingDonated) {
+              return const ProgressLoader();
+            }
             if (state is ItemUpdated) {
               item.otherImageUrls.forEach((img) => items.add(img.toString()));
               return _PhotoViewWidget(items: items);
@@ -43,13 +46,49 @@ class ItemDetailScreen extends StatelessWidget {
             builder: (context, state) => FloatingActionButtonWidget(
                   backgroundColor: Theme.of(context).primaryColor,
                   onPressed: () {
-                    context.read<ItemBloc>().donateItemToCharity(item);
-
-                    Navigator.of(context).pop();
+                    _confirmDonation(context, item);
                   },
-                  child: const Icon(FontAwesomeIcons.donate),
+                  child: state is ItemIsBeingDonated
+                      ? const ProgressLoader()
+                      : const Icon(FontAwesomeIcons.donate),
                 )),
       );
+
+  Future<bool> _confirmDonation(BuildContext context, ItemModel item) async =>
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                title: const Text(
+                  'Confirm donation',
+                  style: TextStyle(fontSize: 22),
+                ),
+                content: const Text(
+                    // ignore: lines_longer_than_80_chars
+                    'Your donation will help the less privileged live a better life. Thank you!'),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        context.read<ItemBloc>().donateItemToCharity(item);
+
+                        Navigator.of(context).pop();
+                      },
+                      child: Text(
+                        'Confirm',
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontSize: 22),
+                      )),
+                  TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: Text(
+                        'Cancel',
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontSize: 22),
+                      ))
+                ],
+              ));
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
