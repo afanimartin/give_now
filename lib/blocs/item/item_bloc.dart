@@ -110,19 +110,21 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
         images = await MultiImagePicker.pickImages(
             maxImages: 5, selectedAssets: images);
 
-        for (var i = 0; i < images.length; i++) {
-          final byteData = await images[i].getByteData();
+        if (images.isNotEmpty) {
+          for (var i = 0; i < images.length; i++) {
+            final byteData = await images[i].getByteData();
 
-          final tempFile = File('$appDocPath/${images[i].name}');
+            final tempFile = File('$appDocPath/${images[i].name}');
 
-          final file = await tempFile.writeAsBytes(byteData.buffer
-              .asInt8List(byteData.offsetInBytes, byteData.lengthInBytes));
+            final file = await tempFile.writeAsBytes(byteData.buffer
+                .asInt8List(byteData.offsetInBytes, byteData.lengthInBytes));
 
-          files.add(file);
+            files.add(file);
+          }
+
+          await _itemRepository.uploadItemToFirestore(
+              files, _currentUserId.getCurrentUserId());
         }
-
-        await _itemRepository.uploadItemToFirestore(
-            files, _currentUserId.getCurrentUserId());
       }
     } on Exception catch (_) {}
   }

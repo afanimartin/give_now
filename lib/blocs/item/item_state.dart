@@ -15,8 +15,10 @@ class ItemState extends Equatable {
 ///
 class ItemUpdated extends ItemState {
   ///
-  ItemUpdated({@required this.items, FirebaseAuth firebaseAuth})
-      : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
+  ItemUpdated({
+    @required this.items,
+    FirebaseAuth firebaseAuth,
+  }) : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
 
   ///
   final List<ItemModel> items;
@@ -38,5 +40,5 @@ class ItemIsBeingAdded extends ItemState {}
 ///
 class ItemIsBeingDonated extends ItemState {}
 
-/// 
+///
 class ItemIsDonatedSuccessfully extends ItemState {}
