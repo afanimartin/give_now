@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import '../../models/item/item_model.dart';
+import '../../models/item/item.dart';
 
 ///
 abstract class IItemRepository {
@@ -12,8 +12,8 @@ abstract class IItemRepository {
   Future<void> uploadItemToFirestore(List<File> urlsToUpload, String userId);
 
   ///
-  Future<void> donateItemToCharity(ItemModel itemToDonate);
+  Future<void> donateItemToCharity(Item itemToDonate);
 
   ///
-  Stream<List<ItemModel>> currentUserItemStream(String userId);
+  Stream<List<Item>> currentUserItemStream(String userId);
 }

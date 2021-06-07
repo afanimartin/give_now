@@ -9,7 +9,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../helpers/bloc/current_user_id.dart';
-import '../../models/item/item_model.dart';
+import '../../models/item/item.dart';
 import '../../repositories/authentication/authentication_repository.dart';
 import '../../repositories/item/item_repository.dart';
 import '../authentication/authentication_bloc.dart';
@@ -28,7 +28,7 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
           authenticationRepository: AuthenticationRepository()));
 
   final ItemRepository _itemRepository;
-  StreamSubscription _imageStreamSubscription;
+  StreamSubscription<List<Item>> _itemStreamSubscription;
 
   @override
   Stream<ItemState> mapEventToState(ItemEvent event) async* {
@@ -79,11 +79,11 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
   }
 
   ///
-  void donateItemToCharity(ItemModel itemToDonate) {
+  void donateItemToCharity(Item itemToDonate) {
     final updatedItem = itemToDonate.copyWith(
         id: itemToDonate.id,
-        userId: itemToDonate.userId,
-        isDonated: !itemToDonate.isDonated,
+        sellerId: itemToDonate.sellerId,
+        isDonated: true,
         mainImageUrl: itemToDonate.mainImageUrl,
         otherImageUrls: itemToDonate.otherImageUrls,
         timestamp: Timestamp.now());
@@ -131,13 +131,12 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
 
   Stream<ItemState> _mapLoadImagesToState() async* {
     try {
-      // await _imageStreamSubscription?.cancel();
+      // await _itemStreamSubscription?.cancel();
 
       // final userId = _currentUserId.getCurrentUserId();
 
-      // _imageStreamSubscription = _itemRepository
-      //     .currentUserItemStream(userId)
-      //     .listen((images) => add(UpdateItems(items: images)));
+      // _itemStreamSubscription =
+      //     state.currentUserItems as StreamSubscription<List<ItemModel>>;
       yield ItemUpdated(items: state.currentUserItems);
     } on Exception catch (error) {
       throw Exception(error);
@@ -150,7 +149,7 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
 
   @override
   Future<void> close() {
-    _imageStreamSubscription.cancel();
+    _itemStreamSubscription.cancel();
 
     return super.close();
   }

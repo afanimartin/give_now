@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import '../item/item_model.dart';
+import '../item/item.dart';
 
 ///
 class UserModel extends Equatable {
@@ -20,8 +20,8 @@ class UserModel extends Equatable {
       email: doc['email'] as String,
       displayName: doc['display_name'] as String,
       photoUrl: doc['photo_url'] as String,
-      itemsInCart: doc['items_in_cart'] as List<ItemModel>,
-      itemsPurchased: doc['items_purchased'] as List<ItemModel>);
+      itemsInCart: doc['items_in_cart'] as List<Item>,
+      itemsPurchased: doc['items_purchased'] as List<Item>);
 
   ///
   static const empty =
@@ -40,10 +40,10 @@ class UserModel extends Equatable {
   final String photoUrl;
 
   ///
-  final List<ItemModel> itemsInCart;
+  final List<Item> itemsInCart;
 
   ///
-  final List<ItemModel> itemsPurchased;
+  final List<Item> itemsPurchased;
 
   ///
   Map<String, dynamic> toDocument() => <String, dynamic>{

@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../models/item/item_model.dart';
+import '../../models/item/item.dart';
 import '../../utils/paths.dart';
 import 'i_item_repository.dart';
 
@@ -40,9 +40,9 @@ class ItemRepository extends IItemRepository {
     final imageUrls = await uploadItemImagesToStorage(urlsToUpload, userId);
 
     if (imageUrls.isNotEmpty) {
-      final image = ItemModel(
+      final image = Item(
           id: uuid.v4(),
-          userId: userId,
+          sellerId: userId,
           mainImageUrl: imageUrls[0],
           timestamp: Timestamp.now(),
           otherImageUrls: imageUrls.sublist(1));
@@ -54,7 +54,7 @@ class ItemRepository extends IItemRepository {
   }
 
   @override
-  Future<void> donateItemToCharity(ItemModel itemToDonate) async {
+  Future<void> donateItemToCharity(Item itemToDonate) async {
     await _firebaseFirestore
         .collection(Paths.donations)
         .add(itemToDonate.toDocument());
@@ -70,15 +70,15 @@ class ItemRepository extends IItemRepository {
   }
 
   @override
-  Stream<List<ItemModel>> currentUserItemStream(String userId) =>
+  Stream<List<Item>> currentUserItemStream(String userId) =>
       _firebaseFirestore.collection(Paths.uploads).snapshots().map((snapshot) =>
-          snapshot.docs.map((doc) => ItemModel.fromSnapshot(doc)).toList()
+          snapshot.docs.map((doc) => Item.fromSnapshot(doc)).toList()
             ..sort((a, b) => b.timestamp.compareTo(a.timestamp)));
 
   ///
-  Stream<List<ItemModel>> currentUserDonations(String userId) =>
+  Stream<List<Item>> currentUserDonations(String userId) =>
       _firebaseFirestore.collection(Paths.donations).snapshots().map(
           (snapshot) =>
-              snapshot.docs.map((doc) => ItemModel.fromSnapshot(doc)).toList()
+              snapshot.docs.map((doc) => Item.fromSnapshot(doc)).toList()
                 ..sort((a, b) => b.timestamp.compareTo(a.timestamp)));
 }

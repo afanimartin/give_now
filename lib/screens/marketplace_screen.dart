@@ -20,6 +20,7 @@ class MarketplaceScreen extends StatefulWidget {
 class _MarketplaceScreenState extends State<MarketplaceScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
+        backgroundColor: Theme.of(context).accentColor,
         body: BlocBuilder<ItemBloc, ItemState>(
           builder: (context, state) {
             if (state is ItemUpdated) {

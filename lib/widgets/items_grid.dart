@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-import '../models/item/item_model.dart';
+import '../models/item/item.dart';
 import '../screens/item_detail_screen.dart';
 
 ///
@@ -11,7 +11,7 @@ class ItemsGrid extends StatelessWidget {
   const ItemsGrid({@required this.items, Key key}) : super(key: key);
 
   ///
-  final List<ItemModel> items;
+  final List<Item> items;
 
   @override
   Widget build(BuildContext context) => SliverPadding(
@@ -30,7 +30,7 @@ class ItemsGrid extends StatelessWidget {
         ),
       );
 
-  Widget _buildItemCard(BuildContext context, ItemModel item) =>
+  Widget _buildItemCard(BuildContext context, Item item) =>
       GestureDetector(
         onTap: () => Navigator.of(context).push(
             MaterialPageRoute(builder: (_) => ItemDetailScreen(item: item))),
@@ -66,7 +66,7 @@ class ItemsGrid extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(IterableProperty<ItemModel>('items', items));
+    properties.add(IterableProperty<Item>('items', items));
     // ignore: cascade_invocations
   }
 }

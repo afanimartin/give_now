@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import '../../models/item/item_model.dart';
+import '../../models/item/item.dart';
 
 ///
 class ItemEvent extends Equatable {
@@ -26,5 +26,5 @@ class UpdateItems extends ItemEvent {
   const UpdateItems({@required this.items});
 
   ///
-  final List<ItemModel> items;
+  final List<Item> items;
 }

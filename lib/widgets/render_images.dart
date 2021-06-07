@@ -6,7 +6,7 @@ import 'package:timeago/timeago.dart' as timeago;
 
 import '../blocs/item/item_bloc.dart';
 import '../blocs/item/item_state.dart';
-import '../models/item/item_model.dart';
+import '../models/item/item.dart';
 import '../screens/item_detail_screen.dart';
 import 'progress_loader.dart';
 
@@ -41,7 +41,7 @@ class _RenderImagesState extends State<RenderImages> {
 class _RenderImage extends StatelessWidget {
   ///
   const _RenderImage({@required this.image, Key key}) : super(key: key);
-  final ItemModel image;
+  final Item image;
 
   @override
   Widget build(BuildContext context) => SizedBox(
@@ -74,6 +74,6 @@ class _RenderImage extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ItemModel>('image', image));
+    properties.add(DiagnosticsProperty<Item>('image', image));
   }
 }

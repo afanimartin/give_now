@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../../models/user/user_model.dart';
+import '../../models/user/user.dart';
 import 'i_authentication_repository.dart';
 
 ///

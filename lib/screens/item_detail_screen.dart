@@ -6,7 +6,7 @@ import 'package:photo_view/photo_view_gallery.dart';
 
 import '../blocs/item/item_bloc.dart';
 import '../blocs/item/item_state.dart';
-import '../models/item/item_model.dart';
+import '../models/item/item.dart';
 import '../widgets/floating_action_button.dart';
 import '../widgets/progress_loader.dart';
 
@@ -16,7 +16,7 @@ class ItemDetailScreen extends StatelessWidget {
   ItemDetailScreen({@required this.item, Key key}) : super(key: key);
 
   ///
-  final ItemModel item;
+  final Item item;
 
   ///
   final List<String> items = <String>[];
@@ -26,7 +26,7 @@ class ItemDetailScreen extends StatelessWidget {
     item.otherImageUrls.forEach((url) => items.add(url as String));
 
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Theme.of(context).accentColor,
       appBar: AppBar(
         title: Text(
           item.title,
@@ -66,7 +66,7 @@ class ItemDetailScreen extends StatelessWidget {
     );
   }
 
-  Future<bool> _confirmDonation(BuildContext context, ItemModel item) async =>
+  Future<bool> _confirmDonation(BuildContext context, Item item) async =>
       showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -104,7 +104,7 @@ class ItemDetailScreen extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ItemModel>('item', item));
+    properties.add(DiagnosticsProperty<Item>('item', item));
     // ignore: cascade_invocations
     properties.add(IterableProperty<String>('items', items));
   }

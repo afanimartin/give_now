@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import '../../models/item/item_model.dart';
+import '../../models/item/item.dart';
 
 ///
 class DonationEvent extends Equatable {
@@ -20,7 +20,7 @@ class UpdateDonations extends DonationEvent {
   const UpdateDonations({@required this.donations});
 
   ///
-  final List<ItemModel> donations;
+  final List<Item> donations;
 
   @override
   List<Object> get props => [donations];

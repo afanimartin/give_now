@@ -1,4 +1,4 @@
-import '../../models/user/user_model.dart';
+import '../../models/user/user.dart';
 ///
 abstract class IAuthenticationRepository {
   ///

@@ -4,14 +4,14 @@ import 'package:flutter/foundation.dart';
 ///
 class Category extends Equatable {
   ///
-  const Category({@required this.categoryId, @required this.title});
+  const Category({@required this.categoryId, @required this.name});
 
   ///
   final String categoryId;
 
   ///
-  final String title;
+  final String name;
 
   @override
-  List<Object> get props => [categoryId, title];
+  List<Object> get props => [categoryId, name];
 }

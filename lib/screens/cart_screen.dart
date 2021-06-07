@@ -1,9 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../blocs/donation/donation_bloc.dart';
-import '../blocs/donation/donation_state.dart';
+import '../blocs/cart/cart_bloc.dart';
+import '../blocs/cart/cart_state.dart';
 import '../widgets/progress_loader.dart';
 
 ///
@@ -17,28 +17,81 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   @override
-  Widget build(BuildContext context) => Scaffold(body:
-          BlocBuilder<DonationBloc, DonationState>(builder: (context, state) {
-        if (state is DonationsUpdated) {
-          return state.currentUserDonations.isNotEmpty
-              ? ListView.builder(
-                  itemCount: state.currentUserDonations.length,
-                  itemBuilder: (context, index) {
-                    final item = state.currentUserDonations[index].mainImageUrl;
-                    return Padding(
-                      padding:
-                          const EdgeInsets.only(left: 10, top: 10, right: 10),
-                      child: Card(
-                          elevation: 4,
-                          child: CachedNetworkImage(
-                            imageUrl: item,
-                          )),
+  Widget build(BuildContext context) => Scaffold(
+        backgroundColor: Theme.of(context).accentColor,
+        body: BlocBuilder<CartBloc, CartState>(
+          builder: (context, state) {
+            if (state is CartUpdated) {
+              return state.currentUserCartItems.isNotEmpty
+                  ? ListView.builder(
+                      itemCount: state.currentUserCartItems.length,
+                      itemBuilder: (context, index) {
+                        final item = state.currentUserCartItems[index];
+
+                        return Column(
+                          children: [
+                            Card(
+                              elevation: 4,
+                              child: Padding(
+                                padding: const EdgeInsets.all(6),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Image.asset(
+                                      item.mainImageUrl,
+                                      height: 70,
+                                      width: 70,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Expanded(
+                                        child: Text(
+                                      item.title,
+                                      style: const TextStyle(
+                                          fontSize: 16, letterSpacing: 0.5),
+                                    )),
+                                    Expanded(
+                                      child: Text(item.price.toString()),
+                                    ),
+                                    IconButton(
+                                        icon: const Icon(Icons.cancel_rounded),
+                                        onPressed: () {})
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(6),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text(
+                                    'Total',
+                                    style: TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  Text('${state.totalCost}',
+                                      style: const TextStyle(
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.w400))
+                                ],
+                              ),
+                            )
+                          ],
+                        );
+                      })
+                  : const Center(
+                      child: Text('No items added to cart'),
                     );
-                  })
-              : const Center(
-                  child: Text('No donations made yet.'),
-                );
-        }
-        return const ProgressLoader();
-      }));
+            }
+
+            return const ProgressLoader();
+          },
+        ),
+      );
 }

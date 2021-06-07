@@ -11,3 +11,5 @@
 - render user items in their profile
 - user should be able to edit/delete items uploaded by them
 - render items in the marketplace that don't belong to the current user
+- add items to cart
+- checkout items from the cart
