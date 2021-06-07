@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
         builder: (context, state) => Scaffold(
           appBar: AppBar(
             title: const Text(
-              'Givenow',
+              'Dalala',
               style: TextStyle(
                   color: Colors.black, fontSize: 28, letterSpacing: 1.2),
             ),

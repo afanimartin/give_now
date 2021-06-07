@@ -7,15 +7,15 @@ import '../blocs/donation/donation_state.dart';
 import '../widgets/progress_loader.dart';
 
 ///
-class DonationsScreen extends StatefulWidget {
+class CartScreen extends StatefulWidget {
   ///
-  const DonationsScreen({Key key}) : super(key: key);
+  const CartScreen({Key key}) : super(key: key);
 
   @override
-  _DonationsScreenState createState() => _DonationsScreenState();
+  _CartScreenState createState() => _CartScreenState();
 }
 
-class _DonationsScreenState extends State<DonationsScreen> {
+class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(body:
           BlocBuilder<DonationBloc, DonationState>(builder: (context, state) {

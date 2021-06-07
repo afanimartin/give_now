@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,7 +6,7 @@ import 'package:photo_view/photo_view_gallery.dart';
 
 import '../blocs/item/item_bloc.dart';
 import '../blocs/item/item_state.dart';
-import '../models/image/item_model.dart';
+import '../models/item/item_model.dart';
 import '../widgets/floating_action_button.dart';
 import '../widgets/progress_loader.dart';
 
@@ -23,36 +22,49 @@ class ItemDetailScreen extends StatelessWidget {
   final List<String> items = <String>[];
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        backgroundColor: Colors.grey[200],
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          iconTheme: const IconThemeData(color: Colors.black),
-        ),
-        body: BlocBuilder<ItemBloc, ItemState>(
-          builder: (context, state) {
-            if (state is ItemIsBeingDonated) {
-              return const ProgressLoader();
-            }
-            if (state is ItemUpdated) {
-              item.otherImageUrls.forEach((img) => items.add(img.toString()));
-              return _PhotoViewWidget(items: items);
-            }
+  Widget build(BuildContext context) {
+    item.otherImageUrls.forEach((url) => items.add(url as String));
 
-            return const ProgressLoader();
-          },
+    return Scaffold(
+      backgroundColor: Colors.grey[200],
+      appBar: AppBar(
+        title: Text(
+          item.title,
+          style: const TextStyle(color: Colors.black),
         ),
-        floatingActionButton: BlocBuilder<ItemBloc, ItemState>(
-            builder: (context, state) => FloatingActionButtonWidget(
-                  backgroundColor: Theme.of(context).primaryColor,
-                  onPressed: () {
-                    _confirmDonation(context, item);
-                  },
-                  child: state is ItemIsBeingDonated
-                      ? const ProgressLoader()
-                      : const Icon(FontAwesomeIcons.donate),
-                )),
-      );
+        backgroundColor: Colors.white,
+        iconTheme: const IconThemeData(color: Colors.black),
+      ),
+      body: Column(
+        children: [
+          _PhotoViewWidget(items: items),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                item.title,
+                style:
+                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              Text(item.description),
+              Text(item.condition),
+              Text(item.price.toString())
+            ],
+          )
+        ],
+      ),
+      floatingActionButton: BlocBuilder<ItemBloc, ItemState>(
+          builder: (context, state) => FloatingActionButtonWidget(
+                backgroundColor: Theme.of(context).primaryColor,
+                onPressed: () {
+                  _confirmDonation(context, item);
+                },
+                child: state is ItemIsBeingDonated
+                    ? const ProgressLoader()
+                    : const Icon(FontAwesomeIcons.cartArrowDown),
+              )),
+    );
+  }
 
   Future<bool> _confirmDonation(BuildContext context, ItemModel item) async =>
       showDialog(
@@ -112,8 +124,8 @@ class _PhotoViewWidget extends StatelessWidget {
             final item = items[index];
 
             return PhotoViewGalleryPageOptions.customChild(
-              child: CachedNetworkImage(
-                imageUrl: item,
+              child: Image.asset(
+                item,
                 fit: BoxFit.cover,
               ),
             );

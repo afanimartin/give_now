@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../models/app_tab/app_tab.dart';
-import '../screens/donations_screen.dart';
-import '../screens/user_items_screen.dart';
+import '../screens/cart_screen.dart';
+import '../screens/marketplace_screen.dart';
 import '../screens/user_profile_screen.dart';
 
 ///
@@ -19,14 +19,14 @@ class RenderScreens extends StatelessWidget {
   Widget _renderScreens(AppTab state) {
     switch (state) {
       case AppTab.home:
-        return const UserItemsScreen();
+        return const MarketplaceScreen();
         break;
       case AppTab.profile:
         return const UserProfileScreen();
         break;
 
-      case AppTab.donations:
-        return const DonationsScreen();
+      case AppTab.marketplace:
+        return const CartScreen();
         break;
     }
     return const SizedBox.shrink();

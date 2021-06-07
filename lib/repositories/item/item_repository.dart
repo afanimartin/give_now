@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../models/image/item_model.dart';
+import '../../models/item/item_model.dart';
 import '../../utils/paths.dart';
 import 'i_item_repository.dart';
 

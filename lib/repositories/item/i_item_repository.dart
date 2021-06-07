@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import '../../models/image/item_model.dart';
+import '../../models/item/item_model.dart';
 
 ///
 abstract class IItemRepository {

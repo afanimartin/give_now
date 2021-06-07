@@ -9,39 +9,30 @@ import '../widgets/items_grid.dart';
 import '../widgets/progress_loader.dart';
 
 ///
-class UserItemsScreen extends StatefulWidget {
+class MarketplaceScreen extends StatefulWidget {
   ///
-  const UserItemsScreen({Key key}) : super(key: key);
+  const MarketplaceScreen({Key key}) : super(key: key);
 
   @override
-  _UserItemsScreenState createState() => _UserItemsScreenState();
+  _MarketplaceScreenState createState() => _MarketplaceScreenState();
 }
 
-class _UserItemsScreenState extends State<UserItemsScreen> {
+class _MarketplaceScreenState extends State<MarketplaceScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: BlocBuilder<ItemBloc, ItemState>(
-          builder: (contex, state) {
-            if (state is ItemIsBeingAdded) {
-              return const ProgressLoader();
-            }
-
+          builder: (context, state) {
             if (state is ItemUpdated) {
               return state.currentUserItems.isNotEmpty
                   ? CustomScrollView(
-                      slivers: [
-                        ItemsGrid(
-                          items: state.currentUserItems,
-                        )
-                      ],
+                      slivers: [ItemsGrid(items: state.currentUserItems)],
                     )
-                  : const Center(
-                      child: Text(
-                      'No items uploaded',
-                    ));
+                  : const ProgressLoader();
             }
 
-            return const SizedBox.shrink();
+            return const Center(
+              child: Text('No items for sale right now. Check again later.'),
+            );
           },
         ),
         floatingActionButton: BlocBuilder<ItemBloc, ItemState>(

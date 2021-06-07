@@ -9,7 +9,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../helpers/bloc/current_user_id.dart';
-import '../../models/image/item_model.dart';
+import '../../models/item/item_model.dart';
 import '../../repositories/authentication/authentication_repository.dart';
 import '../../repositories/item/item_repository.dart';
 import '../authentication/authentication_bloc.dart';
@@ -83,7 +83,7 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
     final updatedItem = itemToDonate.copyWith(
         id: itemToDonate.id,
         userId: itemToDonate.userId,
-        donated: !itemToDonate.donated,
+        isDonated: !itemToDonate.isDonated,
         mainImageUrl: itemToDonate.mainImageUrl,
         otherImageUrls: itemToDonate.otherImageUrls,
         timestamp: Timestamp.now());
@@ -131,13 +131,14 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
 
   Stream<ItemState> _mapLoadImagesToState() async* {
     try {
-      await _imageStreamSubscription?.cancel();
+      // await _imageStreamSubscription?.cancel();
 
-      final userId = _currentUserId.getCurrentUserId();
+      // final userId = _currentUserId.getCurrentUserId();
 
-      _imageStreamSubscription = _itemRepository
-          .currentUserItemStream(userId)
-          .listen((images) => add(UpdateItems(items: images)));
+      // _imageStreamSubscription = _itemRepository
+      //     .currentUserItemStream(userId)
+      //     .listen((images) => add(UpdateItems(items: images)));
+      yield ItemUpdated(items: state.currentUserItems);
     } on Exception catch (error) {
       throw Exception(error);
     }

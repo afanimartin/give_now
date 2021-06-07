@@ -1,7 +1,13 @@
 ## MVP features
-- login with gmail, apple IDs
+- login with gmail
+- login with apple
 - logout
 - view items donated
-- donate new items
+- view how much money earned selling on the platform
+- view items sold/bought
+- donate/sell uploaded items
 - delete donated items
 - view/edit profile
+- render user items in their profile
+- user should be able to edit/delete items uploaded by them
+- render items in the marketplace that don't belong to the current user

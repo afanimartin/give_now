@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../models/app_tab/app_tab.dart';
 
 ///
@@ -40,10 +39,8 @@ class TabSelector extends StatelessWidget {
           Icons.person_outline,
         );
         break;
-      case AppTab.donations:
-        return const Icon(
-          FontAwesomeIcons.briefcase,
-        );
+      case AppTab.marketplace:
+        return const Icon(Icons.shopping_bag_outlined);
         break;
     }
     return const Icon(
@@ -59,8 +56,8 @@ class TabSelector extends StatelessWidget {
       case AppTab.profile:
         return 'Profile';
         break;
-      case AppTab.donations:
-        return 'Donations';
+      case AppTab.marketplace:
+        return 'Cart';
         break;
     }
     return '';

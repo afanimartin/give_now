@@ -6,7 +6,7 @@ import 'package:timeago/timeago.dart' as timeago;
 
 import '../blocs/item/item_bloc.dart';
 import '../blocs/item/item_state.dart';
-import '../models/image/item_model.dart';
+import '../models/item/item_model.dart';
 import '../screens/item_detail_screen.dart';
 import 'progress_loader.dart';
 

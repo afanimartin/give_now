@@ -1,9 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-import '../models/image/item_model.dart';
+import '../models/item/item_model.dart';
 import '../screens/item_detail_screen.dart';
 
 ///
@@ -27,7 +26,6 @@ class ItemsGrid extends StatelessWidget {
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 200,
             mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
           ),
         ),
       );
@@ -43,16 +41,24 @@ class ItemsGrid extends StatelessWidget {
           child: Column(
             children: [
               Expanded(
-                child: CachedNetworkImage(
-                  imageUrl: item.mainImageUrl,
+                child: Image.asset(
+                  item.mainImageUrl,
                   fit: BoxFit.cover,
                   width: 400,
                 ),
               ),
-              const SizedBox(
-                height: 8,
-              ),
-              Expanded(child: Text(timeago.format(item.timestamp.toDate())))
+              Expanded(
+                  child: Padding(
+                padding: const EdgeInsets.all(4),
+                child: Text(
+                  item.title,
+                ),
+              )),
+              Expanded(
+                  child: Text(
+                timeago.format(item.timestamp.toDate()),
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ))
             ],
           ),
         ),

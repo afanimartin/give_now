@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../../models/image/item_model.dart';
+import '../../models/item/item_model.dart';
 
 ///
 class DonationState extends Equatable {

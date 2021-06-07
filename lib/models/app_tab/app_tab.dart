@@ -7,5 +7,5 @@ enum AppTab {
   profile,
 
   ///
-  donations
+  marketplace
 }
