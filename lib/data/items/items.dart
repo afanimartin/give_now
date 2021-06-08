@@ -70,7 +70,7 @@ final List<Item> itemsForSale = [
       ],
       timestamp: Timestamp.now()),
   Item(
-      id: '4',
+      id: '5',
       sellerId: 'ghlgyYBrKkWkzuGtBROPDmrGuaE3',
       title: 'Complete kitchen utensils set',
       description: 'A complete set of kitchen items for sale',
@@ -83,6 +83,22 @@ final List<Item> itemsForSale = [
         'assets/pacoleta.jpg',
         'assets/oven.jpg',
         'assets/utensils.jpg'
+      ],
+      timestamp: Timestamp.now()),
+  Item(
+      id: '6',
+      sellerId: 'ghlgyYBrKkWkzuGtBROPDmrGuaE3',
+      title: 'Awesome used phone for sale',
+      description: 'A good looking and working smartphone for sale',
+      condition: 'used',
+      price: 1500,
+      category: const Category(categoryId: '', name: 'Smartphone'),
+      mainImageUrl: 'assets/mi_10.jpg',
+      otherImageUrls: const [
+        'assets/used_iphone.jpg',
+        'assets/used_samsung.jpg',
+        'assets/one_plus.jpg',
+        'assets/iphone_11.jpg'
       ],
       timestamp: Timestamp.now()),
 ];

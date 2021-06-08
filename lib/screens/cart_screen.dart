@@ -23,68 +23,84 @@ class _CartScreenState extends State<CartScreen> {
           builder: (context, state) {
             if (state is CartUpdated) {
               return state.currentUserCartItems.isNotEmpty
-                  ? ListView.builder(
-                      itemCount: state.currentUserCartItems.length,
-                      itemBuilder: (context, index) {
-                        final item = state.currentUserCartItems[index];
+                  ? SingleChildScrollView(
+                      physics: const ScrollPhysics(),
+                      child: Column(
+                        children: [
+                          ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: state.currentUserCartItems.length,
+                              itemBuilder: (context, index) {
+                                final item = state.currentUserCartItems[index];
 
-                        return Column(
-                          children: [
-                            Card(
-                              elevation: 4,
-                              child: Padding(
-                                padding: const EdgeInsets.all(6),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Image.asset(
-                                      item.mainImageUrl,
-                                      height: 70,
-                                      width: 70,
-                                      fit: BoxFit.cover,
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Expanded(
-                                        child: Text(
-                                      item.title,
-                                      style: const TextStyle(
-                                          fontSize: 16, letterSpacing: 0.5),
-                                    )),
-                                    Expanded(
-                                      child: Text(item.price.toString()),
-                                    ),
-                                    IconButton(
-                                        icon: const Icon(Icons.cancel_rounded),
-                                        onPressed: () {})
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(6),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Text(
-                                    'Total',
-                                    style: TextStyle(
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.w400),
+                                return Card(
+                                  elevation: 4,
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(6),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Image.asset(
+                                              item.mainImageUrl,
+                                              height: 70,
+                                              width: 70,
+                                              fit: BoxFit.cover,
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Expanded(
+                                                child: Text(
+                                              item.title,
+                                              style: const TextStyle(
+                                                  fontSize: 16,
+                                                  letterSpacing: 0.5),
+                                            )),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Expanded(
+                                                child: Text(
+                                              '${item.price} SSP',
+                                              style: const TextStyle(
+                                                  fontSize: 22,
+                                                  fontWeight: FontWeight.w500),
+                                            )),
+                                            IconButton(
+                                                icon: const Icon(
+                                                    Icons.cancel_rounded),
+                                                onPressed: () {})
+                                          ],
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  Text('${state.totalCost}',
-                                      style: const TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.w400))
-                                ],
-                              ),
-                            )
-                          ],
-                        );
-                      })
+                                );
+                              }),
+                          Padding(
+                            padding: const EdgeInsets.all(6),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'Total',
+                                  style: TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                Text('${state.totalCost}',
+                                    style: const TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w400))
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    )
                   : const Center(
                       child: Text('No items added to cart'),
                     );

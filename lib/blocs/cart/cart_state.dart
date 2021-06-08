@@ -12,14 +12,12 @@ class CartState extends Equatable {
   List<Item> get currentUserCartItems => itemsForSale;
 
   ///
-  double total = 0;
-
-  ///
   double get totalCost {
-    itemsForSale.forEach((item) {
-      total += item.price;
-    });
+    double total = 0;
 
+    for (int i = 0; i < itemsForSale.length; i++) {
+      total += itemsForSale[i].price;
+    }
     return total;
   }
 

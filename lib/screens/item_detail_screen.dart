@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
 import '../blocs/item/item_bloc.dart';
@@ -61,7 +60,7 @@ class ItemDetailScreen extends StatelessWidget {
                 },
                 child: state is ItemIsBeingDonated
                     ? const ProgressLoader()
-                    : const Icon(FontAwesomeIcons.cartArrowDown),
+                    : const Icon(Icons.shopping_bag_outlined),
               )),
     );
   }
