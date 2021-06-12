@@ -11,12 +11,12 @@ class Item extends Equatable {
       @required this.sellerId,
       @required this.title,
       @required this.description,
-      @required this.condition,
       @required this.price,
       @required this.category,
       @required this.mainImageUrl,
       this.isDonated = false,
       this.isSold = false,
+      this.condition = 'Used',
       this.buyerId,
       this.otherImageUrls,
       this.timestamp});

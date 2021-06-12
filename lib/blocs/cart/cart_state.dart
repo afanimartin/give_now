@@ -1,38 +1,53 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
-import '../../data/items/items.dart';
+
 import '../../models/item/item.dart';
 
 ///
 class CartState extends Equatable {
   ///
-  CartState();
+  const CartState({this.cartItems});
 
   ///
-  List<Item> get currentUserCartItems => itemsForSale;
+  final List<Item> cartItems;
+
+    ///
+  CartState copyWith({List<Item> cartItems}) =>
+      CartState(cartItems: cartItems ?? this.cartItems);
 
   ///
   double get totalCost {
     double total = 0;
 
-    for (int i = 0; i < itemsForSale.length; i++) {
-      total += itemsForSale[i].price;
+    for (int i = 0; i < cartItems.length; i++) {
+      total += cartItems[i].price;
     }
     return total;
   }
 
-  @override
-  List<Object> get props => [];
-}
-
-///
-class CartUpdated extends CartState {
   ///
-  CartUpdated({@required this.cartItems});
-
-  ///
-  final List<Item> cartItems;
-
   @override
   List<Object> get props => [cartItems];
 }
+
+///
+// class CartUpdated extends CartState {
+//   ///
+//   const CartUpdated();
+
+//   ///
+//   CartState copyWith({List<Item> cartItems}) =>
+//       CartState(cartItems: cartItems ?? this.cartItems);
+
+//   ///
+//   double get totalCost {
+//     double total = 0;
+
+//     for (int i = 0; i < cartItems.length; i++) {
+//       total += cartItems[i].price;
+//     }
+//     return total;
+//   }
+
+//   @override
+//   List<Object> get props => [cartItems];
+// }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/cart/cart_bloc.dart';
+import '../blocs/cart/cart_event.dart';
 import '../blocs/cart/cart_state.dart';
 import '../widgets/progress_loader.dart';
 
@@ -21,17 +22,17 @@ class _CartScreenState extends State<CartScreen> {
         backgroundColor: Theme.of(context).accentColor,
         body: BlocBuilder<CartBloc, CartState>(
           builder: (context, state) {
-            if (state is CartUpdated) {
-              return state.currentUserCartItems.isNotEmpty
+            if (state is CartState) {
+              return state.cartItems.isNotEmpty
                   ? SingleChildScrollView(
                       physics: const ScrollPhysics(),
                       child: Column(
                         children: [
                           ListView.builder(
                               shrinkWrap: true,
-                              itemCount: state.currentUserCartItems.length,
+                              itemCount: state.cartItems?.length ?? 0,
                               itemBuilder: (context, index) {
-                                final item = state.currentUserCartItems[index];
+                                final item = state.cartItems[index];
 
                                 return Card(
                                   elevation: 4,
@@ -72,7 +73,10 @@ class _CartScreenState extends State<CartScreen> {
                                             IconButton(
                                                 icon: const Icon(
                                                     Icons.cancel_rounded),
-                                                onPressed: () {})
+                                                onPressed: () => context
+                                                    .read<CartBloc>()
+                                                    .add(RemoveItemFromCart(
+                                                        item: item)))
                                           ],
                                         ),
                                       ),

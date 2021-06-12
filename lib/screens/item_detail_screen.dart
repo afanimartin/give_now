@@ -47,7 +47,8 @@ class ItemDetailScreen extends StatelessWidget {
               ),
               Text(item.description),
               Text(item.condition),
-              Text(item.price.toString())
+              Text(item.price.toString()),
+              Text(item.category.name)
             ],
           )
         ],

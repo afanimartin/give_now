@@ -26,3 +26,16 @@ class UpdateCartItems extends CartEvent {
   @override
   List<Object> get props => [cartItems];
 }
+
+///
+class RemoveItemFromCart extends CartEvent {
+  ///
+  const RemoveItemFromCart({@required this.item});
+
+  ///
+  final Item item;
+
+  ///
+  @override
+  List<Object> get props => [item];
+}
