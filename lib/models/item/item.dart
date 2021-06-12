@@ -9,6 +9,7 @@ class Item extends Equatable {
   const Item(
       {@required this.id,
       @required this.sellerId,
+      @required this.sellerPhotoUrl,
       @required this.title,
       @required this.description,
       @required this.price,
@@ -25,6 +26,7 @@ class Item extends Equatable {
   factory Item.fromSnapshot(DocumentSnapshot doc) => Item(
         id: doc.id,
         sellerId: doc['seller_id'] as String,
+        sellerPhotoUrl: doc['seller_photo_url'] as String,
         buyerId: doc['buyer_id'] as String,
         isDonated: doc['is_donated'] as bool,
         isSold: doc['is_sold'] as bool,
@@ -43,6 +45,9 @@ class Item extends Equatable {
 
   ///
   final String sellerId;
+
+  ///
+  final String sellerPhotoUrl;
 
   ///
   final String buyerId;
@@ -80,7 +85,8 @@ class Item extends Equatable {
   ///
   Map<String, dynamic> toDocument() => <String, dynamic>{
         'id': id,
-        'user_id': sellerId,
+        'seller_id': sellerId,
+        'seller_photo_url': sellerPhotoUrl,
         'buyer_id': buyerId,
         'is_donated': isDonated,
         'is_sold': isSold,
@@ -98,6 +104,7 @@ class Item extends Equatable {
   Item copyWith(
           {String id,
           String sellerId,
+          String sellerPhotoUrl,
           String buyerId,
           bool isDonated,
           bool isSold,
@@ -112,6 +119,7 @@ class Item extends Equatable {
       Item(
           id: id ?? this.id,
           sellerId: sellerId ?? this.sellerId,
+          sellerPhotoUrl: sellerPhotoUrl ?? this.sellerPhotoUrl,
           buyerId: buyerId ?? this.buyerId,
           isDonated: isDonated ?? this.isDonated,
           title: title ?? this.title,
@@ -127,6 +135,7 @@ class Item extends Equatable {
   List<Object> get props => [
         id,
         sellerId,
+        sellerPhotoUrl,
         isDonated,
         title,
         description,

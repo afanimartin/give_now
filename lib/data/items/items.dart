@@ -8,6 +8,8 @@ final List<Item> itemsForSale = [
   Item(
       id: '1',
       sellerId: 'ghlgyYBrKkWkzuGtBROPDmrGuaE3',
+      sellerPhotoUrl:
+          'https://lh3.googleusercontent.com/a-/AOh14GgIunsSaCvA8ZXFYdT-K-3fGDsyN-v1vYULNyenHg=s96-c',
       title: 'Slightly used hand mixer for grabs',
       description: 'This nice mixer is just for you!',
       condition: 'used',
@@ -24,6 +26,8 @@ final List<Item> itemsForSale = [
   Item(
       id: '2',
       sellerId: 'ghlgyYBrKkWkzuGtBROPDmrGuaE3',
+      sellerPhotoUrl:
+          'https://lh3.googleusercontent.com/a-/AOh14GgIunsSaCvA8ZXFYdT-K-3fGDsyN-v1vYULNyenHg=s96-c',
       title: 'A nice electronic oven for sale',
       description: 'A wonderful oven for easy life',
       condition: 'used',
@@ -40,6 +44,8 @@ final List<Item> itemsForSale = [
   Item(
       id: '3',
       sellerId: 'ghlgyYBrKkWkzuGtBROPDmrGuaE3',
+      sellerPhotoUrl:
+          'https://lh3.googleusercontent.com/a-/AOh14GgIunsSaCvA8ZXFYdT-K-3fGDsyN-v1vYULNyenHg=s96-c',
       title: 'Electric kettle',
       description: 'An affordable electric kettle to make life easy for you',
       condition: 'used',
@@ -56,6 +62,8 @@ final List<Item> itemsForSale = [
   Item(
       id: '4',
       sellerId: 'ghlgyYBrKkWkzuGtBROPDmrGuaE3',
+      sellerPhotoUrl:
+          'https://lh3.googleusercontent.com/a-/AOh14GgIunsSaCvA8ZXFYdT-K-3fGDsyN-v1vYULNyenHg=s96-c',
       title: 'Complete kitchen utensils set',
       description: 'A complete set of kitchen items for sale',
       condition: 'used',
@@ -72,6 +80,8 @@ final List<Item> itemsForSale = [
   Item(
       id: '5',
       sellerId: 'ghlgyYBrKkWkzuGtBROPDmrGuaE3',
+      sellerPhotoUrl:
+          'https://lh3.googleusercontent.com/a-/AOh14GgIunsSaCvA8ZXFYdT-K-3fGDsyN-v1vYULNyenHg=s96-c',
       title: 'Complete kitchen utensils set',
       description: 'A complete set of kitchen items for sale',
       condition: 'used',
@@ -88,6 +98,8 @@ final List<Item> itemsForSale = [
   Item(
       id: '6',
       sellerId: 'ghlgyYBrKkWkzuGtBROPDmrGuaE3',
+      sellerPhotoUrl:
+          'https://lh3.googleusercontent.com/a-/AOh14GgIunsSaCvA8ZXFYdT-K-3fGDsyN-v1vYULNyenHg=s96-c',
       title: 'Awesome used phone for sale',
       description: 'A good looking and working smartphone for sale',
       condition: 'used',

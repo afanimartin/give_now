@@ -1,10 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:give_now/utils/app_theme.dart';
+import 'package:give_now/widgets/circular_avatar_widget.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../models/item/item.dart';
 import '../screens/item_detail_screen.dart';
+import '../utils/app_theme.dart';
 
 ///
 class ItemsGrid extends StatelessWidget {
@@ -37,29 +38,38 @@ class ItemsGrid extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: GestureDetector(
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (_) => ItemDetailScreen(item: item))),
-              child: Image.asset(
-                item.mainImageUrl,
-                height: double.infinity,
-                width: 300,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Container(
+            child: Image.asset(
+              item.mainImageUrl,
               height: double.infinity,
               width: 300,
-              decoration: BoxDecoration(
-                  gradient: postGradient,
-                  borderRadius: BorderRadius.circular(12))),
+              fit: BoxFit.cover,
+            ),
+          ),
+          GestureDetector(
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (_) => ItemDetailScreen(item: item))),
+            child: Container(
+                height: double.infinity,
+                width: 300,
+                decoration: BoxDecoration(
+                    gradient: postGradient,
+                    borderRadius: BorderRadius.circular(12))),
+          ),
           Positioned(
             left: 8,
             bottom: 8,
-            child: Text(
-              timeago.format(item.timestamp.toDate()),
-              style: const TextStyle(fontWeight: FontWeight.bold),
+            child: Row(
+              children: [
+                CircleAvatarWidget(radius: 20, imageUrl: item.sellerPhotoUrl),
+                const SizedBox(
+                  width: 4,
+                ),
+                Text(
+                  timeago.format(item.timestamp.toDate()),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white),
+                ),
+              ],
             ),
           )
         ],
