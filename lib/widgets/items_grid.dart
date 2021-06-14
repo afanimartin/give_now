@@ -1,11 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:give_now/widgets/circular_avatar_widget.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../models/item/item.dart';
 import '../screens/item_detail_screen.dart';
 import '../utils/app_theme.dart';
+import 'circular_avatar_widget.dart';
 
 ///
 class ItemsGrid extends StatelessWidget {
@@ -38,8 +39,8 @@ class ItemsGrid extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              item.mainImageUrl,
+            child: CachedNetworkImage(
+              imageUrl: item.mainImageUrl,
               height: double.infinity,
               width: 300,
               fit: BoxFit.cover,

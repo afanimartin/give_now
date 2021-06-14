@@ -24,16 +24,17 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
         body: BlocBuilder<ItemBloc, ItemState>(
           builder: (context, state) {
             if (state is ItemUpdated) {
-              return state.currentUserItems.isNotEmpty
+              return state.items.isNotEmpty
                   ? CustomScrollView(
-                      slivers: [ItemsGrid(items: state.currentUserItems)],
+                      slivers: [ItemsGrid(items: state.items)],
                     )
-                  : const ProgressLoader();
+                  : const Center(
+                      child: Text(
+                          'No items for sale right now. Check again later.'),
+                    );
             }
 
-            return const Center(
-              child: Text('No items for sale right now. Check again later.'),
-            );
+            return const ProgressLoader();
           },
         ),
         floatingActionButton: BlocBuilder<ItemBloc, ItemState>(

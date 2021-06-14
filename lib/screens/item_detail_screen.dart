@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,20 +38,20 @@ class ItemDetailScreen extends StatelessWidget {
       body: Column(
         children: [
           _PhotoViewWidget(items: items),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                item.title,
-                style:
-                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              Text(item.description),
-              Text(item.condition),
-              Text(item.price.toString()),
-              Text(item.category.name)
-            ],
-          )
+          // Column(
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: [
+          //     Text(
+          //       item.title,
+          //       style:
+          //           const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          //     ),
+          //     Text(item.description),
+          //     Text(item.condition),
+          //     Text(item.price.toString()),
+          //     Text(item.category.name)
+          //   ],
+          // )
         ],
       ),
       floatingActionButton: BlocBuilder<ItemBloc, ItemState>(
@@ -124,8 +125,8 @@ class _PhotoViewWidget extends StatelessWidget {
             final item = items[index];
 
             return PhotoViewGalleryPageOptions.customChild(
-              child: Image.asset(
-                item,
+              child: CachedNetworkImage(
+                imageUrl: item,
                 fit: BoxFit.cover,
               ),
             );

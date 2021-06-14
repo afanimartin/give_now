@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../data/items/items.dart';
 import '../../models/item/item.dart';
 import '../../utils/paths.dart';
 import 'i_item_repository.dart';
@@ -40,8 +39,7 @@ class ItemRepository extends IItemRepository {
 
     final imageUrls = await uploadItemImagesToStorage(urlsToUpload, userId);
 
-    if (imageUrls.isNotEmpty) {
-      final image = Item(
+      final item = Item(
           id: uuid.v4(),
           sellerId: userId,
           mainImageUrl: imageUrls[0],
@@ -50,8 +48,7 @@ class ItemRepository extends IItemRepository {
 
       await _firebaseFirestore
           .collection(Paths.uploads)
-          .add(image.toDocument());
-    }
+          .add(item.toDocument());
   }
 
   @override
@@ -70,14 +67,14 @@ class ItemRepository extends IItemRepository {
         .add(itemToDonate.toDocument());
   }
 
-  ///
-  List<Item> marketplaceItems() => itemsForSale;
-
   @override
-  Stream<List<Item>> currentUserItemStream(String userId) =>
-      _firebaseFirestore.collection(Paths.uploads).snapshots().map((snapshot) =>
-          snapshot.docs.map((doc) => Item.fromSnapshot(doc)).toList()
-            ..sort((a, b) => b.timestamp.compareTo(a.timestamp)));
+  Stream<List<Item>> currentUserItemStream() {
+    final items = _firebaseFirestore.collection(Paths.uploads).snapshots().map(
+        (snapshot) =>
+            snapshot.docs.map((doc) => Item.fromSnapshot(doc)).toList()
+              ..sort((a, b) => b.timestamp.compareTo(a.timestamp)));
+    return items;
+  }
 
   ///
   Stream<List<Item>> currentUserDonations(String userId) => _firebaseFirestore

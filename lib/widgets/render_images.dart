@@ -24,12 +24,12 @@ class _RenderImagesState extends State<RenderImages> {
   Widget build(BuildContext context) => BlocBuilder<ItemBloc, ItemState>(
         builder: (context, state) {
           if (state is ItemUpdated) {
-            return state.currentUserItems.isEmpty
+            return state.items.isEmpty
                 ? const Center(child: Text('No items to load'))
                 : ListView.builder(
-                    itemCount: state.currentUserItems.length,
+                    itemCount: state.items.length,
                     itemBuilder: (context, index) {
-                      final image = state.currentUserItems[index];
+                      final image = state.items[index];
                       return _RenderImage(image: image);
                     });
           }

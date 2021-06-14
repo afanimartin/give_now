@@ -33,7 +33,7 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
   @override
   Stream<ItemState> mapEventToState(ItemEvent event) async* {
     if (event is LoadItems) {
-      yield* _mapLoadImagesToState();
+      yield* _mapLoadItemsToState();
     } else if (event is UpdateItems) {
       yield* _mapUpdatedImagesToState(event);
     } else if (event is PickAndUploadItems) {
@@ -129,15 +129,13 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
     } on Exception catch (_) {}
   }
 
-  Stream<ItemState> _mapLoadImagesToState() async* {
+  Stream<ItemState> _mapLoadItemsToState() async* {
     try {
-      // await _itemStreamSubscription?.cancel();
+      await _itemStreamSubscription?.cancel();
 
-      // final userId = _currentUserId.getCurrentUserId();
-
-      // _itemStreamSubscription =
-      //     state.currentUserItems as StreamSubscription<List<ItemModel>>;
-      yield ItemUpdated(items: state.currentUserItems);
+      _itemStreamSubscription = _itemRepository
+          .currentUserItemStream()
+          .listen((items) => add(UpdateItems(items: items)));
     } on Exception catch (error) {
       throw Exception(error);
     }

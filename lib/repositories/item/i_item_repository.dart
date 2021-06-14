@@ -15,5 +15,5 @@ abstract class IItemRepository {
   Future<void> donateItemToCharity(Item itemToDonate);
 
   ///
-  Stream<List<Item>> currentUserItemStream(String userId);
+  Stream<List<Item>> currentUserItemStream();
 }

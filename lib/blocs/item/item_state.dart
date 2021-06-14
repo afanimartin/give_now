@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../../data/items/items.dart';
 import '../../models/item/item.dart';
 
 ///
@@ -10,7 +9,7 @@ class ItemState extends Equatable {
   const ItemState();
 
   ///
-  List<Item> get currentUserItems => itemsForSale;
+  // List<Item> get currentUserItems =>;
 
   @override
   List<Object> get props => [];
@@ -29,8 +28,9 @@ class ItemUpdated extends ItemState {
   final FirebaseAuth _firebaseAuth;
 
   ///
-  @override
-  List<Item> get currentUserItems => itemsForSale;
+  // List<Item> get currentUserItems => items
+  //     .where((item) => item.sellerId == _firebaseAuth.currentUser.uid)
+  //     .toList();
 
   @override
   List<Object> get props => [items];

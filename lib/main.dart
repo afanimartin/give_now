@@ -1,14 +1,18 @@
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:give_now/blocs/cart/cart_bloc.dart';
-import 'package:give_now/blocs/cart/cart_event.dart';
 
+import 'blocs/cart/cart_bloc.dart';
+import 'blocs/cart/cart_event.dart';
 import 'blocs/donation/donation_bloc.dart';
 import 'blocs/donation/donation_event.dart';
 import 'blocs/item/item_bloc.dart';
 import 'blocs/item/item_event.dart';
-import 'blocs/simple_bloc_observer.dart';
 import 'blocs/tab/tab_bloc.dart';
 import 'repositories/authentication/authentication_repository.dart';
 import 'repositories/item/item_repository.dart';
@@ -19,7 +23,17 @@ void main() async {
 
   await Firebase.initializeApp();
 
-  Bloc.observer = SimpleBlocObserver();
+  final host = Platform.isAndroid ? '10.0.2.2:8080' : '127.0.0.1:8080';
+
+  // [Firestore | localhost:8080]
+  FirebaseFirestore.instance.settings =
+      Settings(host: host, sslEnabled: false, persistenceEnabled: false);
+
+  // [Authentication | localhost:9099]
+  // await FirebaseAuth.instance.useEmulator('127.0.0.1:9099');
+
+  // [Storage | localhost:9199]
+  await FirebaseStorage.instance.useEmulator(host: host, port: 9199);
 
   runApp(MultiBlocProvider(
     providers: [
@@ -32,7 +46,9 @@ void main() async {
       BlocProvider<DonationBloc>(
           create: (_) => DonationBloc(itemRepository: ItemRepository())
             ..add(LoadDonations())),
-      BlocProvider<CartBloc>(create: (_) => CartBloc()..add(LoadCartItems())),
+      BlocProvider<CartBloc>(
+          create: (_) =>
+              CartBloc(itemRepository: ItemRepository())..add(LoadCartItems())),
     ],
     child: App(
       authenticationRepository: AuthenticationRepository(),
