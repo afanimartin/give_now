@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:give_now/blocs/cart/cart_bloc.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
 import '../blocs/item/item_bloc.dart';
@@ -38,27 +39,27 @@ class ItemDetailScreen extends StatelessWidget {
       body: Column(
         children: [
           _PhotoViewWidget(items: items),
-          // Column(
-          //   crossAxisAlignment: CrossAxisAlignment.start,
-          //   children: [
-          //     Text(
-          //       item.title,
-          //       style:
-          //           const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          //     ),
-          //     Text(item.description),
-          //     Text(item.condition),
-          //     Text(item.price.toString()),
-          //     Text(item.category.name)
-          //   ],
-          // )
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                item.title,
+                style:
+                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              Text(item.description),
+              Text(item.condition),
+              Text(item.price.toString()),
+              Text(item.category)
+            ],
+          )
         ],
       ),
       floatingActionButton: BlocBuilder<ItemBloc, ItemState>(
           builder: (context, state) => FloatingActionButtonWidget(
                 backgroundColor: Theme.of(context).primaryColor,
                 onPressed: () {
-                  _confirmDonation(context, item);
+                  context.read<CartBloc>().addItemToCart(item);
                 },
                 child: state is ItemIsBeingDonated
                     ? const ProgressLoader()

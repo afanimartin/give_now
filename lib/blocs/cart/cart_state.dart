@@ -1,22 +1,31 @@
 import 'package:equatable/equatable.dart';
-
-import '../../models/item/item.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import '../../models/cart/cart.dart';
 
 ///
 class CartState extends Equatable {
   ///
-  const CartState({this.cartItems});
+  const CartState({this.cartItems, FirebaseAuth firebaseAuth})
+      : _firebaseAuth = firebaseAuth;
 
   ///
-  final List<Item> cartItems;
+  final List<CartItem> cartItems;
 
-    ///
-  CartState copyWith({List<Item> cartItems}) =>
+  ///
+  final FirebaseAuth _firebaseAuth;
+
+  ///
+  CartState copyWith({List<CartItem> cartItems}) =>
       CartState(cartItems: cartItems ?? this.cartItems);
 
   ///
-  double get totalCost {
-    double total = 0;
+  // List<CartItem> get currentUserCartItems => cartItems
+  //     .where((item) => item.buyerId == _firebaseAuth.currentUser.uid)
+  //     .toList();
+
+  ///
+  int get totalCost {
+    int total = 0;
 
     for (int i = 0; i < cartItems.length; i++) {
       total += cartItems[i].price;
@@ -28,26 +37,3 @@ class CartState extends Equatable {
   @override
   List<Object> get props => [cartItems];
 }
-
-///
-// class CartUpdated extends CartState {
-//   ///
-//   const CartUpdated();
-
-//   ///
-//   CartState copyWith({List<Item> cartItems}) =>
-//       CartState(cartItems: cartItems ?? this.cartItems);
-
-//   ///
-//   double get totalCost {
-//     double total = 0;
-
-//     for (int i = 0; i < cartItems.length; i++) {
-//       total += cartItems[i].price;
-//     }
-//     return total;
-//   }
-
-//   @override
-//   List<Object> get props => [cartItems];
-// }

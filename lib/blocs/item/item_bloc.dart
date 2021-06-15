@@ -134,7 +134,7 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
       await _itemStreamSubscription?.cancel();
 
       _itemStreamSubscription = _itemRepository
-          .currentUserItemStream()
+          .marketplaceStream()
           .listen((items) => add(UpdateItems(items: items)));
     } on Exception catch (error) {
       throw Exception(error);

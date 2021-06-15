@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:timeago/timeago.dart' as timeago;
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../models/item/item.dart';
 import '../screens/item_detail_screen.dart';
@@ -63,13 +63,23 @@ class ItemsGrid extends StatelessWidget {
               children: [
                 CircleAvatarWidget(radius: 20, imageUrl: item.sellerPhotoUrl),
                 const SizedBox(
-                  width: 4,
+                  width: 10,
                 ),
                 Text(
-                  timeago.format(item.timestamp.toDate()),
+                  '${item.price} SSP',
                   style: const TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white),
                 ),
+                const SizedBox(
+                  width: 10,
+                ),
+                IconButton(
+                    icon: const Icon(
+                      FontAwesomeIcons.solidHeart,
+                      color: Colors.white,
+                      size: 28,
+                    ),
+                    onPressed: () {})
               ],
             ),
           )

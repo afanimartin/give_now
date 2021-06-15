@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:give_now/models/cart/cart.dart';
+
 import '../../models/item/item.dart';
 
 ///
@@ -12,8 +14,11 @@ abstract class IItemRepository {
   Future<void> uploadItemToFirestore(List<File> urlsToUpload, String userId);
 
   ///
+  Future<void> addItemToCart(CartItem item);
+
+  ///
   Future<void> donateItemToCharity(Item itemToDonate);
 
   ///
-  Stream<List<Item>> currentUserItemStream();
+  Stream<List<Item>> marketplaceStream();
 }

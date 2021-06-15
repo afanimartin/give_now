@@ -1,22 +1,60 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import '../item/item.dart';
 
 ///
-class Cart extends Equatable {
+class CartItem extends Equatable {
   ///
-  const Cart(
-      {@required this.cartId, @required this.cartItems, @required this.total});
+  const CartItem(
+      {@required this.id,
+      @required this.buyerId,
+      @required this.sellerId,
+      @required this.title,
+      @required this.mainImageUrl,
+      @required this.price,
+      this.timestamp});
 
   ///
-  final String cartId;
+  factory CartItem.fromSnapshot(DocumentSnapshot doc) => CartItem(
+      id: doc.id,
+      buyerId: doc['buyer_id'] as String,
+      sellerId: doc['seller_id'] as String,
+      title: doc['title'] as String,
+      mainImageUrl: doc['main_image_url'] as String,
+      price: doc['price'] as int);
 
   ///
-  final List<Item> cartItems;
+  final String id;
 
   ///
-  final double total;
+  final String buyerId;
+
+  ///
+  final String sellerId;
+
+  ///
+  final String title;
+
+  ///
+  final String mainImageUrl;
+
+  ///
+  final int price;
+
+  ///
+  final Timestamp timestamp;
+
+  ///
+  Map<String, dynamic> toDocument() => {
+        'id': id,
+        'buyer_id': buyerId,
+        'seller_id': sellerId,
+        'title': title,
+        'main_image_url': mainImageUrl,
+        'price': price
+      };
 
   @override
-  List<Object> get props => [cartId, cartItems, total];
+  List<Object> get props =>
+      [id, buyerId, sellerId, title, mainImageUrl, price, timestamp];
 }
