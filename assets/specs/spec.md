@@ -1,15 +1,12 @@
 ## MVP features
 - login with gmail
-- login with apple
 - logout
-- view items donated
-- view how much money earned selling on the platform
 - view items sold/bought
 - donate/sell uploaded items
-- delete donated items
-- view/edit profile
-- render user items in their profile
+- view/edit profile - edit display_name and phone_number
+- render user items in their profile - items sold/bought
 - user should be able to edit/delete items uploaded by them
 - render items in the marketplace that don't belong to the current user
 - add items to cart
 - checkout items from the cart
+- update user profile after signing up. Let user add a phone number

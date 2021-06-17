@@ -9,7 +9,9 @@ class AuthenticationRepository extends IAuthenticationRepository {
   ///
   AuthenticationRepository(
       {GoogleSignIn googleSignIn, FirebaseAuth firebaseAuth})
-      : _googleSignIn = googleSignIn ?? GoogleSignIn.standard(),
+      : _googleSignIn = googleSignIn ??
+            GoogleSignIn
+                .standard(), // Will fail without GoogleSignIn.standard()
         _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn;
   final FirebaseAuth _firebaseAuth;

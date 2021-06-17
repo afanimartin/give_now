@@ -37,3 +37,6 @@ class CartState extends Equatable {
   @override
   List<Object> get props => [cartItems];
 }
+
+///
+class LoadingCartItems extends CartState {}

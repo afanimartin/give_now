@@ -11,6 +11,7 @@ class UserModel extends Equatable {
       @required this.email,
       this.displayName,
       this.photoUrl,
+      this.phoneNumber,
       this.itemsInCart,
       this.itemsPurchased});
 
@@ -20,6 +21,7 @@ class UserModel extends Equatable {
       email: doc['email'] as String,
       displayName: doc['display_name'] as String,
       photoUrl: doc['photo_url'] as String,
+      phoneNumber: doc['phone_number'] as String,
       itemsInCart: doc['items_in_cart'] as List<Item>,
       itemsPurchased: doc['items_purchased'] as List<Item>);
 
@@ -40,6 +42,9 @@ class UserModel extends Equatable {
   final String photoUrl;
 
   ///
+  final String phoneNumber;
+
+  ///
   final List<Item> itemsInCart;
 
   ///
@@ -51,11 +56,19 @@ class UserModel extends Equatable {
         'email': email,
         'display_name': displayName,
         'photo_url': photoUrl,
+        'phone_number': phoneNumber,
         'items_in_cart': itemsInCart,
         'items_purchased': itemsPurchased
       };
 
   @override
-  List<Object> get props =>
-      [userId, email, displayName, photoUrl, itemsInCart, itemsPurchased];
+  List<Object> get props => [
+        userId,
+        email,
+        displayName,
+        photoUrl,
+        phoneNumber,
+        itemsInCart,
+        itemsPurchased
+      ];
 }

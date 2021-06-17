@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../models/item/item.dart';
 import '../screens/item_detail_screen.dart';
@@ -75,9 +74,9 @@ class ItemsGrid extends StatelessWidget {
                 ),
                 IconButton(
                     icon: const Icon(
-                      FontAwesomeIcons.solidHeart,
+                      Icons.shopping_bag_outlined,
                       color: Colors.white,
-                      size: 28,
+                      size: 30,
                     ),
                     onPressed: () {})
               ],

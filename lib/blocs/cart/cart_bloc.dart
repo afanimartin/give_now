@@ -51,7 +51,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   }
 
   Stream<CartState> _mapUpdateCartItemsToState(UpdateCartItems event) async* {
-    yield CartState(cartItems: event.cartItems);
+    yield LoadingCartItems();
+
+    try {
+      yield CartState(cartItems: event.cartItems);
+    } on Exception catch (_) {}
   }
 
   ///

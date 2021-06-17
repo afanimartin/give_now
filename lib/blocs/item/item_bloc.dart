@@ -144,11 +144,4 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
   Stream<ItemState> _mapUpdatedImagesToState(UpdateItems event) async* {
     yield ItemUpdated(items: event.items);
   }
-
-  @override
-  Future<void> close() {
-    _itemStreamSubscription.cancel();
-
-    return super.close();
-  }
 }

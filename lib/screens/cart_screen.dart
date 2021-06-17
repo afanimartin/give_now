@@ -23,6 +23,9 @@ class _CartScreenState extends State<CartScreen> {
         backgroundColor: Theme.of(context).accentColor,
         body: BlocBuilder<CartBloc, CartState>(
           builder: (context, state) {
+            if (state is LoadingCartItems) {
+              return const ProgressLoader();
+            }
             if (state is CartState) {
               return state.cartItems.isNotEmpty
                   ? SingleChildScrollView(
