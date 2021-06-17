@@ -1,14 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import '../item/item.dart';
 
 ///
 class UserModel extends Equatable {
   ///
   const UserModel(
-      {@required this.userId,
-      @required this.email,
+      {this.userId,
+      this.email,
       this.displayName,
       this.photoUrl,
       this.phoneNumber,
@@ -24,6 +23,11 @@ class UserModel extends Equatable {
       phoneNumber: doc['phone_number'] as String,
       itemsInCart: doc['items_in_cart'] as List<Item>,
       itemsPurchased: doc['items_purchased'] as List<Item>);
+
+  ///
+  UserModel copyWith({String displayName, String phoneNumber}) => UserModel(
+      displayName: displayName ?? this.displayName,
+      phoneNumber: phoneNumber ?? this.phoneNumber);
 
   ///
   static const empty =

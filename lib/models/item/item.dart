@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import '../category/category.dart';
 
 ///
 class Item extends Equatable {
@@ -17,7 +16,7 @@ class Item extends Equatable {
       @required this.mainImageUrl,
       this.isDonated = false,
       this.isSold = false,
-      this.condition = 'Used',
+      this.condition = 'used',
       this.buyerId,
       this.otherImageUrls,
       this.timestamp});

@@ -2,11 +2,14 @@
 - login with gmail
 - logout
 - view items sold/bought
+- filter items based on category
 - donate/sell uploaded items
 - view/edit profile - edit display_name and phone_number
 - render user items in their profile - items sold/bought
 - user should be able to edit/delete items uploaded by them
 - render items in the marketplace that don't belong to the current user
 - add items to cart
+- remove items from cart
 - checkout items from the cart
-- update user profile after signing up. Let user add a phone number
+- update user profile after signing up. let user add a phone number
+- add metadata to item before upload. update title, description, etc

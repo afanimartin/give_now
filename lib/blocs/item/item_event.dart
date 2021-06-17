@@ -17,7 +17,7 @@ class LoadItems extends ItemEvent {}
 ///
 class PickAndUploadItems extends ItemEvent {}
 
-/// 
+///
 class DonateItem extends ItemEvent {}
 
 ///
@@ -28,3 +28,6 @@ class UpdateItems extends ItemEvent {
   ///
   final List<Item> items;
 }
+
+///
+class PickImagesToUpload extends ItemEvent {}

@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:give_now/helpers/image/image_picker_logic.dart';
 import 'package:multi_image_picker2/multi_image_picker2.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -45,36 +47,9 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
     yield ItemIsBeingAdded();
 
     try {
-      final files = <File>[];
+      final _files = await filesToUpload();
 
-      ///
-      var images = <Asset>[];
-
-      await Permission.photos.request();
-
-      final permissionStatus = await Permission.photos.status;
-
-      final appDocDir = await getTemporaryDirectory();
-      final appDocPath = appDocDir.path;
-
-      if (permissionStatus.isGranted) {
-        images = await MultiImagePicker.pickImages(
-            maxImages: 5, selectedAssets: images);
-
-        for (var i = 0; i < images.length; i++) {
-          final byteData = await images[i].getByteData();
-
-          final tempFile = File('$appDocPath/${images[i].name}');
-
-          final file = await tempFile.writeAsBytes(byteData.buffer
-              .asInt8List(byteData.offsetInBytes, byteData.lengthInBytes));
-
-          files.add(file);
-        }
-
-        await _itemRepository.uploadItemToFirestore(
-            files, _currentUserId.getCurrentUserId());
-      }
+      yield ImagesToUploadPicked(images: _files);
     } on Exception catch (_) {}
   }
 
@@ -92,42 +67,11 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
   }
 
   ///
-  void pickAndUploadImages() async {
-    try {
-      final files = <File>[];
-
-      ///
-      var images = <Asset>[];
-
-      await Permission.photos.request();
-
-      final permissionStatus = await Permission.photos.status;
-
-      final appDocDir = await getTemporaryDirectory();
-      final appDocPath = appDocDir.path;
-
-      if (permissionStatus.isGranted) {
-        images = await MultiImagePicker.pickImages(
-            maxImages: 5, selectedAssets: images);
-
-        if (images.isNotEmpty) {
-          for (var i = 0; i < images.length; i++) {
-            final byteData = await images[i].getByteData();
-
-            final tempFile = File('$appDocPath/${images[i].name}');
-
-            final file = await tempFile.writeAsBytes(byteData.buffer
-                .asInt8List(byteData.offsetInBytes, byteData.lengthInBytes));
-
-            files.add(file);
-          }
-
-          await _itemRepository.uploadItemToFirestore(
-              files, _currentUserId.getCurrentUserId());
-        }
-      }
-    } on Exception catch (_) {}
-  }
+  // void pickAndUploadImages() async {
+  //   try {
+  //     final _files = await filesToUpload();
+  //   } on Exception catch (_) {}
+  // }
 
   Stream<ItemState> _mapLoadItemsToState() async* {
     try {

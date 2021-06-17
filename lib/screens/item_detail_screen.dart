@@ -30,7 +30,7 @@ class ItemDetailScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).accentColor,
       appBar: AppBar(
         title: Text(
-          item.title,
+          item.title ?? '',
           style: const TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.white,
@@ -43,14 +43,14 @@ class ItemDetailScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                item.title,
+                item.title ?? '',
                 style:
                     const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-              Text(item.description),
-              Text(item.condition),
-              Text(item.price.toString()),
-              Text(item.category)
+              Text(item.description ?? ''),
+              Text(item.condition ?? ''),
+              Text(item.price.toString() ?? ''),
+              Text(item.category ?? '')
             ],
           )
         ],

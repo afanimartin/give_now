@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import '../../models/item/item.dart';
@@ -23,6 +25,18 @@ class ItemUpdated extends ItemState {
 
   @override
   List<Object> get props => [items];
+}
+
+///
+class ImagesToUploadPicked extends ItemState {
+  ///
+  const ImagesToUploadPicked({@required this.images});
+
+  ///
+  final List<File> images;
+
+  @override
+  List<Object> get props => [images];
 }
 
 ///

@@ -7,6 +7,7 @@ import '../blocs/item/item_state.dart';
 import '../widgets/floating_action_button.dart';
 import '../widgets/items_grid.dart';
 import '../widgets/progress_loader.dart';
+import 'item_preview_screen.dart';
 
 ///
 class MarketplaceScreen extends StatefulWidget {
@@ -39,8 +40,12 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
         ),
         floatingActionButton: BlocBuilder<ItemBloc, ItemState>(
             builder: (context, state) => FloatingActionButtonWidget(
-                  onPressed: () =>
-                      context.read<ItemBloc>().add(PickAndUploadItems()),
+                  onPressed: () {
+                    context.read<ItemBloc>().add(PickAndUploadItems());
+
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (_) => const ItemPreviewScreen()));
+                  },
                   backgroundColor: Theme.of(context).primaryColor,
                   child: state is ItemIsBeingAdded
                       ? const ProgressLoader()
