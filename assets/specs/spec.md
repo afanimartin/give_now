@@ -12,4 +12,7 @@
 - remove items from cart
 - checkout items from the cart
 - update user profile after signing up. let user add a phone number
+- preview images to be uploaded
+- remove image(s) during preview
 - add metadata to item before upload. update title, description, etc
+- add localization to the app [ENG(US) & ARABIC(SUDAN)]

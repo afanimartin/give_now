@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,14 +18,37 @@ class ItemPreviewScreen extends StatefulWidget {
 
 class _ItemPreviewScreenState extends State<ItemPreviewScreen> {
   @override
-  Widget build(BuildContext context) =>
-      BlocBuilder<ItemBloc, ItemState>(builder: (context, state) {
-        if (state is ImagesToUploadPicked) {
-          return RenderImagesToUpload(
-            images: state.images,
-          );
-        }
+  Widget build(BuildContext context) => Scaffold(
+        backgroundColor: Theme.of(context).accentColor,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Theme.of(context).accentColor,
+          iconTheme: Theme.of(context).iconTheme,
+        ),
+        body: BlocBuilder<ItemBloc, ItemState>(builder: (context, state) {
+          if (state is ImagesToUploadPicked) {
+            return state.images.isNotEmpty
+                ? Column(
+                    children: [
+                      Expanded(
+                          child: RenderImagesToUpload(assets: state.images)),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 16),
+                        child: IconButton(
+                            icon: const Icon(
+                              Icons.arrow_forward_ios_sharp,
+                              size: 30,
+                            ),
+                            onPressed: () {}),
+                      )
+                    ],
+                  )
+                : const Center(
+                    child: Text('No images to preview. Add Images'),
+                  );
+          }
 
-        return const ProgressLoader();
-      });
+          return const ProgressLoader();
+        }),
+      );
 }

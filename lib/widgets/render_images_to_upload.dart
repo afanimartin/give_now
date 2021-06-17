@@ -1,41 +1,44 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:multi_image_picker2/multi_image_picker2.dart';
+
+import 'progress_loader.dart';
 
 ///
 class RenderImagesToUpload extends StatelessWidget {
   ///
-  const RenderImagesToUpload({@required this.images, Key key})
+  const RenderImagesToUpload({@required this.assets, Key key})
       : super(key: key);
 
   ///
-  final List<File> images;
+  final List<Asset> assets;
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        backgroundColor: Theme.of(context).accentColor,
-        appBar: AppBar(),
-        body: Container(
-          height: 500,
-          color: Colors.white,
-          child: ListView.builder(
-              itemCount: images.length,
-              itemBuilder: (context, index) {
-                final _image = images[index];
-
-                return Image.file(
-                  _image,
-                  height: 100,
-                  width: 50,
-                );
-              }),
+  Widget build(BuildContext context) => GridView.count(
+        crossAxisCount: 2,
+        children: List.generate(
+          assets.length,
+          (index) {
+            final _asset = assets[index];
+            return Padding(
+              padding: const EdgeInsets.only(left: 4, right: 4, top: 4),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(5)),
+                child: AssetThumb(
+                  asset: _asset,
+                  width: 300,
+                  height: 300,
+                  spinner: const ProgressLoader(),
+                ),
+              ),
+            );
+          },
         ),
       );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<List<File>>('images', images));
+    properties.add(DiagnosticsProperty<List<Asset>>('assets', assets));
   }
 }

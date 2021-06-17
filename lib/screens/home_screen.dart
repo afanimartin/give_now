@@ -22,6 +22,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) => BlocBuilder<TabBloc, AppTab>(
         builder: (context, state) => Scaffold(
           appBar: AppBar(
+            elevation: 0,
             title: const Text(
               'Dalala',
               style: TextStyle(

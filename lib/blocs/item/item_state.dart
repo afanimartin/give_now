@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:multi_image_picker2/multi_image_picker2.dart';
 import '../../models/item/item.dart';
 
 ///
@@ -33,7 +34,7 @@ class ImagesToUploadPicked extends ItemState {
   const ImagesToUploadPicked({@required this.images});
 
   ///
-  final List<File> images;
+  final List<Asset> images;
 
   @override
   List<Object> get props => [images];

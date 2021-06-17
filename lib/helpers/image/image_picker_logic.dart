@@ -5,7 +5,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 ///
-Future<List<File>> filesToUpload() async {
+Future<List<Asset>> filesToUpload() async {
   final files = <File>[];
 
   ///
@@ -20,7 +20,7 @@ Future<List<File>> filesToUpload() async {
 
   if (permissionStatus.isGranted) {
     images =
-        await MultiImagePicker.pickImages(maxImages: 5, selectedAssets: images);
+        await MultiImagePicker.pickImages(maxImages: 6, selectedAssets: images);
 
     for (var i = 0; i < images.length; i++) {
       final byteData = await images[i].getByteData();
@@ -34,5 +34,5 @@ Future<List<File>> filesToUpload() async {
     }
   }
 
-  return files;
+  return images;
 }

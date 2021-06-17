@@ -13,5 +13,8 @@ const LinearGradient postGradient = LinearGradient(
     colors: [Colors.transparent, Colors.black26]);
 
 ///
-ThemeData appTheme() =>
-    ThemeData(primaryColor: primaryColor, accentColor: secondaryColor);
+ThemeData appTheme() => ThemeData(
+      primaryColor: primaryColor,
+      accentColor: secondaryColor,
+      iconTheme: const IconThemeData(color: Colors.black, size: 30),
+    );

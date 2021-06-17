@@ -19,7 +19,8 @@ class ItemRepository extends IItemRepository {
       List<File> images, String userId) async {
     const uuid = Uuid();
     final imageUrls = <String>[];
-
+    
+    // make this an extension method
     for (var i = 0; i < images.length; i++) {
       final _ref = await _firebaseStorage
           .ref()
