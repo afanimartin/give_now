@@ -26,7 +26,7 @@ class _ItemPreviewScreenState extends State<ItemPreviewScreen> {
           title: Text(
             'Preview images to upload',
             style: TextStyle(
-                color: Theme.of(context).secondaryHeaderColor,
+                color: Theme.of(context).primaryColorDark,
                 letterSpacing: 1),
           ),
           backgroundColor: Theme.of(context).accentColor,

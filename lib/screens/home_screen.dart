@@ -26,16 +26,16 @@ class HomeScreen extends StatelessWidget {
             title: Text(
               'Dalala',
               style: TextStyle(
-                  color: Theme.of(context).secondaryHeaderColor,
+                  color: Theme.of(context).primaryColorDark,
                   fontSize: 28,
                   letterSpacing: 1.2),
             ),
-            backgroundColor: Colors.white,
+            backgroundColor: Theme.of(context).accentColor,
             actions: [
               IconButton(
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.exit_to_app,
-                    color: Colors.black,
+                    color: Theme.of(context).primaryColorDark,
                     size: 30,
                   ),
                   onPressed: () {

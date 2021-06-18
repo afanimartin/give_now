@@ -17,3 +17,11 @@
 - remove image(s) during preview
 - add metadata to item before upload. update title, description, etc
 - add localization to the app [ENG(US) & ARABIC(SUDAN)]
+
+## CURRENT BUGS
+- [] fix bug with cancelling image selection
+- [] fix bug with loading cart items
+
+## TASKS
+### 18/06/2021
+- 

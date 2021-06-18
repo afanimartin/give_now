@@ -1,16 +1,13 @@
 import 'dart:async';
-import 'dart:io';
-import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:give_now/helpers/image/image_picker_logic.dart';
-import 'package:multi_image_picker2/multi_image_picker2.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:formz/formz.dart';
 
 import '../../helpers/bloc/current_user_id.dart';
+import '../../helpers/image/image_picker_logic.dart';
+import '../../models/form/item_form.dart';
 import '../../models/item/item.dart';
 import '../../repositories/authentication/authentication_repository.dart';
 import '../../repositories/item/item_repository.dart';
@@ -66,13 +63,6 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
     _itemRepository.donateItemToCharity(updatedItem);
   }
 
-  ///
-  // void pickAndUploadImages() async {
-  //   try {
-  //     final _files = await filesToUpload();
-  //   } on Exception catch (_) {}
-  // }
-
   Stream<ItemState> _mapLoadItemsToState() async* {
     try {
       await _itemStreamSubscription?.cancel();
@@ -87,5 +77,18 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
 
   Stream<ItemState> _mapUpdatedImagesToState(UpdateItems event) async* {
     yield ItemUpdated(items: event.items);
+  }
+
+  void titleChanged(String value) {
+    final title = ItemForm.dirty(value: value);
+    emit(state.copyWith(
+        title: title, formzStatus: Formz.validate([title, state.description])));
+  }
+
+  void descriptionChanged(String value) {
+    final description = ItemForm.dirty(value: value);
+    emit(state.copyWith(
+        description: description,
+        formzStatus: Formz.validate([description, state.title])));
   }
 }

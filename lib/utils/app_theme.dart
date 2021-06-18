@@ -7,6 +7,12 @@ const primaryColor = Color(0xFF26A69A);
 const secondaryColor = Color(0xFFE8F5E9);
 
 ///
+const blackColor = Color(0xFF000000);
+
+///
+const whiteColor = Color(0xFFFFFFFF);
+
+///
 const LinearGradient postGradient = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
@@ -15,7 +21,8 @@ const LinearGradient postGradient = LinearGradient(
 ///
 ThemeData appTheme() => ThemeData(
       primaryColor: primaryColor,
-      secondaryHeaderColor: Colors.black,
+      primaryColorLight: whiteColor,
+      primaryColorDark: blackColor,
       accentColor: secondaryColor,
-      iconTheme: const IconThemeData(color: Colors.black, size: 30),
+      iconTheme: const IconThemeData(color: blackColor, size: 30),
     );

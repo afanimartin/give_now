@@ -31,9 +31,10 @@ class ItemDetailScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           item.title ?? '',
-          style: const TextStyle(color: Colors.black),
+          style: TextStyle(color: Theme.of(context).primaryColorDark),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).accentColor,
+        iconTheme: Theme.of(context).iconTheme,
       ),
       body: Column(
         children: [
