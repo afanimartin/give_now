@@ -23,10 +23,12 @@ class HomeScreen extends StatelessWidget {
         builder: (context, state) => Scaffold(
           appBar: AppBar(
             elevation: 0,
-            title: const Text(
+            title: Text(
               'Dalala',
               style: TextStyle(
-                  color: Colors.black, fontSize: 28, letterSpacing: 1.2),
+                  color: Theme.of(context).secondaryHeaderColor,
+                  fontSize: 28,
+                  letterSpacing: 1.2),
             ),
             backgroundColor: Colors.white,
             actions: [

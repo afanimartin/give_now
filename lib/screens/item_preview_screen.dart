@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:give_now/screens/finish_item_upload_screen.dart';
 
 import '../blocs/item/item_bloc.dart';
 import '../blocs/item/item_state.dart';
@@ -22,6 +23,12 @@ class _ItemPreviewScreenState extends State<ItemPreviewScreen> {
         backgroundColor: Theme.of(context).accentColor,
         appBar: AppBar(
           elevation: 0,
+          title: Text(
+            'Preview images to upload',
+            style: TextStyle(
+                color: Theme.of(context).secondaryHeaderColor,
+                letterSpacing: 1),
+          ),
           backgroundColor: Theme.of(context).accentColor,
           iconTheme: Theme.of(context).iconTheme,
         ),
@@ -39,7 +46,10 @@ class _ItemPreviewScreenState extends State<ItemPreviewScreen> {
                               Icons.arrow_forward_ios_sharp,
                               size: 30,
                             ),
-                            onPressed: () {}),
+                            onPressed: () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (_) =>
+                                        const FinishItemUploadScreen()))),
                       )
                     ],
                   )
