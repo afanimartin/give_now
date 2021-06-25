@@ -9,7 +9,6 @@ import '../blocs/item/item_bloc.dart';
 import '../blocs/item/item_state.dart';
 import '../models/item/item.dart';
 import '../widgets/floating_action_button.dart';
-import '../widgets/progress_loader.dart';
 
 ///
 class ItemDetailScreen extends StatelessWidget {
@@ -29,6 +28,7 @@ class ItemDetailScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).accentColor,
       appBar: AppBar(
+        elevation: 0,
         title: Text(
           item.title ?? '',
           style: TextStyle(color: Theme.of(context).primaryColorDark),
@@ -61,9 +61,7 @@ class ItemDetailScreen extends StatelessWidget {
                 onPressed: () {
                   context.read<CartBloc>().addItemToCart(item);
                 },
-                child: state is ItemIsBeingDonated
-                    ? const ProgressLoader()
-                    : const Icon(Icons.shopping_bag_outlined),
+                child: const Icon(Icons.shopping_bag_outlined),
               )),
     );
   }
@@ -82,7 +80,7 @@ class ItemDetailScreen extends StatelessWidget {
                 actions: [
                   TextButton(
                       onPressed: () {
-                        context.read<ItemBloc>().donateItemToCharity(item);
+                        // context.read<ItemBloc>().donateItemToCharity(item);
 
                         Navigator.of(context).pop();
                       },

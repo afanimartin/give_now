@@ -7,11 +7,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'blocs/cart/cart_bloc.dart';
 import 'blocs/cart/cart_event.dart';
-import 'blocs/donation/donation_bloc.dart';
-import 'blocs/donation/donation_event.dart';
 import 'blocs/item/item_bloc.dart';
 import 'blocs/item/item_event.dart';
 import 'blocs/tab/tab_bloc.dart';
+import 'blocs/upload/upload_bloc.dart';
 import 'repositories/authentication/authentication_repository.dart';
 import 'repositories/item/item_repository.dart';
 import 'screens/app.dart';
@@ -41,12 +40,11 @@ void main() async {
       BlocProvider<ItemBloc>(
           create: (_) =>
               ItemBloc(itemRepository: ItemRepository())..add(LoadItems())),
-      BlocProvider<DonationBloc>(
-          create: (_) => DonationBloc(itemRepository: ItemRepository())
-            ..add(LoadDonations())),
       BlocProvider<CartBloc>(
           create: (_) =>
               CartBloc(itemRepository: ItemRepository())..add(LoadCartItems())),
+      BlocProvider<UploadBloc>(
+          create: (_) => UploadBloc(itemRepository: ItemRepository()))
     ],
     child: App(
       authenticationRepository: AuthenticationRepository(),

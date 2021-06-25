@@ -6,6 +6,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../models/cart/cart.dart';
 import '../../models/item/item.dart';
+import '../../models/item/upload.dart';
 import '../../utils/paths.dart';
 import 'i_item_repository.dart';
 
@@ -15,11 +16,10 @@ class ItemRepository extends IItemRepository {
   final _firebaseFirestore = FirebaseFirestore.instance;
 
   @override
-  Future<List<String>> uploadItemImagesToStorage(
-      List<File> images, String userId) async {
+  Future<List<String>> uploadItemImagesToStorage(List<File> images) async {
     const uuid = Uuid();
     final imageUrls = <String>[];
-    
+
     // make this an extension method
     for (var i = 0; i < images.length; i++) {
       final _ref = await _firebaseStorage
@@ -36,14 +36,18 @@ class ItemRepository extends IItemRepository {
 
   @override
   Future<void> uploadItemToFirestore(
-      List<File> urlsToUpload, String userId) async {
-    const uuid = Uuid();
-
-    final imageUrls = await uploadItemImagesToStorage(urlsToUpload, userId);
+      Upload upload, List<File> urlsToUpload) async {
+    final imageUrls = await uploadItemImagesToStorage(urlsToUpload);
 
     final item = Item(
-        id: uuid.v4(),
-        sellerId: userId,
+        id: upload.id,
+        sellerId: upload.sellerId,
+        sellerPhotoUrl: upload.sellerPhotoUrl,
+        title: upload.title,
+        description: upload.description,
+        category: upload.category,
+        condition: upload.condition,
+        price: upload.price,
         mainImageUrl: imageUrls[0],
         timestamp: Timestamp.now(),
         otherImageUrls: imageUrls.sublist(1));

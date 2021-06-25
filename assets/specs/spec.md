@@ -1,22 +1,24 @@
 ## MVP features
 - [x] login with gmail
 - [x] logout
-- view items bought
-- filter items based on category
-- donate/sell uploaded items
-- view/edit profile - edit display_name and phone_number
-- render user items in their profile - items sold/bought
-- user should be able to edit/delete items uploaded by them
-- render items in the marketplace that don't belong to the current user
+- [] view items bought
+- [] filter items based on category
+- [] donate/sell uploaded items
+- [] view/edit profile - edit display_name and phone_number
+- [] render user items in their profile - items sold/bought
+- [] user should be able to edit/delete items uploaded by them
+- [] render items in the marketplace that don't belong to the current user
 - [x] add items to cart
-- show snackbar when item added successfully to cart
-- remove items from cart
-- checkout items from the cart
-- update user profile after signing up. let user add a phone number
+- [] show snackbar when item added successfully to cart
+- [] remove items from cart
+- [] checkout items from the cart
+- [] update user profile after signing up. let user add a phone number
 - [x] preview images to be uploaded
-- remove image(s) during preview
-- add metadata to item before upload. update title, description, etc
-- add localization to the app [ENG(US) & ARABIC(SUDAN)]
+- [] remove image(s) during preview
+- [] add metadata to item before upload. update title, description, etc
+- [] add localization to the app [ENG(US) & ARABIC(SUDAN)]
+- [] add some animation
+- [] render item in a SingleChildScrollView widget
 
 ## CURRENT BUGS
 - [] fix bug with cancelling image selection

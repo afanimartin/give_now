@@ -14,6 +14,7 @@ class UserProfileScreen extends StatelessWidget {
     final user = context.select((AuthenticationBloc bloc) => bloc.state.user);
 
     return Scaffold(
+      backgroundColor: Theme.of(context).accentColor,
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(

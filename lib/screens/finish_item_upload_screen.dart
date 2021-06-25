@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:give_now/widgets/finish_item_upload_widget.dart';
 
-import '../blocs/item/item_bloc.dart';
-import '../blocs/item/item_state.dart';
-import '../widgets/progress_loader.dart';
+import '../widgets/finish_item_upload_widget.dart';
 
 ///
 class FinishItemUploadScreen extends StatefulWidget {

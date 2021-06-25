@@ -1,17 +1,17 @@
 import 'dart:io';
 
-import 'package:give_now/models/cart/cart.dart';
-
+import '../../models/cart/cart.dart';
 import '../../models/item/item.dart';
+import '../../models/item/upload.dart';
 
 ///
 abstract class IItemRepository {
   ///
   Future<List<String>> uploadItemImagesToStorage(
-      List<File> images, String userId);
+      List<File> images);
 
   ///
-  Future<void> uploadItemToFirestore(List<File> urlsToUpload, String userId);
+  Future<void> uploadItemToFirestore(Upload upload, List<File> urlsToUpload);
 
   ///
   Future<void> addItemToCart(CartItem item);

@@ -15,12 +15,6 @@ class ItemEvent extends Equatable {
 class LoadItems extends ItemEvent {}
 
 ///
-class PickAndUploadItems extends ItemEvent {}
-
-///
-class DonateItem extends ItemEvent {}
-
-///
 class UpdateItems extends ItemEvent {
   ///
   const UpdateItems({@required this.items});
@@ -28,6 +22,3 @@ class UpdateItems extends ItemEvent {
   ///
   final List<Item> items;
 }
-
-///
-class PickImagesToUpload extends ItemEvent {}

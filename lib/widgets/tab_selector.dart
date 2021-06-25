@@ -17,10 +17,10 @@ class TabSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BottomNavigationBar(
-      elevation: 4,
+      elevation: 0,
       currentIndex: AppTab.values.indexOf(activeTab),
       onTap: (index) => onTabSelected(AppTab.values[index]),
-      backgroundColor: Theme.of(context).primaryColorLight,
+      backgroundColor: Theme.of(context).accentColor,
       items: AppTab.values
           .map((tab) => BottomNavigationBarItem(
               icon: _tabIcon(tab),
