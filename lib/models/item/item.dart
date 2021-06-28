@@ -32,7 +32,7 @@ class Item extends Equatable {
         title: doc['title'] as String,
         description: doc['description'] as String,
         condition: doc['condition'] as String,
-        price: doc['price'] as int,
+        price: doc['price'] as String,
         category: doc['category'] as String,
         mainImageUrl: doc['main_image_url'] as String,
         otherImageUrls: doc['other_image_urls'] as List<dynamic>,
@@ -67,7 +67,7 @@ class Item extends Equatable {
   final String condition;
 
   ///
-  final int price;
+  final String price;
 
   ///
   final String category;
@@ -110,7 +110,7 @@ class Item extends Equatable {
           String title,
           String description,
           String condition,
-          int price,
+          String price,
           String category,
           String mainImageUrl,
           Timestamp timestamp,

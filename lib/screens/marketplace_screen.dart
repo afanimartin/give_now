@@ -49,8 +49,8 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
                         builder: (_) => const ItemPreviewScreen()));
                   },
                   backgroundColor: Theme.of(context).primaryColor,
-                  child: state is ItemUploadedSuccessfully
-                      ? const Icon(Icons.check)
+                  child: state is ItemIsBeingAdded
+                      ? const ProgressLoader()
                       : const Icon(
                           Icons.add,
                         ),

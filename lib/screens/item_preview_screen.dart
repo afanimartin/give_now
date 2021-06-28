@@ -8,15 +8,10 @@ import '../widgets/render_images_to_upload.dart';
 import 'finish_item_upload_screen.dart';
 
 ///
-class ItemPreviewScreen extends StatefulWidget {
+class ItemPreviewScreen extends StatelessWidget {
   ///
   const ItemPreviewScreen({Key key}) : super(key: key);
 
-  @override
-  _ItemPreviewScreenState createState() => _ItemPreviewScreenState();
-}
-
-class _ItemPreviewScreenState extends State<ItemPreviewScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
       backgroundColor: Theme.of(context).accentColor,

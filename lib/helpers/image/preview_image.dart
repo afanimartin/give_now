@@ -6,13 +6,13 @@ Future<List<Asset>> imagesToPreview() async {
   ///
   var images = <Asset>[];
 
-  await Permission.photos.request();
-
   final permissionStatus = await Permission.photos.status;
 
   if (permissionStatus.isGranted) {
     images =
         await MultiImagePicker.pickImages(maxImages: 6, selectedAssets: images);
+  } else {
+    await Permission.photos.request();
   }
 
   return images;

@@ -28,7 +28,7 @@ class CartState extends Equatable {
     int total = 0;
 
     for (int i = 0; i < cartItems.length; i++) {
-      total += cartItems[i].price;
+      total += int.parse(cartItems[i].price);
     }
     return total;
   }

@@ -121,13 +121,15 @@ class _PhotoViewWidget extends StatelessWidget {
         child: PhotoViewGallery.builder(
           itemCount: items.length,
           builder: (context, index) {
-            final item = items[index];
+            final url = items[index];
 
             return PhotoViewGalleryPageOptions.customChild(
-              child: CachedNetworkImage(
-                imageUrl: item,
-                fit: BoxFit.cover,
-              ),
+              child: items.isNotEmpty
+                  ? CachedNetworkImage(
+                      imageUrl: url,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.asset('assets/placeholder-image.png'),
             );
           },
           scrollPhysics: const BouncingScrollPhysics(),
@@ -139,7 +141,7 @@ class _PhotoViewWidget extends StatelessWidget {
               width: 30,
               height: 30,
               child: CircularProgressIndicator(
-                backgroundColor: Colors.greenAccent,
+                backgroundColor: Theme.of(context).primaryColorDark,
                 value: event == null
                     ? 0
                     : event.cumulativeBytesLoaded / event.expectedTotalBytes,

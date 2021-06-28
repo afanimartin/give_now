@@ -34,7 +34,7 @@ class Upload extends Equatable {
   final String condition;
 
   ///
-  final int price;
+  final String price;
 
   ///
   final String category;
@@ -48,6 +48,7 @@ class Upload extends Equatable {
         description,
         condition,
         price,
+        category
       ];
 
   ///
@@ -58,7 +59,7 @@ class Upload extends Equatable {
           String title,
           String description,
           String condition,
-          int price,
+          String price,
           String category}) =>
       Upload(
           id: id ?? this.id,

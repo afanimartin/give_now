@@ -21,7 +21,7 @@ class CartItem extends Equatable {
       sellerId: doc['seller_id'] as String,
       title: doc['title'] as String,
       mainImageUrl: doc['main_image_url'] as String,
-      price: doc['price'] as int);
+      price: doc['price'] as String);
 
   ///
   final String id;
@@ -39,7 +39,7 @@ class CartItem extends Equatable {
   final String mainImageUrl;
 
   ///
-  final int price;
+  final String price;
 
   ///
   final Timestamp timestamp;

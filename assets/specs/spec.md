@@ -15,10 +15,12 @@
 - [] update user profile after signing up. let user add a phone number
 - [x] preview images to be uploaded
 - [] remove image(s) during preview
-- [] add metadata to item before upload. update title, description, etc
+- [x] add metadata to item before upload. update title, description, etc
+- [] style title, description fields with all border
 - [] add localization to the app [ENG(US) & ARABIC(SUDAN)]
 - [] add some animation
-- [] render item in a SingleChildScrollView widget
+- [] render appBar in a SingleChildScrollView widget
+- [] implement infinite scrolling for marketplace items
 
 ## CURRENT BUGS
 - [] fix bug with cancelling image selection

@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:give_now/blocs/item/item_state.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../helpers/image/preview_image.dart';
@@ -125,7 +124,7 @@ class UploadBloc extends Bloc<UploadEvent, UploadState> {
   }
 
   ///
-  void priceChanged(int value) {
+  void priceChanged(String value) {
     final price = PriceInput.dirty(value: value);
     emit(state.copyWith(
         price: price,

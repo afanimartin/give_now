@@ -55,13 +55,13 @@ class ConditionInput extends FormzInput<String, InputError> {
 }
 
 ///
-class PriceInput extends FormzInput<int, InputError> {
-  const PriceInput.pure() : super.pure(0);
+class PriceInput extends FormzInput<String, InputError> {
+  const PriceInput.pure() : super.pure('');
 
   ///
-  const PriceInput.dirty({int value = 0}) : super.dirty(value);
+  const PriceInput.dirty({String value = ''}) : super.dirty(value);
 
   @override
-  InputError validator(int value) =>
+  InputError validator(String value) =>
       value == null ? null : InputError.empty;
 }
