@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:give_now/blocs/cart/cart_state.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
 import '../blocs/cart/cart_bloc.dart';
@@ -26,44 +27,42 @@ class ItemDetailScreen extends StatelessWidget {
     item.otherImageUrls.forEach((url) => items.add(url as String));
 
     return Scaffold(
-      backgroundColor: Theme.of(context).accentColor,
-      appBar: AppBar(
-        elevation: 0,
-        title: Text(
-          item.title ?? '',
-          style: TextStyle(color: Theme.of(context).primaryColorDark),
-        ),
         backgroundColor: Theme.of(context).accentColor,
-        iconTheme: Theme.of(context).iconTheme,
-      ),
-      body: Column(
-        children: [
-          _PhotoViewWidget(items: items),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                item.title ?? '',
-                style:
-                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              Text(item.description ?? ''),
-              Text(item.condition ?? ''),
-              Text(item.price.toString() ?? ''),
-              Text(item.category ?? '')
-            ],
-          )
-        ],
-      ),
-      floatingActionButton: BlocBuilder<ItemBloc, ItemState>(
-          builder: (context, state) => FloatingActionButtonWidget(
-                backgroundColor: Theme.of(context).primaryColor,
-                onPressed: () {
-                  context.read<CartBloc>().addItemToCart(item);
-                },
-                child: const Icon(Icons.shopping_bag_outlined),
-              )),
-    );
+        appBar: AppBar(
+          elevation: 0,
+          title: Text(
+            item.title ?? '',
+            style: TextStyle(color: Theme.of(context).primaryColorDark),
+          ),
+          backgroundColor: Theme.of(context).accentColor,
+          iconTheme: Theme.of(context).iconTheme,
+        ),
+        body: Column(
+          children: [
+            _PhotoViewWidget(items: items),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  item.title ?? '',
+                  style: const TextStyle(
+                      fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                Text(item.description ?? ''),
+                Text(item.condition ?? ''),
+                Text(item.price.toString() ?? ''),
+                Text(item.category ?? '')
+              ],
+            )
+          ],
+        ),
+        floatingActionButton: FloatingActionButtonWidget(
+          backgroundColor: Theme.of(context).primaryColor,
+          onPressed: () {
+            context.read<CartBloc>().addItemToCart(item);
+          },
+          child: const Icon(Icons.shopping_bag_outlined),
+        ));
   }
 
   Future<bool> _confirmDonation(BuildContext context, Item item) async =>

@@ -53,7 +53,7 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
         ),
         body: BlocBuilder<ItemBloc, ItemState>(
           builder: (context, state) {
-            if (state is ItemUpdated) {
+            if (state is ItemsLoaded) {
               return state.itemsForSale.isNotEmpty
                   ? CustomScrollView(
                       slivers: [ItemsGrid(items: state.itemsForSale)],

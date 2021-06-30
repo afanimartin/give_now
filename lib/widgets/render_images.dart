@@ -23,7 +23,7 @@ class _RenderImagesState extends State<RenderImages> {
   @override
   Widget build(BuildContext context) => BlocBuilder<ItemBloc, ItemState>(
         builder: (context, state) {
-          if (state is ItemUpdated) {
+          if (state is ItemsLoaded) {
             return state.items.isEmpty
                 ? const Center(child: Text('No items to load'))
                 : ListView.builder(

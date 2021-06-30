@@ -96,16 +96,19 @@ class _CartScreenState extends State<CartScreen> {
                                               fontSize: 22,
                                               fontWeight: FontWeight.w500),
                                         )),
-                                        IconButton(
-                                            icon: const Icon(
-                                                Icons.cancel_rounded),
-                                            color:
-                                                Theme.of(context).primaryColor,
-                                            iconSize: 30,
-                                            onPressed: () => context
-                                                .read<CartBloc>()
-                                                .add(RemoveItemFromCart(
-                                                    item: item)))
+                                        if (state is RemovingCartItem)
+                                          const ProgressLoader()
+                                        else
+                                          IconButton(
+                                              icon: const Icon(
+                                                  Icons.cancel_rounded),
+                                              color: Theme.of(context)
+                                                  .primaryColor,
+                                              iconSize: 30,
+                                              onPressed: () => context
+                                                  .read<CartBloc>()
+                                                  .add(RemoveItemFromCart(
+                                                      item: item)))
                                       ],
                                     ),
                                   ),
@@ -132,7 +135,7 @@ class _CartScreenState extends State<CartScreen> {
                     ],
                   ))
               : const Center(
-                  child: Text('No items in the cart'),
+                  child: Text('No items in your cart. Shop to add'),
                 );
         }
 

@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uuid/uuid.dart';
 
 import '../../models/cart/cart.dart';
 import '../../models/item/item.dart';
@@ -26,7 +25,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   final ItemRepository _itemRepository;
 
   ///
-  StreamSubscription _streamSubscription;
+  StreamSubscription<List<CartItem>> _streamSubscription;
 
   ///
   final FirebaseAuth _firebaseAuth;
@@ -61,10 +60,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
   ///
   void addItemToCart(Item item) {
-    const uuid = Uuid();
-
     final newCartItem = CartItem(
-        id: uuid.v4(),
+        id: item.id,
         buyerId: _firebaseAuth.currentUser.uid,
         sellerId: item.sellerId,
         title: item.title,
@@ -78,6 +75,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   ///
   Stream<CartState> _mapRemoveItemFromCartToState(
       RemoveItemFromCart event) async* {
+    yield RemovingCartItem();
+
     try {
       await _itemRepository.removeItemFromCart(event.item);
     } on Exception catch (_) {}

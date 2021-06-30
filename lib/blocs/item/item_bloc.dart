@@ -23,11 +23,9 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
     if (event is LoadItems) {
       yield* _mapLoadItemsToState();
     } else if (event is UpdateItems) {
-      yield* _mapUpdatedImagesToState(event);
+      yield* _mapUpdatedItemsToState(event);
     }
   }
-
-  
 
   Stream<ItemState> _mapLoadItemsToState() async* {
     try {
@@ -41,7 +39,7 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
     }
   }
 
-  Stream<ItemState> _mapUpdatedImagesToState(UpdateItems event) async* {
-    yield ItemUpdated(items: event.items);
+  Stream<ItemState> _mapUpdatedItemsToState(UpdateItems event) async* {
+    yield ItemsLoaded(items: event.items);
   }
 }

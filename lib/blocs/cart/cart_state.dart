@@ -28,10 +28,6 @@ class CartItemsLoaded extends CartState {
   ///
   final FirebaseAuth _firebaseAuth;
 
-  // ///
-  // CartState copyWith({List<CartItem> cartItems}) =>
-  //     CartState(cartItems: cartItems ?? this.cartItems);
-
   ///
   List<CartItem> get currentUserCartItems => cartItems
       .where((item) => item.buyerId == _firebaseAuth.currentUser.uid)
@@ -51,3 +47,6 @@ class CartItemsLoaded extends CartState {
   @override
   List<Object> get props => [cartItems];
 }
+
+///
+class RemovingCartItem extends CartState {}
