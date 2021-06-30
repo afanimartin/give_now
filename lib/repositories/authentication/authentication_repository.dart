@@ -1,20 +1,27 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../models/user/user.dart';
+import '../../utils/paths.dart';
 import 'i_authentication_repository.dart';
 
 ///
 class AuthenticationRepository extends IAuthenticationRepository {
   ///
   AuthenticationRepository(
-      {GoogleSignIn googleSignIn, FirebaseAuth firebaseAuth})
+      {GoogleSignIn googleSignIn,
+      FirebaseAuth firebaseAuth,
+      FirebaseFirestore firebaseFirestore})
       : _googleSignIn = googleSignIn ??
             GoogleSignIn
                 .standard(), // Will fail without GoogleSignIn.standard()
-        _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
+        _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
+        _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance;
+
   final GoogleSignIn _googleSignIn;
   final FirebaseAuth _firebaseAuth;
+  final FirebaseFirestore _firebaseFirestore;
 
   ///
   Stream<UserModel> get user =>
@@ -30,8 +37,17 @@ class AuthenticationRepository extends IAuthenticationRepository {
       final googleCredential = GoogleAuthProvider.credential(
           accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
 
-      await _firebaseAuth.signInWithCredential(googleCredential);
+      final _signedInUser =
+          await _firebaseAuth.signInWithCredential(googleCredential);
+
+      await addUserToFirestore(_signedInUser.user);
     } on Exception catch (_) {}
+  }
+
+  ///
+  Future<void> addUserToFirestore(User firebaseUser) async {
+    final _user = toUser(firebaseUser);
+    await _firebaseFirestore.collection(Paths.users).add(_user.toDocument());
   }
 
   @override

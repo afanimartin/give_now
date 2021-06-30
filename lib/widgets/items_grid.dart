@@ -65,20 +65,11 @@ class ItemsGrid extends StatelessWidget {
                   width: 10,
                 ),
                 Text(
-                  '${item.price} SSP',
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white),
+                  item.title,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).primaryColorLight),
                 ),
-                const SizedBox(
-                  width: 10,
-                ),
-                IconButton(
-                    icon: const Icon(
-                      Icons.shopping_bag_outlined,
-                      color: Colors.white,
-                      size: 30,
-                    ),
-                    onPressed: () {})
               ],
             ),
           )

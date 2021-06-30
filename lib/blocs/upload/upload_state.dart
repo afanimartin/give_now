@@ -12,6 +12,7 @@ class UploadState extends Equatable {
     this.category = const CategoryInput.pure(),
     this.condition = const ConditionInput.pure(),
     this.price = const PriceInput.pure(),
+    this.phone = const PhoneNumberInput.pure(),
     this.images,
     this.formzStatus = FormzStatus.pure,
   });
@@ -32,6 +33,9 @@ class UploadState extends Equatable {
   final PriceInput price;
 
   ///
+  final PhoneNumberInput phone;
+
+  ///
   final List<Asset> images;
 
   ///
@@ -44,6 +48,7 @@ class UploadState extends Equatable {
         category,
         condition,
         price,
+        phone,
         images,
         formzStatus,
       ];
@@ -55,6 +60,7 @@ class UploadState extends Equatable {
           CategoryInput category,
           ConditionInput condition,
           PriceInput price,
+          PhoneNumberInput phone,
           List<Asset> images,
           FormzStatus formzStatus}) =>
       UploadState(
@@ -63,6 +69,7 @@ class UploadState extends Equatable {
           category: category ?? this.category,
           condition: condition ?? this.condition,
           price: price ?? this.price,
+          phone: phone ?? this.phone,
           images: images ?? this.images,
           formzStatus: formzStatus ?? this.formzStatus);
 }

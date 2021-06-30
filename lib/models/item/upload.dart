@@ -10,6 +10,7 @@ class Upload extends Equatable {
     @required this.condition,
     @required this.price,
     @required this.category,
+    @required this.phone,
     this.id,
     this.sellerId,
     this.sellerPhotoUrl,
@@ -39,6 +40,9 @@ class Upload extends Equatable {
   ///
   final String category;
 
+  ///
+  final String phone;
+
   @override
   List<Object> get props => [
         id,
@@ -48,7 +52,8 @@ class Upload extends Equatable {
         description,
         condition,
         price,
-        category
+        category,
+        phone
       ];
 
   ///
@@ -60,7 +65,8 @@ class Upload extends Equatable {
           String description,
           String condition,
           String price,
-          String category}) =>
+          String category,
+          String phone}) =>
       Upload(
           id: id ?? this.id,
           sellerId: sellerId ?? this.sellerId,
@@ -69,5 +75,6 @@ class Upload extends Equatable {
           description: description ?? this.description,
           condition: condition ?? this.condition,
           price: price ?? this.price,
-          category: category ?? this.category);
+          category: category ?? this.category,
+          phone: phone ?? this.phone);
 }

@@ -1,6 +1,9 @@
 ///
 class Paths {
   ///
+  static const users = 'users';
+
+  ///
   static const donations = 'donations';
 
   ///

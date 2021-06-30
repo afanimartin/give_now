@@ -10,7 +10,7 @@ class LogInScreen extends StatelessWidget {
   const LogInScreen({Key key}) : super(key: key);
 
   ///
-  static Route<void> route() =>
+  static Route<void> get route =>
       MaterialPageRoute<void>(builder: (_) => const LogInScreen());
 
   @override

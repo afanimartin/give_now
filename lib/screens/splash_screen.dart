@@ -6,7 +6,7 @@ class SplashScreen extends StatelessWidget {
   const SplashScreen({Key key}) : super(key: key);
 
   ///
-  static Route<Widget> route() =>
+  static Route<Widget> get route =>
       MaterialPageRoute<Widget>(builder: (_) => const SplashScreen());
 
   @override

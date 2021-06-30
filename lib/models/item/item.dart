@@ -9,6 +9,7 @@ class Item extends Equatable {
       {@required this.id,
       @required this.sellerId,
       @required this.sellerPhotoUrl,
+      @required this.sellerPhoneNumber,
       @required this.title,
       @required this.description,
       @required this.price,
@@ -18,6 +19,7 @@ class Item extends Equatable {
       this.isSold = false,
       this.condition = 'used',
       this.buyerId,
+      this.buyerPhoneNumber,
       this.otherImageUrls,
       this.timestamp});
 
@@ -26,7 +28,9 @@ class Item extends Equatable {
         id: doc.id,
         sellerId: doc['seller_id'] as String,
         sellerPhotoUrl: doc['seller_photo_url'] as String,
+        sellerPhoneNumber: doc['seller_phone_number'] as String,
         buyerId: doc['buyer_id'] as String,
+        buyerPhoneNumber: doc['buyer_phone_number'] as String,
         isDonated: doc['is_donated'] as bool,
         isSold: doc['is_sold'] as bool,
         title: doc['title'] as String,
@@ -49,7 +53,13 @@ class Item extends Equatable {
   final String sellerPhotoUrl;
 
   ///
+  final String sellerPhoneNumber;
+
+  ///
   final String buyerId;
+
+  ///
+  final String buyerPhoneNumber;
 
   ///
   final bool isDonated;
@@ -86,7 +96,9 @@ class Item extends Equatable {
         'id': id,
         'seller_id': sellerId,
         'seller_photo_url': sellerPhotoUrl,
+        'seller_phone_number': sellerPhoneNumber,
         'buyer_id': buyerId,
+        'buyer_phone_number': buyerPhoneNumber,
         'is_donated': isDonated,
         'is_sold': isSold,
         'title': title,
@@ -104,7 +116,9 @@ class Item extends Equatable {
           {String id,
           String sellerId,
           String sellerPhotoUrl,
+          String sellerPhoneNumber,
           String buyerId,
+          String buyerPhoneNumber,
           bool isDonated,
           bool isSold,
           String title,
@@ -119,7 +133,9 @@ class Item extends Equatable {
           id: id ?? this.id,
           sellerId: sellerId ?? this.sellerId,
           sellerPhotoUrl: sellerPhotoUrl ?? this.sellerPhotoUrl,
+          sellerPhoneNumber: sellerPhoneNumber ?? this.sellerPhoneNumber,
           buyerId: buyerId ?? this.buyerId,
+          buyerPhoneNumber: buyerPhoneNumber ?? buyerPhoneNumber,
           isDonated: isDonated ?? this.isDonated,
           title: title ?? this.title,
           description: description ?? this.description,
@@ -135,6 +151,9 @@ class Item extends Equatable {
         id,
         sellerId,
         sellerPhotoUrl,
+        sellerPhoneNumber,
+        buyerId,
+        buyerPhoneNumber,
         isDonated,
         title,
         description,

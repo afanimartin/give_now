@@ -23,6 +23,7 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
   final _titleContentController = TextEditingController();
   final _descriptionContentController = TextEditingController();
   final _priceContentController = TextEditingController();
+  final _phoneController = TextEditingController();
 
   String _categoryValue = categoryList[0];
   String _conditionValue = conditionList[0];
@@ -35,7 +36,8 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
               description: _descriptionContentController.text,
               condition: _conditionValue,
               price: _priceContentController.text,
-              category: _categoryValue);
+              category: _categoryValue,
+              phone: _phoneController.text);
 
           return Align(
             alignment: const Alignment(0, -1),
@@ -52,9 +54,25 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
                   _DescriptionInput(
                     controller: _descriptionContentController,
                   ),
+                  const SizedBox(
+                    height: 6,
+                  ),
                   _renderCategory(),
+                  const SizedBox(
+                    height: 6,
+                  ),
                   _renderCondition(),
+                  const SizedBox(
+                    height: 6,
+                  ),
                   _ItemPrice(controller: _priceContentController),
+                  const SizedBox(
+                    height: 6,
+                  ),
+                  _SellerPhoneNumber(controller: _phoneController),
+                  const SizedBox(
+                    height: 6,
+                  ),
                   _SubmitButton(
                     upload: _upload,
                   )
@@ -110,6 +128,7 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
     _titleContentController.clear();
     _descriptionContentController.clear();
     _priceContentController.clear();
+    _phoneController.clear();
   }
 }
 
@@ -190,6 +209,36 @@ class _ItemPrice extends StatelessWidget {
         onChanged: (String title) =>
             context.read<UploadBloc>().priceChanged(title),
         decoration: InputDecoration(
+            labelText: 'price',
+            border: OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: Theme.of(context).primaryColorDark))),
+      );
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+        DiagnosticsProperty<TextEditingController>('controller', controller));
+  }
+}
+
+///
+class _SellerPhoneNumber extends StatelessWidget {
+  const _SellerPhoneNumber({@required this.controller, Key key})
+      : super(key: key);
+
+  ///
+  final TextEditingController controller;
+
+  @override
+  Widget build(BuildContext context) => TextField(
+        controller: controller,
+        keyboardType: TextInputType.phone,
+        onChanged: (String phone) =>
+            context.read<UploadBloc>().phoneChanged(phone),
+        maxLength: 10,
+        decoration: InputDecoration(
+            labelText: 'phone',
             border: OutlineInputBorder(
                 borderSide:
                     BorderSide(color: Theme.of(context).primaryColorDark))),
@@ -215,8 +264,8 @@ class _SubmitButton extends StatelessWidget {
             onPressed: () {
               context.read<UploadBloc>().add(UploadItem(upload: upload));
 
-              Navigator.of(context).pushAndRemoveUntil<void>(
-                  HomeScreen.route(), (route) => false);
+              Navigator.of(context)
+                  .pushAndRemoveUntil<void>(HomeScreen.route, (route) => false);
             },
             child: const Text('Upload')),
       );

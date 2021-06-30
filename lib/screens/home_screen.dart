@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({Key key}) : super(key: key);
 
   ///
-  static Route route() =>
+  static Route get route =>
       MaterialPageRoute<void>(builder: (_) => const HomeScreen());
 
   @override
@@ -42,7 +42,7 @@ class HomeScreen extends StatelessWidget {
                     context.read<AuthenticationBloc>().add(LogOut());
 
                     Navigator.of(context).pushAndRemoveUntil<void>(
-                        LogInScreen.route(), (route) => false);
+                        LogInScreen.route, (route) => false);
                   })
             ],
           ),

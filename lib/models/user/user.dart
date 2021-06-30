@@ -25,13 +25,20 @@ class UserModel extends Equatable {
       itemsPurchased: doc['items_purchased'] as List<Item>);
 
   ///
-  UserModel copyWith({String displayName, String phoneNumber}) => UserModel(
-      displayName: displayName ?? this.displayName,
-      phoneNumber: phoneNumber ?? this.phoneNumber);
+  UserModel copyWith(
+          {String displayName, String phoneNumber, bool profileCompleted}) =>
+      UserModel(
+          displayName: displayName ?? this.displayName,
+          phoneNumber: phoneNumber ?? this.phoneNumber,
+          );
 
   ///
-  static const empty =
-      UserModel(userId: '', email: '', displayName: '', photoUrl: '');
+  static const empty = UserModel(
+    userId: '',
+    email: '',
+    displayName: '',
+    photoUrl: '',
+  );
 
   ///
   final String userId;

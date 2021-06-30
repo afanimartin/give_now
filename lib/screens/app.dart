@@ -63,13 +63,14 @@ class _AppViewState extends State<AppView> {
             switch (state.status) {
               case AuthenticationStatus.authenticated:
                 _navigator.pushAndRemoveUntil<void>(
-                  HomeScreen.route(),
+                  HomeScreen.route,
                   (route) => false,
                 );
                 break;
+
               case AuthenticationStatus.unauthenticated:
                 _navigator.pushAndRemoveUntil<void>(
-                  LogInScreen.route(),
+                  LogInScreen.route,
                   (route) => false,
                 );
                 break;
@@ -77,6 +78,6 @@ class _AppViewState extends State<AppView> {
           },
           child: child,
         ),
-        onGenerateRoute: (_) => SplashScreen.route(),
+        onGenerateRoute: (_) => SplashScreen.route,
       );
 }

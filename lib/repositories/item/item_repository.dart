@@ -48,6 +48,7 @@ class ItemRepository extends IItemRepository {
         category: upload.category,
         condition: upload.condition,
         price: upload.price,
+        sellerPhoneNumber: upload.phone,
         mainImageUrl: imageUrls[0],
         timestamp: Timestamp.now(),
         otherImageUrls: imageUrls.sublist(1));

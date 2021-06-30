@@ -59,7 +59,9 @@ class UploadBloc extends Bloc<UploadEvent, UploadState> {
           description: event.upload.description,
           condition: event.upload.condition,
           category: event.upload.category,
-          price: event.upload.price);
+          price: event.upload.price,
+          phone: event.upload.phone
+          );
 
       await _itemRepository.uploadItemToFirestore(_item, _imagesToUpload);
 
@@ -69,7 +71,7 @@ class UploadBloc extends Bloc<UploadEvent, UploadState> {
 
   ///
   void titleChanged(String value) {
-    final title = TitleInput.dirty(value: value);
+    final title = TitleInput.dirty(value);
     emit(state.copyWith(
         title: title,
         formzStatus: Formz.validate([
@@ -83,7 +85,7 @@ class UploadBloc extends Bloc<UploadEvent, UploadState> {
 
   ///
   void descriptionChanged(String value) {
-    final description = DescriptionInput.dirty(value: value);
+    final description = DescriptionInput.dirty(value);
     emit(state.copyWith(
         description: description,
         formzStatus: Formz.validate([
@@ -97,7 +99,7 @@ class UploadBloc extends Bloc<UploadEvent, UploadState> {
 
   ///
   void categoryChanged(String value) {
-    final category = CategoryInput.dirty(value: value);
+    final category = CategoryInput.dirty(value);
     emit(state.copyWith(
         category: category,
         formzStatus: Formz.validate([
@@ -111,7 +113,7 @@ class UploadBloc extends Bloc<UploadEvent, UploadState> {
 
   ///
   void conditionChanged(String value) {
-    final condition = ConditionInput.dirty(value: value);
+    final condition = ConditionInput.dirty(value);
     emit(state.copyWith(
         condition: condition,
         formzStatus: Formz.validate([
@@ -125,7 +127,7 @@ class UploadBloc extends Bloc<UploadEvent, UploadState> {
 
   ///
   void priceChanged(String value) {
-    final price = PriceInput.dirty(value: value);
+    final price = PriceInput.dirty(value);
     emit(state.copyWith(
         price: price,
         formzStatus: Formz.validate([
@@ -134,6 +136,21 @@ class UploadBloc extends Bloc<UploadEvent, UploadState> {
           state.category,
           state.title,
           state.condition
+        ])));
+  }
+
+  ///
+  void phoneChanged(String value) {
+    final _phone = PhoneNumberInput.dirty(value);
+    emit(state.copyWith(
+        phone: _phone,
+        formzStatus: Formz.validate([
+          _phone,
+          state.title,
+          state.description,
+          state.category,
+          state.condition,
+          state.price
         ])));
   }
 }

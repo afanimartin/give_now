@@ -12,13 +12,17 @@ enum AuthenticationStatus {
 ///
 class AuthenticationState extends Equatable {
   ///
-  const AuthenticationState._(
-      {this.status = AuthenticationStatus.unauthenticated,
-      this.user = UserModel.empty});
+  const AuthenticationState._({
+    this.status = AuthenticationStatus.unauthenticated,
+    this.user = UserModel.empty,
+  });
 
   ///
   const AuthenticationState.authenticated(UserModel user)
-      : this._(status: AuthenticationStatus.authenticated, user: user);
+      : this._(
+          status: AuthenticationStatus.authenticated,
+          user: user,
+        );
 
   ///
   const AuthenticationState.unauthenticated()
