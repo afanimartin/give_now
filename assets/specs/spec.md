@@ -6,15 +6,15 @@
 - [x] add metadata to item before upload. update title, description, etc
 - [x] style title, description fields with all border
 - [x] display title of item instead of price and shopping_bag_outlined icon
-- [] implement phone number picker
-- [] update login screen design with primary color background
-- [] show login progress when contacting google servers
-- [] render items in the marketplace that don't belong to the current user
+- [x] render items in the marketplace that don't belong to the current user
 - [] remove items from cart
 - [] checkout items from the cart
+- [] update login screen design with primary color background
+- [] show login progress when contacting google servers
 - [] user should be able to edit/delete items uploaded by them. add menu button on the appbar with delete/donate options if the user uploaded the item
 - [] render title and description in a textfield for easy edit of contents
 - [] do not show icon for adding to cart for item owner
+- [] implement international phone number input
 - [] render appBar in a SingleChildScrollView widget
 - [] handle exceptions and properly validate input values
 - [] clean up codebase
@@ -39,5 +39,5 @@
 - [] user should not be able to add item already in cart. show check icon for items in cart
 
 ## CURRENT BUGS
-- [] fix bug with cancelling image selection
 - [] fix bug with loading cart items
+- [] fix bug with cancelling image selection

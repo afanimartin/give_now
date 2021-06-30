@@ -56,9 +56,15 @@ class ItemRepository extends IItemRepository {
     await _firebaseFirestore.collection(Paths.uploads).add(item.toDocument());
   }
 
+  /// make this an extension method
   @override
   Future<void> addItemToCart(CartItem item) async {
     await _firebaseFirestore.collection(Paths.carts).add(item.toDocument());
+  }
+
+  /// make this an extension method
+  Future<void> removeItemFromCart(CartItem cartItem) async {
+    await _firebaseFirestore.collection(Paths.carts).doc(cartItem.id).delete();
   }
 
   ///

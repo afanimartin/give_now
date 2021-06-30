@@ -2,7 +2,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import '../../models/cart/cart.dart';
 
-
 ///
 class CartEvent extends Equatable {
   ///

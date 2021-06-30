@@ -5,5 +5,6 @@ final categoryList = <String>[
   'car',
   'furniture',
   'office',
-  'clothing'
+  'clothing',
+  'new'
 ];

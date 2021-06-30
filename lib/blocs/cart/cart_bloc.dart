@@ -1,24 +1,25 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../helpers/bloc/current_user_id.dart';
 import '../../models/cart/cart.dart';
 import '../../models/item/item.dart';
-import '../../repositories/authentication/authentication_repository.dart';
 import '../../repositories/item/item_repository.dart';
-import '../authentication/authentication_bloc.dart';
 import 'cart_event.dart';
 import 'cart_state.dart';
 
 ///
 class CartBloc extends Bloc<CartEvent, CartState> {
   ///
-  CartBloc({@required ItemRepository itemRepository})
+  CartBloc({@required ItemRepository itemRepository, FirebaseAuth firebaseAuth})
       : _itemRepository = itemRepository,
+        _firebaseAuth = firebaseAuth ??
+            // throws an error currentUser is null without FirebaseAuth.instance
+            FirebaseAuth.instance,
         super(const CartState());
 
   ///
@@ -28,9 +29,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   StreamSubscription _streamSubscription;
 
   ///
-  final _currentUserId = CurrentUserId(
-      authenticationBloc: AuthenticationBloc(
-          authenticationRepository: AuthenticationRepository()));
+  final FirebaseAuth _firebaseAuth;
 
   @override
   Stream<CartState> mapEventToState(CartEvent event) async* {
@@ -38,6 +37,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       yield* _mapLoadCartItemsToState();
     } else if (event is UpdateCartItems) {
       yield* _mapUpdateCartItemsToState(event);
+    } else if (event is RemoveItemFromCart) {
+      yield* _mapRemoveItemFromCartToState(event);
     }
   }
 
@@ -54,7 +55,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     yield LoadingCartItems();
 
     try {
-      yield CartState(cartItems: event.cartItems);
+      yield CartItemsLoaded(cartItems: event.cartItems);
     } on Exception catch (_) {}
   }
 
@@ -64,7 +65,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
     final newCartItem = CartItem(
         id: uuid.v4(),
-        buyerId: _currentUserId.getCurrentUserId(),
+        buyerId: _firebaseAuth.currentUser.uid,
         sellerId: item.sellerId,
         title: item.title,
         mainImageUrl: item.mainImageUrl,
@@ -72,5 +73,13 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         timestamp: Timestamp.now());
 
     _itemRepository.addItemToCart(newCartItem);
+  }
+
+  ///
+  Stream<CartState> _mapRemoveItemFromCartToState(
+      RemoveItemFromCart event) async* {
+    try {
+      await _itemRepository.removeItemFromCart(event.item);
+    } on Exception catch (_) {}
   }
 }
