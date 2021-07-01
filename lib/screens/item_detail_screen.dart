@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:give_now/blocs/cart/cart_event.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
 import '../blocs/cart/cart_bloc.dart';
@@ -56,7 +57,7 @@ class ItemDetailScreen extends StatelessWidget {
         floatingActionButton: FloatingActionButtonWidget(
           backgroundColor: Theme.of(context).primaryColor,
           onPressed: () {
-            context.read<CartBloc>().addItemToCart(item);
+            context.read<CartBloc>().add(AddItemToCart(cartItem: item));
           },
           child: const Icon(Icons.shopping_bag_outlined),
         ));

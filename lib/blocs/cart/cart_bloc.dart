@@ -38,6 +38,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       yield* _mapUpdateCartItemsToState(event);
     } else if (event is RemoveItemFromCart) {
       yield* _mapRemoveItemFromCartToState(event);
+    } else if (event is AddItemToCart) {
+      yield* _mapAddItemToCartToState(event);
     }
   }
 
@@ -59,17 +61,19 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   }
 
   ///
-  void addItemToCart(Item item) {
-    final newCartItem = CartItem(
-        id: item.id,
-        buyerId: _firebaseAuth.currentUser.uid,
-        sellerId: item.sellerId,
-        title: item.title,
-        mainImageUrl: item.mainImageUrl,
-        price: item.price,
-        timestamp: Timestamp.now());
+  Stream<CartState> _mapAddItemToCartToState(AddItemToCart event) async* {
+    try {
+      final newCartItem = CartItem(
+          id: event.cartItem.id,
+          buyerId: _firebaseAuth.currentUser.uid,
+          sellerId: event.cartItem.sellerId,
+          title: event.cartItem.title,
+          mainImageUrl: event.cartItem.mainImageUrl,
+          price: event.cartItem.price,
+          timestamp: Timestamp.now());
 
-    _itemRepository.addItemToCart(newCartItem);
+      await _itemRepository.addItemToCart(newCartItem);
+    } on Exception catch (_) {}
   }
 
   ///

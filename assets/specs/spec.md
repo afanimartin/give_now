@@ -10,10 +10,8 @@
 - [x] remove items from cart
 - [x] show how many items have been added to cart
 - [] checkout items from the cart
-- [] allow user to input quantity of product
-- [] only render item available in stock in carts, else inform user the cart item is no longer available. use a snackbar
 - [] user should be able to edit/delete items uploaded by them. add menu button on the appbar with delete/donate options if the user uploaded the item
-- [] update login screen design with primary color background
+- [x] update login screen design with primary color background
 - [] show login progress when contacting google servers
 - [] render title and description in a textfield for easy edit of contents
 - [] render appBar in a SingleChildScrollView widget
@@ -23,6 +21,9 @@
 - [] invite users for testing
 
 ## After MVP
+- [] add terms and conditions
+- [] allow user to input quantity of product
+- [] only render item available in stock in carts, else inform user the cart item is no longer available. use a snackbar
 - [] render main image along side other images of an item
 - [] current user can view items bought
 - [] filter items based on category

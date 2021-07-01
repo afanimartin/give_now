@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:give_now/models/item/item.dart';
 import '../../models/cart/cart.dart';
 
 ///
@@ -24,6 +25,18 @@ class UpdateCartItems extends CartEvent {
 
   @override
   List<Object> get props => [cartItems];
+}
+
+///
+class AddItemToCart extends CartEvent {
+  ///
+  const AddItemToCart({@required this.cartItem});
+
+  ///
+  final Item cartItem;
+
+  @override
+  List<Object> get props => [cartItem];
 }
 
 ///
