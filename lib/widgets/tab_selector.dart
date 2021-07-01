@@ -1,5 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../blocs/cart/cart_bloc.dart';
+import '../blocs/cart/cart_state.dart';
 import '../models/app_tab/app_tab.dart';
 
 ///
@@ -15,6 +18,9 @@ class TabSelector extends StatelessWidget {
   ///
   final Function(AppTab) onTabSelected;
 
+  // ignore: avoid_field_initializers_in_const_classes
+  final double _size = 30;
+
   @override
   Widget build(BuildContext context) => BottomNavigationBar(
       elevation: 0,
@@ -23,29 +29,58 @@ class TabSelector extends StatelessWidget {
       backgroundColor: Theme.of(context).accentColor,
       items: AppTab.values
           .map((tab) => BottomNavigationBarItem(
-              icon: _tabIcon(tab),
+              icon: _tabIcon(tab, context),
               label: _tabLabel(tab),
               backgroundColor: Theme.of(context).accentColor))
           .toList());
 
-  Icon _tabIcon(AppTab tab) {
+  Widget _tabIcon(AppTab tab, BuildContext context) {
     switch (tab) {
       case AppTab.home:
-        return const Icon(
-          Icons.show_chart,
+        return Icon(
+          Icons.home_outlined,
+          size: _size,
         );
         break;
       case AppTab.profile:
-        return const Icon(
+        return Icon(
           Icons.person_outline,
+          size: _size,
         );
         break;
-      case AppTab.marketplace:
-        return const Icon(Icons.shopping_bag_outlined);
+      case AppTab.cart:
+        return BlocBuilder<CartBloc, CartState>(
+          builder: (context, state) => Stack(children: [
+            Icon(
+              Icons.shopping_bag_outlined,
+              size: _size,
+            ),
+            if (state is CartItemsLoaded)
+              state.currentUserCartItems.isNotEmpty
+                  ? Positioned(
+                      left: 7,
+                      top: 10,
+                      child: Container(
+                        height: 15,
+                        width: 15,
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColor,
+                            shape: BoxShape.circle),
+                        child: Center(
+                          child: Text(
+                            '${state.currentUserCartItems.length}',
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    )
+                  : const SizedBox.shrink()
+          ]),
+        );
         break;
     }
     return const Icon(
-      Icons.show_chart,
+      Icons.home_outlined,
     );
   }
 
@@ -57,7 +92,7 @@ class TabSelector extends StatelessWidget {
       case AppTab.profile:
         return 'Profile';
         break;
-      case AppTab.marketplace:
+      case AppTab.cart:
         return 'Cart';
         break;
     }

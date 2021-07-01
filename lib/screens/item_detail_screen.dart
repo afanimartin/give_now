@@ -2,12 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:give_now/blocs/cart/cart_state.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
 import '../blocs/cart/cart_bloc.dart';
-import '../blocs/item/item_bloc.dart';
-import '../blocs/item/item_state.dart';
 import '../models/item/item.dart';
 import '../widgets/floating_action_button.dart';
 
@@ -64,41 +61,6 @@ class ItemDetailScreen extends StatelessWidget {
           child: const Icon(Icons.shopping_bag_outlined),
         ));
   }
-
-  Future<bool> _confirmDonation(BuildContext context, Item item) async =>
-      showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-                title: const Text(
-                  'Confirm donation',
-                  style: TextStyle(fontSize: 22),
-                ),
-                content: const Text(
-                    // ignore: lines_longer_than_80_chars
-                    'Your donation will help the less privileged live a better life. Thank you!'),
-                actions: [
-                  TextButton(
-                      onPressed: () {
-                        // context.read<ItemBloc>().donateItemToCharity(item);
-
-                        Navigator.of(context).pop();
-                      },
-                      child: Text(
-                        'Confirm',
-                        style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontSize: 22),
-                      )),
-                  TextButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      child: Text(
-                        'Cancel',
-                        style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontSize: 22),
-                      ))
-                ],
-              ));
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

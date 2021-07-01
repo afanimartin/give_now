@@ -25,7 +25,7 @@ class RenderScreens extends StatelessWidget {
         return const UserProfileScreen();
         break;
 
-      case AppTab.marketplace:
+      case AppTab.cart:
         return const CartScreen();
         break;
     }

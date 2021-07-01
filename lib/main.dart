@@ -1,5 +1,6 @@
-import 'dart:io';
+// import 'dart:io';
 
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +20,7 @@ void main() async {
 
   await Firebase.initializeApp();
 
-  final host = Platform.isAndroid ? '10.0.2.2:8080' : '127.0.0.1:8080';
+  // final host = Platform.isAndroid ? '10.0.2.2:8080' : '127.0.0.1:8080';
 
   // [Firestore | localhost:8080]
   // FirebaseFirestore.instance.settings =

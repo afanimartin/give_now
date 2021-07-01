@@ -8,14 +8,17 @@
 - [x] display title of item instead of price and shopping_bag_outlined icon
 - [x] render items in the marketplace that don't belong to the current user
 - [x] remove items from cart
+- [x] show how many items have been added to cart
 - [] checkout items from the cart
+- [] allow user to input quantity of product
+- [] only render item available in stock in carts, else inform user the cart item is no longer available. use a snackbar
+- [] user should be able to edit/delete items uploaded by them. add menu button on the appbar with delete/donate options if the user uploaded the item
 - [] update login screen design with primary color background
 - [] show login progress when contacting google servers
-- [] user should be able to edit/delete items uploaded by them. add menu button on the appbar with delete/donate options if the user uploaded the item
 - [] render title and description in a textfield for easy edit of contents
 - [] render appBar in a SingleChildScrollView widget
 - [] handle exceptions and properly validate input values
-- [] clean up codebase
+- [] clean up codebase--check warnings
 - [] add unit tests for core logic
 - [] invite users for testing
 
