@@ -44,3 +44,4 @@
 ## CURRENT BUGS
 - [x] fix bug with loading cart items
 - [] fix bug with cancelling image selection
+- [] loggin out: `Invalid argument(s): No host specified in URI`

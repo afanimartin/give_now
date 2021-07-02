@@ -58,20 +58,15 @@ class TabSelector extends StatelessWidget {
             if (state is CartItemsLoaded)
               state.currentUserCartItems.isNotEmpty
                   ? Positioned(
-                      left: 7,
-                      top: 10,
+                      left: 7.5,
+                      top: 13,
                       child: Container(
-                        height: 15,
+                        height: 10,
                         width: 15,
                         decoration: BoxDecoration(
                             color: Theme.of(context).primaryColor,
                             shape: BoxShape.circle),
-                        child: Center(
-                          child: Text(
-                            '${state.currentUserCartItems.length}',
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
+                        child: const SizedBox.shrink(),
                       ),
                     )
                   : const SizedBox.shrink()

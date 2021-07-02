@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../blocs/authentication/authentication_bloc.dart';
 import '../blocs/item/item_bloc.dart';
 import '../blocs/item/item_state.dart';
 import '../blocs/upload/upload_bloc.dart';
@@ -11,7 +10,6 @@ import '../widgets/floating_action_button.dart';
 import '../widgets/items_grid.dart';
 import '../widgets/progress_loader.dart';
 import 'item_preview_screen.dart';
-import 'log_in_screen.dart';
 
 ///
 class MarketplaceScreen extends StatefulWidget {
@@ -39,16 +37,11 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
           actions: [
             IconButton(
                 icon: Icon(
-                  Icons.exit_to_app,
-                  color: Theme.of(context).primaryColorDark,
+                  Icons.brightness_6_outlined,
                   size: 30,
+                  color: Theme.of(context).primaryColorDark,
                 ),
-                onPressed: () {
-                  context.read<AuthenticationBloc>().add(LogOut());
-
-                  Navigator.of(context).pushAndRemoveUntil<void>(
-                      LogInScreen.route, (route) => false);
-                })
+                onPressed: () {})
           ],
         ),
         body: BlocBuilder<ItemBloc, ItemState>(

@@ -2,10 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:give_now/blocs/cart/cart_event.dart';
+import 'package:give_now/blocs/cart/cart_state.dart';
+import 'package:give_now/widgets/progress_loader.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
 import '../blocs/cart/cart_bloc.dart';
+import '../blocs/cart/cart_event.dart';
 import '../models/item/item.dart';
 import '../widgets/floating_action_button.dart';
 
@@ -54,12 +56,20 @@ class ItemDetailScreen extends StatelessWidget {
             )
           ],
         ),
-        floatingActionButton: FloatingActionButtonWidget(
-          backgroundColor: Theme.of(context).primaryColor,
-          onPressed: () {
-            context.read<CartBloc>().add(AddItemToCart(cartItem: item));
-          },
-          child: const Icon(Icons.shopping_bag_outlined),
+        floatingActionButton: BlocBuilder<CartBloc, CartState>(
+          builder: (context, state) => FloatingActionButtonWidget(
+            backgroundColor: Theme.of(context).primaryColor,
+            onPressed: () {
+              context.read<CartBloc>().add(AddItemToCart(cartItem: item));
+
+              Future.delayed(const Duration(seconds: 5));
+
+              Navigator.of(context).pop();
+            },
+            child: state is AddingItemToCart
+                ? const ProgressLoader()
+                : const Icon(Icons.shopping_bag_outlined),
+          ),
         ));
   }
 

@@ -2,13 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../blocs/authentication/authentication_bloc.dart';
 
 import '../blocs/cart/cart_bloc.dart';
 import '../blocs/cart/cart_event.dart';
 import '../blocs/cart/cart_state.dart';
 import '../widgets/progress_loader.dart';
-import 'log_in_screen.dart';
 
 ///
 class CartScreen extends StatefulWidget {
@@ -24,6 +22,7 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) => Scaffold(
       backgroundColor: Theme.of(context).accentColor,
       appBar: AppBar(
+        centerTitle: true,
         elevation: 0,
         title: Text(
           'Complete purchase',
@@ -33,20 +32,6 @@ class _CartScreenState extends State<CartScreen> {
               letterSpacing: 1.2),
         ),
         backgroundColor: Theme.of(context).accentColor,
-        actions: [
-          IconButton(
-              icon: Icon(
-                Icons.exit_to_app,
-                color: Theme.of(context).primaryColorDark,
-                size: 30,
-              ),
-              onPressed: () {
-                context.read<AuthenticationBloc>().add(LogOut());
-
-                Navigator.of(context).pushAndRemoveUntil<void>(
-                    LogInScreen.route, (route) => false);
-              })
-        ],
       ),
       body: BlocBuilder<CartBloc, CartState>(builder: (context, state) {
         if (state is CartItemsLoaded) {
@@ -96,19 +81,19 @@ class _CartScreenState extends State<CartScreen> {
                                               fontSize: 22,
                                               fontWeight: FontWeight.w500),
                                         )),
-                                        if (state is RemovingCartItem)
-                                          const ProgressLoader()
-                                        else
-                                          IconButton(
-                                              icon: const Icon(
-                                                  Icons.cancel_rounded),
-                                              color: Theme.of(context)
-                                                  .primaryColor,
-                                              iconSize: 30,
-                                              onPressed: () => context
-                                                  .read<CartBloc>()
-                                                  .add(RemoveItemFromCart(
-                                                      item: item)))
+                                        IconButton(
+                                            icon: state
+                                                    is ItemBeingRemovedFromCart
+                                                ? const ProgressLoader()
+                                                : const Icon(
+                                                    Icons.cancel_rounded),
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                            iconSize: 30,
+                                            onPressed: () => context
+                                                .read<CartBloc>()
+                                                .add(RemoveItemFromCart(
+                                                    item: item)))
                                       ],
                                     ),
                                   ),

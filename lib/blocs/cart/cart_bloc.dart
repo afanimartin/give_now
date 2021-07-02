@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../models/cart/cart.dart';
-import '../../models/item/item.dart';
 import '../../repositories/item/item_repository.dart';
 import 'cart_event.dart';
 import 'cart_state.dart';
@@ -62,6 +61,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
   ///
   Stream<CartState> _mapAddItemToCartToState(AddItemToCart event) async* {
+    yield AddingItemToCart();
+
     try {
       final newCartItem = CartItem(
           id: event.cartItem.id,
@@ -73,13 +74,15 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           timestamp: Timestamp.now());
 
       await _itemRepository.addItemToCart(newCartItem);
+
+      yield ItemSuccessfullyAddedToCart();
     } on Exception catch (_) {}
   }
 
   ///
   Stream<CartState> _mapRemoveItemFromCartToState(
       RemoveItemFromCart event) async* {
-    yield RemovingCartItem();
+    yield ItemBeingRemovedFromCart();
 
     try {
       await _itemRepository.removeItemFromCart(event.item);

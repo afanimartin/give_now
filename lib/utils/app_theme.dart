@@ -7,7 +7,7 @@ const primaryColor = Color(0xFF26A69A);
 const secondaryColor = Color(0xFFE8F5E9);
 
 ///
-const blackColor = Color(0xFF000000);
+const blackColor = Color(0xDD000000);
 
 ///
 const whiteColor = Color(0xFFFFFFFF);

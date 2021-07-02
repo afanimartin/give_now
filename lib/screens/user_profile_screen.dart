@@ -46,7 +46,7 @@ class UserProfileScreen extends StatelessWidget {
         child: Column(
           children: [
             Row(),
-            CircleAvatarWidget(radius: 40, imageUrl: user.photoUrl),
+            CircleAvatarWidget(radius: 40, imageUrl: user.photoUrl ?? ''),
             Text(
               user.displayName,
               style: const TextStyle(fontSize: 28),

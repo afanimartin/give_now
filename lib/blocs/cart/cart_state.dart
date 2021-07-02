@@ -49,4 +49,10 @@ class CartItemsLoaded extends CartState {
 }
 
 ///
-class RemovingCartItem extends CartState {}
+class AddingItemToCart extends CartState {}
+
+///
+class ItemBeingRemovedFromCart extends CartState {}
+
+///
+class ItemSuccessfullyAddedToCart extends CartState {}
