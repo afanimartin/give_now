@@ -2,14 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:give_now/blocs/cart/cart_state.dart';
-import 'package:give_now/widgets/progress_loader.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
 import '../blocs/cart/cart_bloc.dart';
 import '../blocs/cart/cart_event.dart';
+import '../blocs/cart/cart_state.dart';
 import '../models/item/item.dart';
 import '../widgets/floating_action_button.dart';
+import '../widgets/progress_loader.dart';
 
 ///
 class ItemDetailScreen extends StatelessWidget {

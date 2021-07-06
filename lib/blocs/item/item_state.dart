@@ -31,6 +31,14 @@ class ItemsLoaded extends ItemState {
       .where((item) => item.sellerId != _firebaseAuth.currentUser.uid)
       .toList();
 
+  ///
+  List<Item> get currentUserItems => items
+      .where((item) => item.sellerId == _firebaseAuth.currentUser.uid)
+      .toList();
+
   @override
   List<Object> get props => [items];
 }
+
+///
+class ItemBeingUpdated extends ItemState {}

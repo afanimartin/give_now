@@ -60,7 +60,7 @@ class ItemsGrid extends StatelessWidget {
             bottom: 8,
             child: Row(
               children: [
-                CircleAvatarWidget(radius: 20, imageUrl: item.sellerPhotoUrl),
+                CircleAvatarWidget(imageUrl: item.sellerPhotoUrl),
                 const SizedBox(
                   width: 10,
                 ),

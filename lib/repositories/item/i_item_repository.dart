@@ -17,8 +17,5 @@ abstract class IItemRepository {
   Future<void> addItemToCart(CartItem item);
 
   ///
-  Future<void> donateItemToCharity(Item itemToDonate);
-
-  ///
   Stream<List<Item>> marketplaceStream();
 }

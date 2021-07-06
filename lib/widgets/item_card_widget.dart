@@ -40,7 +40,7 @@ class ItemCardWidget extends StatelessWidget {
               )),
               Expanded(
                   child: Text(
-                timeago.format(item.timestamp.toDate()),
+                timeago.format(item.createdAt.toDate()),
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ))
             ],

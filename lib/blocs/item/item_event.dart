@@ -21,4 +21,21 @@ class UpdateItems extends ItemEvent {
 
   ///
   final List<Item> items;
+
+  ///
+  @override
+  List<Object> get props => [items];
+}
+
+///
+class UpdateItem extends ItemEvent {
+  ///
+  const UpdateItem({@required this.item});
+
+  ///
+  final Item item;
+
+  ///
+  @override
+  List<Object> get props => [item];
 }

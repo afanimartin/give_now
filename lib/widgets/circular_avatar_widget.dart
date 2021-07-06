@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 ///
 class CircleAvatarWidget extends StatelessWidget {
   ///
-  const CircleAvatarWidget(
-      {@required this.radius, @required this.imageUrl, Key key})
+  const CircleAvatarWidget({@required this.imageUrl, this.radius = 20, Key key})
       : super(key: key);
 
   ///

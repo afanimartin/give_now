@@ -64,7 +64,7 @@ class _RenderImage extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8),
-                  child: Text(timeago.format(image.timestamp.toDate())),
+                  child: Text(timeago.format(image.createdAt.toDate())),
                 )
               ],
             ),

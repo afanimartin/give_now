@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/cart/cart_bloc.dart';
 import '../blocs/cart/cart_event.dart';
 import '../blocs/cart/cart_state.dart';
+import '../widgets/circular_avatar_widget.dart';
 import '../widgets/progress_loader.dart';
 
 ///
@@ -56,12 +56,8 @@ class _CartScreenState extends State<CartScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        CachedNetworkImage(
-                                          imageUrl: item.mainImageUrl,
-                                          height: 70,
-                                          width: 70,
-                                          fit: BoxFit.cover,
-                                        ),
+                                        CircleAvatarWidget(
+                                            imageUrl: item.mainImageUrl),
                                         const SizedBox(
                                           width: 10,
                                         ),
@@ -120,7 +116,10 @@ class _CartScreenState extends State<CartScreen> {
                     ],
                   ))
               : const Center(
-                  child: Text('No items in your cart. Shop to add'),
+                  child: Text(
+                    'No items in your cart. Shop to add',
+                    style: TextStyle(fontSize: 20),
+                  ),
                 );
         }
 

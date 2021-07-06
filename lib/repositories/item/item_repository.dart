@@ -50,7 +50,7 @@ class ItemRepository extends IItemRepository {
         price: upload.price,
         sellerPhoneNumber: upload.phone,
         mainImageUrl: imageUrls[0],
-        timestamp: Timestamp.now(),
+        createdAt: Timestamp.now(),
         otherImageUrls: imageUrls.sublist(1));
 
     await _firebaseFirestore.collection(Paths.uploads).add(item.toDocument());
@@ -68,32 +68,24 @@ class ItemRepository extends IItemRepository {
   }
 
   ///
+  Future<void> updateItem(Item item) async {
+    await _firebaseFirestore
+        .collection(Paths.uploads)
+        .doc(item.id)
+        .update(item.toDocument());
+  }
+
+  ///
   Stream<List<CartItem>> currentUserCartItems() =>
       _firebaseFirestore.collection(Paths.carts).snapshots().map((snapshot) =>
           snapshot.docs.map((doc) => CartItem.fromSnapshot(doc)).toList());
-
-  @override
-  Future<void> donateItemToCharity(Item itemToDonate) async {
-    await _firebaseFirestore
-        .collection(Paths.donations)
-        .add(itemToDonate.toDocument());
-
-    await _firebaseFirestore
-        .collection(Paths.uploads)
-        .doc(itemToDonate.id)
-        .delete();
-
-    await _firebaseFirestore
-        .collection(Paths.uploads)
-        .add(itemToDonate.toDocument());
-  }
 
   @override
   Stream<List<Item>> marketplaceStream() {
     final items = _firebaseFirestore.collection(Paths.uploads).snapshots().map(
         (snapshot) =>
             snapshot.docs.map((doc) => Item.fromSnapshot(doc)).toList()
-              ..sort((a, b) => b.timestamp.compareTo(a.timestamp)));
+              ..sort((a, b) => b.createdAt.compareTo(a.createdAt)));
     return items;
   }
 
@@ -103,5 +95,5 @@ class ItemRepository extends IItemRepository {
       .snapshots()
       .map((snapshot) =>
           snapshot.docs.map((doc) => Item.fromSnapshot(doc)).toList()
-            ..sort((a, b) => b.timestamp.compareTo(a.timestamp)));
+            ..sort((a, b) => b.createdAt.compareTo(a.createdAt)));
 }
