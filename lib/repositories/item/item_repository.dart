@@ -6,6 +6,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../models/cart/cart.dart';
 import '../../models/item/item.dart';
+import '../../models/item/sale.dart';
 import '../../models/item/upload.dart';
 import '../../utils/paths.dart';
 import 'i_item_repository.dart';
@@ -73,6 +74,11 @@ class ItemRepository extends IItemRepository {
         .collection(Paths.uploads)
         .doc(item.id)
         .update(item.toDocument());
+  }
+
+  ///
+  Future<void> buyItems(Sale sale) async {
+    await _firebaseFirestore.collection(Paths.sales).add(sale.toDocument());
   }
 
   ///

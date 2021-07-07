@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../models/cart/cart.dart';
 import '../../repositories/item/item_repository.dart';
@@ -15,19 +16,17 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   ///
   CartBloc({@required ItemRepository itemRepository, FirebaseAuth firebaseAuth})
       : _itemRepository = itemRepository,
-        _firebaseAuth = firebaseAuth ??
-            // throws an error currentUser is null without FirebaseAuth.instance
-            FirebaseAuth.instance,
+        _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         super(const CartState());
 
   ///
   final ItemRepository _itemRepository;
 
   ///
-  StreamSubscription<List<CartItem>> _streamSubscription;
+  final FirebaseAuth _firebaseAuth;
 
   ///
-  final FirebaseAuth _firebaseAuth;
+  StreamSubscription<List<CartItem>> _streamSubscription;
 
   @override
   Stream<CartState> mapEventToState(CartEvent event) async* {
@@ -39,6 +38,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       yield* _mapRemoveItemFromCartToState(event);
     } else if (event is AddItemToCart) {
       yield* _mapAddItemToCartToState(event);
+    } else if (event is SellItem) {
+      yield* _mapSellItemToState(event);
     }
   }
 
@@ -87,5 +88,27 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     try {
       await _itemRepository.removeItemFromCart(event.item);
     } on Exception catch (_) {}
+  }
+
+  ///
+  Stream<CartState> _mapSellItemToState(SellItem event) async* {
+    const uuid = Uuid();
+    try {
+      final _sale = event.sale.copyWith(
+          id: uuid.v4(),
+          buyerAddress: event.sale.buyerAddress,
+          buyerPhone: event.sale.buyerPhone,
+          cartItems: event.sale.cartItems,
+          soldAt: Timestamp.now());
+
+      await _itemRepository.buyItems(_sale);
+    } on Exception catch (_) {}
+  }
+
+  ///
+  void deleteCartItems(List<CartItem> cartItems) {
+    for (var i = 0; i < cartItems.length; i++) {
+      _itemRepository.removeItemFromCart(cartItems[i]);
+    }
   }
 }

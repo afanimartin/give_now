@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../models/cart/cart.dart';
 import '../../models/item/item.dart';
+import '../../models/item/sale.dart';
 
 ///
 class CartEvent extends Equatable {
@@ -38,6 +39,19 @@ class AddItemToCart extends CartEvent {
 
   @override
   List<Object> get props => [cartItem];
+}
+
+///
+class SellItem extends CartEvent {
+  ///
+  const SellItem({@required this.sale});
+
+  ///
+  final Sale sale;
+
+  ///
+  @override
+  List<Object> get props => [sale];
 }
 
 ///

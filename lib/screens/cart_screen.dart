@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/cart/cart_bloc.dart';
 import '../blocs/cart/cart_event.dart';
 import '../blocs/cart/cart_state.dart';
+import '../models/cart/cart.dart';
+import '../models/item/sale.dart';
 import '../widgets/circular_avatar_widget.dart';
 import '../widgets/progress_loader.dart';
 
@@ -86,7 +88,7 @@ class _CartScreenState extends State<CartScreen> {
                                           )),
                                           IconButton(
                                               icon: state
-                                                     is ItemBeingRemovedFromCart
+                                                      is ItemBeingRemovedFromCart
                                                   ? const ProgressLoader()
                                                   : const Icon(
                                                       Icons.cancel_rounded),
@@ -133,7 +135,10 @@ class _CartScreenState extends State<CartScreen> {
               visible: state is CartItemsLoaded &&
                   state.currentUserCartItems.isNotEmpty,
               child: FloatingActionButton(
-                onPressed: () => _modalBottomSheet(context),
+                onPressed: () => state is CartItemsLoaded &&
+                        state.currentUserCartItems.isNotEmpty
+                    ? _modalBottomSheet(context, state.currentUserCartItems)
+                    : const SizedBox.shrink(),
                 child: const Icon(
                   Icons.check,
                   size: 30,
@@ -142,58 +147,85 @@ class _CartScreenState extends State<CartScreen> {
             ),
           ));
 
-  Future<Widget> _modalBottomSheet(BuildContext context) =>
-      showModalBottomSheet(
-          context: context,
-          isScrollControlled: true,
-          enableDrag: true,
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
-          builder: (context) => Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    TextField(
-                      controller: _buyerAddress,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context).accentColor),
-                              borderRadius: BorderRadius.circular(5)),
-                          labelText: 'address'),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    TextField(
-                      controller: _buyerPhoneNumber,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context).accentColor),
-                              borderRadius: BorderRadius.circular(5)),
-                          labelText: 'phone'),
-                    ),
-                    const SizedBox(height: 6),
-                    ElevatedButton(
-                        onPressed: () {
-                          if (_buyerAddress.text.isNotEmpty) {}
-                        },
-                        style: ButtonStyle(
-                            minimumSize:
-                                MaterialStateProperty.all(const Size(400, 50)),
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                Theme.of(context).primaryColor),
-                            padding: MaterialStateProperty.all(
-                                const EdgeInsets.all(16))),
-                        child: const Text(
-                          'Checkout',
-                          style: TextStyle(fontSize: 20),
-                        ))
-                  ],
-                ),
-              ));
+  Future<Widget> _modalBottomSheet(
+      BuildContext context, List<CartItem> cartItems) {
+    final _cartItems = <Map<String, dynamic>>[];
+
+    for (var i = 0; i < cartItems.length; i++) {
+      _cartItems.add(cartItems[i].toDocument());
+    }
+
+    return showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        enableDrag: true,
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+        builder: (context) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextField(
+                    controller: _buyerAddress,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Theme.of(context).accentColor),
+                            borderRadius: BorderRadius.circular(5)),
+                        labelText: 'address'),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  TextField(
+                    controller: _buyerPhoneNumber,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Theme.of(context).accentColor),
+                            borderRadius: BorderRadius.circular(5)),
+                        labelText: 'phone'),
+                  ),
+                  const SizedBox(height: 6),
+                  ElevatedButton(
+                      onPressed: () {
+                        if (_buyerAddress.text.isNotEmpty &&
+                            _buyerPhoneNumber.text.isNotEmpty) {
+                          final _sale = Sale(
+                              buyerAddress: _buyerAddress.text,
+                              buyerPhone: _buyerPhoneNumber.text,
+                              cartItems: _cartItems);
+
+                          context.read<CartBloc>().add(SellItem(sale: _sale));
+
+                          context.read<CartBloc>().deleteCartItems(cartItems);
+
+                          Navigator.of(context).pop();
+                        }
+                      },
+                      style: ButtonStyle(
+                          minimumSize:
+                              MaterialStateProperty.all(const Size(400, 50)),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Theme.of(context).primaryColor),
+                          padding: MaterialStateProperty.all(
+                              const EdgeInsets.all(16))),
+                      child: const Text(
+                        'Checkout',
+                        style: TextStyle(fontSize: 20),
+                      ))
+                ],
+              ),
+            ));
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    _buyerAddress.clear();
+    _buyerPhoneNumber.clear();
+  }
 }

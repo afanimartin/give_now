@@ -7,11 +7,11 @@ class CartItem extends Equatable {
   ///
   const CartItem(
       {@required this.id,
-      @required this.buyerId,
       @required this.sellerId,
       @required this.title,
       @required this.mainImageUrl,
       @required this.price,
+      this.buyerId,
       this.createdAt});
 
   ///

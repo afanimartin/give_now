@@ -19,6 +19,7 @@
 
 ## After MVP
 - [] add dark theme
+- [] render progress loader when editing an item
 - [] only show floatingActionButton when item being edited is dirty
 - [] render appBar in a SingleChildScrollView widget
 - [] show login progress when contacting google servers

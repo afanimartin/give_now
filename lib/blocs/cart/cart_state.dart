@@ -19,7 +19,9 @@ class LoadingCartItems extends CartState {}
 ///
 class CartItemsLoaded extends CartState {
   ///
-  CartItemsLoaded({@required this.cartItems, FirebaseAuth firebaseAuth})
+  CartItemsLoaded(
+      {@required this.cartItems,
+      FirebaseAuth firebaseAuth})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
 
   ///
