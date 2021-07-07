@@ -12,7 +12,7 @@ class CartItem extends Equatable {
       @required this.title,
       @required this.mainImageUrl,
       @required this.price,
-      this.timestamp});
+      this.createdAt});
 
   ///
   factory CartItem.fromSnapshot(DocumentSnapshot doc) => CartItem(
@@ -21,7 +21,8 @@ class CartItem extends Equatable {
       sellerId: doc['seller_id'] as String,
       title: doc['title'] as String,
       mainImageUrl: doc['main_image_url'] as String,
-      price: doc['price'] as String);
+      price: doc['price'] as String,
+      createdAt: doc['created_at'] as Timestamp);
 
   ///
   final String id;
@@ -42,7 +43,7 @@ class CartItem extends Equatable {
   final String price;
 
   ///
-  final Timestamp timestamp;
+  final Timestamp createdAt;
 
   ///
   Map<String, dynamic> toDocument() => {
@@ -51,10 +52,11 @@ class CartItem extends Equatable {
         'seller_id': sellerId,
         'title': title,
         'main_image_url': mainImageUrl,
-        'price': price
+        'price': price,
+        'created_at': createdAt
       };
 
   @override
   List<Object> get props =>
-      [id, buyerId, sellerId, title, mainImageUrl, price, timestamp];
+      [id, buyerId, sellerId, title, mainImageUrl, price, createdAt];
 }

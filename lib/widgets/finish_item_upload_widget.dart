@@ -9,9 +9,9 @@ import '../models/item/upload.dart';
 import '../screens/user_profile_screen.dart';
 import '../utils/category.dart';
 import '../utils/condition.dart';
+import 'category_editing_widget.dart';
 import 'condition_editing_widget.dart';
 import 'description_editing_widget.dart';
-import 'category_editing_widget.dart';
 import 'price_editing_widget.dart';
 import 'title_editing_widget.dart';
 

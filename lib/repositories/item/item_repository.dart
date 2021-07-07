@@ -58,8 +58,8 @@ class ItemRepository extends IItemRepository {
 
   /// make this an extension method
   @override
-  Future<void> addItemToCart(CartItem item) async {
-    await _firebaseFirestore.collection(Paths.carts).add(item.toDocument());
+  Future<void> addItemToCart(CartItem cartItem) async {
+    await _firebaseFirestore.collection(Paths.carts).add(cartItem.toDocument());
   }
 
   /// make this an extension method

@@ -3,15 +3,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:give_now/utils/category.dart';
-import 'package:give_now/utils/condition.dart';
-import 'package:give_now/widgets/category_editing_widget.dart';
-import 'package:give_now/widgets/condition_editing_widget.dart';
 
 import '../blocs/item/item_bloc.dart';
 import '../blocs/item/item_event.dart';
 import '../blocs/item/item_state.dart';
 import '../models/item/item.dart';
+import '../utils/category.dart';
+import '../utils/condition.dart';
+import '../widgets/category_editing_widget.dart';
+import '../widgets/condition_editing_widget.dart';
 import '../widgets/price_editing_widget.dart';
 import '../widgets/progress_loader.dart';
 import '../widgets/title_editing_widget.dart';
@@ -39,6 +39,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _priceContentController = TextEditingController();
+
   @override
   void initState() {
     super.initState();

@@ -11,4 +11,7 @@ class Paths {
 
   ///
   static const carts = 'carts';
+
+  ///
+  static const sales = 'sales';
 }

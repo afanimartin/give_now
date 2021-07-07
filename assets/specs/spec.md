@@ -10,14 +10,16 @@
 - [x] remove items from cart
 - [x] show how many items have been added to cart
 - [x] update login screen design with primary color background
-- [] user should be able to edit/delete items uploaded by them. add menu button on the appbar with delete/donate options if the user uploaded the item
+- [x] user should be able to edit/delete items uploaded by them. add menu button on the appbar with delete/donate options if the user uploaded the item
 - [] checkout items from the cart
+- [] add buttons for deleting/donating item
 - [] clean up codebase--check warnings
 - [] add unit tests for core logic
 - [] invite users for testing
 
 ## After MVP
 - [] add dark theme
+- [] only show floatingActionButton when item being edited is dirty
 - [] render appBar in a SingleChildScrollView widget
 - [] show login progress when contacting google servers
 - [] handle exceptions and properly validate input values
@@ -43,5 +45,7 @@
 
 ## CURRENT BUGS
 - [x] fix bug with loading cart items
+- [] list of cart items is not scrolling
 - [] fix bug with cancelling image selection
 - [] loggin out: `Invalid argument(s): No host specified in URI`
+- [] A RenderFlex overflowed by 52 pixels on the bottom. on edit item screen
