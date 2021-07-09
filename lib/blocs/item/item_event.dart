@@ -39,3 +39,29 @@ class UpdateItem extends ItemEvent {
   @override
   List<Object> get props => [item];
 }
+
+///
+class DeleteItem extends ItemEvent {
+  ///
+  const DeleteItem({@required this.item});
+
+  ///
+  final Item item;
+
+  ///
+  @override
+  List<Object> get props => [item];
+}
+
+///
+class DonateItem extends ItemEvent {
+  ///
+  const DonateItem({@required this.item});
+
+  ///
+  final Item item;
+
+  ///
+  @override
+  List<Object> get props => [item];
+}

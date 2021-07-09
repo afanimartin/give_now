@@ -33,7 +33,9 @@ class ItemsLoaded extends ItemState {
 
   ///
   List<Item> get currentUserItems => items
-      .where((item) => item.sellerId == _firebaseAuth.currentUser.uid)
+      .where((item) =>
+          item.sellerId == _firebaseAuth.currentUser.uid &&
+          item.isDonated == false)
       .toList();
 
   @override
@@ -42,3 +44,9 @@ class ItemsLoaded extends ItemState {
 
 ///
 class ItemBeingUpdated extends ItemState {}
+
+///
+class ItemBeingDeleted extends ItemState {}
+
+///
+class ItemBeingDonated extends ItemState {}

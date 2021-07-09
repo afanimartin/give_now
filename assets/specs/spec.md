@@ -11,14 +11,18 @@
 - [x] show how many items have been added to cart
 - [x] update login screen design with primary color background
 - [x] user should be able to edit/delete items uploaded by them. add menu button on the appbar with delete/donate options if the user uploaded the item
-- [] checkout items from the cart
-- [] add buttons for deleting/donating item
+- [x] checkout items from the cart
+- [x] add buttons for deleting/donating item
+- [x] delete item uploaded by current user
+- []  donate item uploaded by current user
+- [] change valueColor of progress_loader to primaryColorDark
 - [] clean up codebase--check warnings
 - [] add unit tests for core logic
 - [] invite users for testing
 
 ## After MVP
 - [] add dark theme
+- [] remove item from cart when deleted by the owner
 - [] render progress loader when editing an item
 - [] only show floatingActionButton when item being edited is dirty
 - [] render appBar in a SingleChildScrollView widget
@@ -26,13 +30,10 @@
 - [] handle exceptions and properly validate input values
 - [] add terms and conditions
 - [] allow user to input quantity of product
-- [] only render item available in stock in carts, else inform user the cart item is no longer available. use a snackbar
+- [] only render item available in stock in carts, else inform user the cart item is no longer available. use a snackbar [loop through list of items in stock, decrement quantity of given item in db accordingly]
 - [] render main image along side other images of an item
-- [] current user can view items bought
 - [] filter items based on category
 - [] add localization to the app [ENG(US) & ARABIC(SUDAN)]
-- [] change valueColor of progress_loader to primaryColor
-- [] donate items for sale
 - [] view/edit profile - edit display_name and phone_number
 - [] show snackbar when item added successfully to cart
 - [] remove image(s) during preview
@@ -48,5 +49,6 @@
 - [x] fix bug with loading cart items
 - [] list of cart items is not scrolling
 - [] fix bug with cancelling image selection
-- [] loggin out: `Invalid argument(s): No host specified in URI`
-- [] A RenderFlex overflowed by 52 pixels on the bottom. on edit item screen
+- [] logging out: `Invalid argument(s): No host specified in URI`
+- [] a RenderFlex overflowed by 52 pixels on the bottom. on edit item screen
+- [] a new user is getting created everytime a user signs in

@@ -12,6 +12,7 @@ import '../utils/category.dart';
 import '../utils/condition.dart';
 import '../widgets/category_editing_widget.dart';
 import '../widgets/condition_editing_widget.dart';
+import '../widgets/menu_widget.dart';
 import '../widgets/price_editing_widget.dart';
 import '../widgets/progress_loader.dart';
 import '../widgets/title_editing_widget.dart';
@@ -62,6 +63,11 @@ class _EditItemScreenState extends State<EditItemScreen> {
           title: TitleEditingWidget(controller: _titleController),
           backgroundColor: Theme.of(context).accentColor,
           iconTheme: Theme.of(context).iconTheme,
+          actions: [
+            MenuWidget(
+              item: widget.item,
+            )
+          ],
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

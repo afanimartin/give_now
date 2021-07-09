@@ -26,6 +26,10 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
       yield* _mapUpdatedItemsToState(event);
     } else if (event is UpdateItem) {
       yield* _mapUpdatedItemToState(event);
+    } else if (event is DeleteItem) {
+      yield* _mapDeleteItemToState(event);
+    } else if (event is DonateItem) {
+      yield* _mapDonateItemToState(event);
     }
   }
 
@@ -48,6 +52,22 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
   Stream<ItemState> _mapUpdatedItemToState(UpdateItem event) async* {
     try {
       await _itemRepository.updateItem(event.item);
+    } on Exception catch (_) {}
+  }
+
+  Stream<ItemState> _mapDeleteItemToState(DeleteItem event) async* {
+    yield ItemBeingDeleted();
+
+    try {
+      await _itemRepository.deleteItem(event.item);
+    } on Exception catch (_) {}
+  }
+
+  Stream<ItemState> _mapDonateItemToState(DonateItem event) async* {
+    yield ItemBeingDonated();
+
+    try {
+      await _itemRepository.donateItem(event.item);
     } on Exception catch (_) {}
   }
 }

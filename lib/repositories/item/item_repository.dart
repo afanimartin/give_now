@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../models/cart/cart.dart';
+import '../../models/item/donation.dart';
 import '../../models/item/item.dart';
 import '../../models/item/sale.dart';
 import '../../models/item/upload.dart';
@@ -77,8 +78,35 @@ class ItemRepository extends IItemRepository {
   }
 
   ///
+  Future<void> deleteItem(Item item) async {
+    await _firebaseFirestore.collection(Paths.uploads).doc(item.id).delete();
+  }
+
+  ///
   Future<void> buyItems(Sale sale) async {
     await _firebaseFirestore.collection(Paths.sales).add(sale.toDocument());
+  }
+
+  ///
+  Future<void> donateItem(Item item) async {
+    final _donation = Donation(
+        id: item.id,
+        donorId: item.sellerId,
+        donorPhone: item.sellerPhoneNumber,
+        mainImageUrl: item.mainImageUrl,
+        title: item.title,
+        description: item.description,
+        category: item.category,
+        condition: item.condition,
+        donatedAt: item.createdAt);
+
+    await _firebaseFirestore
+        .collection(Paths.donations)
+        .add(_donation.toDocument());
+
+    final _item = item.copyWith(isDonated: true);
+
+    await updateItem(_item);
   }
 
   ///
