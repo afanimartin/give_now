@@ -14,14 +14,19 @@
 - [x] checkout items from the cart
 - [x] add buttons for deleting/donating item
 - [x] delete item uploaded by current user
-- []  donate item uploaded by current user
-- [] change valueColor of progress_loader to primaryColorDark
-- [] clean up codebase--check warnings
+- [x]  donate item uploaded by current user
+- [x] change valueColor of progress_loader to primaryColorDark
+- [] create extension methods
+- [] refactor code, make it more readable and maintainable
 - [] add unit tests for core logic
+- [] reload a page by pulling the page downwards
 - [] invite users for testing
 
 ## After MVP
 - [] add dark theme
+- [] add snackbar to show item was added or donated
+- [] show user item is being uploaded
+- [] resize images before uploading to storage to save space and money
 - [] remove item from cart when deleted by the owner
 - [] render progress loader when editing an item
 - [] only show floatingActionButton when item being edited is dirty
@@ -47,6 +52,7 @@
 
 ## CURRENT BUGS
 - [x] fix bug with loading cart items
+- [] bottom navigator not rendering always
 - [] list of cart items is not scrolling
 - [] fix bug with cancelling image selection
 - [] logging out: `Invalid argument(s): No host specified in URI`

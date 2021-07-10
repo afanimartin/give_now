@@ -8,7 +8,7 @@ import '../widgets/render_screens.dart';
 import '../widgets/tab_selector.dart';
 
 ///
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   ///
   const HomeScreen({Key key}) : super(key: key);
 
@@ -16,6 +16,11 @@ class HomeScreen extends StatelessWidget {
   static Route get route =>
       MaterialPageRoute<void>(builder: (_) => const HomeScreen());
 
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) => BlocBuilder<TabBloc, AppTab>(
         builder: (context, state) => Scaffold(

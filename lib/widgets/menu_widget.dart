@@ -7,6 +7,7 @@ import '../blocs/item/item_event.dart';
 import '../models/item/item.dart';
 
 ///
+// ignore: must_be_immutable
 class MenuWidget extends StatelessWidget {
   ///
   MenuWidget({@required this.item, Key key}) : super(key: key);
@@ -26,22 +27,17 @@ class MenuWidget extends StatelessWidget {
             .map((choice) =>
                 PopupMenuItem<String>(value: choice, child: Text(choice)))
             .toList(),
-        onSelected: _handleClick);
-  }
+        onSelected: (String value) {
+          if (value == 'Delete') {
+            _itemBloc.add(DeleteItem(item: item));
 
-  void _handleClick(String value) {
-    switch (value) {
-      case 'Delete':
-        _itemBloc.add(DeleteItem(item: item));
+            Navigator.of(context).pop();
+          }
 
-        break;
-      case 'Donate':
-        _itemBloc.add(DonateItem(item: item));
-        break;
+          _itemBloc.add(DonateItem(item: item));
 
-      default:
-        break;
-    }
+          Navigator.of(context).pop();
+        });
   }
 
   @override

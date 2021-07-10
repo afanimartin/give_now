@@ -10,6 +10,8 @@ class ProgressLoader extends StatelessWidget {
   Widget build(BuildContext context) => SizedBox(
           child: Center(
               child: CircularProgressIndicator(
-        backgroundColor: Theme.of(context).primaryColorLight,
+        valueColor:
+            AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColorDark),
+        backgroundColor: Theme.of(context).accentColor,
       )));
 }
