@@ -31,6 +31,8 @@ class MenuWidget extends StatelessWidget {
           if (value == 'Delete') {
             _itemBloc.add(DeleteItem(item: item));
 
+            Future.delayed(const Duration(seconds: 5));
+
             Navigator.of(context).pop();
           }
 

@@ -48,7 +48,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     await _streamSubscription?.cancel();
 
     _streamSubscription = _itemRepository
-        .currentUserCartItems()
+        .cartItems()
         .listen((items) => add(UpdateCartItems(cartItems: items)));
   }
 

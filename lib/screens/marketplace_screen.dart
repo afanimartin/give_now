@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:give_now/widgets/tab_selector.dart';
 
 import '../blocs/item/item_bloc.dart';
 import '../blocs/item/item_state.dart';
@@ -9,7 +8,6 @@ import '../blocs/upload/upload_event.dart';
 import '../blocs/upload/upload_state.dart';
 import '../widgets/floating_action_button.dart';
 import '../widgets/items_grid.dart';
-import '../widgets/progress_loader.dart';
 import 'item_preview_screen.dart';
 
 ///
@@ -60,7 +58,7 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
                 ),
           floatingActionButton: BlocBuilder<UploadBloc, UploadState>(
               builder: (context, state) => Visibility(
-                    visible: state is! ItemIsBeingAdded,
+                    visible: state is! ItemBeingAdded,
                     child: FloatingActionButtonWidget(
                       onPressed: () {
                         context.read<UploadBloc>().add(PickAndPreviewImages());

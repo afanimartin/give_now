@@ -7,8 +7,7 @@ import '../../models/item/upload.dart';
 ///
 abstract class IItemRepository {
   ///
-  Future<List<String>> uploadItemImagesToStorage(
-      List<File> images);
+  Future<List<String>> uploadItemImagesToStorage(List<File> images);
 
   ///
   Future<void> uploadItemToFirestore(Upload upload, List<File> urlsToUpload);

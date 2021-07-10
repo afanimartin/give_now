@@ -44,7 +44,7 @@ class UploadBloc extends Bloc<UploadEvent, UploadState> {
   }
 
   Stream<UploadState> _mapUploadItemToState(UploadItem event) async* {
-    yield ItemIsBeingAdded();
+    yield ItemBeingAdded();
 
     const _uuid = Uuid();
 

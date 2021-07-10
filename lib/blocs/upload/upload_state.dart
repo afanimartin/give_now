@@ -75,7 +75,7 @@ class UploadState extends Equatable {
 }
 
 ///
-class ItemIsBeingAdded extends UploadState {}
+class ItemBeingAdded extends UploadState {}
 
 ///
 class ItemUploadedSuccessfully extends UploadState {}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:give_now/blocs/upload/upload_bloc.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../blocs/authentication/authentication_bloc.dart';
@@ -52,46 +53,49 @@ class UserProfileScreen extends StatelessWidget {
         ],
       ),
       body: BlocBuilder<ItemBloc, ItemState>(
-        builder: (context, state) => Padding(
-          padding: const EdgeInsets.all(12),
-          child: Column(
-            children: [
-              Row(),
-              CircleAvatarWidget(radius: 40, imageUrl: user.photoUrl ?? ''),
-              Text(
-                user.displayName,
-                style: const TextStyle(fontSize: 28),
+        builder: (context, itemState) => BlocBuilder<UploadBloc, UploadState>(
+          builder: (context, uploadState) {
+            if (uploadState is ItemBeingAdded) {
+              return const ProgressLoader();
+            }
+            return Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                children: [
+                  Row(),
+                  CircleAvatarWidget(radius: 40, imageUrl: user.photoUrl ?? ''),
+                  Text(
+                    user.displayName,
+                    style: const TextStyle(fontSize: 28),
+                  ),
+                  Text(
+                    user.email,
+                    style: const TextStyle(fontSize: 22, color: Colors.black45),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    'All items',
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Theme.of(context).primaryColorDark,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  _buildListOfItems(context, itemState)
+                ],
               ),
-              Text(
-                user.email,
-                style: const TextStyle(fontSize: 22, color: Colors.black45),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Text(
-                'All items',
-                style: TextStyle(
-                    fontSize: 20,
-                    color: Theme.of(context).primaryColorDark,
-                    fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              _buildListOfItems(context, state)
-            ],
-          ),
+            );
+          },
         ),
       ),
     );
   }
 
   Widget _buildListOfItems(BuildContext context, ItemState state) {
-    if (state is ItemBeingDonated) {
-      return const ProgressLoader();
-    }
-
     if (state is ItemsLoaded) {
       return state.currentUserItems.isNotEmpty
           ? ListView.builder(
@@ -114,7 +118,7 @@ class UserProfileScreen extends StatelessWidget {
                   ),
                 );
               })
-          : state is ItemIsBeingAdded || state is ItemBeingDonated
+          : state is ItemBeingDonated
               ? const ProgressLoader()
               : const Text('You have no items to sell');
     }
