@@ -95,7 +95,7 @@ class _PhotoViewWidget extends StatelessWidget {
                       imageUrl: url,
                       fit: BoxFit.cover,
                     )
-                  : Image.asset('assets/placeholder-image.png'),
+                  : const SizedBox.shrink(),
             );
           },
           scrollPhysics: const BouncingScrollPhysics(),
@@ -106,8 +106,7 @@ class _PhotoViewWidget extends StatelessWidget {
             child: SizedBox(
               width: 30,
               height: 30,
-              child: CircularProgressIndicator(
-                backgroundColor: Theme.of(context).primaryColorDark,
+              child: ProgressLoader(
                 value: event == null
                     ? 0
                     : event.cumulativeBytesLoaded / event.expectedTotalBytes,

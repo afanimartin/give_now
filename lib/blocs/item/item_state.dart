@@ -14,7 +14,6 @@ class ItemState extends Equatable {
   List<Object> get props => [];
 }
 
-
 ///
 class ItemsLoaded extends ItemState {
   ///

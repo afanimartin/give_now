@@ -4,10 +4,13 @@ import 'package:flutter/material.dart';
 ///
 class ProgressLoader extends StatelessWidget {
   ///
-  const ProgressLoader({this.color, Key key}) : super(key: key);
+  const ProgressLoader({this.color, this.value, Key key}) : super(key: key);
 
   ///
   final Color color;
+
+  ///
+  final double value;
 
   ///
   @override
@@ -15,6 +18,7 @@ class ProgressLoader extends StatelessWidget {
       color: color,
       child: Center(
           child: CircularProgressIndicator(
+        value: value,
         valueColor:
             AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColorDark),
         backgroundColor: Theme.of(context).accentColor,
@@ -23,5 +27,7 @@ class ProgressLoader extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(ColorProperty('color', color));
+    // ignore: cascade_invocations
+    properties.add(DoubleProperty('value', value));
   }
 }
