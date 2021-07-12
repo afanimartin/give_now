@@ -27,34 +27,44 @@ class _CartScreenState extends State<CartScreen> {
   final _buyerPhoneNumber = TextEditingController();
 
   @override
-  Widget build(BuildContext context) => BlocBuilder<CartBloc, CartState>(
-      builder: (context, state) => Scaffold(
-            backgroundColor: Theme.of(context).accentColor,
-            appBar: AppBar(
-              centerTitle: true,
-              elevation: 0,
-              title: Text(
-                'Complete purchase',
-                style: TextStyle(
-                    color: Theme.of(context).primaryColorDark,
-                    fontSize: 28,
-                    letterSpacing: 1.2),
-              ),
-              backgroundColor: Theme.of(context).accentColor,
+  Widget build(BuildContext context) =>
+      BlocBuilder<CartBloc, CartState>(builder: (context, state) {
+        if (state is ItemBeingRemovedFromCart) {
+          return ProgressLoader(
+            color: Theme.of(context).accentColor,
+          );
+        }
+        return Scaffold(
+          backgroundColor: Theme.of(context).accentColor,
+          appBar: AppBar(
+            centerTitle: true,
+            elevation: 0,
+            title: Text(
+              'Complete purchase',
+              style: TextStyle(
+                  color: Theme.of(context).primaryColorDark,
+                  fontSize: 28,
+                  letterSpacing: 1.2),
             ),
-            body: state is CartItemsLoaded &&
-                    state.currentUserCartItems.isNotEmpty
-                ? SingleChildScrollView(
-                    physics: const ScrollPhysics(),
-                    child: Column(
-                      children: [
-                        ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: state.currentUserCartItems?.length ?? 0,
-                            itemBuilder: (context, index) {
-                              final item = state.currentUserCartItems[index];
+            backgroundColor: Theme.of(context).accentColor,
+          ),
+          body: state is CartItemsLoaded &&
+                  state.currentUserCartItems.isNotEmpty
+              ? SingleChildScrollView(
+                  physics: const ScrollPhysics(),
+                  child: Column(
+                    children: [
+                      ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: state.currentUserCartItems?.length ?? 0,
+                          itemBuilder: (context, index) {
+                            final item = state.currentUserCartItems[index];
 
-                              return Card(
+                            return Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal:
+                                      MediaQuery.of(context).size.width / 27),
+                              child: Card(
                                 elevation: 4,
                                 child: Column(
                                   children: [
@@ -87,12 +97,8 @@ class _CartScreenState extends State<CartScreen> {
                                                 fontWeight: FontWeight.w500),
                                           )),
                                           IconButton(
-                                              icon: state
-                                                      // ignore: lines_longer_than_80_chars
-                                                      is ItemBeingRemovedFromCart
-                                                  ? const ProgressLoader()
-                                                  : const Icon(
-                                                      Icons.cancel_rounded),
+                                              icon: const Icon(
+                                                  Icons.cancel_rounded),
                                               color: Theme.of(context)
                                                   .primaryColor,
                                               iconSize: 30,
@@ -105,48 +111,49 @@ class _CartScreenState extends State<CartScreen> {
                                     ),
                                   ],
                                 ),
-                              );
-                            }),
-                        Padding(
-                          padding: const EdgeInsets.all(6),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                'Total',
-                                style: TextStyle(
-                                    fontSize: 22, fontWeight: FontWeight.w400),
                               ),
-                              Text('${state.totalCost}',
-                                  style: const TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.w400))
-                            ],
-                          ),
+                            );
+                          }),
+                      Padding(
+                        padding: const EdgeInsets.all(6),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              'Total',
+                              style: TextStyle(
+                                  fontSize: 22, fontWeight: FontWeight.w400),
+                            ),
+                            Text('${state.totalCost}',
+                                style: const TextStyle(
+                                    fontSize: 22, fontWeight: FontWeight.w400))
+                          ],
                         ),
-                      ],
-                    ))
-                : const Center(
-                    child: Text(
-                      'No items in your cart. Shop to add',
-                      style: TextStyle(fontSize: 20),
-                    ),
+                      ),
+                    ],
+                  ))
+              : const Center(
+                  child: Text(
+                    'No items in your cart. Shop to add',
+                    style: TextStyle(fontSize: 20),
                   ),
-            floatingActionButton: Visibility(
-              visible: state is CartItemsLoaded &&
-                  state.currentUserCartItems.isNotEmpty,
-              child: FloatingActionButton(
-                onPressed: () => state is CartItemsLoaded &&
-                        state.currentUserCartItems.isNotEmpty
-                    ? _modalBottomSheet(context, state.currentUserCartItems)
-                    : const SizedBox.shrink(),
-                child: const Icon(
-                  Icons.check,
-                  size: 30,
                 ),
+          floatingActionButton: Visibility(
+            visible: state is CartItemsLoaded &&
+                state.currentUserCartItems.isNotEmpty,
+            child: FloatingActionButton(
+              onPressed: () => state is CartItemsLoaded &&
+                      state.currentUserCartItems.isNotEmpty
+                  ? _modalBottomSheet(context, state.currentUserCartItems)
+                  : const SizedBox.shrink(),
+              child: const Icon(
+                Icons.check,
+                size: 30,
               ),
             ),
-          ));
+          ),
+        );
+      });
 
   Future<Widget> _modalBottomSheet(
       BuildContext context, List<CartItem> cartItems) {

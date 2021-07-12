@@ -22,8 +22,11 @@
 - [] create new logo, update icon and name of app to [samaria]
 - [] pass user phone to custom claims [id token]
 - [] invite users for testing
+- [] learn more about security rules and how to properly implement them of firestore
 
 ## After MVP
+- [] link CI/CD with firebase app distribution and Google play store
+- [] migrate app to null safety
 - [] add onboarding screens. checkout [flow_builder]
 - [] add dark theme
 - [] add snackbar to show item was added or donated
