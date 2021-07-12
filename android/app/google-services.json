@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "596947525320",
+    "project_id": "give-now-8e04f",
+    "storage_bucket": "give-now-8e04f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:596947525320:android:dd24a2702f05db7da9cffd",
+        "android_client_info": {
+          "package_name": "com.example.give_now"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "596947525320-gngo0kpoiu9i12b8926cjm290esb20rp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.give_now",
+            "certificate_hash": "b240267291a83d6bdbc3c42db03ff1ec334ad828"
+          }
+        },
+        {
+          "client_id": "596947525320-p8vdfon3d8gafn7mr32fqptk9fut4t7g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCg41FxssUNQ3ot3ZjQFNlDeF9VPTKr_OY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "596947525320-p8vdfon3d8gafn7mr32fqptk9fut4t7g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

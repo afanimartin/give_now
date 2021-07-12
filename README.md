@@ -1,6 +1,6 @@
-# give_now
+# Samaria
 
-A new Flutter project.
+A fun flutter app for selling/buying used items and donating items to the less privileged in the society like the refugees and street kids.
 
 ## Getting Started
 
