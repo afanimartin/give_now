@@ -1,3 +1,4 @@
+
 ## MVP
 - [x] login with gmail
 - [x] logout
@@ -59,3 +60,4 @@
 - [] logging out: `Invalid argument(s): No host specified in URI`
 - [] renderFlex overflowed by 52 pixels on the bottom. on edit item screen
 - [] new user is getting created everytime the same user signs in
+
