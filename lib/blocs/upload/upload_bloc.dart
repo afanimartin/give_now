@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../helpers/image/preview_image.dart';
-import '../../helpers/image/upload_image.dart';
+import '../../helpers/image/preview_images.dart';
+import '../../helpers/image/upload_images.dart';
 import '../../models/form/item_form.dart';
 import '../../repositories/upload/upload_repository.dart';
 import 'upload_event.dart';

@@ -8,6 +8,7 @@ import 'i_cart_repository.dart';
 ///
 class CartRepository extends ICartRepostiory {
   final _firebaseFirestore = FirebaseFirestore.instance;
+  
   @override
   Future<void> add(CartItem cartItem) async {
     await _firebaseFirestore.collection(Paths.carts).add(cartItem.toDocument());

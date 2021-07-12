@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../helpers/repository/item_repository_helper.dart';
+import '../../helpers/repository/upload_repository_helper.dart';
 
 import '../../models/item/item.dart';
 import '../../models/item/upload.dart';
