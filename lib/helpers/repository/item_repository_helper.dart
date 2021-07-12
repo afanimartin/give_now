@@ -2,14 +2,17 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:give_now/models/item/item.dart';
-import 'package:give_now/models/item/upload.dart';
 import 'package:uuid/uuid.dart';
+
+import '../../models/item/item.dart';
+import '../../models/item/upload.dart';
+
+
+///
+final firebaseStorage = FirebaseStorage.instance;
 
 ///
 Future<List<String>> getDownloadURL(List<File> images) async {
-  final firebaseStorage = FirebaseStorage.instance;
-
   ///
   final imageUrls = <String>[];
 

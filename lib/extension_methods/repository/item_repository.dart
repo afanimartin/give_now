@@ -1,4 +1,4 @@
-import '../../repositories/item/item_repository.dart';
+import '../../repositories/upload/upload_repository.dart';
 
 ///
-extension RepositoryExtensions on ItemRepository {}
+extension RepositoryExtensions on UploadRepository {}

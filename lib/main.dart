@@ -12,7 +12,8 @@ import 'blocs/item/item_event.dart';
 import 'blocs/tab/tab_bloc.dart';
 import 'blocs/upload/upload_bloc.dart';
 import 'repositories/authentication/authentication_repository.dart';
-import 'repositories/item/item_repository.dart';
+import 'repositories/cart/cart_repository.dart';
+import 'repositories/upload/upload_repository.dart';
 import 'screens/app.dart';
 
 void main() async {
@@ -39,12 +40,12 @@ void main() async {
       ),
       BlocProvider<ItemBloc>(
           create: (_) =>
-              ItemBloc(itemRepository: ItemRepository())..add(LoadItems())),
+              ItemBloc(uploadRepository: UploadRepository())..add(LoadItems())),
       BlocProvider<CartBloc>(
           create: (_) =>
-              CartBloc(itemRepository: ItemRepository())..add(LoadCartItems())),
+              CartBloc(cartRepository: CartRepository())..add(LoadCartItems())),
       BlocProvider<UploadBloc>(
-          create: (_) => UploadBloc(itemRepository: ItemRepository()))
+          create: (_) => UploadBloc(itemRepository: UploadRepository()))
     ],
     child: App(
       authenticationRepository: AuthenticationRepository(),

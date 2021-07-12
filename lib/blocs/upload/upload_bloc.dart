@@ -7,7 +7,7 @@ import 'package:uuid/uuid.dart';
 import '../../helpers/image/preview_image.dart';
 import '../../helpers/image/upload_image.dart';
 import '../../models/form/item_form.dart';
-import '../../repositories/item/item_repository.dart';
+import '../../repositories/upload/upload_repository.dart';
 import 'upload_event.dart';
 import 'upload_state.dart';
 
@@ -15,13 +15,13 @@ import 'upload_state.dart';
 class UploadBloc extends Bloc<UploadEvent, UploadState> {
   ///
   UploadBloc(
-      {@required ItemRepository itemRepository, FirebaseAuth firebaseAuth})
+      {@required UploadRepository itemRepository, FirebaseAuth firebaseAuth})
       : _itemRepository = itemRepository,
         _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         super(const UploadState());
 
   ///
-  final ItemRepository _itemRepository;
+  final UploadRepository _itemRepository;
 
   ///
   final FirebaseAuth _firebaseAuth;
@@ -63,7 +63,7 @@ class UploadBloc extends Bloc<UploadEvent, UploadState> {
           phone: event.upload.phone
           );
 
-      await _itemRepository.uploadItemToFirestore(_item, _imagesToUpload);
+      await _itemRepository.upload(_item, _imagesToUpload);
 
       yield ItemUploadedSuccessfully();
     } on Exception catch (_) {}

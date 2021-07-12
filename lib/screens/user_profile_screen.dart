@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:give_now/blocs/upload/upload_bloc.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../blocs/authentication/authentication_bloc.dart';
 import '../blocs/item/item_bloc.dart';
 import '../blocs/item/item_state.dart';
+import '../blocs/upload/upload_bloc.dart';
 import '../blocs/upload/upload_state.dart';
 import '../widgets/circular_avatar_widget.dart';
 import '../widgets/progress_loader.dart';

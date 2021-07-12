@@ -7,20 +7,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../models/cart/cart.dart';
-import '../../repositories/item/item_repository.dart';
+import '../../repositories/cart/cart_repository.dart';
 import 'cart_event.dart';
 import 'cart_state.dart';
 
 ///
 class CartBloc extends Bloc<CartEvent, CartState> {
   ///
-  CartBloc({@required ItemRepository itemRepository, FirebaseAuth firebaseAuth})
-      : _itemRepository = itemRepository,
-        _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
+  CartBloc({@required CartRepository cartRepository, FirebaseAuth firebaseAuth})
+      : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
+        _cartRepository = cartRepository,
         super(const CartState());
 
   ///
-  final ItemRepository _itemRepository;
+  final CartRepository _cartRepository;
 
   ///
   final FirebaseAuth _firebaseAuth;
@@ -47,8 +47,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   Stream<CartState> _mapLoadCartItemsToState() async* {
     await _streamSubscription?.cancel();
 
-    _streamSubscription = _itemRepository
-        .cartItems()
+    _streamSubscription = _cartRepository
+        .cart()
         .listen((items) => add(UpdateCartItems(cartItems: items)));
   }
 
@@ -74,7 +74,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           price: event.cartItem.price,
           createdAt: Timestamp.now());
 
-      await _itemRepository.addItemToCart(cartItem);
+      await _cartRepository.add(cartItem);
 
       yield ItemSuccessfullyAddedToCart();
     } on Exception catch (_) {}
@@ -86,7 +86,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     yield ItemBeingRemovedFromCart();
 
     try {
-      await _itemRepository.removeItemFromCart(event.item);
+      await _cartRepository.delete(event.item);
     } on Exception catch (_) {}
   }
 
@@ -101,14 +101,14 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           cartItems: event.sale.cartItems,
           soldAt: Timestamp.now());
 
-      await _itemRepository.buyItems(_sale);
+      await _cartRepository.checkout(_sale);
     } on Exception catch (_) {}
   }
 
   ///
   void deleteCartItems(List<CartItem> cartItems) {
     for (var i = 0; i < cartItems.length; i++) {
-      _itemRepository.removeItemFromCart(cartItems[i]);
+      _cartRepository.delete(cartItems[i]);
     }
   }
 }

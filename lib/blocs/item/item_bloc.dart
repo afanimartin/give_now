@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../models/item/item.dart';
-import '../../repositories/item/item_repository.dart';
+import '../../repositories/upload/upload_repository.dart';
 import 'item_event.dart';
 import 'item_state.dart';
 
 ///
 class ItemBloc extends Bloc<ItemEvent, ItemState> {
   ///
-  ItemBloc({@required ItemRepository itemRepository})
-      : _itemRepository = itemRepository,
+  ItemBloc({@required UploadRepository uploadRepository})
+      : _uploadRepository = uploadRepository,
         super(const ItemState());
 
-  final ItemRepository _itemRepository;
+  final UploadRepository _uploadRepository;
   StreamSubscription<List<Item>> _itemStreamSubscription;
 
   @override
@@ -28,8 +28,6 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
       yield* _mapUpdatedItemToState(event);
     } else if (event is DeleteItem) {
       yield* _mapDeleteItemToState(event);
-    } else if (event is DonateItem) {
-      yield* _mapDonateItemToState(event);
     }
   }
 
@@ -37,8 +35,8 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
     try {
       await _itemStreamSubscription?.cancel();
 
-      _itemStreamSubscription = _itemRepository
-          .marketplaceStream()
+      _itemStreamSubscription = _uploadRepository
+          .uploads()
           .listen((items) => add(UpdateItems(items: items)));
     } on Exception catch (error) {
       throw Exception(error);
@@ -51,7 +49,7 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
 
   Stream<ItemState> _mapUpdatedItemToState(UpdateItem event) async* {
     try {
-      await _itemRepository.updateItem(event.item);
+      await _uploadRepository.update(event.item);
     } on Exception catch (_) {}
   }
 
@@ -59,15 +57,7 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
     yield ItemBeingDeleted();
 
     try {
-      await _itemRepository.deleteItem(event.item);
-    } on Exception catch (_) {}
-  }
-
-  Stream<ItemState> _mapDonateItemToState(DonateItem event) async* {
-    yield ItemBeingDonated();
-
-    try {
-      await _itemRepository.donateItem(event.item);
+      await _uploadRepository.delete(event.item);
     } on Exception catch (_) {}
   }
 }

@@ -14,11 +14,12 @@
 - [x] checkout items from the cart
 - [x] add buttons for deleting/donating item
 - [x] delete item uploaded by current user
-- [x]  donate item uploaded by current user
+- [x] donate item uploaded by current user
 - [x] change valueColor of progress_loader to primaryColorDark
 - [] create extension methods
 - [] refactor code, make it more readable and maintainable
 - [] add unit tests for core logic
+- [] validate form inputs
 - [] reload a page by pulling the page downwards
 - [] invite users for testing
 
@@ -57,4 +58,4 @@
 - [] fix bug with cancelling image selection
 - [] logging out: `Invalid argument(s): No host specified in URI`
 - [] a RenderFlex overflowed by 52 pixels on the bottom. on edit item screen
-- [] a new user is getting created everytime a user signs in
+- [] a new user is getting created everytime the same user signs in

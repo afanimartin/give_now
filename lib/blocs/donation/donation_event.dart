@@ -12,16 +12,14 @@ class DonationEvent extends Equatable {
 }
 
 ///
-class LoadDonations extends DonationEvent {}
-
-///
-class UpdateDonations extends DonationEvent {
+class DonateItem extends DonationEvent {
   ///
-  const UpdateDonations({@required this.donations});
+  const DonateItem({@required this.item});
 
   ///
-  final List<Item> donations;
+  final Item item;
 
+  ///
   @override
-  List<Object> get props => [donations];
+  List<Object> get props => [item];
 }

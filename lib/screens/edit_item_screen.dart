@@ -64,9 +64,9 @@ class _EditItemScreenState extends State<EditItemScreen> {
           backgroundColor: Theme.of(context).accentColor,
           iconTheme: Theme.of(context).iconTheme,
           actions: [
-            MenuWidget(
-              item: widget.item,
-            )
+            // MenuWidget(
+            //   item: widget.item,
+            // )
           ],
         ),
         body: Column(
