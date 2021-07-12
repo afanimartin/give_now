@@ -21,7 +21,7 @@ jobs:
         restore-keys: ${{ runner.os }}-pub-
         
     - name: Upgrade flutter
-      run: flutter upgrade
+      run: flutter upgrade --major-versions
         
     - name: Download pub dependencies
       run: flutter pub get   
