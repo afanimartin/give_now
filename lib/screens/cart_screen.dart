@@ -56,6 +56,7 @@ class _CartScreenState extends State<CartScreen> {
                     children: [
                       ListView.builder(
                           shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
                           itemCount: state.currentUserCartItems?.length ?? 0,
                           itemBuilder: (context, index) {
                             final item = state.currentUserCartItems[index];
@@ -63,7 +64,7 @@ class _CartScreenState extends State<CartScreen> {
                             return Padding(
                               padding: EdgeInsets.symmetric(
                                   horizontal:
-                                      MediaQuery.of(context).size.width / 27),
+                                      MediaQuery.of(context).size.width / 32),
                               child: Card(
                                 elevation: 4,
                                 child: Column(

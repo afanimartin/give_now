@@ -57,7 +57,7 @@
 ## CURRENT BUGS
 - [x] fix bug with loading cart items
 - [] bottom navigator not rendering always
-- [] list of cart items is not scrolling
+- [x] list of cart items is not scrolling
 - [] fix bug with cancelling image selection
 - [] logging out: `Invalid argument(s): No host specified in URI`
 - [] renderFlex overflowed by 52 pixels on the bottom. on edit item screen
