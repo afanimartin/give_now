@@ -4,6 +4,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:give_now/blocs/donation/donation_bloc.dart';
+import 'package:give_now/repositories/donation/donation_repository.dart';
 
 import 'blocs/cart/cart_bloc.dart';
 import 'blocs/cart/cart_event.dart';
@@ -45,7 +47,9 @@ void main() async {
           create: (_) =>
               CartBloc(cartRepository: CartRepository())..add(LoadCartItems())),
       BlocProvider<UploadBloc>(
-          create: (_) => UploadBloc(itemRepository: UploadRepository()))
+          create: (_) => UploadBloc(itemRepository: UploadRepository())),
+      BlocProvider<DonationBloc>(
+          create: (_) => DonationBloc(donationRepository: DonationRepository()))
     ],
     child: App(
       authenticationRepository: AuthenticationRepository(),

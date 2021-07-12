@@ -16,7 +16,6 @@
 - [x] delete item uploaded by current user
 - [x] donate item uploaded by current user
 - [x] change valueColor of progress_loader to primaryColorDark
-- [] create extension methods
 - [] refactor code, make it more readable and maintainable
 - [] add unit tests for core logic
 - [] validate form inputs
