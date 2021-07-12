@@ -88,6 +88,7 @@ class _CartScreenState extends State<CartScreen> {
                                           )),
                                           IconButton(
                                               icon: state
+                                                      // ignore: lines_longer_than_80_chars
                                                       is ItemBeingRemovedFromCart
                                                   ? const ProgressLoader()
                                                   : const Icon(

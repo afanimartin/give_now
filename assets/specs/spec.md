@@ -16,13 +16,15 @@
 - [x] delete item uploaded by current user
 - [x] donate item uploaded by current user
 - [x] change valueColor of progress_loader to primaryColorDark
-- [] refactor code, make it more readable and maintainable
+- [x] refactor code, make it more readable and maintainable
 - [] add unit tests for core logic
 - [] validate form inputs
-- [] reload a page by pulling the page downwards
+- [] create new logo, update icon and name of app to [samaria]
+- [] pass user phone to custom claims [id token]
 - [] invite users for testing
 
 ## After MVP
+- [] add onboarding screens. checkout [flow_builder]
 - [] add dark theme
 - [] add snackbar to show item was added or donated
 - [] show user item is being uploaded
@@ -42,7 +44,6 @@
 - [] view/edit profile - edit display_name and phone_number
 - [] show snackbar when item added successfully to cart
 - [] remove image(s) during preview
-- [] add some 
 - [] implement infinite scrolling for marketplace items
 - [] hide/disable floating action button on the marketplace screen
 - [] render dropdownButton items within the widget itself
@@ -56,5 +57,5 @@
 - [] list of cart items is not scrolling
 - [] fix bug with cancelling image selection
 - [] logging out: `Invalid argument(s): No host specified in URI`
-- [] a RenderFlex overflowed by 52 pixels on the bottom. on edit item screen
-- [] a new user is getting created everytime the same user signs in
+- [] renderFlex overflowed by 52 pixels on the bottom. on edit item screen
+- [] new user is getting created everytime the same user signs in

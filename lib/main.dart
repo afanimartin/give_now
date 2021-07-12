@@ -4,17 +4,17 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:give_now/blocs/donation/donation_bloc.dart';
-import 'package:give_now/repositories/donation/donation_repository.dart';
 
 import 'blocs/cart/cart_bloc.dart';
 import 'blocs/cart/cart_event.dart';
+import 'blocs/donation/donation_bloc.dart';
 import 'blocs/item/item_bloc.dart';
 import 'blocs/item/item_event.dart';
 import 'blocs/tab/tab_bloc.dart';
 import 'blocs/upload/upload_bloc.dart';
 import 'repositories/authentication/authentication_repository.dart';
 import 'repositories/cart/cart_repository.dart';
+import 'repositories/donation/donation_repository.dart';
 import 'repositories/upload/upload_repository.dart';
 import 'screens/app.dart';
 
