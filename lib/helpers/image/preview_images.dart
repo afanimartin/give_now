@@ -9,8 +9,10 @@ Future<List<Asset>> imagesToPreview() async {
   final permissionStatus = await Permission.photos.status;
 
   if (permissionStatus.isGranted) {
-    images =
-        await MultiImagePicker.pickImages(maxImages: 6, selectedAssets: images);
+    try {
+      images = await MultiImagePicker.pickImages(
+          maxImages: 6, selectedAssets: images);
+    } on Exception catch (_) {}
   } else {
     await Permission.photos.request();
   }

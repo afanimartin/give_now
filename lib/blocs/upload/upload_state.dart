@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:formz/formz.dart';
 import 'package:multi_image_picker2/multi_image_picker2.dart';
 import '../../models/form/item_form.dart';
@@ -41,18 +42,6 @@ class UploadState extends Equatable {
   ///
   final FormzStatus formzStatus;
 
-  @override
-  List<Object> get props => [
-        title,
-        description,
-        category,
-        condition,
-        price,
-        phone,
-        images,
-        formzStatus,
-      ];
-
   ///
   UploadState copyWith(
           {TitleInput title,
@@ -72,6 +61,31 @@ class UploadState extends Equatable {
           phone: phone ?? this.phone,
           images: images ?? this.images,
           formzStatus: formzStatus ?? this.formzStatus);
+
+  @override
+  List<Object> get props => [
+        title,
+        description,
+        category,
+        condition,
+        price,
+        phone,
+        images,
+        formzStatus,
+      ];
+}
+
+///
+class AssetsLoaded extends UploadState {
+  ///
+  const AssetsLoaded({@required this.assets});
+
+  ///
+  final List<Asset> assets;
+
+  ///
+  @override
+  List<Object> get props => [assets];
 }
 
 ///
