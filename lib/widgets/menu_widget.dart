@@ -38,11 +38,11 @@ class MenuWidget extends StatelessWidget {
             _itemBloc.add(DeleteItem(item: item));
 
             Navigator.of(context).pop();
+          } else {
+            _donationBloc.add(DonateItem(item: item));
+
+            Navigator.of(context).pop();
           }
-
-          _donationBloc.add(DonateItem(item: item));
-
-          Navigator.of(context).pop();
         });
   }
 

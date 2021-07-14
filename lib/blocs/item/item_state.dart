@@ -28,13 +28,14 @@ class ItemsLoaded extends ItemState {
 
   ///
   List<Item> get itemsForSale => items
-      .where((item) => item.sellerId != _firebaseAuth.currentUser.uid)
+      .where((item) =>
+          item.sellerId != _firebaseAuth.currentUser.uid &&
+          int.parse(item.quantity) > 0)
       .toList();
 
   ///
   List<Item> get currentUserItems => items
-      .where((item) =>
-          item.sellerId == _firebaseAuth.currentUser.uid)
+      .where((item) => item.sellerId == _firebaseAuth.currentUser.uid)
       .toList();
 
   @override

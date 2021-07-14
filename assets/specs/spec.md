@@ -20,8 +20,9 @@
 - [x] refactor code, make it more readable and maintainable
 - [] user should not add items already in their cart
 - [] allow users to input quantity when uploading. default should be one
-- [] only show products with quantity > 0
+- [x] only show products with quantity > 0
 - [] decrement product quantity everytime a purchase is made
+- [] extract constants to util class
 - [] add unit tests for core logic
 - [] invite users for testing
 
@@ -75,7 +76,7 @@
 ## CURRENT BUGS
 - [x] fix bug with loading cart items
 - [] bottom navigator not rendering always
-- [] after deleting item bug
+- [x] black screen after deleting item bug
 - [x] list of cart items is not scrolling
 - [] fix bug with cancelling image selection
 - [] logging out: `Invalid argument(s): No host specified in URI`

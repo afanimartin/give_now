@@ -15,7 +15,7 @@ class Item extends Equatable {
       @required this.price,
       @required this.category,
       @required this.mainImageUrl,
-      this.quantity = 1,
+      this.quantity = '1',
       this.condition = 'used',
       this.buyerId,
       this.buyerPhoneNumber,
@@ -33,7 +33,7 @@ class Item extends Equatable {
       buyerPhoneNumber: doc['buyer_phone_number'] as String,
       title: doc['title'] as String,
       description: doc['description'] as String,
-      quantity: doc['quantity'] as int,
+      quantity: doc['quantity'] as String,
       condition: doc['condition'] as String,
       price: doc['price'] as String,
       category: doc['category'] as String,
@@ -67,7 +67,7 @@ class Item extends Equatable {
   final String description;
 
   ///
-  final int quantity;
+  final String quantity;
 
   ///
   final String condition;
@@ -120,7 +120,7 @@ class Item extends Equatable {
           String buyerPhoneNumber,
           String title,
           String description,
-          int quantity,
+          String quantity,
           String condition,
           String price,
           String category,
