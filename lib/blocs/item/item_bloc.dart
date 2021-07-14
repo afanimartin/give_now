@@ -11,8 +11,7 @@ import 'item_state.dart';
 ///
 class ItemBloc extends Bloc<ItemEvent, ItemState> {
   ///
-  ItemBloc(
-      {@required UploadRepository uploadRepository})
+  ItemBloc({@required UploadRepository uploadRepository})
       : _uploadRepository = uploadRepository,
         super(const ItemState());
 
@@ -50,6 +49,8 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
   }
 
   Stream<ItemState> _mapUpdatedItemToState(UpdateItem event) async* {
+    yield ItemBeingUpdated();
+
     try {
       await _uploadRepository.update(event.item);
     } on Exception catch (_) {}
@@ -62,5 +63,4 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
       await _uploadRepository.delete(event.item);
     } on Exception catch (_) {}
   }
-
 }

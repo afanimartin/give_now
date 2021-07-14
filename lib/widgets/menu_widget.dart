@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:give_now/screens/user_profile_screen.dart';
 import '../blocs/donation/donation_bloc.dart';
 import '../blocs/donation/donation_event.dart';
 import '../blocs/item/item_bloc.dart';
@@ -37,11 +38,13 @@ class MenuWidget extends StatelessWidget {
           if (value == 'Delete') {
             _itemBloc.add(DeleteItem(item: item));
 
-            Navigator.of(context).pop();
+            Navigator.of(context)
+                .pushAndRemoveUntil(UserProfileScreen.route, (route) => false);
           } else {
             _donationBloc.add(DonateItem(item: item));
 
-            Navigator.of(context).pop();
+            Navigator.of(context)
+                .pushAndRemoveUntil(UserProfileScreen.route, (route) => false);
           }
         });
   }

@@ -35,12 +35,14 @@ class CartItemsLoaded extends CartState {
 
   ///
   int get totalCost {
-    var total = 0;
+    var _total = 0;
 
     for (var i = 0; i < currentUserCartItems.length; i++) {
-      total += int.parse(currentUserCartItems[i].price);
+      final _price = int.tryParse(currentUserCartItems[i].price) ?? 0;
+
+      _total += _price;
     }
-    return total;
+    return _total;
   }
 
   ///

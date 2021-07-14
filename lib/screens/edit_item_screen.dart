@@ -56,86 +56,90 @@ class _EditItemScreenState extends State<EditItemScreen> {
   String _conditionValue = conditionList[0];
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        backgroundColor: Theme.of(context).accentColor,
-        appBar: AppBar(
-          elevation: 0,
-          title: TitleEditingWidget(controller: _titleController),
-          backgroundColor: Theme.of(context).accentColor,
-          iconTheme: Theme.of(context).iconTheme,
-          actions: [
-            MenuWidget(
-              item: widget.item,
-            )
-          ],
-        ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CachedNetworkImage(
-              imageUrl: widget.item.mainImageUrl,
-              height: 300,
-              width: double.infinity,
-              fit: BoxFit.cover,
+  Widget build(BuildContext context) => BlocBuilder<ItemBloc, ItemState>(
+        builder: (context, state) => Scaffold(
+            backgroundColor: Theme.of(context).accentColor,
+            appBar: AppBar(
+              elevation: 0,
+              title: TitleEditingWidget(controller: _titleController),
+              backgroundColor: Theme.of(context).accentColor,
+              iconTheme: Theme.of(context).iconTheme,
+              actions: [
+                MenuWidget(
+                  item: widget.item,
+                )
+              ],
             ),
-            const SizedBox(
-              height: 8,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TitleEditingWidget(
-                      controller: _titleController,
-                      decoration: const InputDecoration.collapsed(hintText: ''),
-                      style: const TextStyle(
-                          fontSize: 24, fontWeight: FontWeight.bold)),
-                  TextField(
-                    controller: _descriptionController,
-                    decoration: const InputDecoration.collapsed(hintText: ''),
+            body: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: CachedNetworkImage(
+                    imageUrl: widget.item.mainImageUrl,
+                    height: 300,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
                   ),
-                  PriceEditingWidget(controller: _priceContentController),
-                  CategoryEditingWidget(
-                      categoryValue: _categoryValue,
-                      onChanged: (String category) {
-                        setState(() {
-                          _categoryValue = category;
-                        });
-                      }),
-                  ConditonEditingWidget(
-                      conditionValue: _conditionValue,
-                      onChanged: (String condition) {
-                        setState(() {
-                          _conditionValue = condition;
-                        });
-                      })
-                ],
-              ),
-            )
-          ],
-        ),
-        floatingActionButton: BlocBuilder<ItemBloc, ItemState>(
-          builder: (context, state) => FloatingActionButton(
-            onPressed: () {
-              final updatedItem = widget.item.copyWith(
-                  title: _titleController.text,
-                  description: _descriptionController.text,
-                  price: _priceContentController.text,
-                  category: _categoryValue,
-                  condition: _conditionValue,
-                  updatedAt: Timestamp.now());
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TitleEditingWidget(
+                          controller: _titleController,
+                          decoration:
+                              const InputDecoration.collapsed(hintText: ''),
+                          style: const TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold)),
+                      TextField(
+                        controller: _descriptionController,
+                        decoration:
+                            const InputDecoration.collapsed(hintText: ''),
+                      ),
+                      PriceEditingWidget(controller: _priceContentController),
+                      CategoryEditingWidget(
+                          categoryValue: _categoryValue,
+                          onChanged: (String category) {
+                            setState(() {
+                              _categoryValue = category;
+                            });
+                          }),
+                      ConditonEditingWidget(
+                          conditionValue: _conditionValue,
+                          onChanged: (String condition) {
+                            setState(() {
+                              _conditionValue = condition;
+                            });
+                          })
+                    ],
+                  ),
+                )
+              ],
+            ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                final updatedItem = widget.item.copyWith(
+                    title: _titleController.text,
+                    description: _descriptionController.text,
+                    price: _priceContentController.text,
+                    category: _categoryValue,
+                    condition: _conditionValue,
+                    updatedAt: Timestamp.now());
 
-              context.read<ItemBloc>().add(UpdateItem(item: updatedItem));
-            },
-            child: state is ItemBeingUpdated
-                ? const ProgressLoader()
-                : const Icon(
-                    Icons.check,
-                    size: 30,
-                  ),
+                context.read<ItemBloc>().add(UpdateItem(item: updatedItem));
+              },
+              child: state is ItemBeingUpdated
+                  ? const ProgressLoader()
+                  : const Icon(
+                      Icons.check,
+                      size: 30,
+                    ),
+            ),
           ),
-        ),
       );
 
   @override

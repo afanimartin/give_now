@@ -13,7 +13,7 @@ import 'edit_item_screen.dart';
 import 'log_in_screen.dart';
 
 ///
-class UserProfileScreen extends StatelessWidget {
+class UserProfileScreen extends StatefulWidget {
   ///
   const UserProfileScreen({Key key}) : super(key: key);
 
@@ -21,6 +21,11 @@ class UserProfileScreen extends StatelessWidget {
   static Route get route =>
       MaterialPageRoute(builder: (_) => const UserProfileScreen());
 
+  @override
+  _UserProfileScreenState createState() => _UserProfileScreenState();
+}
+
+class _UserProfileScreenState extends State<UserProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final user = context.select((AuthenticationBloc bloc) => bloc.state.user);
