@@ -5,10 +5,10 @@ import '../../models/item/item.dart';
 import '../../utils/paths.dart';
 import '../upload/upload_repository.dart';
 
-final _firebaseFirestore = FirebaseFirestore.instance;
-
 ///
 class DonationRepository extends UploadRepository {
+  final _firebaseFirestore = FirebaseFirestore.instance;
+
   ///
   Future<void> donate(Item item) async {
     final _donation = Donation(
@@ -26,8 +26,6 @@ class DonationRepository extends UploadRepository {
         .collection(Paths.donations)
         .add(_donation.toDocument());
 
-    final _item = item.copyWith(isDonated: true);
-
-    await update(_item);
+    await delete(item);
   }
 }

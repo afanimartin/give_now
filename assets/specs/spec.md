@@ -18,14 +18,30 @@
 - [x] donate item uploaded by current user
 - [x] change valueColor of progress_loader to primaryColorDark
 - [x] refactor code, make it more readable and maintainable
+- [] user should not add items already in their cart
+- [] allow users to input quantity when uploading. default should be one
+- [] only show products with quantity > 0
+- [] decrement product quantity everytime a purchase is made
 - [] add unit tests for core logic
-- [] validate form inputs
-- [] create new logo, update icon and name of app to [samaria]
-- [] pass user phone to custom claims [id token]
 - [] invite users for testing
-- [] learn more about security rules and how to properly implement them of firestore
+
+## Test cases 
+- [] user should be able to upload new item
+- [] should be able to donate an item
+- [] user should be able to edit/delete item 
+- [] clear items in a cart after checkout
+- [] add item to cart and confirm it exists in the cart 
+- [] remove item from cart 
 
 ## After MVP
+- [] validate form inputs
+- [] learn basics of design [typography]
+- [] only show floatingActionButton on item edit page when item is dirty
+- [] add search functionality
+- [] create new logo, update icon and name of app to [samaria]
+- [] add caching
+- [] pass user phone to custom claims [id token]
+- [] learn more about security rules and how to properly implement them of firestore
 - [] link CI/CD with firebase app distribution and Google play store
 - [] migrate app to null safety
 - [] add onboarding screens. checkout [flow_builder]
@@ -48,6 +64,7 @@
 - [] view/edit profile - edit display_name and phone_number
 - [] show snackbar when item added successfully to cart
 - [] remove image(s) during preview
+- [] recommend items to users
 - [] implement infinite scrolling for marketplace items
 - [] hide/disable floating action button on the marketplace screen
 - [] render dropdownButton items within the widget itself
@@ -58,6 +75,7 @@
 ## CURRENT BUGS
 - [x] fix bug with loading cart items
 - [] bottom navigator not rendering always
+- [] after deleting item bug
 - [x] list of cart items is not scrolling
 - [] fix bug with cancelling image selection
 - [] logging out: `Invalid argument(s): No host specified in URI`

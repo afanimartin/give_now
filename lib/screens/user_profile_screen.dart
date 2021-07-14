@@ -25,73 +25,78 @@ class UserProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = context.select((AuthenticationBloc bloc) => bloc.state.user);
 
-    return Scaffold(
-      backgroundColor: Theme.of(context).accentColor,
-      appBar: AppBar(
-        elevation: 0,
-        title: Text(
-          'Profile',
-          style: TextStyle(
-              color: Theme.of(context).primaryColorDark,
-              fontSize: 28,
-              letterSpacing: 1.2),
-        ),
-        backgroundColor: Theme.of(context).accentColor,
-        actions: [
-          IconButton(
-              icon: Icon(
-                Icons.exit_to_app,
-                color: Theme.of(context).primaryColorDark,
-                size: 30,
-              ),
-              onPressed: () {
-                context.read<AuthenticationBloc>().add(LogOut());
+    return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+      builder: (context, state) => Scaffold(
+          backgroundColor: Theme.of(context).accentColor,
+          appBar: AppBar(
+            elevation: 0,
+            title: Text(
+              'Profile',
+              style: TextStyle(
+                  color: Theme.of(context).primaryColorDark,
+                  fontSize: 28,
+                  letterSpacing: 1.2),
+            ),
+            backgroundColor: Theme.of(context).accentColor,
+            actions: [
+              IconButton(
+                  icon: Icon(
+                    Icons.exit_to_app,
+                    color: Theme.of(context).primaryColorDark,
+                    size: 30,
+                  ),
+                  onPressed: () {
+                    context.read<AuthenticationBloc>().add(LogOut());
 
-                Navigator.of(context).pushAndRemoveUntil<void>(
-                    LogInScreen.route, (route) => false);
-              })
-        ],
-      ),
-      body: BlocBuilder<ItemBloc, ItemState>(
-        builder: (context, itemState) => BlocBuilder<UploadBloc, UploadState>(
-          builder: (context, uploadState) {
-            if (uploadState is ItemBeingAdded) {
-              return const ProgressLoader();
-            }
-            return Padding(
-              padding: const EdgeInsets.all(12),
-              child: Column(
-                children: [
-                  Row(),
-                  CircleAvatarWidget(radius: 40, imageUrl: user.photoUrl ?? ''),
-                  Text(
-                    user.displayName,
-                    style: const TextStyle(fontSize: 28),
+                    Navigator.of(context).pushAndRemoveUntil<void>(
+                        LogInScreen.route, (route) => false);
+                  })
+            ],
+          ),
+          body: BlocBuilder<ItemBloc, ItemState>(
+            builder: (context, itemState) =>
+                BlocBuilder<UploadBloc, UploadState>(
+              builder: (context, uploadState) {
+                if (uploadState is ItemBeingAdded) {
+                  return const ProgressLoader();
+                }
+                return Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Column(
+                    children: [
+                      Row(),
+                      CircleAvatarWidget(
+                          radius: 40, imageUrl: user.photoUrl ?? ''),
+                      Text(
+                        user.displayName,
+                        style: const TextStyle(fontSize: 28),
+                      ),
+                      Text(
+                        user.email,
+                        style: const TextStyle(
+                            fontSize: 22, color: Colors.black45),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        'All items',
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Theme.of(context).primaryColorDark,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      _buildListOfItems(context, itemState)
+                    ],
                   ),
-                  Text(
-                    user.email,
-                    style: const TextStyle(fontSize: 22, color: Colors.black45),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    'All items',
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: Theme.of(context).primaryColorDark,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  _buildListOfItems(context, itemState)
-                ],
-              ),
-            );
-          },
+                );
+              },
+            ),
+          ),
         ),
-      ),
     );
   }
 

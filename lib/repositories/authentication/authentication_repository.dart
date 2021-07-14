@@ -51,21 +51,10 @@ class AuthenticationRepository extends IAuthenticationRepository {
   }
 
   @override
-  Future<UserModel> getCurrentUser() async {
-    final currentUser = _firebaseAuth.currentUser;
-
-    if (currentUser == null) {
-      return null;
-    }
-
-    return toUser(currentUser);
-  }
-
-  @override
   Future<void> logOut() async {
     try {
       // Using _googleSignIn.out() does not work ):
-      await Future.wait([_firebaseAuth.signOut()]);
+      await _firebaseAuth.signOut();
     } on Exception catch (_) {}
   }
 

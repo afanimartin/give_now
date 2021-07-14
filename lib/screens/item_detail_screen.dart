@@ -25,48 +25,56 @@ class ItemDetailScreen extends StatelessWidget {
     final _images = images(item);
 
     return Scaffold(
+      backgroundColor: Theme.of(context).accentColor,
+      appBar: AppBar(
+        elevation: 0,
+        title: Text(
+          item.title ?? '',
+          style: TextStyle(color: Theme.of(context).primaryColorDark),
+        ),
         backgroundColor: Theme.of(context).accentColor,
-        appBar: AppBar(
-          elevation: 0,
-          title: Text(
-            item.title ?? '',
-            style: TextStyle(color: Theme.of(context).primaryColorDark),
-          ),
-          backgroundColor: Theme.of(context).accentColor,
-          iconTheme: Theme.of(context).iconTheme,
-        ),
-        body: Column(
-          children: [
-            _PhotoViewWidget(items: _images),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  item.title ?? '',
-                  style: const TextStyle(
-                      fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-                Text(item.description ?? ''),
-                Text(item.condition ?? ''),
-                Text(item.price.toString() ?? ''),
-                Text(item.category ?? '')
-              ],
-            )
-          ],
-        ),
-        floatingActionButton: BlocBuilder<CartBloc, CartState>(
-          builder: (context, state) => FloatingActionButtonWidget(
-            backgroundColor: Theme.of(context).primaryColor,
-            onPressed: () {
-              context.read<CartBloc>().add(AddItemToCart(cartItem: item));
+        iconTheme: Theme.of(context).iconTheme,
+      ),
+      body: Column(
+        children: [
+          _PhotoViewWidget(items: _images),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                item.title ?? '',
+                style:
+                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              Text(item.description ?? ''),
+              Text(item.condition ?? ''),
+              Text(item.price.toString() ?? ''),
+              Text(item.category ?? '')
+            ],
+          )
+        ],
+      ),
+      floatingActionButton: BlocBuilder<CartBloc, CartState>(
+        builder: (context, state) {
+          if (state is CartItemsLoaded) {
+            return Visibility(
+              child: FloatingActionButtonWidget(
+                backgroundColor: Theme.of(context).primaryColor,
+                onPressed: () {
+                  context.read<CartBloc>().add(AddItemToCart(cartItem: item));
 
-              Navigator.of(context).pop();
-            },
-            child: state is AddingItemToCart
-                ? const ProgressLoader()
-                : const Icon(Icons.shopping_bag_outlined),
-          ),
-        ));
+                  Navigator.of(context).pop();
+                },
+                child: const Icon(Icons.shopping_bag_outlined),
+              ),
+            );
+          }
+          return const Center(
+            child: Text('Something went wrong. Try again'),
+          );
+        },
+      ),
+    );
   }
 
   @override

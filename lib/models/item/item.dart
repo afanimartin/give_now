@@ -15,8 +15,6 @@ class Item extends Equatable {
       @required this.price,
       @required this.category,
       @required this.mainImageUrl,
-      this.isDonated = false,
-      this.isSold = false,
       this.condition = 'used',
       this.buyerId,
       this.buyerPhoneNumber,
@@ -32,8 +30,6 @@ class Item extends Equatable {
       sellerPhoneNumber: doc['seller_phone_number'] as String,
       buyerId: doc['buyer_id'] as String,
       buyerPhoneNumber: doc['buyer_phone_number'] as String,
-      isDonated: doc['is_donated'] as bool,
-      isSold: doc['is_sold'] as bool,
       title: doc['title'] as String,
       description: doc['description'] as String,
       condition: doc['condition'] as String,
@@ -61,12 +57,6 @@ class Item extends Equatable {
 
   ///
   final String buyerPhoneNumber;
-
-  ///
-  final bool isDonated;
-
-  ///
-  final bool isSold;
 
   ///
   final String title;
@@ -103,8 +93,6 @@ class Item extends Equatable {
         'seller_phone_number': sellerPhoneNumber,
         'buyer_id': buyerId,
         'buyer_phone_number': buyerPhoneNumber,
-        'is_donated': isDonated,
-        'is_sold': isSold,
         'title': title,
         'description': description,
         'condition': condition,
@@ -124,8 +112,6 @@ class Item extends Equatable {
           String sellerPhoneNumber,
           String buyerId,
           String buyerPhoneNumber,
-          bool isDonated,
-          bool isSold,
           String title,
           String description,
           String condition,
@@ -142,7 +128,6 @@ class Item extends Equatable {
           sellerPhoneNumber: sellerPhoneNumber ?? this.sellerPhoneNumber,
           buyerId: buyerId ?? this.buyerId,
           buyerPhoneNumber: buyerPhoneNumber ?? buyerPhoneNumber,
-          isDonated: isDonated ?? this.isDonated,
           title: title ?? this.title,
           description: description ?? this.description,
           condition: condition ?? this.condition,
@@ -161,7 +146,6 @@ class Item extends Equatable {
         sellerPhoneNumber,
         buyerId,
         buyerPhoneNumber,
-        isDonated,
         title,
         description,
         condition,

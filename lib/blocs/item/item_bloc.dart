@@ -11,11 +11,13 @@ import 'item_state.dart';
 ///
 class ItemBloc extends Bloc<ItemEvent, ItemState> {
   ///
-  ItemBloc({@required UploadRepository uploadRepository})
+  ItemBloc(
+      {@required UploadRepository uploadRepository})
       : _uploadRepository = uploadRepository,
         super(const ItemState());
 
   final UploadRepository _uploadRepository;
+
   StreamSubscription<List<Item>> _itemStreamSubscription;
 
   @override
@@ -60,4 +62,5 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
       await _uploadRepository.delete(event.item);
     } on Exception catch (_) {}
   }
+
 }
