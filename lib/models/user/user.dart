@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import '../item/item.dart';
 
 ///
 class UserModel extends Equatable {
@@ -11,26 +10,22 @@ class UserModel extends Equatable {
       this.displayName,
       this.photoUrl,
       this.phoneNumber,
-      this.itemsInCart,
-      this.itemsPurchased});
+      this.signedUpAt});
 
   ///
   factory UserModel.fromSnapshot(DocumentSnapshot doc) => UserModel(
-      userId: doc.id,
-      email: doc['email'] as String,
-      displayName: doc['display_name'] as String,
-      photoUrl: doc['photo_url'] as String,
-      phoneNumber: doc['phone_number'] as String,
-      itemsInCart: doc['items_in_cart'] as List<Item>,
-      itemsPurchased: doc['items_purchased'] as List<Item>);
+        email: doc['email'] as String,
+        displayName: doc['display_name'] as String,
+        photoUrl: doc['photo_url'] as String,
+      );
 
   ///
   UserModel copyWith(
           {String displayName, String phoneNumber, bool profileCompleted}) =>
       UserModel(
-          displayName: displayName ?? this.displayName,
-          phoneNumber: phoneNumber ?? this.phoneNumber,
-          );
+        displayName: displayName ?? this.displayName,
+        phoneNumber: phoneNumber ?? this.phoneNumber,
+      );
 
   ///
   static const empty = UserModel(
@@ -56,10 +51,7 @@ class UserModel extends Equatable {
   final String phoneNumber;
 
   ///
-  final List<Item> itemsInCart;
-
-  ///
-  final List<Item> itemsPurchased;
+  final Timestamp signedUpAt;
 
   ///
   Map<String, dynamic> toDocument() => <String, dynamic>{
@@ -68,8 +60,7 @@ class UserModel extends Equatable {
         'display_name': displayName,
         'photo_url': photoUrl,
         'phone_number': phoneNumber,
-        'items_in_cart': itemsInCart,
-        'items_purchased': itemsPurchased
+        'signed_up_at': signedUpAt
       };
 
   @override
@@ -79,7 +70,6 @@ class UserModel extends Equatable {
         displayName,
         photoUrl,
         phoneNumber,
-        itemsInCart,
-        itemsPurchased
+        signedUpAt
       ];
 }

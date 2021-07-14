@@ -47,6 +47,7 @@
 - [] migrate app to null safety
 - [] add onboarding screens. checkout [flow_builder]
 - [] add dark theme
+- [] hide arrow_forward_ios_sharp icon when user cancels selection of images
 - [] add snackbar to show item was added or donated
 - [] show user item is being uploaded
 - [] resize images before uploading to storage to save space and money
@@ -79,6 +80,6 @@
 - [x] list of cart items is not scrolling
 - [x] renderFlex overflowed by 52 pixels on the bottom. on edit item screen
 - [x] fix bug with cancelling image selection
+- [] new user is getting created everytime the same user signs in
 - [] logging out: `Invalid argument(s): No host specified in URI`
 - [] bottom navigator not rendering always
-- [] new user is getting created everytime the same user signs in

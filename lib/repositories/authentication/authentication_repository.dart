@@ -40,7 +40,11 @@ class AuthenticationRepository extends IAuthenticationRepository {
       final _signedInUser =
           await _firebaseAuth.signInWithCredential(googleCredential);
 
-      await addUserToFirestore(_signedInUser.user);
+      final _user = await checkIfUserExists(_signedInUser.user);
+
+      if (!_user) {
+        await addUserToFirestore(_signedInUser.user);
+      }
     } on Exception catch (_) {}
   }
 
@@ -48,6 +52,16 @@ class AuthenticationRepository extends IAuthenticationRepository {
   Future<void> addUserToFirestore(User firebaseUser) async {
     final _user = toUser(firebaseUser);
     await _firebaseFirestore.collection(Paths.users).add(_user.toDocument());
+  }
+
+  ///
+  Future<bool> checkIfUserExists(User firebaseUser) async {
+    final _user = await _firebaseFirestore
+        .collection(Paths.users)
+        .doc(firebaseUser.email)
+        .get();
+
+    return _user.exists;
   }
 
   @override
