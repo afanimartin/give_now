@@ -1,8 +1,8 @@
-on: [push, pull_request]
-name: Test, Build APK
+on: push
+name: Build app
 jobs:
   build:
-    name: Build APK
+    name: Build app
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -24,13 +24,4 @@ jobs:
       run: flutter upgrade
         
     - name: Download pub dependencies
-      run: flutter pub get
-
-    - name: Create key.properties
-      run: |
-        echo "storeFile=${{ steps.android_keystore.outputs.filePath }}" > android/key.properties
-        echo "storePassword=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}" >> android/key.properties
-        echo "keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}" >> android/key.properties
-        echo "keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}" >> android/key.properties
-    - name: Build Android App Bundle
-      run: flutter build appbundle   
+      run: flutter pub get   
