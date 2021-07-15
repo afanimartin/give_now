@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../models/item/item.dart';
 import '../screens/item_detail_screen.dart';
 import '../utils/app_theme.dart';
+import '../utils/constants.dart';
 import 'circular_avatar_widget.dart';
 
 ///
@@ -19,7 +20,10 @@ class ItemsGrid extends StatelessWidget {
   Widget build(BuildContext context) => _itemsGrid();
 
   Widget _itemsGrid() => SliverPadding(
-        padding: const EdgeInsets.only(left: 10, right: 10, bottom: 40),
+        padding: const EdgeInsets.only(
+            left: Constants.ten,
+            right: Constants.ten,
+            bottom: Constants.fourty),
         sliver: SliverGrid(
           delegate:
               SliverChildBuilderDelegate((BuildContext context, int index) {
@@ -28,20 +32,20 @@ class ItemsGrid extends StatelessWidget {
             return _itemsStack(context, item);
           }, childCount: items?.length),
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10),
+              maxCrossAxisExtent: Constants.maxCrossAxisExtent,
+              mainAxisSpacing: Constants.ten,
+              crossAxisSpacing: Constants.ten),
         ),
       );
 
   Widget _itemsStack(BuildContext context, Item item) => Stack(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(Constants.circularBorderRadius),
             child: CachedNetworkImage(
               imageUrl: item.mainImageUrl,
               height: double.infinity,
-              width: 300,
+              width: Constants.threeHundred,
               fit: BoxFit.cover,
             ),
           ),
@@ -50,19 +54,20 @@ class ItemsGrid extends StatelessWidget {
                 builder: (_) => ItemDetailScreen(item: item))),
             child: Container(
                 height: double.infinity,
-                width: 300,
+                width: Constants.threeHundred,
                 decoration: BoxDecoration(
                     gradient: postGradient,
-                    borderRadius: BorderRadius.circular(12))),
+                    borderRadius:
+                        BorderRadius.circular(Constants.circularBorderRadius))),
           ),
           Positioned(
-            left: 8,
-            bottom: 8,
+            left: Constants.eight,
+            bottom: Constants.eight,
             child: Row(
               children: [
                 CircleAvatarWidget(imageUrl: item.sellerPhotoUrl),
                 const SizedBox(
-                  width: 10,
+                  width: Constants.ten,
                 ),
                 Text(
                   item.title,

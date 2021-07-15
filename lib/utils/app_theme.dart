@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:give_now/utils/constants.dart';
+import 'constants.dart';
 
 ///
 const primaryColor = Color(0xFF26A69A);

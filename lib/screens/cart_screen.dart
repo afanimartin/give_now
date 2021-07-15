@@ -7,7 +7,9 @@ import '../blocs/cart/cart_event.dart';
 import '../blocs/cart/cart_state.dart';
 import '../models/cart/cart.dart';
 import '../models/item/sale.dart';
+import '../utils/constants.dart';
 import '../widgets/circular_avatar_widget.dart';
+import '../widgets/floating_action_button.dart';
 import '../widgets/progress_loader.dart';
 
 ///
@@ -44,7 +46,7 @@ class _CartScreenState extends State<CartScreen> {
               style: TextStyle(
                   color: Theme.of(context).primaryColorDark,
                   fontSize: 28,
-                  letterSpacing: 1.2),
+                  letterSpacing: Constants.onePointTwo),
             ),
             backgroundColor: Theme.of(context).accentColor,
           ),
@@ -64,13 +66,15 @@ class _CartScreenState extends State<CartScreen> {
                             return Padding(
                               padding: EdgeInsets.symmetric(
                                   horizontal:
-                                      MediaQuery.of(context).size.width / 32),
+                                      MediaQuery.of(context).size.width /
+                                          Constants.horizontalPadding),
                               child: Card(
-                                elevation: 4,
+                                elevation: Constants.elevation,
                                 child: Column(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.all(6),
+                                      padding:
+                                          const EdgeInsets.all(Constants.six),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
@@ -78,17 +82,18 @@ class _CartScreenState extends State<CartScreen> {
                                           CircleAvatarWidget(
                                               imageUrl: item.mainImageUrl),
                                           const SizedBox(
-                                            width: 10,
+                                            width: Constants.ten,
                                           ),
                                           Expanded(
                                               child: Text(
                                             item.title,
                                             style: const TextStyle(
                                                 fontSize: 16,
-                                                letterSpacing: 0.5),
+                                                letterSpacing:
+                                                    Constants.pointFive),
                                           )),
                                           const SizedBox(
-                                            width: 10,
+                                            width: Constants.ten,
                                           ),
                                           Expanded(
                                               child: Text(
@@ -102,7 +107,7 @@ class _CartScreenState extends State<CartScreen> {
                                                   Icons.cancel_rounded),
                                               color: Theme.of(context)
                                                   .primaryColor,
-                                              iconSize: 30,
+                                              iconSize: Constants.thirty,
                                               onPressed: () => context
                                                   .read<CartBloc>()
                                                   .add(RemoveItemFromCart(
@@ -116,7 +121,7 @@ class _CartScreenState extends State<CartScreen> {
                             );
                           }),
                       Padding(
-                        padding: const EdgeInsets.all(6),
+                        padding: const EdgeInsets.all(Constants.six),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -142,14 +147,15 @@ class _CartScreenState extends State<CartScreen> {
           floatingActionButton: Visibility(
             visible: state is CartItemsLoaded &&
                 state.currentUserCartItems.isNotEmpty,
-            child: FloatingActionButton(
+            child: FloatingActionButtonWidget(
               onPressed: () => state is CartItemsLoaded &&
                       state.currentUserCartItems.isNotEmpty
                   ? _modalBottomSheet(context, state.currentUserCartItems)
                   : const SizedBox.shrink(),
+              backgroundColor: Theme.of(context).primaryColor,
               child: const Icon(
                 Icons.check,
-                size: 30,
+                size: Constants.thirty,
               ),
             ),
           ),
@@ -169,9 +175,11 @@ class _CartScreenState extends State<CartScreen> {
         isScrollControlled: true,
         enableDrag: true,
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+            borderRadius:
+                BorderRadius.vertical(top: Radius.circular(Constants.twenty))),
         builder: (context) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: Constants.twenty, vertical: Constants.ten),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -181,11 +189,12 @@ class _CartScreenState extends State<CartScreen> {
                         border: OutlineInputBorder(
                             borderSide: BorderSide(
                                 color: Theme.of(context).accentColor),
-                            borderRadius: BorderRadius.circular(5)),
+                            borderRadius:
+                                BorderRadius.circular(Constants.five)),
                         labelText: 'address'),
                   ),
                   const SizedBox(
-                    height: 8,
+                    height: Constants.six,
                   ),
                   TextField(
                     controller: _buyerPhoneNumber,
@@ -194,10 +203,11 @@ class _CartScreenState extends State<CartScreen> {
                         border: OutlineInputBorder(
                             borderSide: BorderSide(
                                 color: Theme.of(context).accentColor),
-                            borderRadius: BorderRadius.circular(5)),
+                            borderRadius:
+                                BorderRadius.circular(Constants.five)),
                         labelText: 'phone'),
                   ),
-                  const SizedBox(height: 6),
+                  const SizedBox(height: Constants.six),
                   ElevatedButton(
                       onPressed: () {
                         if (_buyerAddress.text.isNotEmpty &&

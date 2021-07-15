@@ -13,6 +13,7 @@ import '../utils/condition.dart';
 import '../utils/constants.dart';
 import '../widgets/category_editing_widget.dart';
 import '../widgets/condition_editing_widget.dart';
+import '../widgets/floating_action_button.dart';
 import '../widgets/menu_widget.dart';
 import '../widgets/price_editing_widget.dart';
 import '../widgets/progress_loader.dart';
@@ -83,7 +84,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
                 ),
               ),
               const SizedBox(
-                height: 8,
+                height: Constants.six,
               ),
               Padding(
                 padding: const EdgeInsets.all(12),
@@ -120,7 +121,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
               )
             ],
           ),
-          floatingActionButton: FloatingActionButton(
+          floatingActionButton: FloatingActionButtonWidget(
             onPressed: () {
               final updatedItem = widget.item.copyWith(
                   title: _titleController.text,
@@ -132,6 +133,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
 
               context.read<ItemBloc>().add(UpdateItem(item: updatedItem));
             },
+            backgroundColor: Theme.of(context).primaryColor,
             child: state is ItemBeingUpdated
                 ? const ProgressLoader()
                 : const Icon(

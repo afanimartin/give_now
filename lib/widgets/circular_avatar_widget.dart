@@ -1,11 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import '../utils/constants.dart';
 
 ///
 class CircleAvatarWidget extends StatelessWidget {
   ///
-  const CircleAvatarWidget({@required this.imageUrl, this.radius = 20, Key key})
+  const CircleAvatarWidget(
+      {@required this.imageUrl, this.radius = Constants.twenty, Key key})
       : super(key: key);
 
   ///

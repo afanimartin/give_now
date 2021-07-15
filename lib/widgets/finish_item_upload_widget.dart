@@ -9,6 +9,7 @@ import '../models/item/upload.dart';
 import '../screens/user_profile_screen.dart';
 import '../utils/category.dart';
 import '../utils/condition.dart';
+import '../utils/constants.dart';
 import 'category_editing_widget.dart';
 import 'condition_editing_widget.dart';
 import 'description_editing_widget.dart';
@@ -63,11 +64,11 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
                     ),
                   ),
                   const SizedBox(
-                    height: 6,
+                    height: Constants.six,
                   ),
                   DescriptionEditingWidget(
                     controller: _descriptionContentController,
-                    maxLength: 500,
+                    maxLength: Constants.fiveHundred,
                     onChanged: (String description) => context
                         .read<UploadBloc>()
                         .descriptionChanged(description),
@@ -80,7 +81,7 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
                     ),
                   ),
                   const SizedBox(
-                    height: 6,
+                    height: Constants.six,
                   ),
                   PriceEditingWidget(
                     controller: _priceContentController,
@@ -91,11 +92,11 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
                         labelText: 'price'),
                   ),
                   const SizedBox(
-                    height: 6,
+                    height: Constants.six,
                   ),
                   _SellerPhoneNumber(controller: _phoneController),
                   const SizedBox(
-                    height: 6,
+                    height: Constants.six,
                   ),
                   CategoryEditingWidget(
                     categoryValue: _categoryValue,
@@ -106,7 +107,7 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
                     },
                   ),
                   const SizedBox(
-                    height: 6,
+                    height: Constants.six,
                   ),
                   ConditonEditingWidget(
                       conditionValue: _conditionValue,
@@ -116,7 +117,7 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
                         });
                       }),
                   const SizedBox(
-                    height: 6,
+                    height: Constants.six,
                   ),
                   _SubmitButton(
                     upload: _upload,

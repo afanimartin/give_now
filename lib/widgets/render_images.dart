@@ -8,6 +8,7 @@ import '../blocs/item/item_bloc.dart';
 import '../blocs/item/item_state.dart';
 import '../models/item/item.dart';
 import '../screens/item_detail_screen.dart';
+import '../utils/constants.dart';
 import 'progress_loader.dart';
 
 ///
@@ -46,24 +47,29 @@ class _RenderImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SizedBox(
           child: Padding(
-        padding: const EdgeInsets.only(left: 10, top: 6, right: 10, bottom: 6),
+        padding: const EdgeInsets.only(
+            left: Constants.ten,
+            top: Constants.six,
+            right: Constants.ten,
+            bottom: Constants.six),
         child: GestureDetector(
           onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(
               builder: (_) => ItemDetailScreen(item: image))),
           child: Card(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            elevation: 4,
+            shape: RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.circular(Constants.circularBorderRadius)),
+            elevation: Constants.elevation,
             child: Column(
               children: [
                 CachedNetworkImage(
                   imageUrl: image.mainImageUrl,
-                  height: 300,
-                  width: 400,
+                  height: Constants.threeHundred,
+                  width: Constants.fourHundred,
                   fit: BoxFit.cover,
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(Constants.paddingAll),
                   child: Text(timeago.format(image.createdAt.toDate())),
                 )
               ],
