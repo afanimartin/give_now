@@ -3,17 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/upload/upload_bloc.dart';
-import '../blocs/upload/upload_event.dart';
 import '../blocs/upload/upload_state.dart';
 import '../models/item/upload.dart';
-import '../screens/user_profile_screen.dart';
 import '../utils/category.dart';
 import '../utils/condition.dart';
 import '../utils/constants.dart';
 import 'category_editing_widget.dart';
 import 'condition_editing_widget.dart';
 import 'description_editing_widget.dart';
+import 'phone_number_widget.dart';
 import 'price_editing_widget.dart';
+import 'quantity_editing_widget.dart';
+import 'submit_button_widget.dart';
 import 'title_editing_widget.dart';
 
 ///
@@ -30,6 +31,7 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
   final _descriptionContentController = TextEditingController();
   final _priceContentController = TextEditingController();
   final _phoneController = TextEditingController();
+  final _quantityController = TextEditingController();
 
   String _conditionValue = conditionList[0];
   String _categoryValue = categoryList[0];
@@ -41,6 +43,7 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
               title: _titleContentController.text,
               description: _descriptionContentController.text,
               condition: _conditionValue,
+              quantity: _quantityController.text,
               price: _priceContentController.text,
               category: _categoryValue,
               phone: _phoneController.text);
@@ -94,7 +97,14 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
                   const SizedBox(
                     height: Constants.six,
                   ),
-                  _SellerPhoneNumber(controller: _phoneController),
+                  QuantityEditingWidget(controller: _quantityController),
+                  const SizedBox(
+                    height: Constants.six,
+                  ),
+                  PhoneNumberWidget(controller: _phoneController),
+                  const SizedBox(
+                    height: Constants.six,
+                  ),
                   const SizedBox(
                     height: Constants.six,
                   ),
@@ -119,7 +129,7 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
                   const SizedBox(
                     height: Constants.six,
                   ),
-                  _SubmitButton(
+                  SubmitButtonWidget(
                     upload: _upload,
                   )
                 ],
@@ -137,59 +147,5 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
     _descriptionContentController.clear();
     _priceContentController.clear();
     _phoneController.clear();
-  }
-}
-
-///
-class _SellerPhoneNumber extends StatelessWidget {
-  const _SellerPhoneNumber({@required this.controller, Key key})
-      : super(key: key);
-
-  ///
-  final TextEditingController controller;
-
-  @override
-  Widget build(BuildContext context) => TextField(
-        controller: controller,
-        keyboardType: TextInputType.phone,
-        onChanged: (String phone) =>
-            context.read<UploadBloc>().phoneChanged(phone),
-        maxLength: 10,
-        decoration: InputDecoration(
-            labelText: 'phone',
-            border: OutlineInputBorder(
-                borderSide:
-                    BorderSide(color: Theme.of(context).primaryColorDark))),
-      );
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(
-        DiagnosticsProperty<TextEditingController>('controller', controller));
-  }
-}
-
-///
-class _SubmitButton extends StatelessWidget {
-  const _SubmitButton({@required this.upload, Key key}) : super(key: key);
-
-  ///
-  final Upload upload;
-
-  @override
-  Widget build(BuildContext context) => BlocBuilder<UploadBloc, UploadState>(
-        builder: (context, state) => TextButton(
-            onPressed: () {
-              context.read<UploadBloc>().add(UploadItem(upload: upload));
-
-              Navigator.of(context).pushAndRemoveUntil<void>(
-                  UserProfileScreen.route, (route) => false);
-            },
-            child: const Text('Upload')),
-      );
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Upload>('upload', upload));
   }
 }

@@ -8,6 +8,7 @@ class Upload extends Equatable {
     @required this.title,
     @required this.description,
     @required this.condition,
+    @required this.quantity,
     @required this.price,
     @required this.category,
     @required this.phone,
@@ -35,6 +36,9 @@ class Upload extends Equatable {
   final String condition;
 
   ///
+  final String quantity;
+
+  ///
   final String price;
 
   ///
@@ -51,6 +55,7 @@ class Upload extends Equatable {
         title,
         description,
         condition,
+        quantity,
         price,
         category,
         phone
@@ -64,6 +69,7 @@ class Upload extends Equatable {
           String title,
           String description,
           String condition,
+          String quantity,
           String price,
           String category,
           String phone}) =>
@@ -74,6 +80,7 @@ class Upload extends Equatable {
           title: title ?? this.title,
           description: description ?? this.description,
           condition: condition ?? this.condition,
+          quantity: quantity ?? this.quantity,
           price: price ?? this.price,
           category: category ?? this.category,
           phone: phone ?? this.phone);

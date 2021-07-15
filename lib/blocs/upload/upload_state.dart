@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:formz/formz.dart';
 import 'package:multi_image_picker2/multi_image_picker2.dart';
 import '../../models/form/item_form.dart';
@@ -12,6 +11,7 @@ class UploadState extends Equatable {
     this.description = const DescriptionInput.pure(),
     this.category = const CategoryInput.pure(),
     this.condition = const ConditionInput.pure(),
+    this.quantity = const QuantityInput.pure(),
     this.price = const PriceInput.pure(),
     this.phone = const PhoneNumberInput.pure(),
     this.images,
@@ -31,6 +31,9 @@ class UploadState extends Equatable {
   final ConditionInput condition;
 
   ///
+  final QuantityInput quantity;
+
+  ///
   final PriceInput price;
 
   ///
@@ -48,6 +51,7 @@ class UploadState extends Equatable {
           DescriptionInput description,
           CategoryInput category,
           ConditionInput condition,
+          QuantityInput quantity,
           PriceInput price,
           PhoneNumberInput phone,
           List<Asset> images,
@@ -57,6 +61,7 @@ class UploadState extends Equatable {
           description: description ?? this.description,
           category: category ?? this.category,
           condition: condition ?? this.condition,
+          quantity: quantity ?? this.quantity,
           price: price ?? this.price,
           phone: phone ?? this.phone,
           images: images ?? this.images,
@@ -68,24 +73,12 @@ class UploadState extends Equatable {
         description,
         category,
         condition,
+        quantity,
         price,
         phone,
         images,
         formzStatus,
       ];
-}
-
-///
-class AssetsLoaded extends UploadState {
-  ///
-  const AssetsLoaded({@required this.assets});
-
-  ///
-  final List<Asset> assets;
-
-  ///
-  @override
-  List<Object> get props => [assets];
 }
 
 ///

@@ -126,6 +126,20 @@ class UploadBloc extends Bloc<UploadEvent, UploadState> {
   }
 
   ///
+  void quantityChanged(String value) {
+    final quantity = QuantityInput.dirty(value);
+    emit(state.copyWith(
+        quantity: quantity,
+        formzStatus: Formz.validate([
+          state.condition,
+          state.description,
+          state.category,
+          state.title,
+          state.price
+        ])));
+  }
+
+  ///
   void priceChanged(String value) {
     final price = PriceInput.dirty(value);
     emit(state.copyWith(

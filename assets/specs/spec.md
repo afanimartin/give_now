@@ -19,10 +19,10 @@
 - [x] change valueColor of progress_loader to primaryColorDark
 - [x] refactor code, make it more readable and maintainable
 - [x] only show products with quantity > 0
-- [] user should not add items already in their cart
-- [] allow users to input quantity when uploading. default should be one
-- [] decrement product quantity everytime a purchase is made
 - [x] extract constants to util class
+- [] allow users to input quantity when uploading. default should be one
+- [] user should not add items already in their cart
+- [] decrement product quantity everytime a purchase is made
 - [] use standard fontSize like [headline1]
 - [] add unit tests for core logic
 - [] invite users for testing

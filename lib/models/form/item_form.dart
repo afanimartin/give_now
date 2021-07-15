@@ -55,6 +55,18 @@ class ConditionInput extends FormzInput<String, InputError> {
 }
 
 ///
+class QuantityInput extends FormzInput<String, InputError> {
+  const QuantityInput.pure() : super.pure('');
+
+  ///
+  const QuantityInput.dirty([String value = '']) : super.dirty(value);
+
+  @override
+  InputError validator(String value) =>
+      value.isNotEmpty ? null : InputError.empty;
+}
+
+///
 class PriceInput extends FormzInput<String, InputError> {
   const PriceInput.pure() : super.pure('');
 

@@ -21,7 +21,7 @@ class ProgressLoader extends StatelessWidget {
         value: value,
         valueColor:
             AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColorDark),
-        backgroundColor: Theme.of(context).accentColor,
+        backgroundColor: Theme.of(context).primaryColor,
       )));
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
