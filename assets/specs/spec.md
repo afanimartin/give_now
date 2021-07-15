@@ -18,16 +18,18 @@
 - [x] donate item uploaded by current user
 - [x] change valueColor of progress_loader to primaryColorDark
 - [x] refactor code, make it more readable and maintainable
+- [x] only show products with quantity > 0
 - [] user should not add items already in their cart
 - [] allow users to input quantity when uploading. default should be one
-- [x] only show products with quantity > 0
 - [] decrement product quantity everytime a purchase is made
 - [] extract constants to util class
+- [] use standard fontSize like [headline1]
 - [] add unit tests for core logic
 - [] invite users for testing
 
 ## Test cases 
 - [] user should be able to upload new item
+- [] add integration tests
 - [] should be able to donate an item
 - [] user should be able to edit/delete item 
 - [] clear items in a cart after checkout
@@ -80,6 +82,6 @@
 - [x] list of cart items is not scrolling
 - [x] renderFlex overflowed by 52 pixels on the bottom. on edit item screen
 - [x] fix bug with cancelling image selection
-- [] new user is getting created everytime the same user signs in
+- [x] new user is getting created everytime the same user signs in
 - [] logging out: `Invalid argument(s): No host specified in URI`
 - [] bottom navigator not rendering always

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../utils/constants.dart';
 
 ///
 class SplashScreen extends StatelessWidget {
@@ -11,11 +12,11 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        color: Colors.white,
+        color: Theme.of(context).primaryColorLight,
         child: Center(
             child: Image.asset(
           'assets/givenow-logo.png',
-          height: 100,
+          height: Constants.oneHundred,
         )),
       );
 }

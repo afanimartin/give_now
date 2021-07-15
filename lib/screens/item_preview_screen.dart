@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../blocs/upload/upload_bloc.dart';
 import '../blocs/upload/upload_state.dart';
-
+import '../utils/constants.dart';
 import '../widgets/render_images_to_upload.dart';
 import 'finish_item_upload_screen.dart';
 
@@ -35,7 +36,7 @@ class ItemPreviewScreen extends StatelessWidget {
                     child: IconButton(
                         icon: const Icon(
                           Icons.arrow_forward_ios_sharp,
-                          size: 30,
+                          size: Constants.thirty,
                         ),
                         onPressed: () => Navigator.of(context).push(
                             MaterialPageRoute(

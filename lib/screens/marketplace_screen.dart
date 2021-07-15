@@ -6,6 +6,7 @@ import '../blocs/item/item_state.dart';
 import '../blocs/upload/upload_bloc.dart';
 import '../blocs/upload/upload_event.dart';
 import '../blocs/upload/upload_state.dart';
+import '../utils/constants.dart';
 import '../widgets/floating_action_button.dart';
 import '../widgets/items_grid.dart';
 import 'item_preview_screen.dart';
@@ -35,14 +36,14 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
               style: TextStyle(
                   color: Theme.of(context).primaryColorDark,
                   fontSize: 28,
-                  letterSpacing: 1.2),
+                  letterSpacing: Constants.onePointTwo),
             ),
             backgroundColor: Theme.of(context).accentColor,
             actions: [
               IconButton(
                   icon: Icon(
                     Icons.brightness_6_outlined,
-                    size: 30,
+                    size: Constants.thirty,
                     color: Theme.of(context).primaryColorDark,
                   ),
                   onPressed: () {})

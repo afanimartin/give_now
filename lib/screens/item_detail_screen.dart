@@ -9,6 +9,7 @@ import '../blocs/cart/cart_event.dart';
 import '../blocs/cart/cart_state.dart';
 import '../helpers/item/images.dart';
 import '../models/item/item.dart';
+import '../utils/constants.dart';
 import '../widgets/floating_action_button.dart';
 import '../widgets/progress_loader.dart';
 
@@ -91,7 +92,7 @@ class _PhotoViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SizedBox(
-        height: 300,
+        height: Constants.threeHundred,
         child: PhotoViewGallery.builder(
           itemCount: items.length,
           builder: (context, index) {
@@ -112,8 +113,8 @@ class _PhotoViewWidget extends StatelessWidget {
           enableRotation: true,
           loadingBuilder: (context, event) => Center(
             child: SizedBox(
-              width: 30,
-              height: 30,
+              width: Constants.thirty,
+              height: Constants.thirty,
               child: ProgressLoader(
                 value: event == null
                     ? 0

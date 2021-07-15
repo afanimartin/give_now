@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:give_now/utils/constants.dart';
 
 ///
 const primaryColor = Color(0xFF26A69A);
@@ -24,5 +25,5 @@ ThemeData appTheme() => ThemeData(
       primaryColorLight: whiteColor,
       primaryColorDark: blackColor,
       accentColor: secondaryColor,
-      iconTheme: const IconThemeData(color: blackColor, size: 30),
+      iconTheme: const IconThemeData(color: blackColor, size: Constants.thirty),
     );

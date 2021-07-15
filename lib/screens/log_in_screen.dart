@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/login/login_cubit.dart';
 import '../repositories/authentication/authentication_repository.dart';
+import '../utils/constants.dart';
 
 ///
 class LogInScreen extends StatelessWidget {
@@ -24,14 +25,14 @@ class LogInScreen extends StatelessWidget {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 100),
+                  padding: const EdgeInsets.only(top: Constants.oneHundred),
                   child: Image.asset(
                     'assets/givenow-logo.png',
-                    height: 150,
+                    height: Constants.oneFifty,
                   ),
                 ),
                 const SizedBox(
-                  height: 100,
+                  height: Constants.oneHundred,
                 ),
                 _GoogleLogInButton()
               ],
@@ -55,7 +56,7 @@ class _GoogleLogInButton extends StatelessWidget {
           children: [
             Image.asset(
               'assets/google_logo.png',
-              height: 40,
+              height: Constants.threeHundred,
             ),
             const SizedBox(width: 4),
             Text(
@@ -63,7 +64,7 @@ class _GoogleLogInButton extends StatelessWidget {
               style: TextStyle(
                   fontSize: 26,
                   color: Theme.of(context).primaryColorLight,
-                  letterSpacing: 1.2),
+                  letterSpacing: Constants.onePointTwo),
             )
           ],
         ),

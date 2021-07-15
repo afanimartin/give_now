@@ -7,6 +7,7 @@ import '../blocs/item/item_bloc.dart';
 import '../blocs/item/item_state.dart';
 import '../blocs/upload/upload_bloc.dart';
 import '../blocs/upload/upload_state.dart';
+import '../utils/constants.dart';
 import '../widgets/circular_avatar_widget.dart';
 import '../widgets/progress_loader.dart';
 import 'edit_item_screen.dart';
@@ -48,7 +49,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 icon: Icon(
                   Icons.exit_to_app,
                   color: Theme.of(context).primaryColorDark,
-                  size: 30,
+                  size: Constants.thirty,
                 ),
                 onPressed: () {
                   context.read<AuthenticationBloc>().add(LogOut());
@@ -70,7 +71,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   children: [
                     Row(),
                     CircleAvatarWidget(
-                        radius: 40, imageUrl: user.photoUrl ?? ''),
+                        radius: Constants.fourty,
+                        imageUrl: user.photoUrl ?? ''),
                     Text(
                       user.displayName,
                       style: const TextStyle(fontSize: 28),
