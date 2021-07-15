@@ -22,7 +22,7 @@
 - [] user should not add items already in their cart
 - [] allow users to input quantity when uploading. default should be one
 - [] decrement product quantity everytime a purchase is made
-- [] extract constants to util class
+- [x] extract constants to util class
 - [] use standard fontSize like [headline1]
 - [] add unit tests for core logic
 - [] invite users for testing
