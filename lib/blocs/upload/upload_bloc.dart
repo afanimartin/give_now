@@ -58,10 +58,10 @@ class UploadBloc extends Bloc<UploadEvent, UploadState> {
           title: event.upload.title,
           description: event.upload.description,
           condition: event.upload.condition,
+          quantity: event.upload.quantity,
           category: event.upload.category,
           price: event.upload.price,
-          phone: event.upload.phone
-          );
+          phone: event.upload.phone);
 
       await _itemRepository.upload(_item, _imagesToUpload);
 
@@ -131,6 +131,7 @@ class UploadBloc extends Bloc<UploadEvent, UploadState> {
     emit(state.copyWith(
         quantity: quantity,
         formzStatus: Formz.validate([
+          quantity,
           state.condition,
           state.description,
           state.category,

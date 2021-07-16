@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/upload/upload_bloc.dart';
 
 ///
-class PhoneNumberWidget extends StatelessWidget {
+class PhoneNumberEditingWidget extends StatelessWidget {
   ///
-  const PhoneNumberWidget({@required this.controller, Key key})
+  const PhoneNumberEditingWidget({@required this.controller, Key key})
       : super(key: key);
 
   ///

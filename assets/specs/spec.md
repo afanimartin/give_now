@@ -20,7 +20,7 @@
 - [x] refactor code, make it more readable and maintainable
 - [x] only show products with quantity > 0
 - [x] extract constants to util class
-- [] allow users to input quantity when uploading. default should be one
+- [x] allow users to input quantity when uploading. default should be one
 - [] user should not add items already in their cart
 - [] decrement product quantity everytime a purchase is made
 - [] use standard fontSize like [headline1]

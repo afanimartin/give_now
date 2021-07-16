@@ -101,10 +101,7 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
                   const SizedBox(
                     height: Constants.six,
                   ),
-                  PhoneNumberWidget(controller: _phoneController),
-                  const SizedBox(
-                    height: Constants.six,
-                  ),
+                  PhoneNumberEditingWidget(controller: _phoneController),
                   const SizedBox(
                     height: Constants.six,
                   ),

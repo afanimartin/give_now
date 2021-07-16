@@ -135,7 +135,9 @@ class _EditItemScreenState extends State<EditItemScreen> {
             },
             backgroundColor: Theme.of(context).primaryColor,
             child: state is ItemBeingUpdated
-                ? const ProgressLoader()
+                ? ProgressLoader(
+                    backgroundColor: Theme.of(context).primaryColor,
+                  )
                 : const Icon(
                     Icons.check,
                     size: Constants.thirty,

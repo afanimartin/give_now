@@ -41,6 +41,7 @@ Item convertUploadToItem(Upload upload, List<String> imageUrls) {
       description: upload.description,
       category: upload.category,
       condition: upload.condition,
+      quantity: upload.quantity,
       price: upload.price,
       sellerPhoneNumber: upload.phone,
       mainImageUrl: imageUrls[0],

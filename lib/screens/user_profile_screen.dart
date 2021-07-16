@@ -63,7 +63,9 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           builder: (context, itemState) => BlocBuilder<UploadBloc, UploadState>(
             builder: (context, uploadState) {
               if (uploadState is ItemBeingAdded) {
-                return const ProgressLoader();
+                return ProgressLoader(
+                  backgroundColor: Theme.of(context).accentColor,
+                );
               }
               return Padding(
                 padding: const EdgeInsets.all(12),
@@ -130,10 +132,14 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 );
               })
           : state is ItemBeingDonated || state is ItemBeingDeleted
-              ? const ProgressLoader()
+              ? ProgressLoader(
+                  backgroundColor: Theme.of(context).accentColor,
+                )
               : const Text('You have no items to sell');
     }
 
-    return const ProgressLoader();
+    return ProgressLoader(
+      backgroundColor: Theme.of(context).accentColor,
+    );
   }
 }

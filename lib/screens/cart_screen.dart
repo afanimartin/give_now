@@ -34,6 +34,7 @@ class _CartScreenState extends State<CartScreen> {
         if (state is ItemBeingRemovedFromCart) {
           return ProgressLoader(
             color: Theme.of(context).accentColor,
+            backgroundColor: Theme.of(context).accentColor,
           );
         }
         return Scaffold(

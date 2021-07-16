@@ -4,10 +4,14 @@ import 'package:flutter/material.dart';
 ///
 class ProgressLoader extends StatelessWidget {
   ///
-  const ProgressLoader({this.color, this.value, Key key}) : super(key: key);
+  const ProgressLoader({this.color, this.backgroundColor, this.value, Key key})
+      : super(key: key);
 
   ///
   final Color color;
+
+  ///
+  final Color backgroundColor;
 
   ///
   final double value;
@@ -21,7 +25,7 @@ class ProgressLoader extends StatelessWidget {
         value: value,
         valueColor:
             AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColorDark),
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: backgroundColor,
       )));
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -29,5 +33,7 @@ class ProgressLoader extends StatelessWidget {
     properties.add(ColorProperty('color', color));
     // ignore: cascade_invocations
     properties.add(DoubleProperty('value', value));
+    // ignore: cascade_invocations
+    properties.add(ColorProperty('backgroundColor', backgroundColor));
   }
 }
