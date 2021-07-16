@@ -39,7 +39,7 @@ class ItemPreviewScreen extends StatelessWidget {
                           size: Constants.thirty,
                         ),
                         onPressed: () => Navigator.of(context).push(
-                            MaterialPageRoute(
+                            MaterialPageRoute<Widget>(
                                 builder: (_) =>
                                     const FinishItemUploadScreen()))),
                   )

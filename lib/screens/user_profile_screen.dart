@@ -20,7 +20,7 @@ class UserProfileScreen extends StatefulWidget {
 
   ///
   static Route get route =>
-      MaterialPageRoute(builder: (_) => const UserProfileScreen());
+      MaterialPageRoute<Widget>(builder: (_) => const UserProfileScreen());
 
   @override
   _UserProfileScreenState createState() => _UserProfileScreenState();
@@ -126,8 +126,9 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     ),
                     title: Text(item.title),
                     trailing: Text(timeago.format(item.createdAt.toDate())),
-                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                        builder: (_) => EditItemScreen(item: item))),
+                    onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute<Widget>(
+                            builder: (_) => EditItemScreen(item: item))),
                   ),
                 );
               })

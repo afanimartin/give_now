@@ -47,20 +47,6 @@ class Upload extends Equatable {
   ///
   final String phone;
 
-  @override
-  List<Object> get props => [
-        id,
-        sellerId,
-        sellerPhotoUrl,
-        title,
-        description,
-        condition,
-        quantity,
-        price,
-        category,
-        phone
-      ];
-
   ///
   Upload copyWith(
           {String id,
@@ -84,4 +70,18 @@ class Upload extends Equatable {
           price: price ?? this.price,
           category: category ?? this.category,
           phone: phone ?? this.phone);
+
+  @override
+  List<Object> get props => [
+        id,
+        sellerId,
+        sellerPhotoUrl,
+        title,
+        description,
+        condition,
+        quantity,
+        price,
+        category,
+        phone
+      ];
 }

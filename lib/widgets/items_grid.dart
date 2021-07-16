@@ -50,7 +50,7 @@ class ItemsGrid extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(
+            onTap: () => Navigator.of(context).push(MaterialPageRoute<Widget>(
                 builder: (_) => ItemDetailScreen(item: item))),
             child: Container(
                 height: double.infinity,

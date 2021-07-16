@@ -41,7 +41,7 @@ class Sale extends Equatable {
           soldAt: soldAt ?? this.soldAt);
 
   ///
-  Map<String, dynamic> toDocument() => {
+  Map<String, dynamic> toDocument() => <String, dynamic>{
         'id': id,
         'buyer_phone': buyerPhone,
         'buyer_address': buyerAddress,

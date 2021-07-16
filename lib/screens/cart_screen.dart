@@ -220,6 +220,10 @@ class _CartScreenState extends State<CartScreen> {
 
                           context.read<CartBloc>().add(SellItem(sale: _sale));
 
+                          context
+                              .read<CartBloc>()
+                              .updateUploadQuantity(cartItems);
+
                           context.read<CartBloc>().deleteCartItems(cartItems);
 
                           Navigator.of(context).pop();

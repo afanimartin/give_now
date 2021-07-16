@@ -46,7 +46,7 @@ class CartItem extends Equatable {
   final Timestamp createdAt;
 
   ///
-  Map<String, dynamic> toDocument() => {
+  Map<String, dynamic> toDocument() => <String, dynamic>{
         'id': id,
         'buyer_id': buyerId,
         'seller_id': sellerId,

@@ -1,12 +1,9 @@
-import 'dart:io';
-
 import '../../models/item/item.dart';
-import '../../models/item/upload.dart';
 
 ///
 abstract class IUploadRepository {
   ///
-  Future<void> upload(Upload upload, List<File> urlsToUpload);
+  Future<void> upload(Item upload);
 
   ///
   Future<void> update(Item item);

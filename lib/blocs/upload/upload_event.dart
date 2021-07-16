@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import '../../models/item/upload.dart';
+import '../../models/item/item.dart';
 
 ///
-class UploadEvent extends Equatable {
+class ItemEvent extends Equatable {
   ///
-  const UploadEvent();
+  const ItemEvent();
 
   ///
   @override
@@ -13,17 +13,17 @@ class UploadEvent extends Equatable {
 }
 
 ///
-class PickAndPreviewImages extends UploadEvent {}
+class PickAndPreviewImages extends ItemEvent {}
 
 ///
-class UploadItem extends UploadEvent {
+class UploadItem extends ItemEvent {
   ///
-  const UploadItem({@required this.upload});
+  const UploadItem({@required this.item});
 
   ///
-  final Upload upload;
+  final Item item;
 
   ///
   @override
-  List<Object> get props => [upload];
+  List<Object> get props => [item];
 }

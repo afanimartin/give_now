@@ -44,7 +44,7 @@ class Donation extends Equatable {
   final Timestamp donatedAt;
 
   ///
-  Map<String, dynamic> toDocument() => {
+  Map<String, dynamic> toDocument() => <String, dynamic>{
         'id': id,
         'donor_id': donorId,
         'donor_phone': donorPhone,

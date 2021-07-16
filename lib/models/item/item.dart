@@ -6,15 +6,16 @@ import 'package:flutter/material.dart';
 class Item extends Equatable {
   ///
   const Item(
-      {@required this.id,
-      @required this.sellerId,
-      @required this.sellerPhotoUrl,
+      {
       @required this.sellerPhoneNumber,
       @required this.title,
       @required this.description,
       @required this.price,
       @required this.category,
-      @required this.mainImageUrl,
+      this.sellerId,
+      this.sellerPhotoUrl,
+      this.mainImageUrl,
+      this.id,
       this.quantity = '1',
       this.condition = 'used',
       this.buyerId,

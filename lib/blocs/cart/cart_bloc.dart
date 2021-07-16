@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../extension_methods/upload/upload_repository_extensions.dart';
 import '../../models/cart/cart.dart';
 import '../../repositories/cart/cart_repository.dart';
+import '../../repositories/upload/upload_repository.dart';
 import 'cart_event.dart';
 import 'cart_state.dart';
 
@@ -56,6 +58,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     yield LoadingCartItems();
 
     try {
+      // await _cartRepository.docId();
+
       yield CartItemsLoaded(cartItems: event.cartItems);
     } on Exception catch (_) {}
   }
@@ -65,6 +69,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     yield AddingItemToCart();
 
     try {
+      // grab item's doc.id and assign to id of cart item
       final cartItem = CartItem(
           id: event.cartItem.id,
           buyerId: _firebaseAuth.currentUser.uid,
@@ -103,6 +108,24 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
       await _cartRepository.checkout(_sale);
     } on Exception catch (_) {}
+  }
+
+  ///
+  void updateUploadQuantity(List<CartItem> cartItems) async {
+    final _uploadRepository = UploadRepository();
+
+    for (var i = 0; i < cartItems.length; i++) {
+      final _item =
+          await UploadRepositoryExtensions.doesItemExist(cartItems[i].sellerId);
+
+      // if item exists, update it's quantity
+      if (_item != null) {
+        final _quantity = int.parse(_item.quantity) - 1;
+        final _updated = _item.copyWith(quantity: _quantity as String);
+
+        await _uploadRepository.update(_updated);
+      }
+    }
   }
 
   ///

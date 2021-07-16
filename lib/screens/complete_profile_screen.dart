@@ -8,7 +8,7 @@ class CompleteProfileScreen extends StatelessWidget {
 
   ///
   static Route get route =>
-      MaterialPageRoute(builder: (_) => const CompleteProfileScreen());
+      MaterialPageRoute<Widget>(builder: (_) => const CompleteProfileScreen());
 
   @override
   Widget build(BuildContext context) => Scaffold(

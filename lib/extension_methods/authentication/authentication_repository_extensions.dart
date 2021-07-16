@@ -6,7 +6,7 @@ import '../../repositories/authentication/authentication_repository.dart';
 import '../../utils/paths.dart';
 
 ///
-extension AuthExtensions on AuthenticationRepository {
+extension AuthenticationRepositoryExtensions on AuthenticationRepository {
   ///
   static Future<void> addUserToFirestore(User firebaseUser) async {
     final _firebaseFirestore = FirebaseFirestore.instance;

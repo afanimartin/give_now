@@ -1,18 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:uuid/uuid.dart';
 
 import '../../helpers/image/preview_images.dart';
 import '../../helpers/image/upload_images.dart';
+import '../../helpers/repository/upload_repository_helper.dart';
 import '../../models/form/item_form.dart';
+import '../../models/item/item.dart';
 import '../../repositories/upload/upload_repository.dart';
 import 'upload_event.dart';
 import 'upload_state.dart';
 
 ///
-class UploadBloc extends Bloc<UploadEvent, UploadState> {
+class UploadBloc extends Bloc<ItemEvent, UploadState> {
   ///
   UploadBloc(
       {@required UploadRepository itemRepository, FirebaseAuth firebaseAuth})
@@ -27,7 +29,7 @@ class UploadBloc extends Bloc<UploadEvent, UploadState> {
   final FirebaseAuth _firebaseAuth;
 
   @override
-  Stream<UploadState> mapEventToState(UploadEvent event) async* {
+  Stream<UploadState> mapEventToState(ItemEvent event) async* {
     if (event is PickAndPreviewImages) {
       yield* _mapPickAndUploadItemsToState();
     } else if (event is UploadItem) {
@@ -46,26 +48,26 @@ class UploadBloc extends Bloc<UploadEvent, UploadState> {
   Stream<UploadState> _mapUploadItemToState(UploadItem event) async* {
     yield ItemBeingAdded();
 
-    const _uuid = Uuid();
-
     final _imagesToUpload = await imagesToUpload(state.images);
+    final _imageUrls = await getDownloadURL(_imagesToUpload);
 
     try {
-      final _item = event.upload.copyWith(
-          id: _uuid.v4(),
-          sellerId: _firebaseAuth.currentUser.uid,
-          sellerPhotoUrl: _firebaseAuth.currentUser.photoURL,
-          title: event.upload.title,
-          description: event.upload.description,
-          condition: event.upload.condition,
-          quantity: event.upload.quantity,
-          category: event.upload.category,
-          price: event.upload.price,
-          phone: event.upload.phone);
+      final _item = Item(
+        sellerId: _firebaseAuth.currentUser.uid,
+        sellerPhotoUrl: _firebaseAuth.currentUser.photoURL,
+        title: event.item.title,
+        description: event.item.description,
+        condition: event.item.condition,
+        quantity: event.item.quantity,
+        category: event.item.category,
+        price: event.item.price,
+        sellerPhoneNumber: event.item.sellerPhoneNumber,
+        mainImageUrl: _imageUrls[0],
+        otherImageUrls: _imageUrls.sublist(1),
+        createdAt: Timestamp.now(),
+      );
 
-      await _itemRepository.upload(_item, _imagesToUpload);
-
-      yield ItemUploadedSuccessfully();
+      await _itemRepository.upload(_item);
     } on Exception catch (_) {}
   }
 

@@ -38,13 +38,13 @@ class MenuWidget extends StatelessWidget {
           if (value == 'Delete') {
             _itemBloc.add(DeleteItem(item: item));
 
-            Navigator.of(context)
-                .pushAndRemoveUntil(UserProfileScreen.route, (route) => false);
+            Navigator.of(context).pushAndRemoveUntil<void>(
+                UserProfileScreen.route, (route) => false);
           } else {
             _donationBloc.add(DonateItem(item: item));
 
-            Navigator.of(context)
-                .pushAndRemoveUntil(UserProfileScreen.route, (route) => false);
+            Navigator.of(context).pushAndRemoveUntil<void>(
+                UserProfileScreen.route, (route) => false);
           }
         });
   }

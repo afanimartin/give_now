@@ -18,7 +18,7 @@ class MarketplaceScreen extends StatefulWidget {
 
   ///
   static Route get route =>
-      MaterialPageRoute(builder: (_) => const MarketplaceScreen());
+      MaterialPageRoute<Widget>(builder: (_) => const MarketplaceScreen());
 
   @override
   _MarketplaceScreenState createState() => _MarketplaceScreenState();
@@ -64,7 +64,7 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
                       onPressed: () {
                         context.read<UploadBloc>().add(PickAndPreviewImages());
 
-                        Navigator.of(context).push(MaterialPageRoute(
+                        Navigator.of(context).push(MaterialPageRoute<Widget>(
                             builder: (_) => const ItemPreviewScreen()));
                       },
                       backgroundColor: Theme.of(context).primaryColor,

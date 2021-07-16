@@ -55,7 +55,7 @@ class UserModel extends Equatable {
 
   ///
   Map<String, dynamic> toDocument() => <String, dynamic>{
-        'userId': userId,
+        'user_id': userId,
         'email': email,
         'display_name': displayName,
         'photo_url': photoUrl,

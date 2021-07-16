@@ -5,22 +5,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/upload/upload_bloc.dart';
 import '../blocs/upload/upload_event.dart';
 import '../blocs/upload/upload_state.dart';
-import '../models/item/upload.dart';
+import '../models/item/item.dart';
 import '../screens/user_profile_screen.dart';
 
 ///
 class SubmitButtonWidget extends StatelessWidget {
   ///
-  const SubmitButtonWidget({@required this.upload, Key key}) : super(key: key);
+  const SubmitButtonWidget({@required this.item, Key key}) : super(key: key);
 
   ///
-  final Upload upload;
+  final Item item;
 
   @override
   Widget build(BuildContext context) => BlocBuilder<UploadBloc, UploadState>(
         builder: (context, state) => TextButton(
             onPressed: () {
-              context.read<UploadBloc>().add(UploadItem(upload: upload));
+              context.read<UploadBloc>().add(UploadItem(item: item));
 
               Navigator.of(context).pushAndRemoveUntil<void>(
                   UserProfileScreen.route, (route) => false);
@@ -30,6 +30,6 @@ class SubmitButtonWidget extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Upload>('upload', upload));
+    properties.add(DiagnosticsProperty<Item>('item', item));
   }
 }

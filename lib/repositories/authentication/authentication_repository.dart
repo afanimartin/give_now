@@ -23,7 +23,7 @@ class AuthenticationRepository extends IAuthenticationRepository {
   Stream<UserModel> get user => _firebaseAuth.authStateChanges().map(
       (firebaseUser) => firebaseUser == null
           ? UserModel.empty
-          : AuthExtensions.toUser(firebaseUser));
+          : AuthenticationRepositoryExtensions.toUser(firebaseUser));
 
   @override
   Future<void> logInWithGoogleAccount() async {
@@ -37,10 +37,12 @@ class AuthenticationRepository extends IAuthenticationRepository {
       final _signedInUser =
           await _firebaseAuth.signInWithCredential(googleCredential);
 
-      final _user = await AuthExtensions.checkIfUserExists(_signedInUser.user);
+      final _user = await AuthenticationRepositoryExtensions.checkIfUserExists(
+          _signedInUser.user);
 
       if (!_user) {
-        await AuthExtensions.addUserToFirestore(_signedInUser.user);
+        await AuthenticationRepositoryExtensions.addUserToFirestore(
+            _signedInUser.user);
       }
     } on Exception catch (_) {}
   }

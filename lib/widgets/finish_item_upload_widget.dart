@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/upload/upload_bloc.dart';
 import '../blocs/upload/upload_state.dart';
-import '../models/item/upload.dart';
+import '../models/item/item.dart';
 import '../utils/category.dart';
 import '../utils/condition.dart';
 import '../utils/constants.dart';
@@ -39,14 +39,14 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
   @override
   Widget build(BuildContext context) => BlocBuilder<UploadBloc, UploadState>(
         builder: (context, state) {
-          final _upload = Upload(
+          final _item = Item(
               title: _titleContentController.text,
               description: _descriptionContentController.text,
               condition: _conditionValue,
               quantity: _quantityController.text,
               price: _priceContentController.text,
               category: _categoryValue,
-              phone: _phoneController.text);
+              sellerPhoneNumber: _phoneController.text);
 
           return Align(
             alignment: const Alignment(0, -1),
@@ -127,7 +127,7 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
                     height: Constants.six,
                   ),
                   SubmitButtonWidget(
-                    upload: _upload,
+                    item: _item,
                   )
                 ],
               ),

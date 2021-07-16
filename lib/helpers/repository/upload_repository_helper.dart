@@ -34,7 +34,6 @@ Future<List<String>> getDownloadURL(List<File> images) async {
 ///
 Item convertUploadToItem(Upload upload, List<String> imageUrls) {
   final item = Item(
-      id: upload.id,
       sellerId: upload.sellerId,
       sellerPhotoUrl: upload.sellerPhotoUrl,
       title: upload.title,
