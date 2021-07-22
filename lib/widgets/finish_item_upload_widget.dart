@@ -31,7 +31,6 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
   final _descriptionContentController = TextEditingController();
   final _priceContentController = TextEditingController();
   final _phoneController = TextEditingController();
-  final _quantityController = TextEditingController();
 
   String _conditionValue = conditionList[0];
   String _categoryValue = categoryList[0];
@@ -43,7 +42,6 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
               title: _titleContentController.text,
               description: _descriptionContentController.text,
               condition: _conditionValue,
-              quantity: _quantityController.text,
               price: _priceContentController.text,
               category: _categoryValue,
               sellerPhoneNumber: _phoneController.text);
@@ -97,11 +95,11 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
                   const SizedBox(
                     height: Constants.six,
                   ),
-                  QuantityEditingWidget(controller: _quantityController),
-                  const SizedBox(
-                    height: Constants.six,
+                  PhoneNumberEditingWidget(
+                    controller: _phoneController,
+                    onChanged: (String phone) =>
+                        context.read<UploadBloc>().phoneChanged(phone),
                   ),
-                  PhoneNumberEditingWidget(controller: _phoneController),
                   const SizedBox(
                     height: Constants.six,
                   ),

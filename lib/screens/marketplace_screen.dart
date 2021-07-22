@@ -54,8 +54,10 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
                   slivers: [ItemsGrid(items: state.itemsForSale)],
                 )
               : const Center(
-                  child:
-                      Text('No items for sale right now. Check again later.'),
+                  child: Text(
+                    'No items for sale right now. Check again later.',
+                    style: TextStyle(fontSize: Constants.twenty),
+                  ),
                 ),
           floatingActionButton: BlocBuilder<UploadBloc, UploadState>(
               builder: (context, state) => Visibility(

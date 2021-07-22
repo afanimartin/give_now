@@ -1,23 +1,24 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../blocs/upload/upload_bloc.dart';
 
 ///
 class PhoneNumberEditingWidget extends StatelessWidget {
   ///
-  const PhoneNumberEditingWidget({@required this.controller, Key key})
+  const PhoneNumberEditingWidget(
+      {@required this.controller, @required this.onChanged, Key key})
       : super(key: key);
 
   ///
   final TextEditingController controller;
 
+  ///
+  final void Function(String) onChanged;
+
   @override
   Widget build(BuildContext context) => TextField(
         controller: controller,
         keyboardType: TextInputType.phone,
-        onChanged: (String phone) =>
-            context.read<UploadBloc>().phoneChanged(phone),
+        onChanged: onChanged,
         maxLength: 10,
         decoration: InputDecoration(
             labelText: 'phone',
@@ -30,5 +31,8 @@ class PhoneNumberEditingWidget extends StatelessWidget {
     super.debugFillProperties(properties);
     properties.add(
         DiagnosticsProperty<TextEditingController>('controller', controller));
+    // ignore: cascade_invocations
+    properties.add(
+        DiagnosticsProperty<void Function(String p1)>('onChanged', onChanged));
   }
 }

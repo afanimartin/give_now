@@ -21,8 +21,8 @@
 - [x] only show products with quantity > 0
 - [x] extract constants to util class
 - [x] allow users to input quantity when uploading. default should be one
-- [] user should not add items already in their cart
-- [] delete item from carts when deleted from uploads
+- [x] user should not add items already in their cart
+- [x] delete item from carts when deleted from uploads
 - [] use standard fontSize like [headline1]
 - [] add unit tests for core logic
 - [] invite users for testing
