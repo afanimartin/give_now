@@ -21,7 +21,6 @@
 - [x] only show products with quantity > 0
 - [x] extract constants to util class
 - [x] allow users to input quantity when uploading. default should be one
-- [] decrement product quantity everytime a purchase is made
 - [] user should not add items already in their cart
 - [] delete item from carts when deleted from uploads
 - [] use standard fontSize like [headline1]
@@ -39,6 +38,7 @@
 
 ## After MVP
 - [] validate form inputs
+- [] decrement product quantity everytime a purchase is made
 - [] learn basics of design [typography]
 - [] only show floatingActionButton on item edit page when item is dirty
 - [] add search functionality

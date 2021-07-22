@@ -7,11 +7,11 @@ import '../../utils/paths.dart';
 ///
 extension UploadRepositoryExtensions on UploadRepository {
   ///
-  static Future<Item> doesItemExist(String sellerId) async {
+  static Future<Item> doesItemExist(String id) async {
     final _firebaseFirestore = FirebaseFirestore.instance;
 
     final _item =
-        await _firebaseFirestore.collection(Paths.uploads).doc(sellerId).get();
+        await _firebaseFirestore.collection(Paths.uploads).doc(id).get();
 
     return Item.fromSnapshot(_item);
   }

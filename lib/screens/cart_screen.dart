@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/cart/cart_bloc.dart';
 import '../blocs/cart/cart_event.dart';
 import '../blocs/cart/cart_state.dart';
-import '../models/cart/cart.dart';
+import '../models/item/item.dart';
 import '../models/item/sale.dart';
 import '../utils/constants.dart';
 import '../widgets/circular_avatar_widget.dart';
@@ -50,6 +50,7 @@ class _CartScreenState extends State<CartScreen> {
                   letterSpacing: Constants.onePointTwo),
             ),
             backgroundColor: Theme.of(context).accentColor,
+            iconTheme: Theme.of(context).iconTheme,
           ),
           body: state is CartItemsLoaded &&
                   state.currentUserCartItems.isNotEmpty
@@ -163,8 +164,7 @@ class _CartScreenState extends State<CartScreen> {
         );
       });
 
-  Future<Widget> _modalBottomSheet(
-      BuildContext context, List<CartItem> cartItems) {
+  Future<Widget> _modalBottomSheet(BuildContext context, List<Item> cartItems) {
     final _cartItems = <Map<String, dynamic>>[];
 
     for (var i = 0; i < cartItems.length; i++) {
@@ -200,6 +200,7 @@ class _CartScreenState extends State<CartScreen> {
                   TextField(
                     controller: _buyerPhoneNumber,
                     keyboardType: TextInputType.number,
+                    maxLength: 10,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -210,19 +211,18 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                   const SizedBox(height: Constants.six),
                   ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_buyerAddress.text.isNotEmpty &&
                             _buyerPhoneNumber.text.isNotEmpty) {
                           final _sale = Sale(
                               buyerAddress: _buyerAddress.text,
-                              buyerPhone: _buyerPhoneNumber.text,
+                              buyerPhoneNumber: _buyerPhoneNumber.text,
                               cartItems: _cartItems);
 
                           context.read<CartBloc>().add(SellItem(sale: _sale));
 
-                          context
-                              .read<CartBloc>()
-                              .updateUploadQuantity(cartItems);
+                          await Future<Duration>.delayed(
+                              const Duration(seconds: 1));
 
                           context.read<CartBloc>().deleteCartItems(cartItems);
 

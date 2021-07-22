@@ -12,6 +12,7 @@ import '../models/item/item.dart';
 import '../utils/constants.dart';
 import '../widgets/floating_action_button.dart';
 import '../widgets/progress_loader.dart';
+import 'cart_screen.dart';
 
 ///
 class ItemDetailScreen extends StatelessWidget {
@@ -25,57 +26,77 @@ class ItemDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final _images = images(item);
 
-    return Scaffold(
-      backgroundColor: Theme.of(context).accentColor,
-      appBar: AppBar(
-        elevation: 0,
-        title: Text(
-          item.title ?? '',
-          style: TextStyle(color: Theme.of(context).primaryColorDark),
-        ),
-        backgroundColor: Theme.of(context).accentColor,
-        iconTheme: Theme.of(context).iconTheme,
-      ),
-      body: Column(
-        children: [
-          _PhotoViewWidget(items: _images),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
+    return BlocBuilder<CartBloc, CartState>(
+        builder: (context, state) => Scaffold(
+            backgroundColor: Theme.of(context).accentColor,
+            appBar: AppBar(
+              elevation: 0,
+              title: Text(
                 item.title ?? '',
-                style:
-                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: TextStyle(color: Theme.of(context).primaryColorDark),
               ),
-              Text(item.description ?? ''),
-              Text(item.condition ?? ''),
-              Text(item.price.toString() ?? ''),
-              Text(item.category ?? '')
-            ],
-          )
-        ],
-      ),
-      floatingActionButton: BlocBuilder<CartBloc, CartState>(
-        builder: (context, state) {
-          if (state is CartItemsLoaded) {
-            return Visibility(
-              child: FloatingActionButtonWidget(
-                backgroundColor: Theme.of(context).primaryColor,
-                onPressed: () {
-                  context.read<CartBloc>().add(AddItemToCart(cartItem: item));
+              backgroundColor: Theme.of(context).accentColor,
+              iconTheme: Theme.of(context).iconTheme,
+            ),
+            body: state is CartItemsLoaded
+                ? Column(
+                    children: [
+                      _PhotoViewWidget(items: _images),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            item.title ?? '',
+                            style: const TextStyle(
+                                fontSize: 24, fontWeight: FontWeight.bold),
+                          ),
+                          Text(item.description ?? ''),
+                          Text(item.condition ?? ''),
+                          Text(item.price.toString() ?? ''),
+                          Text(item.category ?? '')
+                        ],
+                      ),
+                      const SizedBox(
+                        height: Constants.six,
+                      ),
+                      if (state.isItemInCart(item))
+                        Center(
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(
+                                      Theme.of(context).primaryColor)),
+                              onPressed: () => Navigator.of(context).push(
+                                  MaterialPageRoute<Widget>(
+                                      builder: (_) => const CartScreen())),
+                              child: const Text('Item in cart. Tap to checkout',
+                                  style: TextStyle(
+                                    fontSize: Constants.twenty,
+                                  )),
+                            ),
+                          ],
+                        ))
+                    ],
+                  )
+                : const Text('Something went wrong. Please try again later.'),
+            floatingActionButton: state is CartItemsLoaded
+                ? Visibility(
+                    visible: !state.isItemInCart(item),
+                    child: FloatingActionButtonWidget(
+                      backgroundColor: Theme.of(context).primaryColor,
+                      onPressed: () {
+                        context
+                            .read<CartBloc>()
+                            .add(AddItemToCart(cartItem: item));
 
-                  Navigator.of(context).pop();
-                },
-                child: const Icon(Icons.shopping_bag_outlined),
-              ),
-            );
-          }
-          return const Center(
-            child: Text('Something went wrong. Try again'),
-          );
-        },
-      ),
-    );
+                        Navigator.of(context).pop();
+                      },
+                      child: const Icon(Icons.shopping_bag_outlined),
+                    ),
+                  )
+                : const SizedBox.shrink()));
   }
 
   @override

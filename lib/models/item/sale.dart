@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 class Sale extends Equatable {
   ///
   const Sale(
-      {this.buyerPhone,
+      {this.buyerPhoneNumber,
       this.buyerAddress,
       this.cartItems,
       this.id,
@@ -15,7 +15,7 @@ class Sale extends Equatable {
   final String id;
 
   ///
-  final String buyerPhone;
+  final String buyerPhoneNumber;
 
   ///
   final String buyerAddress;
@@ -30,20 +30,20 @@ class Sale extends Equatable {
   Sale copyWith(
           {String id,
           String buyerAddress,
-          String buyerPhone,
+          String buyerPhoneNumber,
           List<Map<String, dynamic>> cartItems,
           Timestamp soldAt}) =>
       Sale(
           id: id ?? this.id,
           buyerAddress: buyerAddress ?? this.buyerAddress,
-          buyerPhone: buyerPhone ?? this.buyerPhone,
+          buyerPhoneNumber: buyerPhoneNumber ?? this.buyerPhoneNumber,
           cartItems: cartItems ?? this.cartItems,
           soldAt: soldAt ?? this.soldAt);
 
   ///
   Map<String, dynamic> toDocument() => <String, dynamic>{
         'id': id,
-        'buyer_phone': buyerPhone,
+        'buyer_phone_number': buyerPhoneNumber,
         'buyer_address': buyerAddress,
         'cart_items': cartItems,
         'sold_at': soldAt
@@ -51,5 +51,5 @@ class Sale extends Equatable {
 
   @override
   List<Object> get props =>
-      [id, buyerPhone, buyerAddress, cartItems, soldAt];
+      [id, buyerPhoneNumber, buyerAddress, cartItems, soldAt];
 }

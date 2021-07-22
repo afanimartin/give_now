@@ -1,17 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 
 ///
 class Item extends Equatable {
   ///
   const Item(
-      {
-      @required this.sellerPhoneNumber,
-      @required this.title,
-      @required this.description,
-      @required this.price,
-      @required this.category,
+      {this.sellerPhoneNumber,
+      this.title,
+      this.description,
+      this.price,
+      this.category,
       this.sellerId,
       this.sellerPhotoUrl,
       this.mainImageUrl,
@@ -19,29 +17,31 @@ class Item extends Equatable {
       this.quantity = '1',
       this.condition = 'used',
       this.buyerId,
+      this.buyerAddress,
       this.buyerPhoneNumber,
       this.otherImageUrls,
+      this.cartItems,
       this.createdAt,
       this.updatedAt});
 
   ///
   factory Item.fromSnapshot(DocumentSnapshot doc) => Item(
-      id: doc.id,
-      sellerId: doc['seller_id'] as String,
-      sellerPhotoUrl: doc['seller_photo_url'] as String,
-      sellerPhoneNumber: doc['seller_phone_number'] as String,
-      buyerId: doc['buyer_id'] as String,
-      buyerPhoneNumber: doc['buyer_phone_number'] as String,
-      title: doc['title'] as String,
-      description: doc['description'] as String,
-      quantity: doc['quantity'] as String,
-      condition: doc['condition'] as String,
-      price: doc['price'] as String,
-      category: doc['category'] as String,
-      mainImageUrl: doc['main_image_url'] as String,
-      otherImageUrls: doc['other_image_urls'] as List<dynamic>,
-      createdAt: doc['created_at'] as Timestamp,
-      updatedAt: doc['updated_at'] as Timestamp);
+        id: doc.id,
+        sellerId: doc['seller_id'] as String,
+        sellerPhotoUrl: doc['seller_photo_url'] as String,
+        sellerPhoneNumber: doc['seller_phone_number'] as String,
+        buyerId: doc['buyer_id'] as String,
+        buyerPhoneNumber: doc['buyer_phone_number'] as String,
+        title: doc['title'] as String,
+        description: doc['description'] as String,
+        quantity: doc['quantity'] as String,
+        condition: doc['condition'] as String,
+        price: doc['price'] as String,
+        category: doc['category'] as String,
+        mainImageUrl: doc['main_image_url'] as String,
+        otherImageUrls: doc['other_image_urls'] as List<dynamic>,
+        createdAt: doc['created_at'] as Timestamp,
+      );
 
   ///
   final String id;
@@ -57,6 +57,9 @@ class Item extends Equatable {
 
   ///
   final String buyerId;
+
+  ///
+  final String buyerAddress;
 
   ///
   final String buyerPhoneNumber;
@@ -86,6 +89,9 @@ class Item extends Equatable {
   final List<dynamic> otherImageUrls;
 
   ///
+  final List<Map<String, dynamic>> cartItems;
+
+  ///
   final Timestamp createdAt;
 
   ///
@@ -106,9 +112,10 @@ class Item extends Equatable {
         'price': price,
         'category': category,
         'main_image_url': mainImageUrl,
+        'other_image_urls': otherImageUrls,
+        'cart_items': cartItems,
         'created_at': createdAt,
         'updated_at': updatedAt,
-        'other_image_urls': otherImageUrls,
       };
 
   ///
@@ -118,6 +125,7 @@ class Item extends Equatable {
           String sellerPhotoUrl,
           String sellerPhoneNumber,
           String buyerId,
+          String buyerAddress,
           String buyerPhoneNumber,
           String title,
           String description,
@@ -128,24 +136,28 @@ class Item extends Equatable {
           String mainImageUrl,
           Timestamp createdAt,
           Timestamp updatedAt,
-          List<dynamic> otherImageUrls}) =>
+          List<dynamic> otherImageUrls,
+          List<Map<String, dynamic>> cartItems}) =>
       Item(
-          id: id ?? this.id,
-          sellerId: sellerId ?? this.sellerId,
-          sellerPhotoUrl: sellerPhotoUrl ?? this.sellerPhotoUrl,
-          sellerPhoneNumber: sellerPhoneNumber ?? this.sellerPhoneNumber,
-          buyerId: buyerId ?? this.buyerId,
-          buyerPhoneNumber: buyerPhoneNumber ?? buyerPhoneNumber,
-          title: title ?? this.title,
-          description: description ?? this.description,
-          quantity: quantity ?? this.quantity,
-          condition: condition ?? this.condition,
-          price: price ?? this.price,
-          category: category ?? this.category,
-          mainImageUrl: mainImageUrl ?? this.mainImageUrl,
-          createdAt: createdAt ?? this.createdAt,
-          updatedAt: updatedAt ?? this.updatedAt,
-          otherImageUrls: otherImageUrls ?? this.otherImageUrls);
+        id: id ?? this.id,
+        sellerId: sellerId ?? this.sellerId,
+        sellerPhotoUrl: sellerPhotoUrl ?? this.sellerPhotoUrl,
+        sellerPhoneNumber: sellerPhoneNumber ?? this.sellerPhoneNumber,
+        buyerId: buyerId ?? this.buyerId,
+        buyerAddress: buyerAddress ?? this.buyerAddress,
+        buyerPhoneNumber: buyerPhoneNumber ?? buyerPhoneNumber,
+        title: title ?? this.title,
+        description: description ?? this.description,
+        quantity: quantity ?? this.quantity,
+        condition: condition ?? this.condition,
+        price: price ?? this.price,
+        category: category ?? this.category,
+        mainImageUrl: mainImageUrl ?? this.mainImageUrl,
+        otherImageUrls: otherImageUrls ?? this.otherImageUrls,
+        cartItems: cartItems ?? this.cartItems,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+      );
 
   @override
   List<Object> get props => [
@@ -154,6 +166,7 @@ class Item extends Equatable {
         sellerPhotoUrl,
         sellerPhoneNumber,
         buyerId,
+        buyerAddress,
         buyerPhoneNumber,
         title,
         description,
@@ -161,8 +174,9 @@ class Item extends Equatable {
         condition,
         price,
         mainImageUrl,
+        otherImageUrls,
+        cartItems,
         createdAt,
         updatedAt,
-        otherImageUrls
       ];
 }

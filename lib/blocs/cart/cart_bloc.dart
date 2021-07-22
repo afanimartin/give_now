@@ -4,12 +4,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uuid/uuid.dart';
 
-import '../../extension_methods/upload/upload_repository_extensions.dart';
-import '../../models/cart/cart.dart';
+import '../../models/item/item.dart';
+import '../../models/item/sale.dart';
 import '../../repositories/cart/cart_repository.dart';
-import '../../repositories/upload/upload_repository.dart';
 import 'cart_event.dart';
 import 'cart_state.dart';
 
@@ -28,7 +26,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   final FirebaseAuth _firebaseAuth;
 
   ///
-  StreamSubscription<List<CartItem>> _streamSubscription;
+  StreamSubscription<List<Item>> _streamSubscription;
 
   @override
   Stream<CartState> mapEventToState(CartEvent event) async* {
@@ -51,16 +49,14 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
     _streamSubscription = _cartRepository
         .cart()
-        .listen((items) => add(UpdateCartItems(cartItems: items)));
+        .listen((items) => add(UpdateCartItems(items: items)));
   }
 
   Stream<CartState> _mapUpdateCartItemsToState(UpdateCartItems event) async* {
     yield LoadingCartItems();
 
     try {
-      // await _cartRepository.docId();
-
-      yield CartItemsLoaded(cartItems: event.cartItems);
+      yield CartItemsLoaded(items: event.items);
     } on Exception catch (_) {}
   }
 
@@ -69,12 +65,13 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     yield AddingItemToCart();
 
     try {
-      // grab item's doc.id and assign to id of cart item
-      final cartItem = CartItem(
+      final cartItem = Item(
           id: event.cartItem.id,
           buyerId: _firebaseAuth.currentUser.uid,
           sellerId: event.cartItem.sellerId,
+          sellerPhoneNumber: event.cartItem.sellerPhoneNumber,
           title: event.cartItem.title,
+          category: event.cartItem.category,
           mainImageUrl: event.cartItem.mainImageUrl,
           price: event.cartItem.price,
           createdAt: Timestamp.now());
@@ -97,12 +94,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
   ///
   Stream<CartState> _mapSellItemToState(SellItem event) async* {
-    const uuid = Uuid();
     try {
-      final _sale = event.sale.copyWith(
-          id: uuid.v4(),
+      final _sale = Sale(
           buyerAddress: event.sale.buyerAddress,
-          buyerPhone: event.sale.buyerPhone,
+          buyerPhoneNumber: event.sale.buyerPhoneNumber,
           cartItems: event.sale.cartItems,
           soldAt: Timestamp.now());
 
@@ -111,25 +106,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   }
 
   ///
-  void updateUploadQuantity(List<CartItem> cartItems) async {
-    final _uploadRepository = UploadRepository();
-
-    for (var i = 0; i < cartItems.length; i++) {
-      final _item =
-          await UploadRepositoryExtensions.doesItemExist(cartItems[i].sellerId);
-
-      // if item exists, update it's quantity
-      if (_item != null) {
-        final _quantity = int.parse(_item.quantity) - 1;
-        final _updated = _item.copyWith(quantity: _quantity as String);
-
-        await _uploadRepository.update(_updated);
-      }
-    }
-  }
-
-  ///
-  void deleteCartItems(List<CartItem> cartItems) {
+  void deleteCartItems(List<Item> cartItems) {
     for (var i = 0; i < cartItems.length; i++) {
       _cartRepository.delete(cartItems[i]);
     }
