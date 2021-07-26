@@ -1,16 +1,69 @@
-# Samaria
+# Moostamil (means 'used' in *Arabic*)
 
 A fun flutter app for selling/buying used items and donating items to the less privileged in the society like the refugees and street kids.
 
+![screenshot](./app_screenshot.png)
+
+Additional description about the project and its features.
+
+## Built With
+
+- Flutter
+- Flutter Bloc
+- Firebase
+
+## Live Demo
+
+[Live Demo Link](https://livedemo.com)
+
+
 ## Getting Started
+To get a local copy up and running follow these simple example steps.
 
-This project is a starting point for a Flutter application.
+### Prerequisites
+- Dart SDK: install from [here](https://dart.dev/get-dart)
+- Flutter: install from [here](https://flutter.dev/docs/get-started/install)
 
-A few resources to get you started if this is your first Flutter project:
+### Setup
+- Clone the repo: `git clone `
+- Change directory: `cd to-folder-where-app-is-cloned`
+- Install dependencies: `flutter pub get`
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### Install
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Usage
+- `flutter run`
+
+### Run tests
+- `flutter test`
+
+### Deployment
+
+
+
+## Authors
+
+👤 **Author1**
+
+- GitHub: [@githubhandle](https://github.com/afanimartin)
+- Twitter: [@twitterhandle](https://twitter.com/afanimartin)
+- LinkedIn: [LinkedIn](https://linkedin.com/in/martin-afani)
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+Feel free to check the [issues page](../../issues/).
+
+## Show your support
+
+Give a ⭐️ if you like this project!
+
+## Acknowledgments
+
+- [Bloc Library](bloclibrary.dev)
+
+## 📝 License
+
+This project is [MIT](./MIT.md) licensed.
+
