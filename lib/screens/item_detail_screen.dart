@@ -33,7 +33,7 @@ class ItemDetailScreen extends StatelessWidget {
               elevation: 0,
               title: Text(
                 item.title ?? '',
-                style: TextStyle(color: Theme.of(context).primaryColorDark),
+                style: Theme.of(context).textTheme.headline5,
               ),
               backgroundColor: Theme.of(context).accentColor,
               iconTheme: Theme.of(context).iconTheme,
@@ -48,7 +48,9 @@ class ItemDetailScreen extends StatelessWidget {
                           Text(
                             item.title ?? '',
                             style: const TextStyle(
-                                fontSize: 24, fontWeight: FontWeight.bold),
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: Constants.onePointTwo),
                           ),
                           Text(item.description ?? ''),
                           Text(item.condition ?? ''),

@@ -21,9 +21,9 @@ const LinearGradient postGradient = LinearGradient(
 
 ///
 ThemeData appTheme() => ThemeData(
-      primaryColor: primaryColor,
-      primaryColorLight: whiteColor,
-      primaryColorDark: blackColor,
-      accentColor: secondaryColor,
-      iconTheme: const IconThemeData(color: blackColor, size: Constants.thirty),
-    );
+    primaryColor: primaryColor,
+    primaryColorLight: whiteColor,
+    primaryColorDark: blackColor,
+    accentColor: secondaryColor,
+    iconTheme: const IconThemeData(color: blackColor, size: Constants.thirty),
+    textTheme: const TextTheme(subtitle1: TextStyle(fontSize: 24)));

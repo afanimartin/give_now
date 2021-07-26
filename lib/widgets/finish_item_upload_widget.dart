@@ -13,7 +13,6 @@ import 'condition_editing_widget.dart';
 import 'description_editing_widget.dart';
 import 'phone_number_widget.dart';
 import 'price_editing_widget.dart';
-import 'quantity_editing_widget.dart';
 import 'submit_button_widget.dart';
 import 'title_editing_widget.dart';
 

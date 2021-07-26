@@ -23,8 +23,12 @@
 - [x] allow users to input quantity when uploading. default should be one
 - [x] user should not add items already in their cart
 - [x] delete item from carts when deleted from uploads
-- [] use standard fontSize like [headline1]
+- [x] change app name to [moostamil]
 - [] add unit tests for core logic
+- [] let user complete profile after signup
+- [] validate user inputs
+- [] create a simple logo for the app
+- [] redesign the login page 
 - [] invite users for testing
 
 ## Test cases 
@@ -37,6 +41,7 @@
 - [] remove item from cart 
 
 ## After MVP
+- [] use standard fontSize like [headline1]
 - [] validate form inputs
 - [] decrement product quantity everytime a purchase is made
 - [] learn basics of design [typography]

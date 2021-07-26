@@ -34,7 +34,6 @@ class AuthenticationBloc
     if (event is AppStarted) {
       yield _mapAppStartedToState(event);
     } else if (event is LogOut) {
-      // unawaited(_authenticationRepository.logOut());
       yield* _mapLogoutToState();
     }
   }
@@ -47,8 +46,6 @@ class AuthenticationBloc
   Stream<AuthenticationState> _mapLogoutToState() async* {
     try {
       await _authenticationRepository.logOut();
-
-      // yield* _mapAppStartedToState(event);
     } on Exception catch (_) {}
   }
 }

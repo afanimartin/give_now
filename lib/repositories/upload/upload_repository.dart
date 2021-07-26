@@ -10,8 +10,8 @@ class UploadRepository extends IUploadRepository {
 
   ///
   @override
-  Future<void> upload(Item item) async {
-    await _firebaseFirestore
+  Future<void> upload(Item item, FirebaseFirestore firebaseFirestore) async {
+    await firebaseFirestore
         .collection(Paths.uploads)
         .doc(item.id)
         .set(item.toDocument());

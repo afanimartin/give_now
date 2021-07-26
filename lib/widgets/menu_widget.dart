@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:give_now/blocs/cart/cart_bloc.dart';
-import 'package:give_now/blocs/cart/cart_event.dart';
+import '../blocs/cart/cart_bloc.dart';
+import '../blocs/cart/cart_event.dart';
 
 import '../blocs/donation/donation_bloc.dart';
 import '../blocs/donation/donation_event.dart';

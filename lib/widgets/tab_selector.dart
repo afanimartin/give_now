@@ -6,7 +6,7 @@ import '../blocs/cart/cart_state.dart';
 import '../models/app_tab/app_tab.dart';
 
 ///
-class TabSelector extends StatelessWidget {
+class TabSelector extends StatefulWidget {
   ///
   const TabSelector(
       {@required this.activeTab, @required this.onTabSelected, Key key})
@@ -18,14 +18,26 @@ class TabSelector extends StatelessWidget {
   ///
   final Function(AppTab) onTabSelected;
 
-  // ignore: avoid_field_initializers_in_const_classes
+  @override
+  _TabSelectorState createState() => _TabSelectorState();
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(EnumProperty<AppTab>('activeTab', activeTab));
+    // ignore: cascade_invocations
+    properties.add(DiagnosticsProperty<Function(AppTab p1)>(
+        'onTabSelected', onTabSelected));
+  }
+}
+
+class _TabSelectorState extends State<TabSelector> {
   final double _size = 30;
 
   @override
   Widget build(BuildContext context) => BottomNavigationBar(
       elevation: 20,
-      currentIndex: AppTab.values.indexOf(activeTab),
-      onTap: (index) => onTabSelected(AppTab.values[index]),
+      currentIndex: AppTab.values.indexOf(widget.activeTab),
+      onTap: (index) => widget.onTabSelected(AppTab.values[index]),
       backgroundColor: Theme.of(context).accentColor,
       items: AppTab.values
           .map((tab) => BottomNavigationBarItem(
@@ -97,9 +109,9 @@ class TabSelector extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(EnumProperty<AppTab>('activeTab', activeTab));
+    properties.add(EnumProperty<AppTab>('activeTab', widget.activeTab));
     // ignore: cascade_invocations
     properties.add(DiagnosticsProperty<Function(AppTab p1)>(
-        'onTabSelected', onTabSelected));
+        'onTabSelected', widget.onTabSelected));
   }
 }
