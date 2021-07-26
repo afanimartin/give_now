@@ -1,8 +1,17 @@
 # Moostamil (means 'used' in *Arabic*)
 
 A fun flutter app for selling/buying used items and donating items to the less privileged in the society like the refugees and street kids.
-
-![screenshot](./app_screenshot.png)
+<div>
+  <img align=top src='./assets/screenshots/home_page.png' width=300>
+  <img align=top src='./assets/screenshots/item_details.png' width=300>
+  <img align=top src='./assets/screenshots/profile.png' width=300>
+  <img align=top src='./assets/screenshots/select_image.png' width=300>
+  <img align=top src='./assets/screenshots/image_selection.png' width=300>
+  <img align=top src='./assets/screenshots/photos_preview.png' width=300>
+  <img align=top src='./assets/screenshots/upload_details.png' width=300>
+  <img align=top src='./assets/screenshots/uploading.png' width=300>
+  <img align=top src='./assets/screenshots/cart_list.png' width=300>
+</div>
 
 Additional description about the project and its features.
 
