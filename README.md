@@ -38,25 +38,19 @@ To get a local copy up and running follow these simple example steps.
 - Change directory: `cd to-folder-where-app-is-cloned`
 - Install dependencies: `flutter pub get`
 
-### Install
-
 ### Usage
 - `flutter run`
 
 ### Run tests
 - `flutter test`
 
-### Deployment
-
-
-
 ## Authors
 
-👤 **Author1**
+👤 **Afani Martin**
 
-- GitHub: [@githubhandle](https://github.com/afanimartin)
-- Twitter: [@twitterhandle](https://twitter.com/afanimartin)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/martin-afani)
+- GitHub: [@afanimartin](https://github.com/afanimartin)
+- Twitter: [@afanimartin](https://twitter.com/afanimartin)
+- LinkedIn: [@martin-afani](https://linkedin.com/in/martin-afani/)
 
 ## 🤝 Contributing
 
@@ -70,7 +64,7 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-- [Bloc Library](bloclibrary.dev)
+- [Bloc Library](https://bloclibrary.dev/#/)
 
 ## 📝 License
 
