@@ -13,20 +13,5 @@ class FinishItemUploadScreen extends StatefulWidget {
 
 class _FinishItemUploadScreenState extends State<FinishItemUploadScreen> {
   @override
-  Widget build(BuildContext context) => Scaffold(
-      backgroundColor: Theme.of(context).accentColor,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Theme.of(context).accentColor,
-        title: Text(
-          'Finish item upload',
-          style: TextStyle(
-              color: Theme.of(context).primaryColorDark, letterSpacing: 1),
-        ),
-        iconTheme: Theme.of(context).iconTheme,
-      ),
-      body: const Padding(
-        padding: EdgeInsets.all(8),
-        child: FinishItemUploadWidget(),
-      ));
+  Widget build(BuildContext context) => const FinishItemUploadWidget();
 }

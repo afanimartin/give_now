@@ -29,6 +29,7 @@ class LogInScreen extends StatelessWidget {
                   child: Image.asset(
                     'assets/givenow-logo.png',
                     height: Constants.oneFifty,
+                    fit: BoxFit.cover,
                   ),
                 ),
                 const SizedBox(
@@ -56,7 +57,7 @@ class _GoogleLogInButton extends StatelessWidget {
           children: [
             Image.asset(
               'assets/google_logo.png',
-              height: Constants.threeHundred,
+              height: Constants.twenty,
             ),
             const SizedBox(width: 4),
             Text(

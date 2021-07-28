@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:moostamil/blocs/upload/upload_event.dart';
+import 'package:moostamil/screens/user_profile_screen.dart';
 
 import '../blocs/upload/upload_bloc.dart';
 import '../blocs/upload/upload_state.dart';
@@ -34,9 +36,17 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
   String _conditionValue = conditionList[0];
   String _categoryValue = categoryList[0];
 
+  bool _isFormValid;
+
   @override
   Widget build(BuildContext context) => BlocBuilder<UploadBloc, UploadState>(
         builder: (context, state) {
+          _isFormValid = _titleContentController.text.isNotEmpty &&
+              _descriptionContentController.text.isNotEmpty &&
+              _priceContentController.text.isNotEmpty &&
+              _phoneController.text.isNotEmpty &&
+              _phoneController.text.length == 10;
+
           final _item = Item(
               title: _titleContentController.text,
               description: _descriptionContentController.text,
@@ -45,90 +55,118 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
               category: _categoryValue,
               sellerPhoneNumber: _phoneController.text);
 
-          return Align(
-            alignment: const Alignment(0, -1),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TitleEditingWidget(
-                    controller: _titleContentController,
-                    onChanged: (String title) =>
-                        context.read<UploadBloc>().titleChanged(title),
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).primaryColorDark)),
-                      labelText: 'title',
-                      helperText: '',
-                    ),
+          return Scaffold(
+            backgroundColor: Theme.of(context).accentColor,
+            appBar: AppBar(
+              backgroundColor: Theme.of(context).accentColor,
+              title: Text(
+                'Finish item upload',
+                style: TextStyle(
+                    color: Theme.of(context).primaryColorDark,
+                    letterSpacing: 1),
+              ),
+              iconTheme: Theme.of(context).iconTheme,
+            ),
+            body: Padding(
+              padding: const EdgeInsets.all(Constants.eight),
+              child: Align(
+                alignment: const Alignment(0, -1),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TitleEditingWidget(
+                        controller: _titleContentController,
+                        onChanged: (String title) =>
+                            context.read<UploadBloc>().titleChanged(title),
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).primaryColorDark)),
+                          labelText: 'title',
+                          helperText: '',
+                        ),
+                      ),
+                      const SizedBox(
+                        height: Constants.six,
+                      ),
+                      DescriptionEditingWidget(
+                        controller: _descriptionContentController,
+                        maxLength: Constants.fiveHundred,
+                        onChanged: (String description) => context
+                            .read<UploadBloc>()
+                            .descriptionChanged(description),
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).primaryColorDark)),
+                          labelText: 'description',
+                          helperText: '',
+                        ),
+                      ),
+                      const SizedBox(
+                        height: Constants.six,
+                      ),
+                      PriceEditingWidget(
+                        controller: _priceContentController,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).primaryColorDark)),
+                            labelText: 'price'),
+                      ),
+                      const SizedBox(
+                        height: Constants.six,
+                      ),
+                      PhoneNumberEditingWidget(
+                        controller: _phoneController,
+                        onChanged: (String phone) =>
+                            context.read<UploadBloc>().phoneChanged(phone),
+                      ),
+                      const SizedBox(
+                        height: Constants.six,
+                      ),
+                      CategoryEditingWidget(
+                        categoryValue: _categoryValue,
+                        onChanged: (String value) {
+                          setState(() {
+                            _categoryValue = value;
+                          });
+                        },
+                      ),
+                      const SizedBox(
+                        height: Constants.six,
+                      ),
+                      ConditonEditingWidget(
+                          conditionValue: _conditionValue,
+                          onChanged: (String value) {
+                            setState(() {
+                              _conditionValue = value;
+                            });
+                          }),
+                      const SizedBox(
+                        height: Constants.six,
+                      ),
+                    ],
                   ),
-                  const SizedBox(
-                    height: Constants.six,
-                  ),
-                  DescriptionEditingWidget(
-                    controller: _descriptionContentController,
-                    maxLength: Constants.fiveHundred,
-                    onChanged: (String description) => context
-                        .read<UploadBloc>()
-                        .descriptionChanged(description),
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).primaryColorDark)),
-                      labelText: 'description',
-                      helperText: '',
-                    ),
-                  ),
-                  const SizedBox(
-                    height: Constants.six,
-                  ),
-                  PriceEditingWidget(
-                    controller: _priceContentController,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Theme.of(context).primaryColorDark)),
-                        labelText: 'price'),
-                  ),
-                  const SizedBox(
-                    height: Constants.six,
-                  ),
-                  PhoneNumberEditingWidget(
-                    controller: _phoneController,
-                    onChanged: (String phone) =>
-                        context.read<UploadBloc>().phoneChanged(phone),
-                  ),
-                  const SizedBox(
-                    height: Constants.six,
-                  ),
-                  CategoryEditingWidget(
-                    categoryValue: _categoryValue,
-                    onChanged: (String value) {
-                      setState(() {
-                        _categoryValue = value;
-                      });
-                    },
-                  ),
-                  const SizedBox(
-                    height: Constants.six,
-                  ),
-                  ConditonEditingWidget(
-                      conditionValue: _conditionValue,
-                      onChanged: (String value) {
-                        setState(() {
-                          _conditionValue = value;
-                        });
-                      }),
-                  const SizedBox(
-                    height: Constants.six,
-                  ),
-                  SubmitButtonWidget(
-                    item: _item,
-                  )
-                ],
+                ),
               ),
             ),
+            floatingActionButton: Visibility(
+                visible: _isFormValid,
+                child: FloatingActionButton(
+                  backgroundColor: Theme.of(context).primaryColor,
+                  onPressed: () {
+                    context.read<UploadBloc>().add(UploadItem(item: _item));
+
+                    Navigator.of(context).pushAndRemoveUntil<void>(
+                        UserProfileScreen.route, (route) => false);
+                  },
+                  child: const Icon(
+                    Icons.check,
+                    size: Constants.thirty,
+                  ),
+                )),
           );
         },
       );
