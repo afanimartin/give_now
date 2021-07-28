@@ -27,18 +27,19 @@ class Item extends Equatable {
   ///
   factory Item.fromSnapshot(DocumentSnapshot doc) => Item(
         id: doc.id,
-        buyerId: doc['buyer_id'] as String,
         sellerId: doc['seller_id'] as String,
         sellerPhotoUrl: doc['seller_photo_url'] as String,
         sellerPhoneNumber: doc['seller_phone_number'] as String,
         title: doc['title'] as String,
         description: doc['description'] as String,
+        quantity: doc['quantity'] as String,
         condition: doc['condition'] as String,
-        category: doc['category'] as String,
         price: doc['price'] as String,
+        category: doc['category'] as String,
         mainImageUrl: doc['main_image_url'] as String,
         otherImageUrls: doc['other_image_urls'] as List<dynamic>,
         createdAt: doc['created_at'] as Timestamp,
+        updatedAt: doc['updated_at'] as Timestamp,
       );
 
   ///
