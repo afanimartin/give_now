@@ -6,7 +6,6 @@ import '../blocs/cart/cart_bloc.dart';
 import '../blocs/cart/cart_event.dart';
 import '../blocs/cart/cart_state.dart';
 import '../models/item/item.dart';
-import '../models/item/sale.dart';
 import '../utils/constants.dart';
 import '../widgets/circular_avatar_widget.dart';
 import '../widgets/floating_action_button.dart';
@@ -41,7 +40,6 @@ class _CartScreenState extends State<CartScreen> {
           backgroundColor: Theme.of(context).accentColor,
           appBar: AppBar(
             centerTitle: true,
-            elevation: 0,
             title: Text(
               'Complete purchase',
               style: TextStyle(
@@ -67,6 +65,7 @@ class _CartScreenState extends State<CartScreen> {
 
                             return Padding(
                               padding: EdgeInsets.symmetric(
+                                  vertical: Constants.eight,
                                   horizontal:
                                       MediaQuery.of(context).size.width /
                                           Constants.horizontalPadding),
@@ -123,7 +122,10 @@ class _CartScreenState extends State<CartScreen> {
                             );
                           }),
                       Padding(
-                        padding: const EdgeInsets.all(Constants.six),
+                        padding: EdgeInsets.symmetric(
+                            vertical: Constants.eight,
+                            horizontal: MediaQuery.of(context).size.width /
+                                Constants.horizontalPadding),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -168,7 +170,7 @@ class _CartScreenState extends State<CartScreen> {
     final _cartItems = <Map<String, dynamic>>[];
 
     for (var i = 0; i < cartItems.length; i++) {
-      _cartItems.add(cartItems[i].toDocument());
+      _cartItems.add(cartItems[i].toItemDocument());
     }
 
     return showModalBottomSheet(
@@ -214,12 +216,14 @@ class _CartScreenState extends State<CartScreen> {
                       onPressed: () async {
                         if (_buyerAddress.text.isNotEmpty &&
                             _buyerPhoneNumber.text.isNotEmpty) {
-                          final _sale = Sale(
+                          final _sale = Item(
                               buyerAddress: _buyerAddress.text,
                               buyerPhoneNumber: _buyerPhoneNumber.text,
                               cartItems: _cartItems);
 
-                          context.read<CartBloc>().add(SellItem(sale: _sale));
+                          context
+                              .read<CartBloc>()
+                              .add(CheckoutItem(sale: _sale));
 
                           await Future<Duration>.delayed(
                               const Duration(seconds: 1));

@@ -1,7 +1,5 @@
 import '../../models/item/item.dart';
 
-import '../../models/item/sale.dart';
-
 ///
 abstract class ICartRepostiory {
   ///
@@ -11,7 +9,7 @@ abstract class ICartRepostiory {
   Future<void> delete(Item item);
 
   ///
-  Future<void> checkout(Sale sale);
+  Future<void> checkout(Item sale);
 
   ///
   Stream<List<Item>> cart();

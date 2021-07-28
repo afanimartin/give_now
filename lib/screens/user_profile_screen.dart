@@ -5,11 +5,8 @@ import 'package:timeago/timeago.dart' as timeago;
 import '../blocs/authentication/authentication_bloc.dart';
 import '../blocs/item/item_bloc.dart';
 import '../blocs/item/item_state.dart';
-import '../blocs/tab/tab_bloc.dart';
-import '../blocs/tab/tab_event.dart';
 import '../blocs/upload/upload_bloc.dart';
 import '../blocs/upload/upload_state.dart';
-import '../models/app_tab/app_tab.dart';
 import '../utils/constants.dart';
 import '../widgets/circular_avatar_widget.dart';
 import '../widgets/progress_loader.dart';
@@ -17,27 +14,13 @@ import 'edit_item_screen.dart';
 import 'log_in_screen.dart';
 
 ///
-class UserProfileScreen extends StatefulWidget {
+class UserProfileScreen extends StatelessWidget {
   ///
   const UserProfileScreen({Key key}) : super(key: key);
 
   ///
   static Route get route =>
-      MaterialPageRoute<Widget>(builder: (_) => const UserProfileScreen());
-
-  @override
-  _UserProfileScreenState createState() => _UserProfileScreenState();
-}
-
-class _UserProfileScreenState extends State<UserProfileScreen> {
-  TabBloc _tabBloc;
-  @override
-  void initState() {
-    super.initState();
-
-    _tabBloc = TabBloc();
-    _tabBloc.add(const UpdateTab(tab: AppTab.profile));
-  }
+      MaterialPageRoute<void>(builder: (_) => const UserProfileScreen());
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +30,12 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       builder: (context, state) => Scaffold(
         backgroundColor: Theme.of(context).accentColor,
         appBar: AppBar(
-          elevation: 0,
           title: Text(
             'Profile',
             style: TextStyle(
                 color: Theme.of(context).primaryColorDark,
                 fontSize: 28,
-                letterSpacing: 1.2),
+                letterSpacing: Constants.onePointTwo),
           ),
           backgroundColor: Theme.of(context).accentColor,
           actions: [

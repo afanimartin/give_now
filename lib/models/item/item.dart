@@ -27,20 +27,26 @@ class Item extends Equatable {
   ///
   factory Item.fromSnapshot(DocumentSnapshot doc) => Item(
         id: doc.id,
+        buyerId: doc['buyer_id'] as String,
         sellerId: doc['seller_id'] as String,
         sellerPhotoUrl: doc['seller_photo_url'] as String,
         sellerPhoneNumber: doc['seller_phone_number'] as String,
-        buyerId: doc['buyer_id'] as String,
-        buyerPhoneNumber: doc['buyer_phone_number'] as String,
         title: doc['title'] as String,
         description: doc['description'] as String,
-        quantity: doc['quantity'] as String,
         condition: doc['condition'] as String,
-        price: doc['price'] as String,
         category: doc['category'] as String,
+        price: doc['price'] as String,
         mainImageUrl: doc['main_image_url'] as String,
         otherImageUrls: doc['other_image_urls'] as List<dynamic>,
         createdAt: doc['created_at'] as Timestamp,
+      );
+
+  ///
+  factory Item.fromCartSnapshot(DocumentSnapshot doc) => Item(
+        buyerId: doc['buyer_id'] as String,
+        title: doc['title'] as String,
+        price: doc['price'] as String,
+        mainImageUrl: doc['main_image_url'] as String,
       );
 
   ///
@@ -98,13 +104,11 @@ class Item extends Equatable {
   final Timestamp updatedAt;
 
   ///
-  Map<String, dynamic> toDocument() => <String, dynamic>{
+  Map<String, dynamic> toItemDocument() => <String, dynamic>{
         'id': id,
         'seller_id': sellerId,
         'seller_photo_url': sellerPhotoUrl,
         'seller_phone_number': sellerPhoneNumber,
-        'buyer_id': buyerId,
-        'buyer_phone_number': buyerPhoneNumber,
         'title': title,
         'description': description,
         'quantity': quantity,
@@ -113,9 +117,32 @@ class Item extends Equatable {
         'category': category,
         'main_image_url': mainImageUrl,
         'other_image_urls': otherImageUrls,
-        'cart_items': cartItems,
         'created_at': createdAt,
         'updated_at': updatedAt,
+      };
+
+  ///
+  Map<String, dynamic> toCartDocument() => <String, dynamic>{
+        'id': id,
+        'buyer_id': buyerId,
+        'title': title,
+        'price': price,
+        'category': category,
+        'condition': condition,
+        'main_image_url': mainImageUrl,
+        'added_at': createdAt,
+      };
+
+  ///
+  Map<String, dynamic> toSaleDocument() => <String, dynamic>{
+        'id': id,
+        'buyer_id': buyerId,
+        'buyer_address': buyerAddress,
+        'buyer_phone_number': buyerPhoneNumber,
+        'seller_id': sellerId,
+        'seller_phone_number': sellerPhoneNumber,
+        'cart_items': cartItems,
+        'sold_at': createdAt,
       };
 
   ///

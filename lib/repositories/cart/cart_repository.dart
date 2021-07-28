@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../models/item/item.dart';
 
-import '../../models/item/sale.dart';
 import '../../utils/paths.dart';
 import 'i_cart_repository.dart';
 
@@ -14,7 +13,7 @@ class CartRepository extends ICartRepostiory {
     await _firebaseFirestore
         .collection(Paths.carts)
         .doc(item.id)
-        .set(item.toDocument());
+        .set(item.toCartDocument());
   }
 
   @override
@@ -24,15 +23,15 @@ class CartRepository extends ICartRepostiory {
 
   ///
   @override
-  Future<void> checkout(Sale sale) async {
+  Future<void> checkout(Item sale) async {
     await _firebaseFirestore
         .collection(Paths.sales)
         .doc(sale.id)
-        .set(sale.toDocument());
+        .set(sale.toSaleDocument());
   }
 
   @override
   Stream<List<Item>> cart() =>
       _firebaseFirestore.collection(Paths.carts).snapshots().map((snapshot) =>
-          snapshot.docs.map((doc) => Item.fromSnapshot(doc)).toList());
+          snapshot.docs.map((doc) => Item.fromCartSnapshot(doc)).toList());
 }

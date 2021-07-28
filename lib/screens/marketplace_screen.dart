@@ -30,7 +30,6 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
         builder: (context, state) => Scaffold(
           backgroundColor: Theme.of(context).accentColor,
           appBar: AppBar(
-            elevation: 0,
             title: Text(
               'Dalala',
               style: TextStyle(
@@ -50,8 +49,12 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
             ],
           ),
           body: state is ItemsLoaded && state.itemsForSale.isNotEmpty
-              ? CustomScrollView(
-                  slivers: [ItemsGrid(items: state.itemsForSale)],
+              ? Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: Constants.eight),
+                  child: CustomScrollView(
+                    slivers: [ItemsGrid(items: state.itemsForSale)],
+                  ),
                 )
               : const Center(
                   child: Text(

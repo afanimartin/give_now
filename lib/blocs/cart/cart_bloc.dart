@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../models/item/item.dart';
-import '../../models/item/sale.dart';
 import '../../repositories/cart/cart_repository.dart';
 import 'cart_event.dart';
 import 'cart_state.dart';
@@ -38,7 +37,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       yield* _mapRemoveItemFromCartToState(event);
     } else if (event is AddItemToCart) {
       yield* _mapAddItemToCartToState(event);
-    } else if (event is SellItem) {
+    } else if (event is CheckoutItem) {
       yield* _mapSellItemToState(event);
     }
   }
@@ -93,13 +92,16 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   }
 
   ///
-  Stream<CartState> _mapSellItemToState(SellItem event) async* {
+  Stream<CartState> _mapSellItemToState(CheckoutItem event) async* {
     try {
-      final _sale = Sale(
+      final _sale = event.sale.copyWith(
+          buyerId: _firebaseAuth.currentUser.uid,
           buyerAddress: event.sale.buyerAddress,
           buyerPhoneNumber: event.sale.buyerPhoneNumber,
+          sellerId: event.sale.sellerId,
+          sellerPhoneNumber: event.sale.sellerPhoneNumber,
           cartItems: event.sale.cartItems,
-          soldAt: Timestamp.now());
+          createdAt: Timestamp.now());
 
       await _cartRepository.checkout(_sale);
     } on Exception catch (_) {}

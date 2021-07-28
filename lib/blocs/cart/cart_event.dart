@@ -2,7 +2,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/item/item.dart';
-import '../../models/item/sale.dart';
 
 ///
 class CartEvent extends Equatable {
@@ -41,12 +40,12 @@ class AddItemToCart extends CartEvent {
 }
 
 ///
-class SellItem extends CartEvent {
+class CheckoutItem extends CartEvent {
   ///
-  const SellItem({@required this.sale});
+  const CheckoutItem({@required this.sale});
 
   ///
-  final Sale sale;
+  final Item sale;
 
   ///
   @override

@@ -82,7 +82,11 @@ class ItemDetailScreen extends StatelessWidget {
                         ))
                     ],
                   )
-                : const Text('Something went wrong. Please try again later.'),
+                : const Center(
+                    child: Text(
+                    'Something went wrong. Please try again later.',
+                    style: TextStyle(fontSize: Constants.twenty),
+                  )),
             floatingActionButton: state is CartItemsLoaded
                 ? Visibility(
                     visible: !state.isItemInCart(item),
