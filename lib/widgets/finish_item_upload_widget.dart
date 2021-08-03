@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:moostamil/blocs/upload/upload_event.dart';
-import 'package:moostamil/screens/user_profile_screen.dart';
 
 import '../blocs/upload/upload_bloc.dart';
+import '../blocs/upload/upload_event.dart';
 import '../blocs/upload/upload_state.dart';
 import '../models/item/item.dart';
+import '../screens/user_profile_screen.dart';
 import '../utils/category.dart';
 import '../utils/condition.dart';
 import '../utils/constants.dart';
@@ -15,7 +15,6 @@ import 'condition_editing_widget.dart';
 import 'description_editing_widget.dart';
 import 'phone_number_widget.dart';
 import 'price_editing_widget.dart';
-import 'submit_button_widget.dart';
 import 'title_editing_widget.dart';
 
 ///

@@ -15,7 +15,7 @@ class SplashScreen extends StatelessWidget {
         color: Theme.of(context).primaryColorLight,
         child: Center(
             child: Image.asset(
-          'assets/givenow-logo.png',
+          'assets/moostamil.png',
           height: Constants.oneHundred,
         )),
       );

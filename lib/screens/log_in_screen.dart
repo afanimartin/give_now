@@ -27,7 +27,7 @@ class LogInScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: Constants.oneHundred),
                   child: Image.asset(
-                    'assets/givenow-logo.png',
+                    'assets/moostamil.png',
                     height: Constants.oneFifty,
                     fit: BoxFit.cover,
                   ),

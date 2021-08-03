@@ -14,7 +14,7 @@ class UploadRepository extends IUploadRepository {
     await firebaseFirestore
         .collection(Paths.uploads)
         .doc(item.id)
-        .set(item.toItemDocument());
+        .set(item.toDocument());
   }
 
   ///
@@ -23,7 +23,7 @@ class UploadRepository extends IUploadRepository {
     await _firebaseFirestore
         .collection(Paths.uploads)
         .doc(item.id)
-        .update(item.toItemDocument());
+        .update(item.toDocument());
   }
 
   ///

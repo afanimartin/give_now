@@ -9,7 +9,6 @@ import '../models/item/item.dart';
 import '../utils/constants.dart';
 import '../widgets/circular_avatar_widget.dart';
 import '../widgets/floating_action_button.dart';
-import '../widgets/progress_loader.dart';
 
 ///
 class CartScreen extends StatefulWidget {
@@ -29,14 +28,7 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) =>
-      BlocBuilder<CartBloc, CartState>(builder: (context, state) {
-        if (state is ItemBeingRemovedFromCart) {
-          return ProgressLoader(
-            color: Theme.of(context).accentColor,
-            backgroundColor: Theme.of(context).accentColor,
-          );
-        }
-        return Scaffold(
+      BlocBuilder<CartBloc, CartState>(builder: (context, state) => Scaffold(
           backgroundColor: Theme.of(context).accentColor,
           appBar: AppBar(
             centerTitle: true,
@@ -65,7 +57,7 @@ class _CartScreenState extends State<CartScreen> {
 
                             return Padding(
                               padding: EdgeInsets.symmetric(
-                                  vertical: Constants.eight,
+                                  vertical: Constants.six,
                                   horizontal:
                                       MediaQuery.of(context).size.width /
                                           Constants.horizontalPadding),
@@ -163,14 +155,13 @@ class _CartScreenState extends State<CartScreen> {
               ),
             ),
           ),
-        );
-      });
+        ));
 
   Future<Widget> _modalBottomSheet(BuildContext context, List<Item> cartItems) {
     final _cartItems = <Map<String, dynamic>>[];
 
     for (var i = 0; i < cartItems.length; i++) {
-      _cartItems.add(cartItems[i].toItemDocument());
+      _cartItems.add(cartItems[i].toDocument());
     }
 
     return showModalBottomSheet(

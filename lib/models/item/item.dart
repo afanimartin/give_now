@@ -27,7 +27,8 @@ class Item extends Equatable {
   ///
   factory Item.fromSnapshot(DocumentSnapshot doc) => Item(
         id: doc.id,
-        sellerId: doc['seller_id'] as String,
+        buyerId: doc['buyer_id'] as String ?? '',
+        sellerId: doc['seller_id'] as String ?? '',
         sellerPhotoUrl: doc['seller_photo_url'] as String,
         sellerPhoneNumber: doc['seller_phone_number'] as String,
         title: doc['title'] as String,
@@ -40,14 +41,6 @@ class Item extends Equatable {
         otherImageUrls: doc['other_image_urls'] as List<dynamic>,
         createdAt: doc['created_at'] as Timestamp,
         updatedAt: doc['updated_at'] as Timestamp,
-      );
-
-  ///
-  factory Item.fromCartSnapshot(DocumentSnapshot doc) => Item(
-        buyerId: doc['buyer_id'] as String,
-        title: doc['title'] as String,
-        price: doc['price'] as String,
-        mainImageUrl: doc['main_image_url'] as String,
       );
 
   ///
@@ -105,8 +98,9 @@ class Item extends Equatable {
   final Timestamp updatedAt;
 
   ///
-  Map<String, dynamic> toItemDocument() => <String, dynamic>{
+  Map<String, dynamic> toDocument() => <String, dynamic>{
         'id': id,
+        'buyer_id': buyerId,
         'seller_id': sellerId,
         'seller_photo_url': sellerPhotoUrl,
         'seller_phone_number': sellerPhoneNumber,
@@ -120,18 +114,6 @@ class Item extends Equatable {
         'other_image_urls': otherImageUrls,
         'created_at': createdAt,
         'updated_at': updatedAt,
-      };
-
-  ///
-  Map<String, dynamic> toCartDocument() => <String, dynamic>{
-        'id': id,
-        'buyer_id': buyerId,
-        'title': title,
-        'price': price,
-        'category': category,
-        'condition': condition,
-        'main_image_url': mainImageUrl,
-        'added_at': createdAt,
       };
 
   ///

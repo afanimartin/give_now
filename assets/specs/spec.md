@@ -25,10 +25,11 @@
 - [x] delete item from carts when deleted from uploads
 - [x] change app name to [moostamil]
 - [x] validate user inputs
-- [] let user complete profile after signup
+- [x] create a simple logo for the app
+- [x] redesign the login page 
+- [] decrement product quantity after checkout
+- [] let user add phone number after signup
 - [] add unit tests for core logic
-- [] create a simple logo for the app
-- [] redesign the login page 
 - [] invite users for testing
 
 ## Test cases 

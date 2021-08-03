@@ -13,7 +13,7 @@ class CartRepository extends ICartRepostiory {
     await _firebaseFirestore
         .collection(Paths.carts)
         .doc(item.id)
-        .set(item.toCartDocument());
+        .set(item.toDocument());
   }
 
   @override
@@ -33,5 +33,5 @@ class CartRepository extends ICartRepostiory {
   @override
   Stream<List<Item>> cart() =>
       _firebaseFirestore.collection(Paths.carts).snapshots().map((snapshot) =>
-          snapshot.docs.map((doc) => Item.fromCartSnapshot(doc)).toList());
+          snapshot.docs.map((doc) => Item.fromSnapshot(doc)).toList());
 }

@@ -64,18 +64,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     yield AddingItemToCart();
 
     try {
-      final cartItem = Item(
-          id: event.cartItem.id,
-          buyerId: _firebaseAuth.currentUser.uid,
-          sellerId: event.cartItem.sellerId,
-          sellerPhoneNumber: event.cartItem.sellerPhoneNumber,
-          title: event.cartItem.title,
-          category: event.cartItem.category,
-          mainImageUrl: event.cartItem.mainImageUrl,
-          price: event.cartItem.price,
-          createdAt: Timestamp.now());
+      final _item = event.cartItem.copyWith(
+          buyerId: _firebaseAuth.currentUser.uid, createdAt: Timestamp.now());
 
-      await _cartRepository.add(cartItem);
+      await _cartRepository.add(_item);
 
       yield ItemSuccessfullyAddedToCart();
     } on Exception catch (_) {}

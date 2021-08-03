@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:moostamil/extension_methods/upload/upload_repository_extensions.dart';
+import 'package:moostamil/utils/paths.dart';
 import '../../models/item/item.dart';
 
 ///
@@ -34,11 +36,18 @@ class CartItemsLoaded extends CartState {
       .toList();
 
   ///
-  bool isItemInCart(Item item) {
+  Future<bool> isItemInCart(Item item) async {
     var _bool = false;
+    // look for item in carts collection by id
+    // check if buyer_id == current_user_id
     if (currentUserCartItems.isNotEmpty) {
       for (var i = 0; i < currentUserCartItems.length; i++) {
-        _bool = item.id == currentUserCartItems[i].id;
+        final _item = await UploadRepositoryExtensions.doesItemExist(
+            Paths.carts, item.id);
+
+        if(_item != null){
+          _bool = _item.buyerId == _firebaseAuth.currentUser.uid;
+        }
       }
     }
 
