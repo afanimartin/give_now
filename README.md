@@ -13,8 +13,6 @@ A fun flutter app for selling/buying used items and donating items to the less p
   <img align=top src='./assets/screenshots/cart_list.png' width=300>
 </div>
 
-Additional description about the project and its features.
-
 ## Built With
 
 - Flutter
