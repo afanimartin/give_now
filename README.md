@@ -37,6 +37,23 @@ To get a local copy up and running follow these simple example steps.
 ### Run tests
 - `flutter test`
 
+### MVP features
+- login with Gmail
+- upload item for sale/donataion
+- donate/delete item uploaded by current user
+- delete item from carts when deleted from uploads
+
+### After MVP features
+- filter items based on category
+- search for items
+- add local caching
+- localization [ENGLISH, ARABIC]
+- onboard users after signing up
+- add only items not in user's cart
+- user should be able to add reviews
+- user should be able to remove images during preview
+- make launcher icon large enough
+
 ## Authors
 
 👤 **Afani Martin**
