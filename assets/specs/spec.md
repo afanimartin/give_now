@@ -21,13 +21,12 @@
 - [x] only show products with quantity > 0
 - [x] extract constants to util class
 - [x] allow users to input quantity when uploading. default should be one
-- [x] user should not add items already in their cart
 - [x] delete item from carts when deleted from uploads
 - [x] change app name to [moostamil]
 - [x] validate user inputs
 - [x] create a simple logo for the app
 - [x] redesign the login page 
-- [] decrement product quantity after checkout
+- [x] decrement product quantity after checkout
 - [] let user add phone number after signup
 - [] add unit tests for core logic
 - [] invite users for testing
@@ -43,13 +42,11 @@
 - [] remove item from cart 
 
 ## After MVP
+- [] user should not add items already in their cart
 - [] use standard fontSize like [headline1]
-- [] validate form inputs
-- [] decrement product quantity everytime a purchase is made
 - [] learn basics of design [typography]
 - [] only show floatingActionButton on item edit page when item is dirty
 - [] add search functionality
-- [] create new logo, update icon and name of app to [samaria]
 - [] add caching
 - [] pass user phone to custom claims [id token]
 - [] learn more about security rules and how to properly implement them of firestore
@@ -81,7 +78,6 @@
 - [] hide/disable floating action button on the marketplace screen
 - [] render dropdownButton items within the widget itself
 - [] add user reviews
-- [] user should not be able to add item already in cart. show check icon for items in cart
 - [] implement international phone number input
 
 ## CURRENT BUGS

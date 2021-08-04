@@ -7,19 +7,27 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../models/item/item.dart';
 import '../../repositories/cart/cart_repository.dart';
+import '../../repositories/upload/upload_repository.dart';
 import 'cart_event.dart';
 import 'cart_state.dart';
 
 ///
 class CartBloc extends Bloc<CartEvent, CartState> {
   ///
-  CartBloc({@required CartRepository cartRepository, FirebaseAuth firebaseAuth})
+  CartBloc(
+      {@required CartRepository cartRepository,
+      @required UploadRepository uploadRepository,
+      FirebaseAuth firebaseAuth})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _cartRepository = cartRepository,
+        _uploadRepository = uploadRepository ?? UploadRepository(),
         super(const CartState());
 
   ///
   final CartRepository _cartRepository;
+
+  ///
+  final UploadRepository _uploadRepository;
 
   ///
   final FirebaseAuth _firebaseAuth;
@@ -100,9 +108,21 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   }
 
   ///
-  void deleteCartItems(List<Item> cartItems) {
+  Future<void> deleteCartItems(List<Item> cartItems) async{
     for (var i = 0; i < cartItems.length; i++) {
-      _cartRepository.delete(cartItems[i]);
+      await _cartRepository.delete(cartItems[i]);
+    }
+  }
+
+  ///
+  Future<void> decrementItemQuantity(List<Item> cartItems) async {
+    for (var i = 0; i < cartItems.length; i++) {
+      final _item = cartItems[i];
+      final _quantity = int.parse(_item.quantity) - 1;
+
+      final _updatedItem = _item.copyWith(quantity: _quantity.toString());
+
+      await _uploadRepository.update(_updatedItem);
     }
   }
 }

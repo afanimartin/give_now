@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../models/item/item.dart';
 
 import '../../repositories/upload/upload_repository.dart';
-import '../../utils/paths.dart';
 
 ///
 extension UploadRepositoryExtensions on UploadRepository {

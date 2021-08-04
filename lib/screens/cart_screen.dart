@@ -27,135 +27,136 @@ class _CartScreenState extends State<CartScreen> {
   final _buyerPhoneNumber = TextEditingController();
 
   @override
-  Widget build(BuildContext context) =>
-      BlocBuilder<CartBloc, CartState>(builder: (context, state) => Scaffold(
-          backgroundColor: Theme.of(context).accentColor,
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text(
-              'Complete purchase',
-              style: TextStyle(
-                  color: Theme.of(context).primaryColorDark,
-                  fontSize: 28,
-                  letterSpacing: Constants.onePointTwo),
-            ),
+  Widget build(BuildContext context) => BlocBuilder<CartBloc, CartState>(
+      builder: (context, state) => Scaffold(
             backgroundColor: Theme.of(context).accentColor,
-            iconTheme: Theme.of(context).iconTheme,
-          ),
-          body: state is CartItemsLoaded &&
-                  state.currentUserCartItems.isNotEmpty
-              ? SingleChildScrollView(
-                  physics: const ScrollPhysics(),
-                  child: Column(
-                    children: [
-                      ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: state.currentUserCartItems?.length ?? 0,
-                          itemBuilder: (context, index) {
-                            final item = state.currentUserCartItems[index];
+            appBar: AppBar(
+              centerTitle: true,
+              title: Text(
+                'Complete purchase',
+                style: TextStyle(
+                    color: Theme.of(context).primaryColorDark,
+                    fontSize: 28,
+                    letterSpacing: Constants.onePointTwo),
+              ),
+              backgroundColor: Theme.of(context).accentColor,
+              iconTheme: Theme.of(context).iconTheme,
+            ),
+            body: state is CartItemsLoaded &&
+                    state.currentUserCartItems.isNotEmpty
+                ? SingleChildScrollView(
+                    physics: const ScrollPhysics(),
+                    child: Column(
+                      children: [
+                        ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: state.currentUserCartItems?.length ?? 0,
+                            itemBuilder: (context, index) {
+                              final item = state.currentUserCartItems[index];
 
-                            return Padding(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: Constants.six,
-                                  horizontal:
-                                      MediaQuery.of(context).size.width /
-                                          Constants.horizontalPadding),
-                              child: Card(
-                                elevation: Constants.elevation,
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.all(Constants.six),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          CircleAvatarWidget(
-                                              imageUrl: item.mainImageUrl),
-                                          const SizedBox(
-                                            width: Constants.ten,
-                                          ),
-                                          Expanded(
-                                              child: Text(
-                                            item.title,
-                                            style: const TextStyle(
-                                                fontSize: 16,
-                                                letterSpacing:
-                                                    Constants.pointFive),
-                                          )),
-                                          const SizedBox(
-                                            width: Constants.ten,
-                                          ),
-                                          Expanded(
-                                              child: Text(
-                                            '${item.price} SSP',
-                                            style: const TextStyle(
-                                                fontSize: 22,
-                                                fontWeight: FontWeight.w500),
-                                          )),
-                                          IconButton(
-                                              icon: const Icon(
-                                                  Icons.cancel_rounded),
-                                              color: Theme.of(context)
-                                                  .primaryColor,
-                                              iconSize: Constants.thirty,
-                                              onPressed: () => context
-                                                  .read<CartBloc>()
-                                                  .add(RemoveItemFromCart(
-                                                      item: item)))
-                                        ],
+                              return Padding(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: Constants.six,
+                                    horizontal:
+                                        MediaQuery.of(context).size.width /
+                                            Constants.horizontalPadding),
+                                child: Card(
+                                  elevation: Constants.elevation,
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.all(Constants.six),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            CircleAvatarWidget(
+                                                imageUrl: item.mainImageUrl),
+                                            const SizedBox(
+                                              width: Constants.ten,
+                                            ),
+                                            Expanded(
+                                                child: Text(
+                                              item.title,
+                                              style: const TextStyle(
+                                                  fontSize: 16,
+                                                  letterSpacing:
+                                                      Constants.pointFive),
+                                            )),
+                                            const SizedBox(
+                                              width: Constants.ten,
+                                            ),
+                                            Expanded(
+                                                child: Text(
+                                              '${item.price} SSP',
+                                              style: const TextStyle(
+                                                  fontSize: 22,
+                                                  fontWeight: FontWeight.w500),
+                                            )),
+                                            IconButton(
+                                                icon: const Icon(
+                                                    Icons.cancel_rounded),
+                                                color: Theme.of(context)
+                                                    .primaryColor,
+                                                iconSize: Constants.thirty,
+                                                onPressed: () => context
+                                                    .read<CartBloc>()
+                                                    .add(RemoveItemFromCart(
+                                                        item: item)))
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
+                              );
+                            }),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: Constants.eight,
+                              horizontal: MediaQuery.of(context).size.width /
+                                  Constants.horizontalPadding),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                'Total',
+                                style: TextStyle(
+                                    fontSize: 22, fontWeight: FontWeight.w400),
                               ),
-                            );
-                          }),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: Constants.eight,
-                            horizontal: MediaQuery.of(context).size.width /
-                                Constants.horizontalPadding),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              'Total',
-                              style: TextStyle(
-                                  fontSize: 22, fontWeight: FontWeight.w400),
-                            ),
-                            Text('${state.totalCost}',
-                                style: const TextStyle(
-                                    fontSize: 22, fontWeight: FontWeight.w400))
-                          ],
+                              Text('${state.totalCost}',
+                                  style: const TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w400))
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ))
-              : const Center(
-                  child: Text(
-                    'No items in your cart. Shop to add',
-                    style: TextStyle(fontSize: 20),
+                      ],
+                    ))
+                : const Center(
+                    child: Text(
+                      'No items in your cart. Shop to add',
+                      style: TextStyle(fontSize: 20),
+                    ),
                   ),
+            floatingActionButton: Visibility(
+              visible: state is CartItemsLoaded &&
+                  state.currentUserCartItems.isNotEmpty,
+              child: FloatingActionButtonWidget(
+                onPressed: () => state is CartItemsLoaded &&
+                        state.currentUserCartItems.isNotEmpty
+                    ? _modalBottomSheet(context, state.currentUserCartItems)
+                    : const SizedBox.shrink(),
+                backgroundColor: Theme.of(context).primaryColor,
+                child: const Icon(
+                  Icons.check,
+                  size: Constants.thirty,
                 ),
-          floatingActionButton: Visibility(
-            visible: state is CartItemsLoaded &&
-                state.currentUserCartItems.isNotEmpty,
-            child: FloatingActionButtonWidget(
-              onPressed: () => state is CartItemsLoaded &&
-                      state.currentUserCartItems.isNotEmpty
-                  ? _modalBottomSheet(context, state.currentUserCartItems)
-                  : const SizedBox.shrink(),
-              backgroundColor: Theme.of(context).primaryColor,
-              child: const Icon(
-                Icons.check,
-                size: Constants.thirty,
               ),
             ),
-          ),
-        ));
+          ));
 
   Future<Widget> _modalBottomSheet(BuildContext context, List<Item> cartItems) {
     final _cartItems = <Map<String, dynamic>>[];
@@ -216,10 +217,16 @@ class _CartScreenState extends State<CartScreen> {
                               .read<CartBloc>()
                               .add(CheckoutItem(sale: _sale));
 
-                          await Future<Duration>.delayed(
-                              const Duration(seconds: 1));
+                          await context
+                              .read<CartBloc>()
+                              .decrementItemQuantity(cartItems);
 
-                          context.read<CartBloc>().deleteCartItems(cartItems);
+                          await Future<dynamic>.delayed(
+                              const Duration(seconds: 3));
+
+                          await context
+                              .read<CartBloc>()
+                              .deleteCartItems(cartItems);
 
                           Navigator.of(context).pop();
                         }

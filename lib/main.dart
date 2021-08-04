@@ -44,8 +44,10 @@ void main() async {
           create: (_) =>
               ItemBloc(uploadRepository: UploadRepository())..add(LoadItems())),
       BlocProvider<CartBloc>(
-          create: (_) =>
-              CartBloc(cartRepository: CartRepository())..add(LoadCartItems())),
+          create: (_) => CartBloc(
+              cartRepository: CartRepository(),
+              uploadRepository: UploadRepository())
+            ..add(LoadCartItems())),
       BlocProvider<UploadBloc>(
           create: (_) => UploadBloc(itemRepository: UploadRepository())),
       BlocProvider<DonationBloc>(

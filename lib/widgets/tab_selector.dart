@@ -43,7 +43,7 @@ class _TabSelectorState extends State<TabSelector> {
           .map((tab) => BottomNavigationBarItem(
               icon: _tabIcon(tab, context),
               label: _tabLabel(tab),
-              backgroundColor: Theme.of(context).accentColor))
+              backgroundColor: Theme.of(context).primaryColor))
           .toList());
 
   Widget _tabIcon(AppTab tab, BuildContext context) {
