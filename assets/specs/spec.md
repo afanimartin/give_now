@@ -31,6 +31,7 @@
 - [] let user add phone number after signup
 - [] add unit tests for core logic
 - [] invite users for testing
+- [] make launcher icon big enough from the apps menu
 
 ## Test cases 
 - [] user should be able to upload new item

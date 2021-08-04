@@ -61,7 +61,7 @@ class ItemDetailScreen extends StatelessWidget {
                       const SizedBox(
                         height: Constants.six,
                       ),
-                      // if (state.isItemInCart(item))
+                      if (state.isItemInCart(item) != null)
                         Center(
                             child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -89,7 +89,7 @@ class ItemDetailScreen extends StatelessWidget {
                   )),
             floatingActionButton: state is CartItemsLoaded
                 ? Visibility(
-                    // visible: !state.isItemInCart(item),
+                    visible: !state.isItemInCart(item),
                     child: FloatingActionButtonWidget(
                       backgroundColor: Theme.of(context).primaryColor,
                       onPressed: () {
