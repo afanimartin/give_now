@@ -49,6 +49,7 @@ To get a local copy up and running follow these simple example steps.
 - add local caching
 - localization [ENGLISH, ARABIC]
 - onboard users after signing up
+- add only items not in user's cart
 - user should be able to add reviews
 - user should be able to remove images during preview
 - make launcher icon large enough
