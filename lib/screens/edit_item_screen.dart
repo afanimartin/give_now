@@ -22,7 +22,7 @@ import '../widgets/title_editing_widget.dart';
 ///
 class EditItemScreen extends StatefulWidget {
   ///
-  const EditItemScreen({@required this.item, Key key}) : super(key: key);
+  const EditItemScreen({required this.item, Key? key}) : super(key: key);
 
   ///
   final Item item;
@@ -37,6 +37,7 @@ class EditItemScreen extends StatefulWidget {
 }
 
 class _EditItemScreenState extends State<EditItemScreen> {
+  // ignore: unnecessary_null_comparison
   bool get _isEditing => widget.item != null;
 
   final _titleController = TextEditingController();
@@ -48,14 +49,14 @@ class _EditItemScreenState extends State<EditItemScreen> {
     super.initState();
 
     if (_isEditing) {
-      _titleController.text = widget.item.title;
-      _descriptionController.text = widget.item.description;
-      _priceContentController.text = widget.item.price;
+      _titleController.text = widget.item.title!;
+      _descriptionController.text = widget.item.description!;
+      _priceContentController.text = widget.item.price!;
     }
   }
 
-  String _categoryValue = categoryList[0];
-  String _conditionValue = conditionList[0];
+  String? _categoryValue = categoryList[0];
+  String? _conditionValue = conditionList[0];
 
   @override
   Widget build(BuildContext context) => BlocBuilder<ItemBloc, ItemState>(
@@ -77,7 +78,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
             children: [
               Expanded(
                 child: CachedNetworkImage(
-                  imageUrl: widget.item.mainImageUrl,
+                  imageUrl: widget.item.mainImageUrl!,
                   height: Constants.threeHundred,
                   width: double.infinity,
                   fit: BoxFit.cover,
@@ -104,14 +105,14 @@ class _EditItemScreenState extends State<EditItemScreen> {
                     PriceEditingWidget(controller: _priceContentController),
                     CategoryEditingWidget(
                         categoryValue: _categoryValue,
-                        onChanged: (String category) {
+                        onChanged: (String? category) {
                           setState(() {
                             _categoryValue = category;
                           });
                         }),
                     ConditonEditingWidget(
                         conditionValue: _conditionValue,
-                        onChanged: (String condition) {
+                        onChanged: (String? condition) {
                           setState(() {
                             _conditionValue = condition;
                           });

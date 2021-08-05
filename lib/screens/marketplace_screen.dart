@@ -14,7 +14,7 @@ import 'item_preview_screen.dart';
 ///
 class MarketplaceScreen extends StatefulWidget {
   ///
-  const MarketplaceScreen({Key key}) : super(key: key);
+  const MarketplaceScreen({Key? key}) : super(key: key);
 
   ///
   static Route get route =>

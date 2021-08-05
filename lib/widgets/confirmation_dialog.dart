@@ -6,11 +6,11 @@ import '../models/item/item.dart';
 class ConfirmationDialog extends StatelessWidget {
   ///
   const ConfirmationDialog(
-      {@required this.item,
-      @required this.title,
-      @required this.content,
-      @required this.onPressed,
-      Key key})
+      {required this.item,
+      required this.title,
+      required this.content,
+      required this.onPressed,
+      Key? key})
       : super(key: key);
 
   ///
@@ -28,11 +28,11 @@ class ConfirmationDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FutureBuilder(
         future: _confirmAction(context, item),
-        builder: (BuildContext context, AsyncSnapshot<bool> bool) =>
+        builder: (BuildContext context, AsyncSnapshot<bool?> bool) =>
             const Text(''),
       );
 
-  Future<bool> _confirmAction(BuildContext context, Item item) async =>
+  Future<bool?> _confirmAction(BuildContext context, Item item) async =>
       showDialog(
           context: context,
           builder: (context) => AlertDialog(

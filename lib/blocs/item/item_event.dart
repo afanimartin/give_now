@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import '../../models/item/item.dart';
 
 ///
@@ -17,7 +16,7 @@ class LoadItems extends ItemEvent {}
 ///
 class UpdateItems extends ItemEvent {
   ///
-  const UpdateItems({@required this.items});
+  const UpdateItems({required this.items});
 
   ///
   final List<Item> items;
@@ -30,7 +29,7 @@ class UpdateItems extends ItemEvent {
 ///
 class UpdateItem extends ItemEvent {
   ///
-  const UpdateItem({@required this.item});
+  const UpdateItem({required this.item});
 
   ///
   final Item item;
@@ -43,7 +42,7 @@ class UpdateItem extends ItemEvent {
 ///
 class DeleteItem extends ItemEvent {
   ///
-  const DeleteItem({@required this.item});
+  const DeleteItem({required this.item});
 
   ///
   final Item item;

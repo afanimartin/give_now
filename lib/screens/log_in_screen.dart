@@ -8,7 +8,7 @@ import '../utils/constants.dart';
 ///
 class LogInScreen extends StatelessWidget {
   ///
-  const LogInScreen({Key key}) : super(key: key);
+  const LogInScreen({Key? key}) : super(key: key);
 
   ///
   static Route<void> get route =>

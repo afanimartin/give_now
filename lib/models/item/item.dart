@@ -27,75 +27,75 @@ class Item extends Equatable {
   ///
   factory Item.fromSnapshot(DocumentSnapshot doc) => Item(
         id: doc.id,
-        buyerId: doc['buyer_id'] as String ?? '',
-        sellerId: doc['seller_id'] as String ?? '',
-        sellerPhotoUrl: doc['seller_photo_url'] as String,
-        sellerPhoneNumber: doc['seller_phone_number'] as String,
-        title: doc['title'] as String,
-        description: doc['description'] as String,
-        quantity: doc['quantity'] as String,
-        condition: doc['condition'] as String,
-        price: doc['price'] as String,
-        category: doc['category'] as String,
-        mainImageUrl: doc['main_image_url'] as String,
-        otherImageUrls: doc['other_image_urls'] as List<dynamic>,
-        createdAt: doc['created_at'] as Timestamp,
-        updatedAt: doc['updated_at'] as Timestamp,
+        buyerId: doc['buyer_id'] as String? ?? '',
+        sellerId: doc['seller_id'] as String? ?? '',
+        sellerPhotoUrl: doc['seller_photo_url'] as String?,
+        sellerPhoneNumber: doc['seller_phone_number'] as String?,
+        title: doc['title'] as String?,
+        description: doc['description'] as String?,
+        quantity: doc['quantity'] as String?,
+        condition: doc['condition'] as String?,
+        price: doc['price'] as String?,
+        category: doc['category'] as String?,
+        mainImageUrl: doc['main_image_url'] as String?,
+        otherImageUrls: doc['other_image_urls'] as List<dynamic>?,
+        createdAt: doc['created_at'] as Timestamp?,
+        updatedAt: doc['updated_at'] as Timestamp?,
       );
 
   ///
-  final String id;
+  final String? id;
 
   ///
-  final String sellerId;
+  final String? sellerId;
 
   ///
-  final String sellerPhotoUrl;
+  final String? sellerPhotoUrl;
 
   ///
-  final String sellerPhoneNumber;
+  final String? sellerPhoneNumber;
 
   ///
-  final String buyerId;
+  final String? buyerId;
 
   ///
-  final String buyerAddress;
+  final String? buyerAddress;
 
   ///
-  final String buyerPhoneNumber;
+  final String? buyerPhoneNumber;
 
   ///
-  final String title;
+  final String? title;
 
   ///
-  final String description;
+  final String? description;
 
   ///
-  final String quantity;
+  final String? quantity;
 
   ///
-  final String condition;
+  final String? condition;
 
   ///
-  final String price;
+  final String? price;
 
   ///
-  final String category;
+  final String? category;
 
   ///
-  final String mainImageUrl;
+  final String? mainImageUrl;
 
   ///
-  final List<dynamic> otherImageUrls;
+  final List<dynamic>? otherImageUrls;
 
   ///
-  final List<Map<String, dynamic>> cartItems;
+  final List<Map<String, dynamic>>? cartItems;
 
   ///
-  final Timestamp createdAt;
+  final Timestamp? createdAt;
 
   ///
-  final Timestamp updatedAt;
+  final Timestamp? updatedAt;
 
   ///
   Map<String, dynamic> toDocument() => <String, dynamic>{
@@ -130,24 +130,24 @@ class Item extends Equatable {
 
   ///
   Item copyWith(
-          {String id,
-          String sellerId,
-          String sellerPhotoUrl,
-          String sellerPhoneNumber,
-          String buyerId,
-          String buyerAddress,
-          String buyerPhoneNumber,
-          String title,
-          String description,
-          String quantity,
-          String condition,
-          String price,
-          String category,
-          String mainImageUrl,
-          Timestamp createdAt,
-          Timestamp updatedAt,
-          List<dynamic> otherImageUrls,
-          List<Map<String, dynamic>> cartItems}) =>
+          {String? id,
+          String? sellerId,
+          String? sellerPhotoUrl,
+          String? sellerPhoneNumber,
+          String? buyerId,
+          String? buyerAddress,
+          String? buyerPhoneNumber,
+          String? title,
+          String? description,
+          String? quantity,
+          String? condition,
+          String? price,
+          String? category,
+          String? mainImageUrl,
+          Timestamp? createdAt,
+          Timestamp? updatedAt,
+          List<dynamic>? otherImageUrls,
+          List<Map<String, dynamic>>? cartItems}) =>
       Item(
         id: id ?? this.id,
         sellerId: sellerId ?? this.sellerId,
@@ -170,7 +170,7 @@ class Item extends Equatable {
       );
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         id,
         sellerId,
         sellerPhotoUrl,

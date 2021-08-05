@@ -4,7 +4,7 @@ import '../utils/constants.dart';
 ///
 class SplashScreen extends StatelessWidget {
   ///
-  const SplashScreen({Key key}) : super(key: key);
+  const SplashScreen({Key? key}) : super(key: key);
 
   ///
   static Route<Widget> get route =>

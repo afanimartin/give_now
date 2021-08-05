@@ -11,7 +11,7 @@ import '../screens/user_profile_screen.dart';
 ///
 class SubmitButtonWidget extends StatelessWidget {
   ///
-  const SubmitButtonWidget({@required this.item, Key key}) : super(key: key);
+  const SubmitButtonWidget({required this.item, Key? key}) : super(key: key);
 
   ///
   final Item item;

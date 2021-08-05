@@ -7,24 +7,24 @@ import '../blocs/upload/upload_bloc.dart';
 class PriceEditingWidget extends StatelessWidget {
   ///
   const PriceEditingWidget(
-      {@required this.controller,
+      {required this.controller,
       this.onChanged,
       this.decoration,
       this.style,
-      Key key})
+      Key? key})
       : super(key: key);
 
   ///
   final TextEditingController controller;
 
   ///
-  final InputDecoration decoration;
+  final InputDecoration? decoration;
 
   ///
-  final TextStyle style;
+  final TextStyle? style;
 
   ///
-  final void Function(String) onChanged;
+  final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) => TextField(

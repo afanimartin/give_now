@@ -11,7 +11,7 @@ import 'finish_item_upload_screen.dart';
 ///
 class ItemPreviewScreen extends StatelessWidget {
   ///
-  const ItemPreviewScreen({Key key}) : super(key: key);
+  const ItemPreviewScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Scaffold(

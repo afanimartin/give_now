@@ -5,28 +5,28 @@ import 'package:flutter/material.dart';
 class DescriptionEditingWidget extends StatelessWidget {
   ///
   const DescriptionEditingWidget(
-      {@required this.controller,
+      {required this.controller,
       this.onChanged,
       this.decoration,
       this.style,
       this.maxLength,
-      Key key})
+      Key? key})
       : super(key: key);
 
   ///
   final TextEditingController controller;
 
   ///
-  final InputDecoration decoration;
+  final InputDecoration? decoration;
 
   ///
-  final TextStyle style;
+  final TextStyle? style;
 
   ///
-  final int maxLength;
+  final int? maxLength;
 
   ///
-  final void Function(String) onChanged;
+  final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) => TextField(

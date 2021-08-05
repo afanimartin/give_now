@@ -36,5 +36,5 @@ class UploadRepository extends IUploadRepository {
   Stream<List<Item>> uploads() =>
       _firebaseFirestore.collection(Paths.uploads).snapshots().map((snapshot) =>
           snapshot.docs.map((doc) => Item.fromSnapshot(doc)).toList()
-            ..sort((a, b) => b.createdAt.compareTo(a.createdAt)));
+            ..sort((a, b) => b.createdAt!.compareTo(a.createdAt!)));
 }

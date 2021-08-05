@@ -15,19 +15,19 @@ import '../screens/user_profile_screen.dart';
 // ignore: must_be_immutable
 class MenuWidget extends StatelessWidget {
   ///
-  MenuWidget({@required this.item, Key key}) : super(key: key);
+  MenuWidget({required this.item, Key? key}) : super(key: key);
 
   ///
   final Item item;
 
   ///
-  ItemBloc _itemBloc;
+  late ItemBloc _itemBloc;
 
   ///
-  CartBloc _cartBloc;
+  late CartBloc _cartBloc;
 
   ///
-  DonationBloc _donationBloc;
+  late DonationBloc _donationBloc;
 
   @override
   Widget build(BuildContext context) {

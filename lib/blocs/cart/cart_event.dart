@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 
 import '../../models/item/item.dart';
 
@@ -18,7 +17,7 @@ class LoadCartItems extends CartEvent {}
 ///
 class UpdateCartItems extends CartEvent {
   ///
-  const UpdateCartItems({@required this.items});
+  const UpdateCartItems({required this.items});
 
   ///
   final List<Item> items;
@@ -30,7 +29,7 @@ class UpdateCartItems extends CartEvent {
 ///
 class AddItemToCart extends CartEvent {
   ///
-  const AddItemToCart({@required this.cartItem});
+  const AddItemToCart({required this.cartItem});
 
   ///
   final Item cartItem;
@@ -42,7 +41,7 @@ class AddItemToCart extends CartEvent {
 ///
 class CheckoutItem extends CartEvent {
   ///
-  const CheckoutItem({@required this.sale});
+  const CheckoutItem({required this.sale});
 
   ///
   final Item sale;
@@ -55,7 +54,7 @@ class CheckoutItem extends CartEvent {
 ///
 class RemoveItemFromCart extends CartEvent {
   ///
-  const RemoveItemFromCart({@required this.item});
+  const RemoveItemFromCart({required this.item});
 
   ///
   final Item item;

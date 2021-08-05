@@ -7,18 +7,18 @@ import '../utils/constants.dart';
 class CircleAvatarWidget extends StatelessWidget {
   ///
   const CircleAvatarWidget(
-      {@required this.imageUrl, this.radius = Constants.twenty, Key key})
+      {required this.imageUrl, this.radius = Constants.twenty, Key? key})
       : super(key: key);
 
   ///
   final double radius;
 
   ///
-  final String imageUrl;
+  final String? imageUrl;
 
   @override
   Widget build(BuildContext context) => CircleAvatar(
-      radius: radius, backgroundImage: CachedNetworkImageProvider(imageUrl));
+      radius: radius, backgroundImage: CachedNetworkImageProvider(imageUrl!));
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);

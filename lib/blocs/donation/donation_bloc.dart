@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../repositories/donation/donation_repository.dart';
@@ -10,7 +9,7 @@ import 'donation_state.dart';
 ///
 class DonationBloc extends Bloc<DonationEvent, DonationState> {
   ///
-  DonationBloc({@required DonationRepository donationRepository})
+  DonationBloc({required DonationRepository donationRepository})
       : _donationRepository = donationRepository,
         super(const DonationState());
 

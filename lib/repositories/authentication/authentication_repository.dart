@@ -9,8 +9,8 @@ import 'i_authentication_repository.dart';
 class AuthenticationRepository extends IAuthenticationRepository {
   ///
   AuthenticationRepository({
-    GoogleSignIn googleSignIn,
-    FirebaseAuth firebaseAuth,
+    GoogleSignIn? googleSignIn,
+    FirebaseAuth? firebaseAuth,
   })  : _googleSignIn = googleSignIn ??
             GoogleSignIn
                 .standard(), // Will fail without GoogleSignIn.standard()
@@ -28,21 +28,22 @@ class AuthenticationRepository extends IAuthenticationRepository {
   @override
   Future<void> logInWithGoogleAccount() async {
     try {
-      final googleUser = await _googleSignIn.signIn();
-      final googleAuth = await googleUser.authentication;
+      final googleUser =
+          await _googleSignIn.signIn();
+      final googleAuth = await googleUser?.authentication;
 
       final googleCredential = GoogleAuthProvider.credential(
-          accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
+          accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
 
       final _signedInUser =
           await _firebaseAuth.signInWithCredential(googleCredential);
 
       final _user = await AuthenticationRepositoryExtensions.checkIfUserExists(
-          _signedInUser.user);
+          _signedInUser.user!);
 
       if (!_user) {
         await AuthenticationRepositoryExtensions.addUserToFirestore(
-            _signedInUser.user);
+            _signedInUser.user!);
       }
     } on Exception catch (_) {}
   }

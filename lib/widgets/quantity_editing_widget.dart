@@ -6,7 +6,7 @@ import '../blocs/upload/upload_bloc.dart';
 ///
 class QuantityEditingWidget extends StatelessWidget {
   ///
-  const QuantityEditingWidget({@required this.controller, Key key})
+  const QuantityEditingWidget({required this.controller, Key? key})
       : super(key: key);
 
   ///

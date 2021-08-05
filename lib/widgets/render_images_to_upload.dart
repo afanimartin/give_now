@@ -8,7 +8,7 @@ import 'progress_loader.dart';
 ///
 class RenderImagesToUpload extends StatelessWidget {
   ///
-  const RenderImagesToUpload({@required this.assets, Key key})
+  const RenderImagesToUpload({required this.assets, Key? key})
       : super(key: key);
 
   ///

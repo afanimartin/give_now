@@ -9,7 +9,7 @@ import '../models/app_tab/app_tab.dart';
 class TabSelector extends StatefulWidget {
   ///
   const TabSelector(
-      {@required this.activeTab, @required this.onTabSelected, Key key})
+      {required this.activeTab, required this.onTabSelected, Key? key})
       : super(key: key);
 
   ///
@@ -53,13 +53,11 @@ class _TabSelectorState extends State<TabSelector> {
           Icons.home_outlined,
           size: _size,
         );
-        break;
       case AppTab.profile:
         return Icon(
           Icons.person_outline,
           size: _size,
         );
-        break;
       case AppTab.cart:
         return BlocBuilder<CartBloc, CartState>(
           builder: (context, state) => Stack(children: [
@@ -84,26 +82,21 @@ class _TabSelectorState extends State<TabSelector> {
                   : const SizedBox.shrink()
           ]),
         );
-        break;
     }
-    return const Icon(
-      Icons.home_outlined,
-    );
+
   }
 
   String _tabLabel(AppTab tab) {
     switch (tab) {
       case AppTab.home:
         return 'Home';
-        break;
+
       case AppTab.profile:
         return 'Profile';
-        break;
+
       case AppTab.cart:
         return 'Cart';
-        break;
     }
-    return '';
   }
 
   @override

@@ -8,7 +8,7 @@ import '../screens/user_profile_screen.dart';
 ///
 class RenderScreens extends StatelessWidget {
   ///
-  const RenderScreens({@required this.state, Key key}) : super(key: key);
+  const RenderScreens({required this.state, Key? key}) : super(key: key);
 
   ///
   final AppTab state;
@@ -20,16 +20,11 @@ class RenderScreens extends StatelessWidget {
     switch (state) {
       case AppTab.home:
         return const MarketplaceScreen();
-        break;
       case AppTab.profile:
         return const UserProfileScreen();
-        break;
-
       case AppTab.cart:
         return const CartScreen();
-        break;
     }
-    return const SizedBox.shrink();
   }
 
   @override

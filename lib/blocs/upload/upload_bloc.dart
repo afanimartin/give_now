@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 
@@ -17,9 +16,9 @@ import 'upload_state.dart';
 class UploadBloc extends Bloc<ItemEvent, UploadState> {
   ///
   UploadBloc(
-      {@required UploadRepository itemRepository,
-      FirebaseAuth firebaseAuth,
-      FirebaseFirestore firebaseFirestore})
+      {required UploadRepository itemRepository,
+      FirebaseAuth? firebaseAuth,
+      FirebaseFirestore? firebaseFirestore})
       : _itemRepository = itemRepository,
         _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance,
@@ -54,13 +53,13 @@ class UploadBloc extends Bloc<ItemEvent, UploadState> {
   Stream<UploadState> _mapUploadItemToState(UploadItem event) async* {
     yield ItemBeingAdded();
 
-    final _imagesToUpload = await imagesToUpload(state.images);
+    final _imagesToUpload = await imagesToUpload(state.images!);
     final _imageUrls = await getDownloadURL(_imagesToUpload);
 
     try {
       final _item = Item(
-        sellerId: _firebaseAuth.currentUser.uid,
-        sellerPhotoUrl: _firebaseAuth.currentUser.photoURL,
+        sellerId: _firebaseAuth.currentUser!.uid,
+        sellerPhotoUrl: _firebaseAuth.currentUser!.photoURL,
         title: event.item.title,
         description: event.item.description,
         condition: event.item.condition,

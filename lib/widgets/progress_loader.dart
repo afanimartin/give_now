@@ -4,17 +4,17 @@ import 'package:flutter/material.dart';
 ///
 class ProgressLoader extends StatelessWidget {
   ///
-  const ProgressLoader({this.color, this.backgroundColor, this.value, Key key})
+  const ProgressLoader({this.color, this.backgroundColor, this.value, Key? key})
       : super(key: key);
 
   ///
-  final Color color;
+  final Color? color;
 
   ///
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   ///
-  final double value;
+  final double? value;
 
   ///
   @override

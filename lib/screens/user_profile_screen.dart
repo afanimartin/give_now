@@ -14,7 +14,7 @@ import 'log_in_screen.dart';
 ///
 class UserProfileScreen extends StatelessWidget {
   ///
-  const UserProfileScreen({Key key}) : super(key: key);
+  const UserProfileScreen({Key? key}) : super(key: key);
 
   ///
 static Route get route =>
@@ -61,11 +61,11 @@ static Route get route =>
                               radius: Constants.fourty,
                               imageUrl: user.photoUrl ?? ''),
                           Text(
-                            user.displayName,
+                            user.displayName!,
                             style: const TextStyle(fontSize: 28),
                           ),
                           Text(
-                            user.email,
+                            user.email!,
                             style: const TextStyle(
                                 fontSize: 22, color: Colors.black45),
                           ),
@@ -104,8 +104,8 @@ static Route get route =>
                     leading: CircleAvatarWidget(
                       imageUrl: item.mainImageUrl,
                     ),
-                    title: Text(item.title),
-                    trailing: Text(timeago.format(item.createdAt.toDate())),
+                    title: Text(item.title!),
+                    trailing: Text(timeago.format(item.createdAt!.toDate())),
                     onTap: () => Navigator.of(context).push(
                         MaterialPageRoute<Widget>(
                             builder: (_) => EditItemScreen(item: item))),

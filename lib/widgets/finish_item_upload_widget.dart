@@ -20,7 +20,7 @@ import 'title_editing_widget.dart';
 ///
 class FinishItemUploadWidget extends StatefulWidget {
   ///
-  const FinishItemUploadWidget({Key key}) : super(key: key);
+  const FinishItemUploadWidget({Key? key}) : super(key: key);
 
   @override
   _FinishItemUploadWidgetState createState() => _FinishItemUploadWidgetState();
@@ -32,10 +32,10 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
   final _priceContentController = TextEditingController();
   final _phoneController = TextEditingController();
 
-  String _conditionValue = conditionList[0];
-  String _categoryValue = categoryList[0];
+  String? _conditionValue = conditionList[0];
+  String? _categoryValue = categoryList[0];
 
-  bool _isFormValid;
+  late bool _isFormValid;
 
   @override
   Widget build(BuildContext context) => BlocBuilder<UploadBloc, UploadState>(
@@ -127,7 +127,7 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
                       ),
                       CategoryEditingWidget(
                         categoryValue: _categoryValue,
-                        onChanged: (String value) {
+                        onChanged: (String? value) {
                           setState(() {
                             _categoryValue = value;
                           });
@@ -138,7 +138,7 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
                       ),
                       ConditonEditingWidget(
                           conditionValue: _conditionValue,
-                          onChanged: (String value) {
+                          onChanged: (String? value) {
                             setState(() {
                               _conditionValue = value;
                             });

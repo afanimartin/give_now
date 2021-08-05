@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import '../../models/item/item.dart';
 
 ///
@@ -18,7 +17,7 @@ class PickAndPreviewImages extends ItemEvent {}
 ///
 class UploadItem extends ItemEvent {
   ///
-  const UploadItem({@required this.item});
+  const UploadItem({required this.item});
 
   ///
   final Item item;

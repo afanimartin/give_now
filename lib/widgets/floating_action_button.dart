@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 class FloatingActionButtonWidget extends StatelessWidget {
   ///
   const FloatingActionButtonWidget(
-      {@required this.onPressed,
-      @required this.child,
-      @required this.backgroundColor,
-      Key key})
+      {required this.onPressed,
+      required this.child,
+      required this.backgroundColor,
+      Key? key})
       : super(key: key);
 
   ///

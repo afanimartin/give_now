@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import '../../models/user/user.dart';
@@ -15,7 +14,7 @@ class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   /// Constructor
   AuthenticationBloc(
-      {@required AuthenticationRepository authenticationRepository})
+      {required AuthenticationRepository authenticationRepository})
       : _authenticationRepository = authenticationRepository,
         super(const AuthenticationState.unauthenticated()) {
     _userStreamSubscription?.cancel();
@@ -25,7 +24,7 @@ class AuthenticationBloc
   }
 
   final AuthenticationRepository _authenticationRepository;
-  StreamSubscription _userStreamSubscription;
+  StreamSubscription? _userStreamSubscription;
 
   @override
   Stream<AuthenticationState> mapEventToState(

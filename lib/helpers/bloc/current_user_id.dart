@@ -1,19 +1,18 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import '../../blocs/authentication/authentication_bloc.dart';
 
 ///
 class CurrentUserId extends Equatable {
   ///
-  const CurrentUserId({@required AuthenticationBloc authenticationBloc})
+  const CurrentUserId({required AuthenticationBloc authenticationBloc})
       : _authenticationBloc = authenticationBloc;
   final AuthenticationBloc _authenticationBloc;
 
   ///
-  String getCurrentUserId() {
+  String? getCurrentUserId() {
     final authState = _authenticationBloc.state;
 
-    String currentUserId;
+    String? currentUserId;
 
     if (authState is AuthenticationState) {
       currentUserId = authState.user.userId;

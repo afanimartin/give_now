@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../models/item/item.dart';
@@ -15,12 +14,12 @@ import 'cart_state.dart';
 class CartBloc extends Bloc<CartEvent, CartState> {
   ///
   CartBloc(
-      {@required CartRepository cartRepository,
-      @required UploadRepository uploadRepository,
-      FirebaseAuth firebaseAuth})
+      {required CartRepository cartRepository,
+      required UploadRepository uploadRepository,
+      FirebaseAuth? firebaseAuth})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _cartRepository = cartRepository,
-        _uploadRepository = uploadRepository ?? UploadRepository(),
+        _uploadRepository = uploadRepository,
         super(const CartState());
 
   ///
@@ -33,7 +32,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   final FirebaseAuth _firebaseAuth;
 
   ///
-  StreamSubscription<List<Item>> _streamSubscription;
+  StreamSubscription<List<Item>>? _streamSubscription;
 
   @override
   Stream<CartState> mapEventToState(CartEvent event) async* {
@@ -73,7 +72,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
     try {
       final _item = event.cartItem.copyWith(
-          buyerId: _firebaseAuth.currentUser.uid, createdAt: Timestamp.now());
+          buyerId: _firebaseAuth.currentUser!.uid, createdAt: Timestamp.now());
 
       await _cartRepository.add(_item);
 
@@ -95,7 +94,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   Stream<CartState> _mapSellItemToState(CheckoutItem event) async* {
     try {
       final _sale = event.sale.copyWith(
-          buyerId: _firebaseAuth.currentUser.uid,
+          buyerId: _firebaseAuth.currentUser!.uid,
           buyerAddress: event.sale.buyerAddress,
           buyerPhoneNumber: event.sale.buyerPhoneNumber,
           sellerId: event.sale.sellerId,
@@ -118,7 +117,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   Future<void> decrementItemQuantity(List<Item> cartItems) async {
     for (var i = 0; i < cartItems.length; i++) {
       final _item = cartItems[i];
-      final _quantity = int.parse(_item.quantity) - 1;
+      final _quantity = int.parse(_item.quantity!) - 1;
 
       final _updatedItem = _item.copyWith(quantity: _quantity.toString());
 

@@ -14,7 +14,7 @@ class TitleInput extends FormzInput<String, InputError> {
   const TitleInput.dirty([String value = '']) : super.dirty(value);
 
   @override
-  InputError validator(String value) =>
+  InputError? validator(String value) =>
       value.isNotEmpty ? null : InputError.empty;
 }
 
@@ -26,7 +26,7 @@ class DescriptionInput extends FormzInput<String, InputError> {
   const DescriptionInput.dirty([String value = '']) : super.dirty(value);
 
   @override
-  InputError validator(String value) =>
+  InputError? validator(String value) =>
       value.isNotEmpty ? null : InputError.empty;
 }
 
@@ -38,7 +38,7 @@ class CategoryInput extends FormzInput<String, InputError> {
   const CategoryInput.dirty([String value = '']) : super.dirty(value);
 
   @override
-  InputError validator(String value) =>
+  InputError? validator(String value) =>
       value.isNotEmpty ? null : InputError.empty;
 }
 
@@ -50,7 +50,7 @@ class ConditionInput extends FormzInput<String, InputError> {
   const ConditionInput.dirty([String value = '']) : super.dirty(value);
 
   @override
-  InputError validator(String value) =>
+  InputError? validator(String value) =>
       value.isNotEmpty ? null : InputError.empty;
 }
 
@@ -62,7 +62,7 @@ class QuantityInput extends FormzInput<String, InputError> {
   const QuantityInput.dirty([String value = '']) : super.dirty(value);
 
   @override
-  InputError validator(String value) =>
+  InputError? validator(String value) =>
       value.isNotEmpty ? null : InputError.empty;
 }
 
@@ -74,7 +74,7 @@ class PriceInput extends FormzInput<String, InputError> {
   const PriceInput.dirty([String value = '']) : super.dirty(value);
 
   @override
-  InputError validator(String value) =>
+  InputError? validator(String value) =>
       value.isNotEmpty ? null : InputError.empty;
 }
 
@@ -96,6 +96,6 @@ class PhoneNumberInput extends FormzInput<String, PhoneNumberInputError> {
 
   ///
   @override
-  PhoneNumberInputError validator(String value) =>
+  PhoneNumberInputError? validator(String value) =>
       value.isNotEmpty ? null : PhoneNumberInputError.invalid;
 }

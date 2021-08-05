@@ -13,7 +13,7 @@ import '../widgets/floating_action_button.dart';
 ///
 class CartScreen extends StatefulWidget {
   ///
-  const CartScreen({Key key}) : super(key: key);
+  const CartScreen({Key? key}) : super(key: key);
 
   @override
   _CartScreenState createState() => _CartScreenState();
@@ -51,7 +51,7 @@ class _CartScreenState extends State<CartScreen> {
                         ListView.builder(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
-                            itemCount: state.currentUserCartItems?.length ?? 0,
+                            itemCount: state.currentUserCartItems.length,
                             itemBuilder: (context, index) {
                               final item = state.currentUserCartItems[index];
 
@@ -79,7 +79,7 @@ class _CartScreenState extends State<CartScreen> {
                                             ),
                                             Expanded(
                                                 child: Text(
-                                              item.title,
+                                              item.title!,
                                               style: const TextStyle(
                                                   fontSize: 16,
                                                   letterSpacing:
@@ -158,7 +158,8 @@ class _CartScreenState extends State<CartScreen> {
             ),
           ));
 
-  Future<Widget> _modalBottomSheet(BuildContext context, List<Item> cartItems) {
+  Future<Widget?> _modalBottomSheet(
+      BuildContext context, List<Item> cartItems) {
     final _cartItems = <Map<String, dynamic>>[];
 
     for (var i = 0; i < cartItems.length; i++) {

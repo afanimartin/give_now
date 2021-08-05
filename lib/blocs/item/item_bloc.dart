@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../models/item/item.dart';
@@ -11,13 +10,13 @@ import 'item_state.dart';
 ///
 class ItemBloc extends Bloc<ItemEvent, ItemState> {
   ///
-  ItemBloc({@required UploadRepository uploadRepository})
+  ItemBloc({required UploadRepository uploadRepository})
       : _uploadRepository = uploadRepository,
         super(const ItemState());
 
   final UploadRepository _uploadRepository;
 
-  StreamSubscription<List<Item>> _itemStreamSubscription;
+  StreamSubscription<List<Item>>? _itemStreamSubscription;
 
   @override
   Stream<ItemState> mapEventToState(ItemEvent event) async* {

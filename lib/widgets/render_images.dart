@@ -14,7 +14,7 @@ import 'progress_loader.dart';
 ///
 class RenderImages extends StatefulWidget {
   ///
-  const RenderImages({Key key}) : super(key: key);
+  const RenderImages({Key? key}) : super(key: key);
 
   @override
   _RenderImagesState createState() => _RenderImagesState();
@@ -41,7 +41,7 @@ class _RenderImagesState extends State<RenderImages> {
 
 class _RenderImage extends StatelessWidget {
   ///
-  const _RenderImage({@required this.image, Key key}) : super(key: key);
+  const _RenderImage({required this.image, Key? key}) : super(key: key);
   final Item image;
 
   @override
@@ -63,14 +63,14 @@ class _RenderImage extends StatelessWidget {
             child: Column(
               children: [
                 CachedNetworkImage(
-                  imageUrl: image.mainImageUrl,
+                  imageUrl: image.mainImageUrl!,
                   height: Constants.threeHundred,
                   width: Constants.fourHundred,
                   fit: BoxFit.cover,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(Constants.paddingAll),
-                  child: Text(timeago.format(image.createdAt.toDate())),
+                  child: Text(timeago.format(image.createdAt!.toDate())),
                 )
               ],
             ),

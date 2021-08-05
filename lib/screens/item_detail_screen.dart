@@ -16,7 +16,7 @@ import '../widgets/progress_loader.dart';
 ///
 class ItemDetailScreen extends StatelessWidget {
   ///
-  const ItemDetailScreen({@required this.item, Key key}) : super(key: key);
+  const ItemDetailScreen({required this.item, Key? key}) : super(key: key);
 
   ///
   final Item item;
@@ -53,7 +53,7 @@ class ItemDetailScreen extends StatelessWidget {
                           ),
                           Text(item.description ?? ''),
                           Text(item.condition ?? ''),
-                          Text(item.price.toString() ?? ''),
+                          Text(item.price.toString()),
                           Text(item.category ?? '')
                         ],
                       ),
@@ -84,7 +84,7 @@ class ItemDetailScreen extends StatelessWidget {
 
 class _PhotoViewWidget extends StatelessWidget {
   ///
-  const _PhotoViewWidget({@required this.items, Key key}) : super(key: key);
+  const _PhotoViewWidget({required this.items, Key? key}) : super(key: key);
   final List<String> items;
 
   @override
@@ -115,7 +115,7 @@ class _PhotoViewWidget extends StatelessWidget {
               child: ProgressLoader(
                 value: event == null
                     ? 0
-                    : event.cumulativeBytesLoaded / event.expectedTotalBytes,
+                    : event.cumulativeBytesLoaded / event.expectedTotalBytes!,
               ),
             ),
           ),

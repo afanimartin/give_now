@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import '../../models/item/item.dart';
 
 ///
@@ -19,7 +18,7 @@ class LoadingCartItems extends CartState {}
 ///
 class CartItemsLoaded extends CartState {
   ///
-  CartItemsLoaded({@required this.items, FirebaseAuth firebaseAuth})
+  CartItemsLoaded({required this.items, FirebaseAuth? firebaseAuth})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
 
   ///
@@ -31,7 +30,7 @@ class CartItemsLoaded extends CartState {
   ///
   List<Item> get currentUserCartItems => items
       .where((item) =>
-          item.buyerId == _firebaseAuth.currentUser.uid)
+          item.buyerId == _firebaseAuth.currentUser!.uid)
       .toList();
 
   ///
@@ -39,7 +38,7 @@ class CartItemsLoaded extends CartState {
     var _total = 0;
 
     for (var i = 0; i < currentUserCartItems.length; i++) {
-      final _price = int.tryParse(currentUserCartItems[i].price) ?? 0;
+      final _price = int.tryParse(currentUserCartItems[i].price!) ?? 0;
 
       _total += _price;
     }

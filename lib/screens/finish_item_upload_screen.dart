@@ -5,7 +5,7 @@ import '../widgets/finish_item_upload_widget.dart';
 ///
 class FinishItemUploadScreen extends StatefulWidget {
   ///
-  const FinishItemUploadScreen({Key key}) : super(key: key);
+  const FinishItemUploadScreen({Key? key}) : super(key: key);
 
   @override
   _FinishItemUploadScreenState createState() => _FinishItemUploadScreenState();

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 ///
 class CompleteProfileScreen extends StatelessWidget {
   ///
-  const CompleteProfileScreen({Key key}) : super(key: key);
+  const CompleteProfileScreen({Key? key}) : super(key: key);
 
   ///
   static Route get route =>

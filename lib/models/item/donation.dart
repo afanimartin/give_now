@@ -1,47 +1,46 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 
 ///
 class Donation extends Equatable {
   ///
   const Donation(
-      {@required this.id,
-      @required this.donorId,
-      @required this.donorPhone,
-      @required this.mainImageUrl,
-      @required this.title,
-      @required this.description,
-      @required this.category,
-      @required this.condition,
-      @required this.donatedAt});
+      {required this.id,
+      required this.donorId,
+      required this.donorPhone,
+      required this.mainImageUrl,
+      required this.title,
+      required this.description,
+      required this.category,
+      required this.condition,
+      required this.donatedAt});
 
   ///
-  final String id;
+  final String? id;
 
   ///
-  final String donorId;
+  final String? donorId;
 
   ///
-  final String donorPhone;
+  final String? donorPhone;
 
   ///
-  final String mainImageUrl;
+  final String? mainImageUrl;
 
   ///
-  final String title;
+  final String? title;
 
   ///
-  final String description;
+  final String? description;
 
   ///
-  final String category;
+  final String? category;
 
   ///
-  final String condition;
+  final String? condition;
 
   ///
-  final Timestamp donatedAt;
+  final Timestamp? donatedAt;
 
   ///
   Map<String, dynamic> toDocument() => <String, dynamic>{
@@ -57,7 +56,7 @@ class Donation extends Equatable {
       };
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         id,
         donorId,
         donorPhone,

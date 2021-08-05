@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class PhoneNumberEditingWidget extends StatelessWidget {
   ///
   const PhoneNumberEditingWidget(
-      {@required this.controller, @required this.onChanged, Key key})
+      {required this.controller, required this.onChanged, Key? key})
       : super(key: key);
 
   ///

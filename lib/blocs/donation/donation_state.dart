@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import '../../models/item/item.dart';
 
 ///
@@ -15,7 +14,7 @@ class DonationState extends Equatable {
 ///
 class DonationsUpdated extends DonationState {
   ///
-  DonationsUpdated({@required this.donations, FirebaseAuth firebaseAuth})
+  DonationsUpdated({required this.donations, FirebaseAuth? firebaseAuth})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
 
   ///
@@ -26,7 +25,7 @@ class DonationsUpdated extends DonationState {
 
   ///
   List<Item> get currentUserDonations => donations
-      .where((donation) => _firebaseAuth.currentUser.uid == donation.sellerId)
+      .where((donation) => _firebaseAuth.currentUser!.uid == donation.sellerId)
       .toList();
 
   @override

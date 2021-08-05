@@ -11,7 +11,7 @@ import 'circular_avatar_widget.dart';
 ///
 class ItemsGrid extends StatelessWidget {
   ///
-  const ItemsGrid({@required this.items, Key key}) : super(key: key);
+  const ItemsGrid({required this.items, Key? key}) : super(key: key);
 
   ///
   final List<Item> items;
@@ -30,7 +30,7 @@ class ItemsGrid extends StatelessWidget {
             final item = items[index];
 
             return _itemsStack(context, item);
-          }, childCount: items?.length),
+          }, childCount: items.length),
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: Constants.maxCrossAxisExtent,
               mainAxisSpacing: Constants.ten,
@@ -43,7 +43,7 @@ class ItemsGrid extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(Constants.circularBorderRadius),
             child: CachedNetworkImage(
-              imageUrl: item.mainImageUrl,
+              imageUrl: item.mainImageUrl!,
               height: double.infinity,
               width: Constants.threeHundred,
               fit: BoxFit.cover,
@@ -70,7 +70,7 @@ class ItemsGrid extends StatelessWidget {
                   width: Constants.ten,
                 ),
                 Text(
-                  item.title,
+                  item.title!,
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).primaryColorLight),

@@ -6,14 +6,14 @@ import '../utils/condition.dart';
 class ConditonEditingWidget extends StatefulWidget {
   ///
   const ConditonEditingWidget(
-      {@required this.conditionValue, @required this.onChanged, Key key})
+      {required this.conditionValue, required this.onChanged, Key? key})
       : super(key: key);
 
   ///
-  final String conditionValue;
+  final String? conditionValue;
 
   ///
-  final void Function(String) onChanged;
+  final void Function(String?) onChanged;
 
   @override
   _ConditonEditingWidgetState createState() => _ConditonEditingWidgetState();

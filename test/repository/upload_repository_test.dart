@@ -15,8 +15,8 @@ void main() async {
 
   await Firebase.initializeApp();
 
-  UploadRepository _uploadRepository;
-  FakeFirebaseFirestore _fakeFirebaseFirestore;
+  late UploadRepository _uploadRepository;
+  late FakeFirebaseFirestore _fakeFirebaseFirestore;
 
   setUpAll(() async {
     _uploadRepository = UploadRepository();

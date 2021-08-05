@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import '../../models/item/item.dart';
 
 ///
@@ -14,7 +13,7 @@ class DonationEvent extends Equatable {
 ///
 class DonateItem extends DonationEvent {
   ///
-  const DonateItem({@required this.item});
+  const DonateItem({required this.item});
 
   ///
   final Item item;

@@ -40,22 +40,22 @@ class UploadState extends Equatable {
   final PhoneNumberInput phone;
 
   ///
-  final List<Asset> images;
+  final List<Asset>? images;
 
   ///
   final FormzStatus formzStatus;
 
   ///
   UploadState copyWith(
-          {TitleInput title,
-          DescriptionInput description,
-          CategoryInput category,
-          ConditionInput condition,
-          QuantityInput quantity,
-          PriceInput price,
-          PhoneNumberInput phone,
-          List<Asset> images,
-          FormzStatus formzStatus}) =>
+          {TitleInput? title,
+          DescriptionInput? description,
+          CategoryInput? category,
+          ConditionInput? condition,
+          QuantityInput? quantity,
+          PriceInput? price,
+          PhoneNumberInput? phone,
+          List<Asset>? images,
+          FormzStatus? formzStatus}) =>
       UploadState(
           title: title ?? this.title,
           description: description ?? this.description,
@@ -68,7 +68,7 @@ class UploadState extends Equatable {
           formzStatus: formzStatus ?? this.formzStatus);
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         title,
         description,
         category,

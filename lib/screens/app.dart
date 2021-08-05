@@ -13,8 +13,8 @@ import 'splash_screen.dart';
 class App extends StatelessWidget {
   ///
   const App({
-    @required this.authenticationRepository,
-    Key key,
+    required this.authenticationRepository,
+    Key? key,
   }) : super(key: key);
 
   ///
@@ -41,7 +41,7 @@ class App extends StatelessWidget {
 ///
 class AppView extends StatefulWidget {
   ///
-  const AppView({Key key}) : super(key: key);
+  const AppView({Key? key}) : super(key: key);
 
   @override
   _AppViewState createState() => _AppViewState();
@@ -50,7 +50,7 @@ class AppView extends StatefulWidget {
 class _AppViewState extends State<AppView> {
   final _navigatorKey = GlobalKey<NavigatorState>();
 
-  NavigatorState get _navigator => _navigatorKey.currentState;
+  NavigatorState? get _navigator => _navigatorKey.currentState;
 
   @override
   Widget build(BuildContext context) => MaterialApp(
@@ -62,14 +62,14 @@ class _AppViewState extends State<AppView> {
           listener: (context, state) {
             switch (state.status) {
               case AuthenticationStatus.authenticated:
-                _navigator.pushAndRemoveUntil<void>(
+                _navigator!.pushAndRemoveUntil<void>(
                   HomeScreen.route,
                   (route) => false,
                 );
                 break;
 
               case AuthenticationStatus.unauthenticated:
-                _navigator.pushAndRemoveUntil<void>(
+                _navigator!.pushAndRemoveUntil<void>(
                   LogInScreen.route,
                   (route) => false,
                 );

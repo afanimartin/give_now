@@ -14,14 +14,14 @@ class UserModel extends Equatable {
 
   ///
   factory UserModel.fromSnapshot(DocumentSnapshot doc) => UserModel(
-        email: doc['email'] as String,
-        displayName: doc['display_name'] as String,
-        photoUrl: doc['photo_url'] as String,
+        email: doc['email'] as String?,
+        displayName: doc['display_name'] as String?,
+        photoUrl: doc['photo_url'] as String?,
       );
 
   ///
   UserModel copyWith(
-          {String displayName, String phoneNumber, bool profileCompleted}) =>
+          {String? displayName, String? phoneNumber, bool? profileCompleted}) =>
       UserModel(
         displayName: displayName ?? this.displayName,
         phoneNumber: phoneNumber ?? this.phoneNumber,
@@ -36,22 +36,22 @@ class UserModel extends Equatable {
   );
 
   ///
-  final String userId;
+  final String? userId;
 
   ///
-  final String email;
+  final String? email;
 
   ///
-  final String displayName;
+  final String? displayName;
 
   ///
-  final String photoUrl;
+  final String? photoUrl;
 
   ///
-  final String phoneNumber;
+  final String? phoneNumber;
 
   ///
-  final Timestamp signedUpAt;
+  final Timestamp? signedUpAt;
 
   ///
   Map<String, dynamic> toDocument() => <String, dynamic>{
@@ -64,7 +64,7 @@ class UserModel extends Equatable {
       };
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         userId,
         email,
         displayName,

@@ -6,14 +6,14 @@ import '../utils/category.dart';
 class CategoryEditingWidget extends StatefulWidget {
   ///
   const CategoryEditingWidget(
-      {@required this.categoryValue, @required this.onChanged, Key key})
+      {required this.categoryValue, required this.onChanged, Key? key})
       : super(key: key);
 
   ///
-  final void Function(String) onChanged;
+  final void Function(String?) onChanged;
 
   ///
-  final String categoryValue;
+  final String? categoryValue;
 
   @override
   _CategoryEditingWidgetState createState() => _CategoryEditingWidgetState();
