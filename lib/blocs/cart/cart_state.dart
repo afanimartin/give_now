@@ -31,8 +31,7 @@ class CartItemsLoaded extends CartState {
   ///
   List<Item> get currentUserCartItems => items
       .where((item) =>
-          item.buyerId == _firebaseAuth.currentUser.uid &&
-          int.parse(item.quantity) > 0)
+          item.buyerId == _firebaseAuth.currentUser.uid)
       .toList();
 
   ///

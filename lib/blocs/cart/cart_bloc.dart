@@ -123,8 +123,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       final _updatedItem = _item.copyWith(quantity: _quantity.toString());
 
       await _uploadRepository.update(_updatedItem);
-
-      await _cartRepository.update(_updatedItem);
     }
   }
 }

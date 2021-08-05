@@ -42,6 +42,7 @@
 
 ## After MVP
 - [] user should not add items already in their cart
+- [] hide item from other users' cart if the item was bought by another user
 - [] let user add phone number after signup
 - [] use standard fontSize like [headline1]
 - [] learn basics of design [typography]
