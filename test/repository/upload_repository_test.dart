@@ -1,30 +1,48 @@
-import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:moostamil/models/item/item.dart';
-import 'package:moostamil/repositories/upload/upload_repository.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+import '../mocks/data/item.dart';
+import '../mocks/repository/upload_repository_mock.dart';
 
-  const channel = MethodChannel('plugins.flutter.io/path_provider');
-  // ignore: cascade_invocations
-  channel.setMockMethodCallHandler((MethodCall methodCall) async => '.');
+void main() {
+  UploadRepositoryMock? mockUplodRepository;
 
-  await Firebase.initializeApp();
-
-  late UploadRepository _uploadRepository;
-  late FakeFirebaseFirestore _fakeFirebaseFirestore;
-
-  setUpAll(() async {
-    _uploadRepository = UploadRepository();
-    _fakeFirebaseFirestore = FakeFirebaseFirestore();
+  setUp(() {
+    mockUplodRepository = UploadRepositoryMock();
   });
 
-  test('Add item', () async {
-    const _item = Item(title: 'test item', description: 'test item to upload');
-    await _uploadRepository.upload(_item, _fakeFirebaseFirestore);
+  test('add', () {
+    mockUplodRepository?.add(item);
+  });
+
+  group('uploads', () {
+    test('length list should be 0', () async {
+      final snapshot = await mockUplodRepository?.uploads();
+
+      expect(snapshot?.length, 0);
+    });
+
+    test('length list should be 1', () async {
+      mockUplodRepository?.add(item);
+
+      final snapshot = await mockUplodRepository?.uploads();
+
+      expect(snapshot?.length, 1);
+    });
+
+    test('add, delete, length should be 0', () async {
+      mockUplodRepository?.add(item);
+
+      final snapshot = await mockUplodRepository?.uploads();
+
+      expect(snapshot?.length, 1);
+
+      for (var i = 0; i < snapshot!.length; i++) {
+        if (item.id == snapshot[i]['id']) {
+          snapshot.remove(snapshot[i]);
+        }
+      }
+
+      expect(snapshot.length, 0);
+    });
   });
 }
