@@ -108,7 +108,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   }
 
   ///
-  Future<void> deleteCartItems(List<Item> cartItems) async{
+  Future<void> deleteCartItems(List<Item> cartItems) async {
     for (var i = 0; i < cartItems.length; i++) {
       await _cartRepository.delete(cartItems[i]);
     }
@@ -123,6 +123,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       final _updatedItem = _item.copyWith(quantity: _quantity.toString());
 
       await _uploadRepository.update(_updatedItem);
+
+      await _cartRepository.update(_updatedItem);
     }
   }
 }

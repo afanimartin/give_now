@@ -17,6 +17,14 @@ class CartRepository extends ICartRepostiory {
   }
 
   @override
+  Future<void> update(Item item) async {
+    await _firebaseFirestore
+        .collection(Paths.carts)
+        .doc(item.id)
+        .update(item.toDocument());
+  }
+
+  @override
   Future<void> delete(Item item) async {
     await _firebaseFirestore.collection(Paths.carts).doc(item.id).delete();
   }

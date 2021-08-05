@@ -52,6 +52,8 @@ dev_dependencies:
   
   bloc_test: ^8.1.0
 
+  mockito: ^5.0.13
+
   fake_cloud_firestore: ^1.1.2
 
   pedantic: ^1.9.0

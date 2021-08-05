@@ -27,7 +27,6 @@
 - [x] create a simple logo for the app
 - [x] redesign the login page 
 - [x] decrement product quantity after checkout
-- [] let user add phone number after signup
 - [] add unit tests for core logic
 - [] invite users for testing
 - [] make launcher icon big enough from the apps menu
@@ -43,6 +42,7 @@
 
 ## After MVP
 - [] user should not add items already in their cart
+- [] let user add phone number after signup
 - [] use standard fontSize like [headline1]
 - [] learn basics of design [typography]
 - [] only show floatingActionButton on item edit page when item is dirty
