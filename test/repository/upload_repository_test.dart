@@ -11,38 +11,55 @@ void main() {
   });
 
   test('add', () {
-    mockUplodRepository?.add(item);
+    mockUplodRepository?.add(itemOne);
   });
 
   group('uploads', () {
-    test('length list should be 0', () async {
+    test('length of snapshot should be 0', () async {
       final snapshot = await mockUplodRepository?.uploads();
 
       expect(snapshot?.length, 0);
     });
 
     test('length list should be 1', () async {
-      mockUplodRepository?.add(item);
+      mockUplodRepository?.add(itemOne);
 
       final snapshot = await mockUplodRepository?.uploads();
 
       expect(snapshot?.length, 1);
     });
 
-    test('add, delete, length should be 0', () async {
-      mockUplodRepository?.add(item);
+    test('add one item, delete one item, length should be 0', () async {
+      mockUplodRepository?.add(itemOne);
 
       final snapshot = await mockUplodRepository?.uploads();
 
       expect(snapshot?.length, 1);
 
       for (var i = 0; i < snapshot!.length; i++) {
-        if (item.id == snapshot[i]['id']) {
+        if (itemOne.id == snapshot[i]['id']) {
           snapshot.remove(snapshot[i]);
         }
       }
 
       expect(snapshot.length, 0);
+    });
+
+    test('add two items, delete one item, length should be 1', () async {
+      mockUplodRepository?.add(itemOne);
+      mockUplodRepository?.add(itemTwo);
+
+      final snapshot = await mockUplodRepository?.uploads();
+
+      expect(snapshot?.length, 2);
+
+      for (var i = 0; i < snapshot!.length; i++) {
+        if (itemOne.id == snapshot[i]['id']) {
+          snapshot.remove(snapshot[i]);
+        }
+      }
+
+      expect(snapshot.length, 1);
     });
   });
 }

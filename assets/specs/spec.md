@@ -27,7 +27,7 @@
 - [x] create a simple logo for the app
 - [x] redesign the login page 
 - [x] decrement product quantity after checkout
-- [] add unit tests for core logic
+- [] add unit tests for bloc, repository and some widgets
 - [] invite users for testing
 - [] make launcher icon big enough from the apps menu
 
