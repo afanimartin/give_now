@@ -22,7 +22,12 @@ class UploadRepositoryMock {
   }
 
   Future<List<Map<String, dynamic>>> uploads() async {
-    final data = await _fakeFirebaseFirestore.collection(Paths.uploads).get();
-    return data.docs.map((doc) => doc.data()).toList();
+    final uploads =
+        await _fakeFirebaseFirestore.collection(Paths.uploads).get();
+    return uploads.docs.map((doc) => doc.data()).toList();
+  }
+
+  void clearCollection(List<Map<String, dynamic>>? uploads) async {
+    uploads?.clear();
   }
 }
