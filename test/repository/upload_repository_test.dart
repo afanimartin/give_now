@@ -16,13 +16,13 @@ void main() {
   });
 
   group('uploads', () {
-    test('uploads collection should be empty: length==0', () async {
+    test('uploads collection should be empty:length==0', () async {
       final uploads = await mockUplodRepository?.uploads();
 
       expect(uploads?.length, 0);
     });
 
-    test('add one item: length==1', () async {
+    test('add one item:length==1', () async {
       mockUplodRepository?.add(itemOne);
 
       final uploads = await mockUplodRepository?.uploads();
