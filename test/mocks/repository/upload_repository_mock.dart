@@ -1,23 +1,24 @@
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
-import 'package:moostamil/models/item/item.dart';
 import 'package:moostamil/utils/paths.dart';
 
 class UploadRepositoryMock {
   final _fakeFirebaseFirestore = FakeFirebaseFirestore();
 
   ///
-  void add(Item item) {
-    _fakeFirebaseFirestore.collection(Paths.uploads).add(item.toDocument());
+  void add(Map<String, dynamic> item) {
+    _fakeFirebaseFirestore.collection(Paths.uploads).add(item);
   }
 
-  void delete(Item item) async {
-    final snapshot = await uploads();
+  ///
+  void update(Map<String, dynamic> item) {
+    _fakeFirebaseFirestore
+        .collection(Paths.uploads)
+        .doc(item['id'] as String)
+        .update(item);
+  }
 
-    for (var i = 0; i < snapshot.length; i++) {
-        if(item.id == snapshot[i]['id']) {
-          snapshot.remove(snapshot[i]);
-        }
-      }
+  void delete(List<Map<String, dynamic>>? uploads, Map<String, dynamic> item) {
+    uploads?.remove(item);
   }
 
   Future<List<Map<String, dynamic>>> uploads() async {
