@@ -10,8 +10,8 @@ class UploadRepository extends IUploadRepository {
 
   ///
   @override
-  Future<void> upload(Item item, FirebaseFirestore firebaseFirestore) async {
-    await firebaseFirestore
+  Future<void> upload(Item item) async {
+    await _firebaseFirestore
         .collection(Paths.uploads)
         .doc(item.id)
         .set(item.toDocument());
@@ -27,12 +27,12 @@ class UploadRepository extends IUploadRepository {
   }
 
   ///
-  @override
+  // @override
   Future<void> delete(Item item) async {
     await _firebaseFirestore.collection(Paths.uploads).doc(item.id).delete();
   }
 
-  @override
+  ///
   Stream<List<Item>> uploads() =>
       _firebaseFirestore.collection(Paths.uploads).snapshots().map((snapshot) =>
           snapshot.docs.map((doc) => Item.fromSnapshot(doc)).toList()

@@ -15,20 +15,15 @@ import 'upload_state.dart';
 ///
 class UploadBloc extends Bloc<ItemEvent, UploadState> {
   ///
-  UploadBloc(
-      {required UploadRepository itemRepository,
-      FirebaseAuth? firebaseAuth,
-      FirebaseFirestore? firebaseFirestore})
-      : _itemRepository = itemRepository,
+  UploadBloc({
+    required UploadRepository itemRepository,
+    FirebaseAuth? firebaseAuth,
+  })  : _itemRepository = itemRepository,
         _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
-        _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance,
         super(const UploadState());
 
   ///
   final UploadRepository _itemRepository;
-
-  ///
-  final FirebaseFirestore _firebaseFirestore;
 
   ///
   final FirebaseAuth _firebaseAuth;
@@ -72,7 +67,7 @@ class UploadBloc extends Bloc<ItemEvent, UploadState> {
         createdAt: Timestamp.now(),
       );
 
-      await _itemRepository.upload(_item, _firebaseFirestore);
+      await _itemRepository.upload(_item);
     } on Exception catch (_) {}
   }
 

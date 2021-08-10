@@ -1,33 +1,30 @@
-import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
-import 'package:moostamil/utils/paths.dart';
+import 'package:moostamil/models/item/item.dart';
+import 'package:moostamil/repositories/upload/i_upload_repository.dart';
 
-class UploadRepositoryMock {
-  final _fakeFirebaseFirestore = FakeFirebaseFirestore();
+import '../data/item.dart';
 
-  ///
-  void add(Map<String, dynamic> item) {
-    _fakeFirebaseFirestore.collection(Paths.uploads).add(item);
+class UploadRepositoryMock extends IUploadRepository {
+  @override
+  Future<void> upload(Item upload) async {
+    mockedUploads.add(upload);
   }
 
-  ///
-  void update(Map<String, dynamic> item) {
-    _fakeFirebaseFirestore
-        .collection(Paths.uploads)
-        .doc(item['id'] as String)
-        .update(item);
+  @override
+  Future<void> update(Item item) async {
+    for (var i = 0; i < mockedUploads.length; i++) {
+      if (item.id == mockedUploads[i].id) {
+        mockedUploads[i] = item;
+      }
+    }
   }
 
-  void delete(List<Map<String, dynamic>>? uploads, Map<String, dynamic> item) {
-    uploads?.remove(item);
+  Future<void> delete(Item? item) async {
+    mockedUploads.remove(item);
   }
 
-  Future<List<Map<String, dynamic>>> uploads() async {
-    final uploads =
-        await _fakeFirebaseFirestore.collection(Paths.uploads).get();
-    return uploads.docs.map((doc) => doc.data()).toList();
-  }
+  Future<List<Item>>? uploads() async => mockedUploads;
 
-  void clearCollection(List<Map<String, dynamic>>? uploads) async {
-    uploads?.clear();
+  void clearCollection() async {
+    mockedUploads.clear();
   }
 }
