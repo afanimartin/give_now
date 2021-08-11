@@ -9,7 +9,7 @@ import '../../models/item/item.dart';
 ///
 class ItemState extends Equatable {
   ///
-  const ItemState({
+  ItemState({
     this.title = const TitleInput.pure(),
     this.description = const DescriptionInput.pure(),
     this.category = const CategoryInput.pure(),
@@ -111,8 +111,9 @@ class ItemsLoaded extends ItemState {
       .where((item) => item.sellerId == _firebaseAuth.currentUser!.uid)
       .toList();
 
+  ///
   @override
-  List<Object> get props => [items];
+  List<Object?> get props => [items];
 }
 
 ///

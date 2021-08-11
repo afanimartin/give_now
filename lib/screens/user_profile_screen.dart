@@ -52,7 +52,7 @@ static Route get route =>
               ],
             ),
             body: BlocBuilder<ItemBloc, ItemState>(
-                builder: (context, itemState) => Padding(
+                builder: (context, state) => Padding(
                       padding: const EdgeInsets.all(12),
                       child: Column(
                         children: [
@@ -82,7 +82,7 @@ static Route get route =>
                           const SizedBox(
                             height: 8,
                           ),
-                          _buildListOfItems(context, itemState)
+                          _buildListOfItems(context, state)
                         ],
                       ),
                     ))));

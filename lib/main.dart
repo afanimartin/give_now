@@ -40,7 +40,8 @@ void main() async {
       BlocProvider<ItemBloc>(
           create: (_) => ItemBloc(
               itemRepository: ItemRepository(),
-              firebaseAuth: FirebaseAuth.instance)),
+              firebaseAuth: FirebaseAuth.instance)
+            ..fetchItems()),
       BlocProvider<CartBloc>(
           create: (_) => CartBloc(
               cartRepository: CartRepository(),
