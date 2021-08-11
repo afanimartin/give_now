@@ -23,7 +23,7 @@ class ItemRepositoryMock extends IItemRepository {
     mockedUploads.remove(item);
   }
 
-  List<Item>? uploads() => mockedUploads;
+  List<Item>? items() => mockedUploads;
 
   @override
   Stream<List<Item>> allItems() => mockedUploads as Stream<List<Item>>;

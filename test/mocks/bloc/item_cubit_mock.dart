@@ -15,5 +15,5 @@ class ItemCubit extends Cubit<ItemStateMock> {
     } on Exception catch (_) {}
   }
 
-  List<Item>? getAllUploads() => itemRepository.uploads();
+  List<Item>? getAllUploads() => itemRepository.items();
 }

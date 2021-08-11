@@ -17,38 +17,42 @@ import 'item_state.dart';
 ///
 class ItemBloc extends Cubit<ItemState> {
   ///
-  ItemBloc({required ItemRepository itemRepository, FirebaseAuth? firebaseAuth})
+  ItemBloc(
+      {required ItemRepository itemRepository,
+      required FirebaseAuth firebaseAuth})
       : _itemRepository = itemRepository,
-        _firebaseAuth = firebaseAuth ?? FirebaseAuth?.instance,
+        _firebaseAuth = firebaseAuth,
         super(InitialItemState());
 
   final IItemRepository _itemRepository;
 
   ///
-  final FirebaseAuth? _firebaseAuth;
+  final FirebaseAuth _firebaseAuth;
 
   StreamSubscription<List<Item>>? _itemStreamSubscription;
 
   ///
-  void pickAndUploadItems() async {
+  void addImagesToState() async {
     try {
       final _files = await imagesToPreview();
 
-      emit(ItemState(images: _files));
+      emit(state.copyWith(images: _files));
     } on Exception catch (_) {}
   }
 
   ///
-  void uploadItem(Item item) async {
-    emit(ItemBeingAdded());
-
-    final _imagesToUpload = await imagesToUpload(state.images!);
+  void addItem(Item item) async {
+    // do not emit any state before this line 
+    // to avoid loss of images from the state object
+    final _imagesToUpload = await imagesToUpload(state.images);
     final _imageUrls = await getDownloadURL(_imagesToUpload);
+
+    emit(ItemBeingAdded());
 
     try {
       final _item = Item(
-        sellerId: _firebaseAuth!.currentUser!.uid,
-        sellerPhotoUrl: _firebaseAuth!.currentUser!.photoURL,
+        sellerId: _firebaseAuth.currentUser?.uid,
+        sellerPhotoUrl: _firebaseAuth.currentUser?.photoURL,
         title: item.title,
         description: item.description,
         condition: item.condition,

@@ -14,9 +14,9 @@ void main() {
     mockUploadRepository?.clearCollection();
   });
 
-  group('upload repository', () {
-    test('uploads collection should be empty:length==0', () async {
-      final uploads = mockUploadRepository?.uploads();
+  group('item repository', () {
+    test('items collection should be empty:length==0', () async {
+      final uploads = mockUploadRepository?.items();
 
       expect(uploads?.length, 0);
     });
@@ -24,7 +24,7 @@ void main() {
     test('add one item:length==1', () async {
       await mockUploadRepository?.add(itemOne);
 
-      final uploads = mockUploadRepository?.uploads();
+      final uploads = mockUploadRepository?.items();
 
       expect(uploads?.length, 1);
     });
@@ -32,7 +32,7 @@ void main() {
     test('add item, delete item:length==0', () async {
       await mockUploadRepository?.add(itemOne);
 
-      final uploads = mockUploadRepository?.uploads();
+      final uploads = mockUploadRepository?.items();
 
       expect(uploads?.length, 1);
       await mockUploadRepository?.delete(itemOne);

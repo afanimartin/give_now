@@ -19,7 +19,7 @@ class SubmitButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) => BlocBuilder<ItemBloc, ItemState>(
         builder: (context, state) => TextButton(
             onPressed: () {
-              context.read<ItemBloc>().uploadItem(item);
+              context.read<ItemBloc>().addItem(item);
 
               Navigator.of(context).pushAndRemoveUntil<void>(
                   UserProfileScreen.route, (route) => false);

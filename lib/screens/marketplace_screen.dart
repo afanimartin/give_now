@@ -63,7 +63,7 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
               visible: state is! ItemBeingAdded,
               child: FloatingActionButtonWidget(
                 onPressed: () {
-                  context.read<ItemBloc>().pickAndUploadItems();
+                  context.read<ItemBloc>().addImagesToState();
 
                   Navigator.of(context).push(MaterialPageRoute<Widget>(
                       builder: (_) => const ItemPreviewScreen()));

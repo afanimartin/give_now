@@ -5,13 +5,13 @@ import 'package:path_provider/path_provider.dart';
 
 
 /// pick images as Asset and convert to File for upload
-Future<List<File>> imagesToUpload(List<Asset> images) async {
+Future<List<File>> imagesToUpload(List<Asset>? images) async {
   final files = <File>[];
 
   final appDocDir = await getTemporaryDirectory();
   final appDocPath = appDocDir.path;
 
-  for (var i = 0; i < images.length; i++) {
+  for (var i = 0; i < images!.length; i++) {
     final byteData = await images[i].getByteData();
 
     final tempFile = File('$appDocPath/${images[i].name}');

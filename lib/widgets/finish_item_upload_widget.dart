@@ -155,7 +155,7 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
                 child: FloatingActionButton(
                   backgroundColor: Theme.of(context).primaryColor,
                   onPressed: () {
-                    context.read<ItemBloc>().uploadItem(_item);
+                    context.read<ItemBloc>().addItem(_item);
 
                     Navigator.of(context).pushAndRemoveUntil<void>(
                         UserProfileScreen.route, (route) => false);
