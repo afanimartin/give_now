@@ -1,10 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../blocs/item/item_cubit.dart';
+import '../blocs/item/item_state.dart';
 
-import '../blocs/upload/upload_bloc.dart';
-import '../blocs/upload/upload_event.dart';
-import '../blocs/upload/upload_state.dart';
 import '../models/item/item.dart';
 import '../screens/user_profile_screen.dart';
 import '../utils/category.dart';
@@ -38,7 +37,7 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
   late bool _isFormValid;
 
   @override
-  Widget build(BuildContext context) => BlocBuilder<UploadBloc, UploadState>(
+  Widget build(BuildContext context) => BlocBuilder<ItemBloc, ItemState>(
         builder: (context, state) {
           _isFormValid = _titleContentController.text.isNotEmpty &&
               _descriptionContentController.text.isNotEmpty &&
@@ -77,7 +76,7 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
                       TitleEditingWidget(
                         controller: _titleContentController,
                         onChanged: (String title) =>
-                            context.read<UploadBloc>().titleChanged(title),
+                            context.read<ItemBloc>().titleChanged(title),
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -93,7 +92,7 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
                         controller: _descriptionContentController,
                         maxLength: Constants.fiveHundred,
                         onChanged: (String description) => context
-                            .read<UploadBloc>()
+                            .read<ItemBloc>()
                             .descriptionChanged(description),
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
@@ -120,7 +119,7 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
                       PhoneNumberEditingWidget(
                         controller: _phoneController,
                         onChanged: (String phone) =>
-                            context.read<UploadBloc>().phoneChanged(phone),
+                            context.read<ItemBloc>().phoneChanged(phone),
                       ),
                       const SizedBox(
                         height: Constants.six,
@@ -156,7 +155,7 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
                 child: FloatingActionButton(
                   backgroundColor: Theme.of(context).primaryColor,
                   onPressed: () {
-                    context.read<UploadBloc>().add(UploadItem(item: _item));
+                    context.read<ItemBloc>().uploadItem(_item);
 
                     Navigator.of(context).pushAndRemoveUntil<void>(
                         UserProfileScreen.route, (route) => false);

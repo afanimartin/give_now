@@ -1,13 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
 
 import '../mocks/data/item.dart';
-import '../mocks/repository/upload_repository_mock.dart';
+import '../mocks/repository/item_repository_mock.dart';
 
 void main() {
-  UploadRepositoryMock? mockUploadRepository;
+  ItemRepositoryMock? mockUploadRepository;
 
   setUp(() {
-    mockUploadRepository = UploadRepositoryMock();
+    mockUploadRepository = ItemRepositoryMock();
   });
 
   tearDown(() {

@@ -1,9 +1,9 @@
 import 'package:moostamil/models/item/item.dart';
-import 'package:moostamil/repositories/upload/i_upload_repository.dart';
+import 'package:moostamil/repositories/item/i_item_repository.dart';
 
 import '../data/item.dart';
 
-class UploadRepositoryMock extends IUploadRepository {
+class ItemRepositoryMock extends IItemRepository {
   @override
   Future<void> upload(Item upload) async {
     mockedUploads.add(upload);

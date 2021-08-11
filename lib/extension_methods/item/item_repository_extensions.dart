@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../models/item/item.dart';
 
-import '../../repositories/upload/upload_repository.dart';
+import '../../models/item/item.dart';
+import '../../repositories/item/item_repository.dart';
+
 
 ///
-extension UploadRepositoryExtensions on UploadRepository {
+extension ItemRepositoryExtensions on ItemRepository {
   ///
   static Future<Item> doesItemExist(String collection, String id) async {
     final _firebaseFirestore = FirebaseFirestore.instance;

@@ -4,8 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../blocs/item/item_bloc.dart';
-import '../blocs/item/item_event.dart';
+import '../blocs/item/item_cubit.dart';
 import '../blocs/item/item_state.dart';
 import '../models/item/item.dart';
 import '../utils/category.dart';
@@ -132,7 +131,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
                   condition: _conditionValue,
                   updatedAt: Timestamp.now());
 
-              context.read<ItemBloc>().add(UpdateItem(item: updatedItem));
+              context.read<ItemBloc>().updateItem(updatedItem);
             },
             backgroundColor: Theme.of(context).primaryColor,
             child: state is ItemBeingUpdated

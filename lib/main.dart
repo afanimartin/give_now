@@ -8,14 +8,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'blocs/cart/cart_bloc.dart';
 import 'blocs/cart/cart_event.dart';
 import 'blocs/donation/donation_bloc.dart';
-import 'blocs/item/item_bloc.dart';
-import 'blocs/item/item_event.dart';
+import 'blocs/item/item_cubit.dart';
 import 'blocs/tab/tab_bloc.dart';
-import 'blocs/upload/upload_bloc.dart';
 import 'repositories/authentication/authentication_repository.dart';
 import 'repositories/cart/cart_repository.dart';
 import 'repositories/donation/donation_repository.dart';
-import 'repositories/upload/upload_repository.dart';
+import 'repositories/item/item_repository.dart';
 import 'screens/app.dart';
 
 void main() async {
@@ -42,14 +40,12 @@ void main() async {
       ),
       BlocProvider<ItemBloc>(
           create: (_) =>
-              ItemBloc(uploadRepository: UploadRepository())..add(LoadItems())),
+              ItemBloc(itemRepository: ItemRepository())),
       BlocProvider<CartBloc>(
           create: (_) => CartBloc(
               cartRepository: CartRepository(),
-              uploadRepository: UploadRepository())
+              uploadRepository: ItemRepository())
             ..add(LoadCartItems())),
-      BlocProvider<UploadBloc>(
-          create: (_) => UploadBloc(itemRepository: UploadRepository())),
       BlocProvider<DonationBloc>(
           create: (_) => DonationBloc(donationRepository: DonationRepository()))
     ],

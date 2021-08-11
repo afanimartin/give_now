@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../models/item/item.dart';
 import '../../repositories/cart/cart_repository.dart';
-import '../../repositories/upload/upload_repository.dart';
+import '../../repositories/item/item_repository.dart';
 import 'cart_event.dart';
 import 'cart_state.dart';
 
@@ -15,7 +15,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   ///
   CartBloc(
       {required CartRepository cartRepository,
-      required UploadRepository uploadRepository,
+      required ItemRepository uploadRepository,
       FirebaseAuth? firebaseAuth})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _cartRepository = cartRepository,
@@ -26,7 +26,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   final CartRepository _cartRepository;
 
   ///
-  final UploadRepository _uploadRepository;
+  final ItemRepository _uploadRepository;
 
   ///
   final FirebaseAuth _firebaseAuth;

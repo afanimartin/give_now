@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../blocs/item/item_bloc.dart';
+import '../blocs/item/item_cubit.dart';
 import '../blocs/item/item_state.dart';
-import '../blocs/upload/upload_bloc.dart';
-import '../blocs/upload/upload_event.dart';
-import '../blocs/upload/upload_state.dart';
 import '../utils/constants.dart';
 import '../widgets/floating_action_button.dart';
 import '../widgets/items_grid.dart';
@@ -28,56 +25,54 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
   @override
   Widget build(BuildContext context) => BlocBuilder<ItemBloc, ItemState>(
         builder: (context, state) => Scaffold(
-          backgroundColor: Theme.of(context).accentColor,
-          appBar: AppBar(
-            title: Text(
-              'Dalala',
-              style: TextStyle(
-                  color: Theme.of(context).primaryColorDark,
-                  fontSize: 28,
-                  letterSpacing: Constants.onePointTwo),
-            ),
             backgroundColor: Theme.of(context).accentColor,
-            actions: [
-              IconButton(
-                  icon: Icon(
-                    Icons.brightness_6_outlined,
-                    size: Constants.thirty,
+            appBar: AppBar(
+              title: Text(
+                'Dalala',
+                style: TextStyle(
                     color: Theme.of(context).primaryColorDark,
-                  ),
-                  onPressed: () {})
-            ],
-          ),
-          body: state is ItemsLoaded && state.itemsForSale.isNotEmpty
-              ? Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: Constants.eight),
-                  child: CustomScrollView(
-                    slivers: [ItemsGrid(items: state.itemsForSale)],
-                  ),
-                )
-              : const Center(
-                  child: Text(
-                    'No items for sale right now. Check again later.',
-                    style: TextStyle(fontSize: Constants.twenty),
-                  ),
-                ),
-          floatingActionButton: BlocBuilder<UploadBloc, UploadState>(
-              builder: (context, state) => Visibility(
-                    visible: state is! ItemBeingAdded,
-                    child: FloatingActionButtonWidget(
-                      onPressed: () {
-                        context.read<UploadBloc>().add(PickAndPreviewImages());
-
-                        Navigator.of(context).push(MaterialPageRoute<Widget>(
-                            builder: (_) => const ItemPreviewScreen()));
-                      },
-                      backgroundColor: Theme.of(context).primaryColor,
-                      child: const Icon(
-                        Icons.add,
-                      ),
+                    fontSize: 28,
+                    letterSpacing: Constants.onePointTwo),
+              ),
+              backgroundColor: Theme.of(context).accentColor,
+              actions: [
+                IconButton(
+                    icon: Icon(
+                      Icons.brightness_6_outlined,
+                      size: Constants.thirty,
+                      color: Theme.of(context).primaryColorDark,
                     ),
-                  )),
-        ),
+                    onPressed: () {})
+              ],
+            ),
+            body: state is ItemsLoaded && state.itemsForSale.isNotEmpty
+                ? Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: Constants.eight),
+                    child: CustomScrollView(
+                      slivers: [ItemsGrid(items: state.itemsForSale)],
+                    ),
+                  )
+                : const Center(
+                    child: Text(
+                      'No items for sale right now. Check again later.',
+                      style: TextStyle(fontSize: Constants.twenty),
+                    ),
+                  ),
+            floatingActionButton: Visibility(
+              visible: state is! ItemBeingAdded,
+              child: FloatingActionButtonWidget(
+                onPressed: () {
+                  context.read<ItemBloc>().pickAndUploadItems();
+
+                  Navigator.of(context).push(MaterialPageRoute<Widget>(
+                      builder: (_) => const ItemPreviewScreen()));
+                },
+                backgroundColor: Theme.of(context).primaryColor,
+                child: const Icon(
+                  Icons.add,
+                ),
+              ),
+            )),
       );
 }

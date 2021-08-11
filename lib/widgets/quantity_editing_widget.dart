@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../blocs/upload/upload_bloc.dart';
+import '../blocs/item/item_cubit.dart';
 
 ///
 class QuantityEditingWidget extends StatelessWidget {
@@ -17,7 +17,7 @@ class QuantityEditingWidget extends StatelessWidget {
         controller: controller,
         keyboardType: TextInputType.number,
         onChanged: (String quantity) =>
-            context.read<UploadBloc>().quantityChanged(quantity),
+            context.read<ItemBloc>().quantityChanged(quantity),
         decoration: InputDecoration(
             labelText: 'quantity',
             border: OutlineInputBorder(

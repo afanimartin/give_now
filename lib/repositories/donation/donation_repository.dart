@@ -3,10 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../models/item/donation.dart';
 import '../../models/item/item.dart';
 import '../../utils/paths.dart';
-import '../upload/upload_repository.dart';
+import '../item/item_repository.dart';
 
 ///
-class DonationRepository extends UploadRepository {
+class DonationRepository extends ItemRepository {
   final _firebaseFirestore = FirebaseFirestore.instance;
 
   ///

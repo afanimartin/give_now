@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../blocs/upload/upload_bloc.dart';
+import '../blocs/item/item_cubit.dart';
 
 ///
 class PriceEditingWidget extends StatelessWidget {
@@ -30,7 +30,7 @@ class PriceEditingWidget extends StatelessWidget {
   Widget build(BuildContext context) => TextField(
         controller: controller,
         onChanged: (String price) =>
-            context.read<UploadBloc>().priceChanged(price),
+            context.read<ItemBloc>().priceChanged(price),
         keyboardType: TextInputType.number,
         decoration: decoration,
       );

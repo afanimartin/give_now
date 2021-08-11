@@ -1,10 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../blocs/item/item_cubit.dart';
+import '../blocs/item/item_state.dart';
 
-import '../blocs/upload/upload_bloc.dart';
-import '../blocs/upload/upload_event.dart';
-import '../blocs/upload/upload_state.dart';
 import '../models/item/item.dart';
 import '../screens/user_profile_screen.dart';
 
@@ -17,10 +16,10 @@ class SubmitButtonWidget extends StatelessWidget {
   final Item item;
 
   @override
-  Widget build(BuildContext context) => BlocBuilder<UploadBloc, UploadState>(
+  Widget build(BuildContext context) => BlocBuilder<ItemBloc, ItemState>(
         builder: (context, state) => TextButton(
             onPressed: () {
-              context.read<UploadBloc>().add(UploadItem(item: item));
+              context.read<ItemBloc>().uploadItem(item);
 
               Navigator.of(context).pushAndRemoveUntil<void>(
                   UserProfileScreen.route, (route) => false);

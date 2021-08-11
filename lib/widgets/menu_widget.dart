@@ -6,8 +6,7 @@ import '../blocs/cart/cart_event.dart';
 
 import '../blocs/donation/donation_bloc.dart';
 import '../blocs/donation/donation_event.dart';
-import '../blocs/item/item_bloc.dart';
-import '../blocs/item/item_event.dart';
+import '../blocs/item/item_cubit.dart';
 import '../models/item/item.dart';
 import '../screens/user_profile_screen.dart';
 
@@ -44,7 +43,7 @@ class MenuWidget extends StatelessWidget {
             .toList(),
         onSelected: (String value) {
           if (value == 'Delete') {
-            _itemBloc.add(DeleteItem(item: item));
+            _itemBloc.deleteItem(item);
 
             _cartBloc.add(RemoveItemFromCart(item: item));
 

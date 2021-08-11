@@ -1,13 +1,10 @@
 import '../../models/item/item.dart';
 
 ///
-abstract class IUploadRepository {
+abstract class IItemRepository {
   ///
   Future<void> upload(Item upload);
 
   ///
   Future<void> update(Item item);
-
-  ///
-  // Future<void> delete(Item item);
 }
