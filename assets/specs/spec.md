@@ -27,8 +27,9 @@
 - [x] create a simple logo for the app
 - [x] redesign the login page 
 - [x] decrement product quantity after checkout
-- [] add unit tests for bloc, repository and some widgets
-- [] use very_good_coverage and obtain coverage of >=80%
+- [x] add unit tests for bloc, repository and some widgets
+- [] configure very_good_coverage and obtain coverage of >=80%
+- [] clean up codebase
 - [] invite users for testing
 - [] make launcher icon big enough from the apps menu
 
