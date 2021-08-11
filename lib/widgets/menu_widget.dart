@@ -4,8 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/cart/cart_bloc.dart';
 import '../blocs/cart/cart_event.dart';
 
-import '../blocs/donation/donation_bloc.dart';
-import '../blocs/donation/donation_event.dart';
 import '../blocs/item/item_cubit.dart';
 import '../models/item/item.dart';
 import '../screens/user_profile_screen.dart';
@@ -26,7 +24,7 @@ class MenuWidget extends StatelessWidget {
   late CartBloc _cartBloc;
 
   ///
-  late DonationBloc _donationBloc;
+  // late DonationBloc _donationBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +32,7 @@ class MenuWidget extends StatelessWidget {
 
     _cartBloc = BlocProvider.of<CartBloc>(context);
 
-    _donationBloc = BlocProvider.of<DonationBloc>(context);
+    // _donationBloc = BlocProvider.of<DonationBloc>(context);
 
     return PopupMenuButton<String>(
         itemBuilder: (context) => {'Delete', 'Donate'}
@@ -50,7 +48,7 @@ class MenuWidget extends StatelessWidget {
             Navigator.of(context).pushAndRemoveUntil<void>(
                 UserProfileScreen.route, (route) => false);
           } else {
-            _donationBloc.add(DonateItem(item: item));
+            // _donationBloc.add(DonateItem(item: item));
 
             Navigator.of(context).pushAndRemoveUntil<void>(
                 UserProfileScreen.route, (route) => false);

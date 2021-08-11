@@ -5,7 +5,7 @@ import '../data/item.dart';
 
 class ItemRepositoryMock extends IItemRepository {
   @override
-  Future<void> upload(Item upload) async {
+  Future<void> add(Item upload) async {
     mockedUploads.add(upload);
   }
 
@@ -18,11 +18,15 @@ class ItemRepositoryMock extends IItemRepository {
     }
   }
 
+  @override
   Future<void> delete(Item? item) async {
     mockedUploads.remove(item);
   }
 
-  Future<List<Item>>? uploads() async => mockedUploads;
+  List<Item>? uploads() => mockedUploads;
+
+  @override
+  Stream<List<Item>> allItems() => mockedUploads as Stream<List<Item>>;
 
   void clearCollection() async {
     mockedUploads.clear();

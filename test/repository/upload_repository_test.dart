@@ -16,23 +16,23 @@ void main() {
 
   group('upload repository', () {
     test('uploads collection should be empty:length==0', () async {
-      final uploads = await mockUploadRepository?.uploads();
+      final uploads = mockUploadRepository?.uploads();
 
       expect(uploads?.length, 0);
     });
 
     test('add one item:length==1', () async {
-      await mockUploadRepository?.upload(itemOne);
+      await mockUploadRepository?.add(itemOne);
 
-      final uploads = await mockUploadRepository?.uploads();
+      final uploads = mockUploadRepository?.uploads();
 
       expect(uploads?.length, 1);
     });
 
     test('add item, delete item:length==0', () async {
-      await mockUploadRepository?.upload(itemOne);
+      await mockUploadRepository?.add(itemOne);
 
-      final uploads = await mockUploadRepository?.uploads();
+      final uploads = mockUploadRepository?.uploads();
 
       expect(uploads?.length, 1);
       await mockUploadRepository?.delete(itemOne);
@@ -41,7 +41,7 @@ void main() {
     });
 
     test('add item, update item', () async {
-      await mockUploadRepository?.upload(itemOne);
+      await mockUploadRepository?.add(itemOne);
 
       final updatedItem = itemOne.copyWith(title: 'some updated title');
 
@@ -51,12 +51,11 @@ void main() {
     });
 
     test('add items, clear uploads:length==0', () async {
-      await mockUploadRepository?.upload(itemOne);
-      await mockUploadRepository?.upload(itemTwo);
+      await mockUploadRepository?.add(itemOne);
+      await mockUploadRepository?.add(itemTwo);
 
       mockUploadRepository?.clearCollection();
       expect(mockedUploads.length, 0);
     });
   });
 }
-

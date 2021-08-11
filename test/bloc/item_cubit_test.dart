@@ -1,17 +1,23 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import '../mocks/bloc/item_bloc_mock.dart';
+import '../mocks/bloc/item_cubit_mock.dart';
+import '../mocks/data/item.dart';
 import '../mocks/repository/item_repository_mock.dart';
 
 void main() {
-  ItemCubit itemCubit;
-  final ItemRepositoryMock itemRepository;
+  final itemCubit = ItemCubit(itemRepository: ItemRepositoryMock());
 
-  setUp(() {
-    itemCubit = ItemCubit(itemRepository: ItemRepositoryMock());
-  });
+  setUp(() {});
 
-  tearDown(() {
-    // itemCubit.close();
+  tearDown(itemCubit.close);
+
+  group('ItemCubit', () {
+    test('add item, fetch all items', () async {
+      itemCubit.addItem(itemOne);
+
+      final items = itemCubit.getAllUploads();
+
+      expect(items?.length, 1);
+    });
   });
 }

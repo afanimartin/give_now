@@ -10,7 +10,7 @@ class ItemRepository extends IItemRepository {
 
   ///
   @override
-  Future<void> upload(Item item) async {
+  Future<void> add(Item item) async {
     await _firebaseFirestore
         .collection(Paths.uploads)
         .doc(item.id)
@@ -27,13 +27,14 @@ class ItemRepository extends IItemRepository {
   }
 
   ///
-  // @override
+  @override
   Future<void> delete(Item item) async {
     await _firebaseFirestore.collection(Paths.uploads).doc(item.id).delete();
   }
 
   ///
-  Stream<List<Item>> uploads() =>
+  @override
+  Stream<List<Item>> allItems() =>
       _firebaseFirestore.collection(Paths.uploads).snapshots().map((snapshot) =>
           snapshot.docs.map((doc) => Item.fromSnapshot(doc)).toList()
             ..sort((a, b) => b.createdAt!.compareTo(a.createdAt!)));

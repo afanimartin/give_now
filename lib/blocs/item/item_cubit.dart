@@ -10,19 +10,19 @@ import '../../helpers/image/upload_images.dart';
 import '../../helpers/repository/upload_repository_helper.dart';
 import '../../models/form/item_form.dart';
 import '../../models/item/item.dart';
+import '../../repositories/item/i_item_repository.dart';
 import '../../repositories/item/item_repository.dart';
 import 'item_state.dart';
 
 ///
 class ItemBloc extends Cubit<ItemState> {
   ///
-  ItemBloc(
-      {required ItemRepository itemRepository, FirebaseAuth? firebaseAuth})
+  ItemBloc({required ItemRepository itemRepository, FirebaseAuth? firebaseAuth})
       : _itemRepository = itemRepository,
         _firebaseAuth = firebaseAuth ?? FirebaseAuth?.instance,
         super(InitialItemState());
 
-  final ItemRepository _itemRepository;
+  final IItemRepository _itemRepository;
 
   ///
   final FirebaseAuth? _firebaseAuth;
@@ -61,7 +61,7 @@ class ItemBloc extends Cubit<ItemState> {
         createdAt: Timestamp.now(),
       );
 
-      await _itemRepository.upload(_item);
+      await _itemRepository.add(_item);
     } on Exception catch (_) {}
   }
 
@@ -71,7 +71,7 @@ class ItemBloc extends Cubit<ItemState> {
       await _itemStreamSubscription?.cancel();
 
       _itemStreamSubscription = _itemRepository
-          .uploads()
+          .allItems()!
           .listen((items) => emit(ItemsLoaded(items: items)));
     } on Exception catch (error) {
       throw Exception(error);
