@@ -9,7 +9,7 @@ import '../../models/item/item.dart';
 ///
 class ItemState extends Equatable {
   ///
-  ItemState({
+  const ItemState({
     this.title = const TitleInput.pure(),
     this.description = const DescriptionInput.pure(),
     this.category = const CategoryInput.pure(),

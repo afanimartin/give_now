@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import '../mocks/data/item.dart';
+import '../mocks/data/mocked_item.dart';
 import '../mocks/repository/item_repository_mock.dart';
 
 void main() {

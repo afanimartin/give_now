@@ -15,5 +15,23 @@ class ItemCubit extends Cubit<ItemStateMock> {
     } on Exception catch (_) {}
   }
 
-  List<Item>? getAllUploads() => itemRepository.items();
+  List<Item>? fetchAllItems() => itemRepository.items();
+
+  void updateItem(Item? item) async {
+    try {
+      await itemRepository.update(item);
+    } on Exception catch (_) {}
+  }
+
+  void deleteItem(Item item) async {
+    try {
+      await itemRepository.delete(item);
+    } on Exception catch (_) {}
+  }
+
+  void clearCollection() {
+    try {
+      itemRepository.clearCollection();
+    } on Exception catch (_) {}
+  }
 }

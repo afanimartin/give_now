@@ -1,7 +1,7 @@
 import 'package:moostamil/models/item/item.dart';
 import 'package:moostamil/repositories/item/i_item_repository.dart';
 
-import '../data/item.dart';
+import '../data/mocked_item.dart';
 
 class ItemRepositoryMock extends IItemRepository {
   @override
@@ -10,10 +10,10 @@ class ItemRepositoryMock extends IItemRepository {
   }
 
   @override
-  Future<void> update(Item item) async {
+  Future<void> update(Item? item) async {
     for (var i = 0; i < mockedUploads.length; i++) {
-      if (item.id == mockedUploads[i].id) {
-        mockedUploads[i] = item;
+      if (item?.id == mockedUploads[i].id) {
+        mockedUploads[i] = item!;
       }
     }
   }

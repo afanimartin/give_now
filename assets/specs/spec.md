@@ -28,6 +28,7 @@
 - [x] redesign the login page 
 - [x] decrement product quantity after checkout
 - [] add unit tests for bloc, repository and some widgets
+- [] use very_good_coverage and obtain coverage of >=80%
 - [] invite users for testing
 - [] make launcher icon big enough from the apps menu
 
@@ -90,3 +91,4 @@
 - [x] new user is getting created everytime the same user signs in
 - [] logging out: `Invalid argument(s): No host specified in URI`
 - [] bottom navigator not rendering always
+- [] updating item doesn't reflect on UI but firebase is ok [category, condition]
