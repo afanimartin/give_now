@@ -30,7 +30,7 @@ class PriceEditingWidget extends StatelessWidget {
   Widget build(BuildContext context) => TextField(
         controller: controller,
         onChanged: (String price) =>
-            context.read<ItemBloc>().priceChanged(price),
+            context.read<ItemCubit>().priceChanged(price),
         keyboardType: TextInputType.number,
         decoration: decoration,
       );

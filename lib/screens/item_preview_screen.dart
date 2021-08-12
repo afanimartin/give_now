@@ -26,7 +26,7 @@ class ItemPreviewScreen extends StatelessWidget {
         backgroundColor: Theme.of(context).accentColor,
         iconTheme: Theme.of(context).iconTheme,
       ),
-      body: BlocBuilder<ItemBloc, ItemState>(
+      body: BlocBuilder<ItemCubit, ItemState>(
           builder: (context, state) => Column(
                 children: [
                   Expanded(

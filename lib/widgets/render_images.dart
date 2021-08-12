@@ -22,7 +22,7 @@ class RenderImages extends StatefulWidget {
 
 class _RenderImagesState extends State<RenderImages> {
   @override
-  Widget build(BuildContext context) => BlocBuilder<ItemBloc, ItemState>(
+  Widget build(BuildContext context) => BlocBuilder<ItemCubit, ItemState>(
         builder: (context, state) {
           if (state is ItemsLoaded) {
             return state.items.isEmpty

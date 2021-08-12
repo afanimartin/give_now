@@ -17,7 +17,7 @@ class QuantityEditingWidget extends StatelessWidget {
         controller: controller,
         keyboardType: TextInputType.number,
         onChanged: (String quantity) =>
-            context.read<ItemBloc>().quantityChanged(quantity),
+            context.read<ItemCubit>().quantityChanged(quantity),
         decoration: InputDecoration(
             labelText: 'quantity',
             border: OutlineInputBorder(

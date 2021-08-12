@@ -15,10 +15,10 @@ import '../../repositories/item/item_repository.dart';
 import 'item_state.dart';
 
 ///
-class ItemBloc extends Cubit<ItemState> {
+class ItemCubit extends Cubit<ItemState> {
   ///
-  ItemBloc(
-      {required ItemRepository itemRepository,
+  ItemCubit(
+      {required IItemRepository itemRepository,
       required FirebaseAuth firebaseAuth})
       : _itemRepository = itemRepository,
         _firebaseAuth = firebaseAuth,

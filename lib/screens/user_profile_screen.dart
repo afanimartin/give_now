@@ -51,7 +51,7 @@ static Route get route =>
                     })
               ],
             ),
-            body: BlocBuilder<ItemBloc, ItemState>(
+            body: BlocBuilder<ItemCubit, ItemState>(
                 builder: (context, state) => Padding(
                       padding: const EdgeInsets.all(12),
                       child: Column(

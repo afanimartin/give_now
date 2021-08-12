@@ -5,7 +5,7 @@ import '../mocks/data/mocked_item.dart';
 import '../mocks/repository/item_repository_mock.dart';
 
 void main() {
-  final itemCubit = ItemCubit(itemRepository: ItemRepositoryMock());
+  final itemCubit = ItemCubitMock(itemRepository: ItemRepositoryMock());
 
   setUp(() {});
 

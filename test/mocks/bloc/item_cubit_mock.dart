@@ -4,8 +4,8 @@ import 'package:moostamil/models/item/item.dart';
 import '../repository/item_repository_mock.dart';
 import 'item_state_mock.dart';
 
-class ItemCubit extends Cubit<ItemStateMock> {
-  ItemCubit({required this.itemRepository}) : super(ItemInitialState());
+class ItemCubitMock extends Cubit<ItemStateMock> {
+  ItemCubitMock({required this.itemRepository}) : super(ItemInitialState());
 
   ItemRepositoryMock itemRepository;
 

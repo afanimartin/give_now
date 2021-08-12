@@ -37,7 +37,7 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
   late bool _isFormValid;
 
   @override
-  Widget build(BuildContext context) => BlocBuilder<ItemBloc, ItemState>(
+  Widget build(BuildContext context) => BlocBuilder<ItemCubit, ItemState>(
         builder: (context, state) {
           _isFormValid = _titleContentController.text.isNotEmpty &&
               _descriptionContentController.text.isNotEmpty &&
@@ -76,7 +76,7 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
                       TitleEditingWidget(
                         controller: _titleContentController,
                         onChanged: (String title) =>
-                            context.read<ItemBloc>().titleChanged(title),
+                            context.read<ItemCubit>().titleChanged(title),
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -92,7 +92,7 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
                         controller: _descriptionContentController,
                         maxLength: Constants.fiveHundred,
                         onChanged: (String description) => context
-                            .read<ItemBloc>()
+                            .read<ItemCubit>()
                             .descriptionChanged(description),
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
@@ -119,7 +119,7 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
                       PhoneNumberEditingWidget(
                         controller: _phoneController,
                         onChanged: (String phone) =>
-                            context.read<ItemBloc>().phoneChanged(phone),
+                            context.read<ItemCubit>().phoneChanged(phone),
                       ),
                       const SizedBox(
                         height: Constants.six,
@@ -155,7 +155,7 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
                 child: FloatingActionButton(
                   backgroundColor: Theme.of(context).primaryColor,
                   onPressed: () {
-                    context.read<ItemBloc>().addItem(_item);
+                    context.read<ItemCubit>().addItem(_item);
 
                     Navigator.of(context).pushAndRemoveUntil<void>(
                         UserProfileScreen.route, (route) => false);

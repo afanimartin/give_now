@@ -58,7 +58,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
   String? _conditionValue = conditionList[0];
 
   @override
-  Widget build(BuildContext context) => BlocBuilder<ItemBloc, ItemState>(
+  Widget build(BuildContext context) => BlocBuilder<ItemCubit, ItemState>(
         builder: (context, state) => Scaffold(
           backgroundColor: Theme.of(context).accentColor,
           appBar: AppBar(
@@ -131,7 +131,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
                   condition: _conditionValue,
                   updatedAt: Timestamp.now());
 
-              context.read<ItemBloc>().updateItem(updatedItem);
+              context.read<ItemCubit>().updateItem(updatedItem);
             },
             backgroundColor: Theme.of(context).primaryColor,
             child: state is ItemBeingUpdated

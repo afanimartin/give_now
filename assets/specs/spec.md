@@ -30,8 +30,10 @@
 - [x] add unit tests for bloc, repository and some widgets
 - [] configure very_good_coverage and obtain coverage of >=80%
 - [] clean up codebase
-- [] invite users for testing
 - [] make launcher icon big enough from the apps menu
+- [] test app using firebase test lab
+- [] invite users for testing
+
 
 ## Test cases 
 - [] user should be able to upload new item

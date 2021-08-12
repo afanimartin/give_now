@@ -18,7 +18,7 @@ class MenuWidget extends StatelessWidget {
   final Item item;
 
   ///
-  late ItemBloc _itemBloc;
+  late ItemCubit _itemBloc;
 
   ///
   late CartBloc _cartBloc;
@@ -28,7 +28,7 @@ class MenuWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _itemBloc = BlocProvider.of<ItemBloc>(context);
+    _itemBloc = BlocProvider.of<ItemCubit>(context);
 
     _cartBloc = BlocProvider.of<CartBloc>(context);
 

@@ -37,8 +37,8 @@ void main() async {
       BlocProvider<TabBloc>(
         create: (_) => TabBloc(),
       ),
-      BlocProvider<ItemBloc>(
-          create: (_) => ItemBloc(
+      BlocProvider<ItemCubit>(
+          create: (_) => ItemCubit(
               itemRepository: ItemRepository(),
               firebaseAuth: FirebaseAuth.instance)
             ..fetchItems()),

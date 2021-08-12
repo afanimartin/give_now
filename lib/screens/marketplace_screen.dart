@@ -23,29 +23,30 @@ class MarketplaceScreen extends StatefulWidget {
 
 class _MarketplaceScreenState extends State<MarketplaceScreen> {
   @override
-  Widget build(BuildContext context) => BlocBuilder<ItemBloc, ItemState>(
-        builder: (context, state) => Scaffold(
-            backgroundColor: Theme.of(context).accentColor,
-            appBar: AppBar(
-              title: Text(
-                'Dalala',
-                style: TextStyle(
-                    color: Theme.of(context).primaryColorDark,
-                    fontSize: 28,
-                    letterSpacing: Constants.onePointTwo),
-              ),
-              backgroundColor: Theme.of(context).accentColor,
-              actions: [
-                IconButton(
-                    icon: Icon(
-                      Icons.brightness_6_outlined,
-                      size: Constants.thirty,
-                      color: Theme.of(context).primaryColorDark,
-                    ),
-                    onPressed: () {})
-              ],
-            ),
-            body: state is ItemsLoaded && state.itemsForSale.isNotEmpty
+  Widget build(BuildContext context) => Scaffold(
+        backgroundColor: Theme.of(context).accentColor,
+        appBar: AppBar(
+          title: Text(
+            'Moostamil',
+            style: TextStyle(
+                color: Theme.of(context).primaryColorDark,
+                fontSize: 28,
+                letterSpacing: Constants.onePointTwo),
+          ),
+          backgroundColor: Theme.of(context).accentColor,
+          actions: [
+            IconButton(
+                icon: Icon(
+                  Icons.brightness_6_outlined,
+                  size: Constants.thirty,
+                  color: Theme.of(context).primaryColorDark,
+                ),
+                onPressed: () {})
+          ],
+        ),
+        body: BlocBuilder<ItemCubit, ItemState>(
+            builder: (context, state) => state is ItemsLoaded &&
+                    state.itemsForSale.isNotEmpty
                 ? Padding(
                     padding:
                         const EdgeInsets.symmetric(vertical: Constants.eight),
@@ -58,21 +59,18 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
                       'No items for sale right now. Check again later.',
                       style: TextStyle(fontSize: Constants.twenty),
                     ),
-                  ),
-            floatingActionButton: Visibility(
-              visible: state is! ItemBeingAdded,
-              child: FloatingActionButtonWidget(
-                onPressed: () {
-                  context.read<ItemBloc>().addImagesToState();
+                  )),
+        floatingActionButton: FloatingActionButtonWidget(
+          onPressed: () {
+            context.read<ItemCubit>().addImagesToState();
 
-                  Navigator.of(context).push(MaterialPageRoute<Widget>(
-                      builder: (_) => const ItemPreviewScreen()));
-                },
-                backgroundColor: Theme.of(context).primaryColor,
-                child: const Icon(
-                  Icons.add,
-                ),
-              ),
-            )),
+            Navigator.of(context).push(MaterialPageRoute<Widget>(
+                builder: (_) => const ItemPreviewScreen()));
+          },
+          backgroundColor: Theme.of(context).primaryColor,
+          child: const Icon(
+            Icons.add,
+          ),
+        ),
       );
 }
