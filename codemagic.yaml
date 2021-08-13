@@ -53,6 +53,6 @@ workflows:
       firebase:
         firebase_token: Encrypted(Z0FBQUFBQmhGanJiMUJOOVBKUFl3SnJTT2k2TE9aZkwwOEpiR3Ytc0t1bWpoaTV0WDZfc1FZendQb0N3MUNkaUg4RVZKNGpVNDg3VlhnSUNnMm1uTy1ucTBLWVhVV2t0WkVVZlNZWUZJMTJWbmhHYXhjQkEzS2NfYjB0X2E4aW9RTWNPQVNPVlRaQ3BlNXJjcmRTRldCZXAwbzhfQ3ZOQzNCLVJvWHc5NXZqY3lLMjNFSFZVRHN4Ykh0WXU3T2NadGFab0txaWNDbU5Oa3NJbDNVdGUtUFFNYVI1UXIxS1pxQT09)
         android:
-          app_id: com.example.give_now1:596947525320:android:dd24a2702f05db7da9cffd
+          app_id: 1:596947525320:android:dd24a2702f05db7da9cffd
           groups:
-            - group-one
+            - android-group

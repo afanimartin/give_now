@@ -41,7 +41,7 @@ class ItemCubit extends Cubit<ItemState> {
 
   ///
   void addItem(Item item) async {
-    // do not emit any state before this line 
+    // do not emit any state before this line
     // to avoid loss of images from the state object
     final _imagesToUpload = await imagesToUpload(state.images);
     final _imageUrls = await getDownloadURL(_imagesToUpload);
