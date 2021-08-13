@@ -28,7 +28,7 @@
 - [x] redesign the login page 
 - [x] decrement product quantity after checkout
 - [x] add unit tests for bloc, repository and some widgets
-- [] configure very_good_coverage and obtain coverage of >=80%
+- [] setup ci/cd with codemagic + firebase app distribution
 - [] clean up codebase
 - [] make launcher icon big enough from the apps menu
 - [] test app using firebase test lab

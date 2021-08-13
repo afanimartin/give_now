@@ -1,0 +1,58 @@
+# Automatically generated on 2021-08-13 UTC from https://codemagic.io/app/610d20c9d286d33879ef554a/settings
+# Note that this configuration is not an exact match to UI settings. Review and adjust as necessary.
+
+workflows:
+  default-workflow:
+    name: Default Workflow
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+    cache:
+      cache_paths: []
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: '*'
+          include: true
+          source: true
+      tag_patterns:
+        - pattern: '*'
+          include: true
+    scripts:
+      - |
+        # set up debug keystore
+        rm -f ~/.android/debug.keystore
+        keytool -genkeypair \
+          -alias androiddebugkey \
+          -keypass android \
+          -keystore ~/.android/debug.keystore \
+          -storepass android \
+          -dname 'CN=Android Debug,O=Android,C=US' \
+          -keyalg 'RSA' \
+          -keysize 2048 \
+          -validity 10000
+      - |
+        # set up local properties
+        echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
+      - flutter packages pub get
+      - flutter analyze
+      - flutter test
+      - flutter build appbundle --debug --split-debug-info
+    artifacts:
+      - build/**/outputs/apk/**/*.apk
+      - build/**/outputs/bundle/**/*.aab
+      - build/**/outputs/**/mapping.txt
+      - flutter_drive.log
+    publishing:
+      email:
+        recipients:
+          - afani.dev@gmail.com
+      firebase:
+        firebase_token: Encrypted(Z0FBQUFBQmhGanJiMUJOOVBKUFl3SnJTT2k2TE9aZkwwOEpiR3Ytc0t1bWpoaTV0WDZfc1FZendQb0N3MUNkaUg4RVZKNGpVNDg3VlhnSUNnMm1uTy1ucTBLWVhVV2t0WkVVZlNZWUZJMTJWbmhHYXhjQkEzS2NfYjB0X2E4aW9RTWNPQVNPVlRaQ3BlNXJjcmRTRldCZXAwbzhfQ3ZOQzNCLVJvWHc5NXZqY3lLMjNFSFZVRHN4Ykh0WXU3T2NadGFab0txaWNDbU5Oa3NJbDNVdGUtUFFNYVI1UXIxS1pxQT09)
+        android:
+          app_id: com.example.give_now1:596947525320:android:dd24a2702f05db7da9cffd
+          groups:
+            - group-one
