@@ -7,17 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:596947525320:android:dd24a2702f05db7da9cffd",
+        "mobilesdk_app_id": "1:596947525320:android:de9fe564bfe2d3dda9cffd",
         "android_client_info": {
-          "package_name": "com.example.give_now"
+          "package_name": "app.moostamil.junubia"
         }
       },
       "oauth_client": [
         {
-          "client_id": "596947525320-gngo0kpoiu9i12b8926cjm290esb20rp.apps.googleusercontent.com",
+          "client_id": "596947525320-4nerb3bppgfsrnqbck2kfdts2vep8br9.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.give_now",
+            "package_name": "app.moostamil.junubia",
             "certificate_hash": "b240267291a83d6bdbc3c42db03ff1ec334ad828"
           }
         },
