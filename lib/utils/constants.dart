@@ -31,7 +31,7 @@ class Constants {
   static const circularBorderRadius = 10.0;
 
   ///
-  static const twenty = 20.0;
+  static const standardFontSize = 20.0;
 
   ///
   static const iconButtonSize = 30.0;

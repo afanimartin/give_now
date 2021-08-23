@@ -100,7 +100,8 @@ class _CartScreenState extends State<CartScreen> {
                                                     Icons.cancel_rounded),
                                                 color: Theme.of(context)
                                                     .primaryColor,
-                                                iconSize: Constants.iconButtonSize,
+                                                iconSize:
+                                                    Constants.iconButtonSize,
                                                 onPressed: () => context
                                                     .read<CartBloc>()
                                                     .add(RemoveItemFromCart(
@@ -171,11 +172,12 @@ class _CartScreenState extends State<CartScreen> {
         isScrollControlled: true,
         enableDrag: true,
         shape: const RoundedRectangleBorder(
-            borderRadius:
-                BorderRadius.vertical(top: Radius.circular(Constants.twenty))),
+            borderRadius: BorderRadius.vertical(
+                top: Radius.circular(Constants.standardFontSize))),
         builder: (context) => Padding(
               padding: const EdgeInsets.symmetric(
-                  horizontal: Constants.twenty, vertical: Constants.ten),
+                  horizontal: Constants.standardFontSize,
+                  vertical: Constants.ten),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [

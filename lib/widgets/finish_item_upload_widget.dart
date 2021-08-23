@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../blocs/item/item_cubit.dart';
 import '../blocs/item/item_state.dart';
-
 import '../models/item/item.dart';
-import '../screens/user_profile_screen.dart';
+import '../screens/marketplace_screen.dart';
 import '../utils/category.dart';
 import '../utils/condition.dart';
 import '../utils/constants.dart';
@@ -158,7 +158,7 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
                     context.read<ItemCubit>().addItem(_item);
 
                     Navigator.of(context).pushAndRemoveUntil<void>(
-                        UserProfileScreen.route, (route) => false);
+                        MarketplaceScreen.route, (route) => false);
                   },
                   child: const Icon(
                     Icons.check,

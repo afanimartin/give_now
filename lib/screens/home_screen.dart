@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:moostamil/screens/marketplace_screen.dart';
 
 import '../blocs/tab/tab_bloc.dart';
-import '../blocs/tab/tab_event.dart';
 import '../models/app_tab/app_tab.dart';
 import '../widgets/render_screens.dart';
-import '../widgets/tab_selector.dart';
 
 ///
 class HomeScreen extends StatefulWidget {
@@ -22,9 +21,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  Widget build(BuildContext context) => BlocBuilder<TabBloc, AppTab>(
-        builder: (context, state) => Scaffold(
-          body: RenderScreens(state: state),
-        ),
-      );
+  Widget build(BuildContext context) =>
+      const Scaffold(body: MarketplaceScreen());
 }

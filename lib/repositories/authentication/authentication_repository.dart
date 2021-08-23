@@ -28,8 +28,7 @@ class AuthenticationRepository extends IAuthenticationRepository {
   @override
   Future<void> logInWithGoogleAccount() async {
     try {
-      final googleUser =
-          await _googleSignIn.signIn();
+      final googleUser = await _googleSignIn.signIn();
       final googleAuth = await googleUser?.authentication;
 
       final googleCredential = GoogleAuthProvider.credential(

@@ -30,6 +30,7 @@
 - [x] add unit tests for bloc, repository and some widgets
 - [x] setup ci/cd with codemagic + firebase app distribution
 - [x] enable firebase performance
+- [] implement drawer menu for user profile and logout icon
 - [] clean up codebase
 - [] make launcher icon big enough from the apps menu
 - [] invite users for testing

@@ -57,7 +57,7 @@ class _GoogleLogInButton extends StatelessWidget {
           children: [
             Image.asset(
               'assets/google_logo.png',
-              height: Constants.twenty,
+              height: Constants.standardFontSize,
             ),
             const SizedBox(width: 4),
             Text(

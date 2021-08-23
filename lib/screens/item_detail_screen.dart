@@ -62,7 +62,7 @@ class ItemDetailScreen extends StatelessWidget {
                 : const Center(
                     child: Text(
                     'Something went wrong. Please try again later.',
-                    style: TextStyle(fontSize: Constants.twenty),
+                    style: TextStyle(fontSize: Constants.standardFontSize),
                   )),
             floatingActionButton: FloatingActionButtonWidget(
               backgroundColor: Theme.of(context).primaryColor,

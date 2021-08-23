@@ -25,5 +25,6 @@ ThemeData appTheme() => ThemeData(
     primaryColorLight: whiteColor,
     primaryColorDark: blackColor,
     accentColor: secondaryColor,
-    iconTheme: const IconThemeData(color: blackColor, size: Constants.iconButtonSize),
+    iconTheme:
+        const IconThemeData(color: blackColor, size: Constants.iconButtonSize),
     textTheme: const TextTheme(subtitle1: TextStyle(fontSize: 22)));

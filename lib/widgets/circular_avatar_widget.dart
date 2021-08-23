@@ -7,9 +7,11 @@ import '../utils/constants.dart';
 class CircleAvatarWidget extends StatelessWidget {
   ///
   const CircleAvatarWidget(
-      {required this.imageUrl, this.radius = Constants.twenty, Key? key})
+      {required this.imageUrl,
+      this.radius = Constants.standardFontSize,
+      Key? key})
       : super(key: key);
-
+      
   ///
   final double radius;
 

@@ -1,30 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:moostamil/blocs/cart/cart_bloc.dart';
-import 'package:moostamil/blocs/cart/cart_state.dart';
-import 'package:moostamil/screens/cart_screen.dart';
 
+import '../blocs/cart/cart_bloc.dart';
+import '../blocs/cart/cart_state.dart';
 import '../blocs/item/item_cubit.dart';
 import '../blocs/item/item_state.dart';
 import '../utils/constants.dart';
 import '../widgets/floating_action_button.dart';
 import '../widgets/items_grid.dart';
+import 'cart_screen.dart';
 import 'item_preview_screen.dart';
 
 ///
-class MarketplaceScreen extends StatefulWidget {
+class MarketplaceScreen extends StatelessWidget {
   ///
   const MarketplaceScreen({Key? key}) : super(key: key);
 
   ///
   static Route get route =>
-      MaterialPageRoute<Widget>(builder: (_) => const MarketplaceScreen());
+      MaterialPageRoute<void>(builder: (_) => const MarketplaceScreen());
 
-  @override
-  _MarketplaceScreenState createState() => _MarketplaceScreenState();
-}
-
-class _MarketplaceScreenState extends State<MarketplaceScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: Theme.of(context).accentColor,
@@ -82,7 +77,7 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
                 : const Center(
                     child: Text(
                       'No items for sale right now. Check again later.',
-                      style: TextStyle(fontSize: Constants.twenty),
+                      style: TextStyle(fontSize: Constants.standardFontSize),
                     ),
                   )),
         floatingActionButton: FloatingActionButtonWidget(
