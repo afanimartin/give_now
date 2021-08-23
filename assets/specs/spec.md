@@ -28,11 +28,10 @@
 - [x] redesign the login page 
 - [x] decrement product quantity after checkout
 - [x] add unit tests for bloc, repository and some widgets
-- [] setup ci/cd with codemagic + firebase app distribution
-- [] enable firebase performance
+- [x] setup ci/cd with codemagic + firebase app distribution
+- [x] enable firebase performance
 - [] clean up codebase
 - [] make launcher icon big enough from the apps menu
-- [] test app using firebase test lab
 - [] invite users for testing
 
 
@@ -95,4 +94,4 @@
 - [x] new user is getting created everytime the same user signs in
 - [] logging out: `Invalid argument(s): No host specified in URI`
 - [] bottom navigator not rendering always
-- [] updating item doesn't reflect on UI but firebase is ok [category, condition]
+- [x] updating item doesn't reflect on UI but firebase is ok [category, condition]

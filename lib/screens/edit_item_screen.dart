@@ -43,6 +43,9 @@ class _EditItemScreenState extends State<EditItemScreen> {
   final _descriptionController = TextEditingController();
   final _priceContentController = TextEditingController();
 
+  String? _categoryValue = categoryList[0];
+  String? _conditionValue = conditionList[0];
+
   @override
   void initState() {
     super.initState();
@@ -51,11 +54,10 @@ class _EditItemScreenState extends State<EditItemScreen> {
       _titleController.text = widget.item.title!;
       _descriptionController.text = widget.item.description!;
       _priceContentController.text = widget.item.price!;
+      _categoryValue = widget.item.category!;
+      _conditionValue = widget.item.condition;
     }
   }
-
-  String? _categoryValue = categoryList[0];
-  String? _conditionValue = conditionList[0];
 
   @override
   Widget build(BuildContext context) => BlocBuilder<ItemCubit, ItemState>(
