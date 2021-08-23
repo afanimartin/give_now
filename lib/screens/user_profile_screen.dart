@@ -41,7 +41,7 @@ static Route get route =>
                     icon: Icon(
                       Icons.exit_to_app,
                       color: Theme.of(context).primaryColorDark,
-                      size: Constants.thirty,
+                      size: Constants.iconButtonSize,
                     ),
                     onPressed: () {
                       context.read<AuthenticationBloc>().add(LogOut());

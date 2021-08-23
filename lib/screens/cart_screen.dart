@@ -100,7 +100,7 @@ class _CartScreenState extends State<CartScreen> {
                                                     Icons.cancel_rounded),
                                                 color: Theme.of(context)
                                                     .primaryColor,
-                                                iconSize: Constants.thirty,
+                                                iconSize: Constants.iconButtonSize,
                                                 onPressed: () => context
                                                     .read<CartBloc>()
                                                     .add(RemoveItemFromCart(
@@ -152,7 +152,7 @@ class _CartScreenState extends State<CartScreen> {
                 backgroundColor: Theme.of(context).primaryColor,
                 child: const Icon(
                   Icons.check,
-                  size: Constants.thirty,
+                  size: Constants.iconButtonSize,
                 ),
               ),
             ),

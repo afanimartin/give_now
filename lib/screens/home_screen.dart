@@ -25,10 +25,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) => BlocBuilder<TabBloc, AppTab>(
         builder: (context, state) => Scaffold(
           body: RenderScreens(state: state),
-          bottomNavigationBar: TabSelector(
-              activeTab: state,
-              onTabSelected: (tab) =>
-                  context.read<TabBloc>().add(UpdateTab(tab: tab))),
         ),
       );
 }

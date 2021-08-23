@@ -34,7 +34,7 @@ class Constants {
   static const twenty = 20.0;
 
   ///
-  static const thirty = 30.0;
+  static const iconButtonSize = 30.0;
 
   ///
   static const horizontalPadding = 32.0;

@@ -36,7 +36,7 @@ class ItemPreviewScreen extends StatelessWidget {
                     child: IconButton(
                         icon: const Icon(
                           Icons.arrow_forward_ios_sharp,
-                          size: Constants.thirty,
+                          size: Constants.iconButtonSize,
                         ),
                         onPressed: () => Navigator.of(context).push(
                             MaterialPageRoute<Widget>(

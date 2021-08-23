@@ -110,8 +110,8 @@ class _PhotoViewWidget extends StatelessWidget {
           enableRotation: true,
           loadingBuilder: (context, event) => Center(
             child: SizedBox(
-              width: Constants.thirty,
-              height: Constants.thirty,
+              width: Constants.iconButtonSize,
+              height: Constants.iconButtonSize,
               child: ProgressLoader(
                 value: event == null
                     ? 0

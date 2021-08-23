@@ -142,7 +142,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
                   )
                 : const Icon(
                     Icons.check,
-                    size: Constants.thirty,
+                    size: Constants.iconButtonSize,
                   ),
           ),
         ),

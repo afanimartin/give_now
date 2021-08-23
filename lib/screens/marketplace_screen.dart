@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:moostamil/blocs/cart/cart_bloc.dart';
+import 'package:moostamil/blocs/cart/cart_state.dart';
+import 'package:moostamil/screens/cart_screen.dart';
 
 import '../blocs/item/item_cubit.dart';
 import '../blocs/item/item_state.dart';
@@ -26,22 +29,44 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: Theme.of(context).accentColor,
         appBar: AppBar(
-          title: Text(
-            'Moostamil',
-            style: TextStyle(
+          leading: IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.menu,
+                size: Constants.iconButtonSize,
                 color: Theme.of(context).primaryColorDark,
-                fontSize: 28,
-                letterSpacing: Constants.onePointTwo),
-          ),
+              )),
           backgroundColor: Theme.of(context).accentColor,
           actions: [
-            IconButton(
-                icon: Icon(
-                  Icons.brightness_6_outlined,
-                  size: Constants.thirty,
+            BlocBuilder<CartBloc, CartState>(
+              builder: (context, state) => Stack(children: [
+                IconButton(
+                  icon: const Icon(
+                    Icons.shopping_bag_outlined,
+                    size: Constants.iconButtonSize,
+                  ),
                   color: Theme.of(context).primaryColorDark,
+                  onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                          builder: (_) => const CartScreen())),
                 ),
-                onPressed: () {})
+                if (state is CartItemsLoaded)
+                  state.currentUserCartItems.isNotEmpty
+                      ? Positioned(
+                          left: 16,
+                          bottom: 24,
+                          child: Container(
+                            height: 10,
+                            width: 15,
+                            decoration: BoxDecoration(
+                                color: Theme.of(context).primaryColor,
+                                shape: BoxShape.circle),
+                            child: const SizedBox.shrink(),
+                          ),
+                        )
+                      : const SizedBox.shrink()
+              ]),
+            )
           ],
         ),
         body: BlocBuilder<ItemCubit, ItemState>(

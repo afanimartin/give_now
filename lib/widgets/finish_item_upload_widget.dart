@@ -162,7 +162,7 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
                   },
                   child: const Icon(
                     Icons.check,
-                    size: Constants.thirty,
+                    size: Constants.iconButtonSize,
                   ),
                 )),
           );
