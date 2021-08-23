@@ -24,6 +24,7 @@ class UserProfileScreen extends StatelessWidget {
           builder: (context, state) => Scaffold(
               backgroundColor: Theme.of(context).accentColor,
               appBar: AppBar(
+                elevation: 0,
                 backgroundColor: Theme.of(context).accentColor,
                 iconTheme: Theme.of(context).iconTheme,
               ),

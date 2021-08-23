@@ -25,6 +25,7 @@ class MarketplaceScreen extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: Theme.of(context).accentColor,
         appBar: AppBar(
+          elevation: 0,
           backgroundColor: Theme.of(context).accentColor,
           iconTheme: Theme.of(context).iconTheme,
           actions: [

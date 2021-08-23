@@ -57,12 +57,7 @@ class _FinishItemUploadWidgetState extends State<FinishItemUploadWidget> {
             backgroundColor: Theme.of(context).accentColor,
             appBar: AppBar(
               backgroundColor: Theme.of(context).accentColor,
-              title: Text(
-                'Finish item upload',
-                style: TextStyle(
-                    color: Theme.of(context).primaryColorDark,
-                    letterSpacing: 1),
-              ),
+              elevation: 0,
               iconTheme: Theme.of(context).iconTheme,
             ),
             body: Padding(

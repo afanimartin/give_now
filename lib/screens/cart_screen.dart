@@ -31,14 +31,7 @@ class _CartScreenState extends State<CartScreen> {
       builder: (context, state) => Scaffold(
             backgroundColor: Theme.of(context).accentColor,
             appBar: AppBar(
-              centerTitle: true,
-              title: Text(
-                'Complete purchase',
-                style: TextStyle(
-                    color: Theme.of(context).primaryColorDark,
-                    fontSize: 28,
-                    letterSpacing: Constants.onePointTwo),
-              ),
+              elevation: 0,
               backgroundColor: Theme.of(context).accentColor,
               iconTheme: Theme.of(context).iconTheme,
             ),
