@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'constants.dart';
 
 ///
-// const primaryColor = Color(0xFF26A69A);
-
-///
 const secondaryColor = Color(0xFFE8F5E9);
 
 ///
@@ -21,7 +18,6 @@ const LinearGradient postGradient = LinearGradient(
 
 ///
 ThemeData appTheme() => ThemeData(
-    // primaryColor: primaryColor,
     primaryColorLight: whiteColor,
     primaryColorDark: blackColor,
     accentColor: secondaryColor,

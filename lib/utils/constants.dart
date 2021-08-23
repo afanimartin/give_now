@@ -34,6 +34,9 @@ class Constants {
   static const standardFontSize = 20.0;
 
   ///
+  static const normalFontSize = 22.0;
+
+  ///
   static const iconButtonSize = 30.0;
 
   ///

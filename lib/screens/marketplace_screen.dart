@@ -8,6 +8,7 @@ import '../blocs/item/item_state.dart';
 import '../utils/constants.dart';
 import '../widgets/floating_action_button.dart';
 import '../widgets/items_grid.dart';
+import '../widgets/menu_drawer_widget.dart';
 import 'cart_screen.dart';
 import 'item_preview_screen.dart';
 
@@ -24,14 +25,8 @@ class MarketplaceScreen extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: Theme.of(context).accentColor,
         appBar: AppBar(
-          leading: IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.menu,
-                size: Constants.iconButtonSize,
-                color: Theme.of(context).primaryColorDark,
-              )),
           backgroundColor: Theme.of(context).accentColor,
+          iconTheme: Theme.of(context).iconTheme,
           actions: [
             BlocBuilder<CartBloc, CartState>(
               builder: (context, state) => Stack(children: [
@@ -80,6 +75,7 @@ class MarketplaceScreen extends StatelessWidget {
                       style: TextStyle(fontSize: Constants.standardFontSize),
                     ),
                   )),
+        drawer: const MenuDrawerWidget(),
         floatingActionButton: FloatingActionButtonWidget(
           onPressed: () {
             context.read<ItemCubit>().addImagesToState();

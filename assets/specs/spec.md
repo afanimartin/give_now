@@ -30,7 +30,7 @@
 - [x] add unit tests for bloc, repository and some widgets
 - [x] setup ci/cd with codemagic + firebase app distribution
 - [x] enable firebase performance
-- [] implement drawer menu for user profile and logout icon
+- [x] implement drawer menu for user profile and logout icon
 - [] clean up codebase
 - [] make launcher icon big enough from the apps menu
 - [] invite users for testing
@@ -93,6 +93,5 @@
 - [x] renderFlex overflowed by 52 pixels on the bottom. on edit item screen
 - [x] fix bug with cancelling image selection
 - [x] new user is getting created everytime the same user signs in
-- [] logging out: `Invalid argument(s): No host specified in URI`
-- [] bottom navigator not rendering always
 - [x] updating item doesn't reflect on UI but firebase is ok [category, condition]
+- [] logging out: `Invalid argument(s): No host specified in URI`
