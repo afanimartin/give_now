@@ -2,13 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../blocs/cart/cart_bloc.dart';
-import '../blocs/cart/cart_event.dart';
+import '../blocs/cart/cart_cubit.dart';
 import '../blocs/cart/cart_state.dart';
 import '../models/item/item.dart';
 import '../utils/constants.dart';
 import '../widgets/circular_avatar_widget.dart';
 import '../widgets/floating_action_button.dart';
+import '../widgets/progress_loader.dart';
 
 ///
 class CartScreen extends StatefulWidget {
@@ -27,7 +27,7 @@ class _CartScreenState extends State<CartScreen> {
   final _buyerPhoneNumber = TextEditingController();
 
   @override
-  Widget build(BuildContext context) => BlocBuilder<CartBloc, CartState>(
+  Widget build(BuildContext context) => BlocBuilder<CartCubit, CartState>(
       builder: (context, state) => Scaffold(
             backgroundColor: Theme.of(context).accentColor,
             appBar: AppBar(
@@ -89,16 +89,18 @@ class _CartScreenState extends State<CartScreen> {
                                                   fontWeight: FontWeight.w500),
                                             )),
                                             IconButton(
-                                                icon: const Icon(
-                                                    Icons.cancel_rounded),
+                                                icon: state
+                                                        is ItemBeingRemovedFromCart
+                                                    ? const ProgressLoader()
+                                                    : const Icon(
+                                                        Icons.cancel_rounded),
                                                 color: Theme.of(context)
                                                     .primaryColor,
                                                 iconSize:
                                                     Constants.iconButtonSize,
                                                 onPressed: () => context
-                                                    .read<CartBloc>()
-                                                    .add(RemoveItemFromCart(
-                                                        item: item)))
+                                                    .read<CartCubit>()
+                                                    .removeItemFromCart(item))
                                           ],
                                         ),
                                       ),
@@ -209,19 +211,17 @@ class _CartScreenState extends State<CartScreen> {
                               buyerPhoneNumber: _buyerPhoneNumber.text,
                               cartItems: _cartItems);
 
-                          context
-                              .read<CartBloc>()
-                              .add(CheckoutItem(sale: _sale));
+                          context.read<CartCubit>().sellItem(_sale);
 
                           await context
-                              .read<CartBloc>()
+                              .read<CartCubit>()
                               .decrementItemQuantity(cartItems);
 
                           await Future<dynamic>.delayed(
                               const Duration(seconds: 3));
 
                           await context
-                              .read<CartBloc>()
+                              .read<CartCubit>()
                               .deleteCartItems(cartItems);
 
                           Navigator.of(context).pop();

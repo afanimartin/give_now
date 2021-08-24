@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../blocs/cart/cart_bloc.dart';
+import '../blocs/cart/cart_cubit.dart';
 import '../blocs/cart/cart_state.dart';
 import '../blocs/item/item_cubit.dart';
 import '../blocs/item/item_state.dart';
@@ -13,7 +13,7 @@ import 'cart_screen.dart';
 import 'item_preview_screen.dart';
 
 ///
-class MarketplaceScreen extends StatelessWidget {
+class MarketplaceScreen extends StatefulWidget {
   ///
   const MarketplaceScreen({Key? key}) : super(key: key);
 
@@ -22,6 +22,11 @@ class MarketplaceScreen extends StatelessWidget {
       MaterialPageRoute<void>(builder: (_) => const MarketplaceScreen());
 
   @override
+  _MarketplaceScreenState createState() => _MarketplaceScreenState();
+}
+
+class _MarketplaceScreenState extends State<MarketplaceScreen> {
+  @override
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: Theme.of(context).accentColor,
         appBar: AppBar(
@@ -29,7 +34,7 @@ class MarketplaceScreen extends StatelessWidget {
           backgroundColor: Theme.of(context).accentColor,
           iconTheme: Theme.of(context).iconTheme,
           actions: [
-            BlocBuilder<CartBloc, CartState>(
+            BlocBuilder<CartCubit, CartState>(
               builder: (context, state) => Stack(children: [
                 IconButton(
                   icon: const Icon(

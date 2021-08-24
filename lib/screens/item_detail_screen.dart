@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
-import '../blocs/cart/cart_bloc.dart';
-import '../blocs/cart/cart_event.dart';
-import '../blocs/cart/cart_state.dart';
+import '../blocs/item/item_cubit.dart';
+import '../blocs/item/item_state.dart';
 import '../helpers/item/images.dart';
 import '../models/item/item.dart';
 import '../utils/constants.dart';
@@ -25,7 +24,7 @@ class ItemDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final _images = images(item);
 
-    return BlocBuilder<CartBloc, CartState>(
+    return BlocBuilder<ItemCubit, ItemState>(
         builder: (context, state) => Scaffold(
             backgroundColor: Theme.of(context).accentColor,
             appBar: AppBar(
@@ -37,7 +36,7 @@ class ItemDetailScreen extends StatelessWidget {
               backgroundColor: Theme.of(context).accentColor,
               iconTheme: Theme.of(context).iconTheme,
             ),
-            body: state is CartItemsLoaded
+            body: state is ItemsLoaded
                 ? Column(
                     children: [
                       _PhotoViewWidget(items: _images),
@@ -59,15 +58,11 @@ class ItemDetailScreen extends StatelessWidget {
                       ),
                     ],
                   )
-                : const Center(
-                    child: Text(
-                    'Something went wrong. Please try again later.',
-                    style: TextStyle(fontSize: Constants.standardFontSize),
-                  )),
+                : const ProgressLoader(),
             floatingActionButton: FloatingActionButtonWidget(
               backgroundColor: Theme.of(context).primaryColor,
               onPressed: () {
-                context.read<CartBloc>().add(AddItemToCart(cartItem: item));
+                context.read<ItemCubit>().addItemToCart(item);
 
                 Navigator.of(context).pop();
               },

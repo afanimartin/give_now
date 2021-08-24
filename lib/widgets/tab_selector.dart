@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../blocs/cart/cart_bloc.dart';
+import '../blocs/cart/cart_cubit.dart';
 import '../blocs/cart/cart_state.dart';
 import '../models/app_tab/app_tab.dart';
 
@@ -59,7 +59,7 @@ class _TabSelectorState extends State<TabSelector> {
           size: _size,
         );
       case AppTab.cart:
-        return BlocBuilder<CartBloc, CartState>(
+        return BlocBuilder<CartCubit, CartState>(
           builder: (context, state) => Stack(children: [
             Icon(
               Icons.shopping_bag_outlined,

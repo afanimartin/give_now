@@ -10,6 +10,7 @@ import '../../helpers/image/upload_images.dart';
 import '../../helpers/repository/upload_repository_helper.dart';
 import '../../models/form/item_form.dart';
 import '../../models/item/item.dart';
+import '../../repositories/cart/cart_repository.dart';
 import '../../repositories/item/i_item_repository.dart';
 import 'item_state.dart';
 
@@ -18,12 +19,17 @@ class ItemCubit extends Cubit<ItemState> {
   ///
   ItemCubit(
       {required IItemRepository itemRepository,
-      required FirebaseAuth firebaseAuth})
+      required FirebaseAuth firebaseAuth,
+      required CartRepository? cartRepository})
       : _itemRepository = itemRepository,
         _firebaseAuth = firebaseAuth,
+        _cartRepository = cartRepository,
         super(InitialItemState());
 
   final IItemRepository _itemRepository;
+
+  ///
+  final CartRepository? _cartRepository;
 
   ///
   final FirebaseAuth _firebaseAuth;
@@ -65,6 +71,18 @@ class ItemCubit extends Cubit<ItemState> {
       );
 
       await _itemRepository.add(_item);
+    } on Exception catch (_) {}
+  }
+
+  ///
+  void addItemToCart(Item item) async {
+    emit(ItemBeingAdded());
+
+    try {
+      final _item = item.copyWith(
+          buyerId: _firebaseAuth.currentUser!.uid, createdAt: Timestamp.now());
+
+      await _cartRepository!.add(_item);
     } on Exception catch (_) {}
   }
 

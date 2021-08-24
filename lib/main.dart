@@ -6,8 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'blocs/cart/cart_bloc.dart';
-import 'blocs/cart/cart_event.dart';
+import 'blocs/cart/cart_cubit.dart';
 import 'blocs/item/item_cubit.dart';
 import 'blocs/tab/tab_bloc.dart';
 import 'repositories/authentication/authentication_repository.dart';
@@ -40,13 +39,14 @@ void main() async {
       BlocProvider<ItemCubit>(
           create: (_) => ItemCubit(
               itemRepository: ItemRepository(),
+              cartRepository: CartRepository(),
               firebaseAuth: FirebaseAuth.instance)
             ..fetchItems()),
-      BlocProvider<CartBloc>(
-          create: (_) => CartBloc(
+      BlocProvider<CartCubit>(
+          create: (_) => CartCubit(
               cartRepository: CartRepository(),
               uploadRepository: ItemRepository())
-            ..add(LoadCartItems())),
+            ..loadCartItems()),
     ],
     child: App(
       authenticationRepository: AuthenticationRepository(),

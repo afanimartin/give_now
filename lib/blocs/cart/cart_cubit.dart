@@ -7,13 +7,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../models/item/item.dart';
 import '../../repositories/cart/cart_repository.dart';
 import '../../repositories/item/item_repository.dart';
-import 'cart_event.dart';
 import 'cart_state.dart';
 
 ///
-class CartBloc extends Bloc<CartEvent, CartState> {
+class CartCubit extends Cubit<CartState> {
   ///
-  CartBloc(
+  CartCubit(
       {required CartRepository cartRepository,
       required ItemRepository uploadRepository,
       FirebaseAuth? firebaseAuth})
@@ -34,72 +33,56 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   ///
   StreamSubscription<List<Item>>? _streamSubscription;
 
-  @override
-  Stream<CartState> mapEventToState(CartEvent event) async* {
-    if (event is LoadCartItems) {
-      yield* _mapLoadCartItemsToState();
-    } else if (event is UpdateCartItems) {
-      yield* _mapUpdateCartItemsToState(event);
-    } else if (event is RemoveItemFromCart) {
-      yield* _mapRemoveItemFromCartToState(event);
-    } else if (event is AddItemToCart) {
-      yield* _mapAddItemToCartToState(event);
-    } else if (event is CheckoutItem) {
-      yield* _mapSellItemToState(event);
-    }
-  }
-
   ///
-  Stream<CartState> _mapLoadCartItemsToState() async* {
+  void loadCartItems() async {
     await _streamSubscription?.cancel();
 
     _streamSubscription = _cartRepository
         .cart()
-        .listen((items) => add(UpdateCartItems(items: items)));
+        .listen((items) => emit(CartItemsLoaded(items: items)));
   }
 
-  Stream<CartState> _mapUpdateCartItemsToState(UpdateCartItems event) async* {
-    yield LoadingCartItems();
+  ///
+  void updateCartItems(List<Item> items) {
+     emit(LoadingCartItems());
 
     try {
-      yield CartItemsLoaded(items: event.items);
+      emit(CartItemsLoaded(items: items));
     } on Exception catch (_) {}
   }
 
   ///
-  Stream<CartState> _mapAddItemToCartToState(AddItemToCart event) async* {
-    yield AddingItemToCart();
+  void addItemToCart(Item item) async {
+     emit(AddingItemToCart());
 
     try {
-      final _item = event.cartItem.copyWith(
+      final _item = item.copyWith(
           buyerId: _firebaseAuth.currentUser!.uid, createdAt: Timestamp.now());
 
       await _cartRepository.add(_item);
-
-      yield ItemSuccessfullyAddedToCart();
     } on Exception catch (_) {}
   }
 
   ///
-  Stream<CartState> _mapRemoveItemFromCartToState(
-      RemoveItemFromCart event) async* {
-    yield ItemBeingRemovedFromCart();
+  void removeItemFromCart(
+      Item item) async {
+    emit(ItemBeingRemovedFromCart());
 
     try {
-      await _cartRepository.delete(event.item);
+      await _cartRepository.delete(item);
     } on Exception catch (_) {}
   }
 
   ///
-  Stream<CartState> _mapSellItemToState(CheckoutItem event) async* {
+  void sellItem(Item item) async {
     try {
-      final _sale = event.sale.copyWith(
+      final _sale = item.copyWith(
           buyerId: _firebaseAuth.currentUser!.uid,
-          buyerAddress: event.sale.buyerAddress,
-          buyerPhoneNumber: event.sale.buyerPhoneNumber,
-          sellerId: event.sale.sellerId,
-          sellerPhoneNumber: event.sale.sellerPhoneNumber,
-          cartItems: event.sale.cartItems,
+          buyerAddress: item.buyerAddress,
+          buyerPhoneNumber: item.buyerPhoneNumber,
+          sellerId: item.sellerId,
+          sellerPhoneNumber: item.sellerPhoneNumber,
+          cartItems: item.cartItems,
           createdAt: Timestamp.now());
 
       await _cartRepository.checkout(_sale);

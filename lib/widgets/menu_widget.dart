@@ -1,8 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../blocs/cart/cart_bloc.dart';
-import '../blocs/cart/cart_event.dart';
+import '../blocs/cart/cart_cubit.dart';
 
 import '../blocs/item/item_cubit.dart';
 import '../models/item/item.dart';
@@ -18,19 +17,19 @@ class MenuWidget extends StatelessWidget {
   final Item item;
 
   ///
-  late ItemCubit _itemBloc;
+  late ItemCubit itemBloc;
 
   ///
-  late CartBloc _cartBloc;
+  late CartCubit cartCubit;
 
   ///
-  // late DonationBloc _donationBloc;
+  // late DonationBloc donationBloc;
 
   @override
   Widget build(BuildContext context) {
-    _itemBloc = BlocProvider.of<ItemCubit>(context);
+    itemBloc = BlocProvider.of<ItemCubit>(context);
 
-    _cartBloc = BlocProvider.of<CartBloc>(context);
+    cartCubit = BlocProvider.of<CartCubit>(context);
 
     // _donationBloc = BlocProvider.of<DonationBloc>(context);
 
@@ -41,9 +40,9 @@ class MenuWidget extends StatelessWidget {
             .toList(),
         onSelected: (String value) {
           if (value == 'Delete') {
-            _itemBloc.deleteItem(item);
+            itemBloc.deleteItem(item);
 
-            _cartBloc.add(RemoveItemFromCart(item: item));
+            cartCubit.removeItemFromCart(item);
 
             Navigator.of(context).pushAndRemoveUntil<void>(
                 UserProfileScreen.route, (route) => false);
@@ -60,5 +59,9 @@ class MenuWidget extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty<Item>('item', item));
+    // ignore: cascade_invocations
+    properties.add(DiagnosticsProperty<ItemCubit>('itemBloc', itemBloc));
+    // ignore: cascade_invocations
+    properties.add(DiagnosticsProperty<CartCubit>('cartCubit', cartCubit));
   }
 }

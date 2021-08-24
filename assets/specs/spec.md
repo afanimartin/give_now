@@ -31,7 +31,9 @@
 - [x] setup ci/cd with codemagic + firebase app distribution
 - [x] enable firebase performance
 - [x] implement drawer menu for user profile and logout icon
-- [] clean up codebase
+- [] clean up codebase [donation_bloc]
+- [] add implicit animation
+- [] use  customScrollChild to hide/show item image on the detail page
 - [] make launcher icon big enough from the apps menu
 - [] invite users for testing
 
@@ -95,3 +97,5 @@
 - [x] new user is getting created everytime the same user signs in
 - [x] updating item doesn't reflect on UI but firebase is ok [category, condition]
 - [] logging out: `Invalid argument(s): No host specified in URI`
+- [] items disappear from the marketplace_screen after adding item to cart
+ 
