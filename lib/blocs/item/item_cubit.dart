@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:moostamil/extension_methods/item/item_repository_extensions.dart';
 
 import '../../helpers/image/preview_images.dart';
 import '../../helpers/image/upload_images.dart';
@@ -112,6 +113,14 @@ class ItemCubit extends Cubit<ItemState> {
 
     try {
       await _itemRepository.delete(item);
+    } on Exception catch (_) {}
+  }
+
+  ///
+  void donateItem(Item item) async {
+    emit(ItemBeingDonated());
+    try {
+      await ItemRepositoryExtensions.donateItem(item);
     } on Exception catch (_) {}
   }
 

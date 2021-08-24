@@ -17,21 +17,16 @@ class MenuWidget extends StatelessWidget {
   final Item item;
 
   ///
-  late ItemCubit itemBloc;
+  late ItemCubit itemCubit;
 
   ///
   late CartCubit cartCubit;
 
-  ///
-  // late DonationBloc donationBloc;
-
   @override
   Widget build(BuildContext context) {
-    itemBloc = BlocProvider.of<ItemCubit>(context);
+    itemCubit = BlocProvider.of<ItemCubit>(context);
 
     cartCubit = BlocProvider.of<CartCubit>(context);
-
-    // _donationBloc = BlocProvider.of<DonationBloc>(context);
 
     return PopupMenuButton<String>(
         itemBuilder: (context) => {'Delete', 'Donate'}
@@ -40,14 +35,14 @@ class MenuWidget extends StatelessWidget {
             .toList(),
         onSelected: (String value) {
           if (value == 'Delete') {
-            itemBloc.deleteItem(item);
+            itemCubit.deleteItem(item);
 
             cartCubit.removeItemFromCart(item);
 
             Navigator.of(context).pushAndRemoveUntil<void>(
                 UserProfileScreen.route, (route) => false);
           } else {
-            // _donationBloc.add(DonateItem(item: item));
+            itemCubit.donateItem(item);
 
             Navigator.of(context).pushAndRemoveUntil<void>(
                 UserProfileScreen.route, (route) => false);
@@ -60,7 +55,7 @@ class MenuWidget extends StatelessWidget {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty<Item>('item', item));
     // ignore: cascade_invocations
-    properties.add(DiagnosticsProperty<ItemCubit>('itemBloc', itemBloc));
+    properties.add(DiagnosticsProperty<ItemCubit>('itemBloc', itemCubit));
     // ignore: cascade_invocations
     properties.add(DiagnosticsProperty<CartCubit>('cartCubit', cartCubit));
   }
