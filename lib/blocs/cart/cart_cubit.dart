@@ -14,18 +14,18 @@ class CartCubit extends Cubit<CartState> {
   ///
   CartCubit(
       {required CartRepository cartRepository,
-      required ItemRepository uploadRepository,
+      required ItemRepository itemRepository,
       FirebaseAuth? firebaseAuth})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _cartRepository = cartRepository,
-        _uploadRepository = uploadRepository,
+        _itemRepository = itemRepository,
         super(const CartState());
 
   ///
   final CartRepository _cartRepository;
 
   ///
-  final ItemRepository _uploadRepository;
+  final ItemRepository _itemRepository;
 
   ///
   final FirebaseAuth _firebaseAuth;
@@ -104,7 +104,7 @@ class CartCubit extends Cubit<CartState> {
 
       final _updatedItem = _item.copyWith(quantity: _quantity.toString());
 
-      await _uploadRepository.update(_updatedItem);
+      await _itemRepository.update(_updatedItem);
     }
   }
 }

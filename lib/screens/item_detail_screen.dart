@@ -11,6 +11,7 @@ import '../models/item/item.dart';
 import '../utils/constants.dart';
 import '../widgets/floating_action_button.dart';
 import '../widgets/progress_loader.dart';
+import 'marketplace_screen.dart';
 
 ///
 class ItemDetailScreen extends StatelessWidget {
@@ -64,7 +65,8 @@ class ItemDetailScreen extends StatelessWidget {
               onPressed: () {
                 context.read<ItemCubit>().addItemToCart(item);
 
-                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute<void>(
+                    builder: (_) => const MarketplaceScreen()));
               },
               child: const Icon(Icons.shopping_bag_outlined),
             )));

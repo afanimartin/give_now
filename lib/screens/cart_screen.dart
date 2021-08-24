@@ -85,11 +85,13 @@ class _CartScreenState extends State<CartScreen> {
                                                 child: Text(
                                               '${item.price} SSP',
                                               style: const TextStyle(
-                                                  fontSize: 22,
+                                                  fontSize:
+                                                      Constants.normalFontSize,
                                                   fontWeight: FontWeight.w500),
                                             )),
                                             IconButton(
                                                 icon: state
+                                                        // ignore: lines_longer_than_80_chars
                                                         is ItemBeingRemovedFromCart
                                                     ? const ProgressLoader()
                                                     : const Icon(

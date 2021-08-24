@@ -97,5 +97,5 @@
 - [x] new user is getting created everytime the same user signs in
 - [x] updating item doesn't reflect on UI but firebase is ok [category, condition]
 - [] logging out: `Invalid argument(s): No host specified in URI`
-- [] items disappear from the marketplace_screen after adding item to cart
+- [x] items disappear from the marketplace_screen after adding item to cart
  

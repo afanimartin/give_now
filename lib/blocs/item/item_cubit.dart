@@ -76,8 +76,6 @@ class ItemCubit extends Cubit<ItemState> {
 
   ///
   void addItemToCart(Item item) async {
-    emit(ItemBeingAdded());
-
     try {
       final _item = item.copyWith(
           buyerId: _firebaseAuth.currentUser!.uid, createdAt: Timestamp.now());

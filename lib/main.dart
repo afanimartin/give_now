@@ -45,7 +45,7 @@ void main() async {
       BlocProvider<CartCubit>(
           create: (_) => CartCubit(
               cartRepository: CartRepository(),
-              uploadRepository: ItemRepository())
+              itemRepository: ItemRepository())
             ..loadCartItems()),
     ],
     child: App(
