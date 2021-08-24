@@ -65,8 +65,7 @@ class ItemDetailScreen extends StatelessWidget {
               onPressed: () {
                 context.read<ItemCubit>().addItemToCart(item);
 
-                Navigator.of(context).push(MaterialPageRoute<void>(
-                    builder: (_) => const MarketplaceScreen()));
+                Navigator.of(context).pop();
               },
               child: const Icon(Icons.shopping_bag_outlined),
             )));
