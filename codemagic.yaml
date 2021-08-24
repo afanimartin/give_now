@@ -40,7 +40,7 @@ workflows:
       - flutter packages pub get
       - flutter analyze
       - flutter test
-      - flutter build apk
+      - flutter build appbundle --debug
     artifacts:
       - build/**/outputs/apk/**/*.apk
       - build/**/outputs/bundle/**/*.aab
