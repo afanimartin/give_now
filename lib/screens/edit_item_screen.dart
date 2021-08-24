@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../blocs/item/item_cubit.dart';
 import '../blocs/item/item_state.dart';
@@ -74,54 +75,59 @@ class _EditItemScreenState extends State<EditItemScreen> {
               )
             ],
           ),
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: CachedNetworkImage(
+          body: SlidingUpPanel(
+            body: Column(
+              children: [
+                CachedNetworkImage(
                   imageUrl: widget.item.mainImageUrl!,
                   height: Constants.threeHundred,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
-              ),
-              const SizedBox(
-                height: Constants.six,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TitleEditingWidget(
-                        controller: _titleController,
+              ],
+            ),
+            panel: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: Constants.six,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TitleEditingWidget(
+                          controller: _titleController,
+                          decoration:
+                              const InputDecoration.collapsed(hintText: ''),
+                          style: const TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold)),
+                      TextField(
+                        controller: _descriptionController,
                         decoration:
                             const InputDecoration.collapsed(hintText: ''),
-                        style: const TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold)),
-                    TextField(
-                      controller: _descriptionController,
-                      decoration: const InputDecoration.collapsed(hintText: ''),
-                    ),
-                    PriceEditingWidget(controller: _priceContentController),
-                    CategoryEditingWidget(
-                        categoryValue: _categoryValue,
-                        onChanged: (String? category) {
-                          setState(() {
-                            _categoryValue = category;
-                          });
-                        }),
-                    ConditonEditingWidget(
-                        conditionValue: _conditionValue,
-                        onChanged: (String? condition) {
-                          setState(() {
-                            _conditionValue = condition;
-                          });
-                        })
-                  ],
-                ),
-              )
-            ],
+                      ),
+                      PriceEditingWidget(controller: _priceContentController),
+                      CategoryEditingWidget(
+                          categoryValue: _categoryValue,
+                          onChanged: (String? category) {
+                            setState(() {
+                              _categoryValue = category;
+                            });
+                          }),
+                      ConditonEditingWidget(
+                          conditionValue: _conditionValue,
+                          onChanged: (String? condition) {
+                            setState(() {
+                              _conditionValue = condition;
+                            });
+                          })
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
           floatingActionButton: FloatingActionButtonWidget(
             onPressed: () {

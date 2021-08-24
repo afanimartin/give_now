@@ -31,9 +31,10 @@
 - [x] setup ci/cd with codemagic + firebase app distribution
 - [x] enable firebase performance
 - [x] implement drawer menu for user profile and logout icon
-- [] clean up codebase [donation_bloc]
+- [x] clean up codebase [donation_bloc]
 - [] add implicit animation
-- [] use  customScrollChild to hide/show item image on the detail page
+- [x] use  slider widget to render item on the edit_item_screen
+- [] hide floating_action_button on the edit_item_screen when item is not dirty
 - [] make launcher icon big enough from the apps menu
 - [] invite users for testing
 
