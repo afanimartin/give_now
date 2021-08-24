@@ -11,7 +11,6 @@ import '../models/item/item.dart';
 import '../utils/constants.dart';
 import '../widgets/floating_action_button.dart';
 import '../widgets/progress_loader.dart';
-import 'marketplace_screen.dart';
 
 ///
 class ItemDetailScreen extends StatelessWidget {

@@ -9,6 +9,7 @@ import '../utils/constants.dart';
 import '../widgets/floating_action_button.dart';
 import '../widgets/items_grid.dart';
 import '../widgets/menu_drawer_widget.dart';
+import '../widgets/progress_loader.dart';
 import 'cart_screen.dart';
 import 'item_preview_screen.dart';
 
@@ -65,22 +66,25 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
             )
           ],
         ),
-        body: BlocBuilder<ItemCubit, ItemState>(
-            builder: (context, state) => state is ItemsLoaded &&
-                    state.itemsForSale.isNotEmpty
-                ? Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: Constants.eight),
-                    child: CustomScrollView(
-                      slivers: [ItemsGrid(items: state.itemsForSale)],
-                    ),
-                  )
-                : const Center(
-                    child: Text(
-                      'No items for sale right now. Check again later.',
-                      style: TextStyle(fontSize: Constants.standardFontSize),
-                    ),
-                  )),
+        body: BlocBuilder<ItemCubit, ItemState>(builder: (context, state) {
+          if (state is ItemBeingAdded) {
+            return const ProgressLoader();
+          }
+          return state is ItemsLoaded && state.itemsForSale.isNotEmpty
+              ? Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: Constants.eight),
+                  child: CustomScrollView(
+                    slivers: [ItemsGrid(items: state.itemsForSale)],
+                  ),
+                )
+              : const Center(
+                  child: Text(
+                    'No items for sale right now. Check again later.',
+                    style: TextStyle(fontSize: Constants.standardFontSize),
+                  ),
+                );
+        }),
         drawer: const MenuDrawerWidget(),
         floatingActionButton: FloatingActionButtonWidget(
           onPressed: () {

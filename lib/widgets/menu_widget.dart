@@ -5,7 +5,6 @@ import '../blocs/cart/cart_cubit.dart';
 
 import '../blocs/item/item_cubit.dart';
 import '../models/item/item.dart';
-import '../screens/user_profile_screen.dart';
 
 ///
 // ignore: must_be_immutable
@@ -39,13 +38,11 @@ class MenuWidget extends StatelessWidget {
 
             cartCubit.removeItemFromCart(item);
 
-            Navigator.of(context).pushAndRemoveUntil<void>(
-                UserProfileScreen.route, (route) => false);
+            Navigator.of(context).pop();
           } else {
             itemCubit.donateItem(item);
 
-            Navigator.of(context).pushAndRemoveUntil<void>(
-                UserProfileScreen.route, (route) => false);
+            Navigator.of(context).pop();
           }
         });
   }
